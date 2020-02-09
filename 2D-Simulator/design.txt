@@ -1,0 +1,9 @@
+Map data structure: std::unordered_map
+- fast retrieval
+- faster than std::Map
+- map pixels doesn't need ordering
+
+Map pixel value: {0,1}
+0: not occupied (free space)
+1: occupied
+

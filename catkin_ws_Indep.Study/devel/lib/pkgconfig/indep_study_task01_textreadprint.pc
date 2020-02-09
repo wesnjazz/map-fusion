@@ -1,0 +1,8 @@
+prefix=/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/devel
+
+Name: indep_study_task01_textreadprint
+Description: Description of indep_study_task01_textreadprint
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
