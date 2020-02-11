@@ -1,17 +1,17 @@
-#include "Map.h"
 #include <iostream>
+#include "line.h"
+using namespace std;
 
-int main(int argc, char **argv)
+typedef Eigen::Vector2f Vec2f;
+
+int main(int argv, char **args)
 {
-    Map map;
-
-    map.occupy(Coordinate(0,0));
-    map.occupy(Coordinate(1,1));
-    map.occupy(Coordinate(2,2));
-    
-    map.print_points();
-    std::cout << map.is_occupied(Coordinate(2,2)) << "\n";
-    std::cout << map.is_occupied(Coordinate(2,1)) << "\n";
-
-    return 0;
+    Vec2f a = Vec2f(3, 6);
+    Line seg1 = Line(Vec2f(0.0, 0.0), Vec2f(10.0, 0.0));
+    Line seg2 = Line(Vec2f(10.0, 0.0), Vec2f(10.0, 5.0));
+    Line seg3 = Line(Vec2f(10.0, 5.0), Vec2f(20.0, 5.0));
+    Line seg4 = Line(Vec2f(20.0, 5.0), Vec2f(20.0, 10.0));
+    Line seg5 = Line(Vec2f(0.0, 10.0), Vec2f(20.0, 10.0));
+    cout << a.y();
+    cout << seg5;
 }
