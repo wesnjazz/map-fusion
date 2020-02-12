@@ -11,31 +11,35 @@ struct Line
     {
         p1 = start;
         p2 = end;
+        calculate_members();
     }
     Eigen::Vector2f p1;
     Eigen::Vector2f p2;
+    Eigen::Vector2f line_vector;
     double length;
     int orientation;
 
-    // std::ostream& operator<<(std::ostream& os)
-    // std::string operator<<(const Line &l)
-    // {
-    //     // os << p1.x();
-    //     std::string temp_str;
-    //     temp_str = "(" + std::to_string(p1.x()) + "," + std::to_string(p1.y()) + ")";
-    //     return temp_str;
-    //     // return os;
-    // }
+    void calculate_members()
+    {
+        length = abs(sqrt((pow((p2.x()-p1.x()),2.0) + pow((p2.y()-p1.y()),2.0))));
+        line_vector = p2 - p1;
+    }
 
     friend std::ostream& operator<<(std::ostream& os, const Line &l)
     {
-        string temp_str1;
-        string temp_str2;
-        string temp_str3;
-        temp_str1 = "[" + to_string(l.p1.x()) + "," + to_string(l.p1.y()) + "]";
-        temp_str2 = "[" + to_string(l.p2.x()) + "," + to_string(l.p2.y()) + "]";
-        temp_str3 = temp_str1 + " -> " + temp_str2;
-        os << temp_str3;
+        double x = l.p2.x()-l.p1.x();
+        double x2 = pow(x,2.0);
+        double y = l.p2.y()-l.p1.y();
+        double y2 = pow(y,2.0);
+        double z = sqrt(x2+y2);
+        os << "[" << to_string(l.p1.x()) << "," << to_string(l.p1.y()) << "]";
+        os << "->";
+        os << "[" << to_string(l.p2.x()) << "," << to_string(l.p2.y()) << "]";
+        os << "\tlength:" << l.length << "\torientation:";
+        os << "\n" << l.line_vector;
+        // os << "\n" << l.p2.x() << "-" << l.p1.x() << "=" << x << "\t" << x2;
+        // os << "\n" << l.p2.y() << "-" << l.p1.y() << "=" << x << "\t" << y2;
+        // os << "\t" << z << "\t" << abs(z);
         return os;
     }
 };
