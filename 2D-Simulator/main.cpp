@@ -5,6 +5,15 @@ using namespace std;
 
 typedef Eigen::Vector2f Vec2f;
 
+/** Todo 
+ * Read map data
+ * Read rays data
+ * Robot Poses (x, y, theta)
+ * Segment operator<< into cpp file
+ * 
+ * **/
+
+
 int main(int argv, char **args)
 {
     Vec2f a = Vec2f(3, 6);
@@ -27,7 +36,15 @@ int main(int argv, char **args)
     // 10.0 && 9.9999995 == false
     // 10.0 && 9.9999996 == true
     Segment ray2 = Segment(Vec2f(0.0, 0.0), Vec2f(1.23567, 9.9999995));
-    cout << wall6 << "\n";
-    cout << ray2 << "\n";
-    cout << ray2.intersect(wall6) << "\n";
+    // cout << wall6 << "\n";
+    // cout << ray2 << "\n";
+    // cout << ray2.intersect(wall6) << "\n";
+
+    Segment seg7 = Segment(Vec2f(4.0, 8.0), Vec2f(7.0, 5.0));
+    Segment ray3 = Segment(Vec2f(4.5, 2.0), Vec2f(6.5, 9.0));
+    cout << seg7 << "\n";
+    cout << ray3 << "\n";
+    cout << ray3.intersect(seg7) << "\n";
+    cout << ray3.intersect(wall5) << "\n";
+    cout << wall5.intersect(ray3) << "\n";
 }
