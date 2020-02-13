@@ -4,8 +4,8 @@
 #include <iostream>
 #include <math.h>
 #include <Eigen/Dense>
-using namespace std;
 
+using namespace std;
 typedef Eigen::Vector2f Vec2f;
 typedef Eigen::Hyperplane<float, 2> Line;
 
@@ -40,7 +40,7 @@ struct Segment
         os << "[" << to_string(sg.p1.x()) << "," << to_string(sg.p1.y()) << "]";
         os << "->";
         os << "[" << to_string(sg.p2.x()) << "," << to_string(sg.p2.y()) << "]";
-        os << "\nlength:" << sg.length << "\tangle:" << sg.angle << "\tangle_degree:" << sg.angle_degree;
+        os << "\tlength:" << sg.length << "\tangle:" << sg.angle << "\tangle_degree:" << sg.angle_degree;
         // os << "\n" << sg.p1.se;
         // os << "\n" << sg.segment;
         // os << "\n" << sg.p2.x() << "-" << sg.p1.x() << "=" << x << "\t" << x2;

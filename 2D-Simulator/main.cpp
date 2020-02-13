@@ -1,8 +1,10 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
 #include "segment.h"
 #include <Eigen/Dense>
-using namespace std;
 
+using namespace std;
 typedef Eigen::Vector2f Vec2f;
 
 /** Todo 
@@ -13,8 +15,86 @@ typedef Eigen::Vector2f Vec2f;
  * 
  * **/
 
+int usage(char *app_name) {
+    cout << "Usage: " << app_name << " [text file]\n";
+    cout << "Options:\n";
+    cout << "  -p\t\t\tpause on every line\n\n";
+    exit(0);
+}
 
-int main(int argv, char **args)
+void read_segments(ifstream &seg_file, vector<Segment> *segs)
+{
+    Vec2f p1 = Vec2f(0,0);
+    Vec2f p2 = Vec2f(0,0);
+    Segment seg = Segment(p1, p2);
+    int x, y;
+    int count = 0;
+    string line;
+    while(getline(seg_file, line)) {
+        stringstream ss(line);
+        while(getline(ss, line, ',')) {
+            count++;
+            switch (count)
+            {
+            case 1: x = stoi(line); break;
+            case 2: y = stoi(line); p1 = Vec2f(x, y); break;
+            case 3: x = stoi(line); break;
+            case 4: 
+                y = stoi(line);
+                p2 = Vec2f(x, y);
+                count = 0;
+                // Segment seg = Segment(p1, p2);
+                seg = Segment(p1, p2);
+                segs->push_back(seg);
+                break;
+            default: break;
+            }
+        }
+    }
+}
+
+int main(int argc, char **argv)
+{
+    vector<Segment> map;
+    vector<Segment> rays;
+    ifstream map_file;
+    ifstream rays_file;
+
+    // Check number of arguments
+    if (argc <= 1 || 4 <= argc) {
+        usage(argv[0]);
+    }
+    if (argc >= 2) { map_file = ifstream(argv[1]); }
+    if (argc >= 3) { rays_file = ifstream(argv[2]); }
+    if (!map_file && !rays_file) {
+        cout << "The file [";
+        if (!map_file) { cout << argv[1]; }
+        if (!rays_file) { cout << ", " << argv[2]; }
+        cout << "] doesn't exists.\n\n";
+        exit(0);
+    }
+
+    read_segments(map_file, &map);
+    read_segments(rays_file, &rays);
+    for (vector<Segment>::iterator it = map.begin(); it != map.end(); ++it) {
+        cout << *it << "\n";
+    }
+    for (vector<Segment>::iterator it = rays.begin(); it != rays.end(); ++it) {
+        cout << *it << "\n";
+    }
+
+    // Print text file line by line
+    string line;
+    // flush();
+    // while(getline(infile, line)) {
+    //     cout << line << endl;
+    // }
+
+    // infile.close();
+    return 0;
+}
+
+void test()
 {
     Vec2f a = Vec2f(3, 6);
     Segment wall1 = Segment(Vec2f(0.0, 0.0), Vec2f(10.0, 0.0));
@@ -47,4 +127,5 @@ int main(int argv, char **args)
     cout << ray3.intersect(seg7) << "\n";
     cout << ray3.intersect(wall5) << "\n";
     cout << wall5.intersect(ray3) << "\n";
+
 }
