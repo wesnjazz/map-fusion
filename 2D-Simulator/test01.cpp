@@ -8,7 +8,6 @@ using namespace std;
 typedef Eigen::Vector2f Vec2f;
 void test();
 void test2();
-void test3();
 
 /** Todo 
  * Read map data
@@ -86,24 +85,17 @@ int main(int argc, char **argv)
     //     cout << *it << "\n";
     // }
 
-    test3();
+    test2();
 
-    map_file.close();
-    rays_file.close();
+    // Print text file line by line
+    // string line;
+    // flush();
+    // while(getline(infile, line)) {
+    //     cout << line << endl;
+    // }
+
+    // infile.close();
     return 0;
-}
-
-void test3()
-{
-    Segment va = Segment(Vec2f(0,0), Vec2f(5,0));
-    Segment vb = Segment(Vec2f(5.1,-5), Vec2f(15.1,-5));
-    // Segment vb = Segment(Vec2f(5.1,-5), Vec2f(5.1,5));
-
-    cout << "va:" << va << "\n";
-    cout << "vb:" << vb << "\n";
-    cout << va.ifIntersect(vb);
-    cout << "intersect point:\n" << va.intersection_point(vb) << "\n";
-
 }
 
 void test2()
