@@ -25,18 +25,19 @@ struct Segment
     float y_difference;
     float angle;
     float angle_degree;
-    double length;
+    float length;
 
     void calculate_members();
     Vec2f intersect(const Segment &seg2);
+    Vec2f intersect2(const Segment &seg2);
 
     friend std::ostream& operator<<(std::ostream& os, const Segment &sg)
     {
-        double x = sg.p2.x()-sg.p1.x();
-        double x2 = pow(x,2.0);
-        double y = sg.p2.y()-sg.p1.y();
-        double y2 = pow(y,2.0);
-        double z = sqrt(x2+y2);
+        float x = sg.p2.x()-sg.p1.x();
+        float x2 = pow(x,2.0);
+        float y = sg.p2.y()-sg.p1.y();
+        float y2 = pow(y,2.0);
+        float z = sqrt(x2+y2);
         os << "[" << to_string(sg.p1.x()) << "," << to_string(sg.p1.y()) << "]";
         os << "->";
         os << "[" << to_string(sg.p2.x()) << "," << to_string(sg.p2.y()) << "]";

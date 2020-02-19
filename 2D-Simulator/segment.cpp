@@ -41,3 +41,7 @@ Vec2f Segment::intersect(const Segment &seg2)
     return intersect;
 }
 
+Vec2f Segment::intersect2(const Segment &seg2)
+{
+    ;
+}

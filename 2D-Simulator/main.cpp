@@ -6,6 +6,8 @@
 
 using namespace std;
 typedef Eigen::Vector2f Vec2f;
+void test();
+void test2();
 
 /** Todo 
  * Read map data
@@ -76,15 +78,17 @@ int main(int argc, char **argv)
 
     read_segments(map_file, &map);
     read_segments(rays_file, &rays);
-    for (vector<Segment>::iterator it = map.begin(); it != map.end(); ++it) {
-        cout << *it << "\n";
-    }
-    for (vector<Segment>::iterator it = rays.begin(); it != rays.end(); ++it) {
-        cout << *it << "\n";
-    }
+    // for (vector<Segment>::iterator it = map.begin(); it != map.end(); ++it) {
+    //     cout << *it << "\n";
+    // }
+    // for (vector<Segment>::iterator it = rays.begin(); it != rays.end(); ++it) {
+    //     cout << *it << "\n";
+    // }
+
+    test2();
 
     // Print text file line by line
-    string line;
+    // string line;
     // flush();
     // while(getline(infile, line)) {
     //     cout << line << endl;
@@ -92,6 +96,61 @@ int main(int argc, char **argv)
 
     // infile.close();
     return 0;
+}
+
+void test2()
+{
+    Segment va = Segment(Vec2f(1,5), Vec2f(6,6));
+    Segment vb = Segment(Vec2f(4,8), Vec2f(10,4));
+
+    /**
+     * as: a vector of va's starting point
+     * ad: a unit, direction vector of vector va
+     * 
+     * parametrinc representation
+     * va = as + t(ad)
+     * vb = bs + u(bd)
+     * 
+     * va = [as_x as_y]^T + t[ad_x ad_y]^T
+     * vb = [bs_x bs_y]^T + u[bd_x bd_y]^T
+     * 
+     * p: intersection point
+     * as + t(ad) = bs + u(bd)
+     * =>
+     * as_x + t(ad_x) = bs_x + u(bd_x)   - 1)
+     * as_y + t(ad_y) = bs_y + u(bd_y)   - 2)
+     * => from 1) t:
+     * t(ad_x) = bs_x + u(bd_x) - as_x
+     * t = [bs_x + u(bd_x) - as_x] / ad_x
+     * => from 2) u:
+     * u(bd_y) = as_y + t(ad_y) - bs_y
+     * u = (as_y + t(ad_y) - bs_y) / bd_y
+     * => substitute
+     * 
+     * as_y + ([bs_x + u(bd_x) - as_x] / ad_x)(ad_y) = bs_y + u(bd_y)
+     * (as_y)(ad_y) + ([bs_x + u(bd_x) - as_x] / ad_x) = (bs_y)(ad_y) + u(bd_y)(ad_y)
+     * (as_y)(ad_y)(ad_x) + [bs_x + u(bd_x) - as_x] = (bs_y)(ad_y)(ad_x) + u(bd_y)(ad_y)(ad_x)
+     * u(bd_y)(ad_y)(ad_x) - u(bd_x) = (as_y)(ad_y)(ad_x) + bs_x - as_x - (bs_y)(ad_y)(ad_x)
+     * 
+     * 
+     * 
+     * 
+     * u(bd_y) = as_y + t(ad_y) - bs_y
+     * u = (as_y + t(ad_y) - bs_y) / bd_y
+     * u = (as_y + [(bs_x + u(bd_x) - as_x) / ad_x] * ad_y - bs_y) / bd_y
+     * u = 
+     * 
+     **/
+
+    // Vec2f n1 = (va.p2 - va.p1).normalized(); 
+    // Vec2f n2 = (vb.p2 - vb.p1).normalized(); 
+    // float t = (vb.p1 - va.p1).dot(n2) / (va.p2-va.p1).dot(n2);
+
+    cout << "va:" << va << "\n";
+    cout << "vb:" << vb << "\n";
+    // cout << "n1:" << n1 << "\n";
+    // cout << "n2:" << n2 << "\n";
+    // cout << "t:" << t << "\n";
 }
 
 void test()
