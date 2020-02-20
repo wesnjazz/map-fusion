@@ -8,6 +8,14 @@ Segment::Segment(Vec2f p1, Vec2f p2)
     calculate_members();
 }
 
+Segment::Segment(Vec2f st, float length, float angle)
+{
+    start = st;
+    float end_x = length * cos(angle);
+    float end_y = length * sin(angle);
+    cout << end_x << ", " << end_y << "\n";
+    end = Vec2f(end_x, end_y);
+}
 
 void Segment::calculate_members()
 {
@@ -24,7 +32,7 @@ void Segment::calculate_members()
 
 bool Segment::isParallel(const Segment &seg2)
 {
-    float dot_product = (this->segment_unit).dot(seg2.segment_unit_norm);
+    float dot_product = (segment_unit).dot(seg2.segment_unit_norm);
     cout << "isParallel(dot_product):" << dot_product << "\n";
     return (dot_product == 0.0) ? true : false;
 }
@@ -32,16 +40,16 @@ bool Segment::isParallel(const Segment &seg2)
 
 bool Segment::ifIntersect(const Segment &seg2)
 {
-    return (0.0 < this->t && this->t <= this->length) &&
+    return (0.0 < t && t <= length) &&
             (0.0 < seg2.t && seg2.t <= seg2.length);
 }
 
 
 Vec2f Segment::intersection_point(Segment &seg2)
 {
-    this->t = (seg2.start - this->start).dot(seg2.segment_unit_norm) / (this->segment_unit).dot(seg2.segment_unit_norm);
-    seg2.t = (this->start - seg2.start).dot(this->segment_unit_norm) / (seg2.segment_unit).dot(this->segment_unit_norm);
-    Vec2f intersect_vector = this->start + t*(this->segment_unit);
+    t = (seg2.start - start).dot(seg2.segment_unit_norm) / (segment_unit).dot(seg2.segment_unit_norm);
+    seg2.t = (start - seg2.start).dot(segment_unit_norm) / (seg2.segment_unit).dot(segment_unit_norm);
+    Vec2f intersect_vector = start + t*(segment_unit);
 
     cout << "t:" << t << "\n";
     cout << "u:" << seg2.t << "\n";

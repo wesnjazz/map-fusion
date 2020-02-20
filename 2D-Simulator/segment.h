@@ -13,6 +13,7 @@ typedef Eigen::Hyperplane<float, 2> Line;
 struct Segment
 {
     Segment(Vec2f p1, Vec2f p2);
+    Segment(Vec2f start, float length, float angle);
     Vec2f start;                // start point vector
     Vec2f end;                  // end point vector
     Vec2f segment;              // segment(line) vector = end - start

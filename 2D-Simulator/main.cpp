@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include "segment.h"
+#include "robot.h"
 #include <Eigen/Dense>
 
 using namespace std;
@@ -9,6 +10,7 @@ typedef Eigen::Vector2f Vec2f;
 void test();
 void test2();
 void test3();
+void test4(Robot &robot);
 
 /** Todo 
  * Read map data
@@ -86,11 +88,21 @@ int main(int argc, char **argv)
     //     cout << *it << "\n";
     // }
 
-    test3();
+    // test3();
+
+    Robot robot = Robot(Position(4,3,90,0));
+    // Robot robot = Robot(Position(3, 4, 270, 15));
+    test4(robot);
 
     map_file.close();
     rays_file.close();
     return 0;
+}
+
+void test4(Robot &robot)
+{
+    cout << "Robot(" << robot.position.x << "," << robot.position.y << "," << robot.position.theta << "," << robot.position.velocity << ")" << "\n";
+    robot.laser_scan(robot.position);
 }
 
 void test3()
