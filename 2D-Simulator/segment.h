@@ -9,11 +9,6 @@ using namespace std;
 typedef Eigen::Vector2f Vec2f;
 typedef Eigen::Hyperplane<float, 2> Line;
 
-// For accurate comparison between floats
-// bool cmpf(float A, float B, float epsilon = 0.005f)
-// {
-//     return (fabs(A - B) < epsilon);
-// }
 
 struct Segment
 {
@@ -32,6 +27,7 @@ struct Segment
     float length;
 
     void calculate_members();
+    bool isParallel(const Segment &seg2);
     Vec2f intersection_point(Segment &seg2);
     bool ifIntersect(const Segment &seg2);
 
