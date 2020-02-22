@@ -18,7 +18,7 @@ struct Segment
     Vec2f end;                  // end point vector
     Vec2f segment;              // segment(line) vector = end - start
     Vec2f segment_unit;         // unit vector of segment
-    Vec2f segment_unit_norm;    // unit & normal vector of segment
+    Vec2f segment_norm_unit;    // unit vector of normal vector of segment
     
     float t;                    // t in the parametric equation: a_vector = a_start + (a_direction) * t
     float x_diff;

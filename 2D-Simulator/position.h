@@ -6,14 +6,13 @@
 struct Position
 {
     Position();
-    Position(float x, float y, float theta, float velocity);
-    void move_to(float x, float y, float theta, float velocity);
+    Position(float x, float y, float theta);
+    void move_to(float x, float y, float theta);
     float x;
     float y;
     float theta;
     float theta_degree;
-    float velocity;
-    Vec2f pos_vec2f;
+    Vec2f position_vector;
 };
 
 #endif

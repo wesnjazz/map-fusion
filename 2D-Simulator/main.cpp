@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include "segment.h"
+#include "laser.h"
 #include "robot.h"
 #include <Eigen/Dense>
 
@@ -58,51 +59,67 @@ void read_segments(ifstream &seg_file, vector<Segment> *segs)
     }
 }
 
+void print_segments(vector<Segment> &segs)
+{
+    for (vector<Segment>::iterator it = segs.begin(); it != segs.end(); ++it) {
+        cout << *it << "\n";
+    }
+}
+
+
 int main(int argc, char **argv)
 {
-    vector<Segment> map;
-    vector<Segment> rays;
-    ifstream map_file;
-    ifstream rays_file;
+    vector<Segment> wall_segments;
+    vector<Segment> trajectories;
+    ifstream wall_segments_file;
+    ifstream trajectories_file;
 
     // Check number of arguments
     if (argc <= 1 || 4 <= argc) {
         usage(argv[0]);
     }
-    if (argc >= 2) { map_file = ifstream(argv[1]); }
-    if (argc >= 3) { rays_file = ifstream(argv[2]); }
-    if (!map_file && !rays_file) {
+    if (argc >= 2) { wall_segments_file = ifstream(argv[1]); }
+    if (argc >= 3) { trajectories_file = ifstream(argv[2]); }
+    if (!wall_segments_file && !trajectories_file) {
         cout << "The file [";
-        if (!map_file) { cout << argv[1]; }
-        if (!rays_file) { cout << ", " << argv[2]; }
+        if (!wall_segments_file) { cout << argv[1]; }
+        if (!trajectories_file) { cout << ", " << argv[2]; }
         cout << "] doesn't exists.\n\n";
         exit(0);
     }
 
-    read_segments(map_file, &map);
-    read_segments(rays_file, &rays);
-    // for (vector<Segment>::iterator it = map.begin(); it != map.end(); ++it) {
-    //     cout << *it << "\n";
-    // }
-    // for (vector<Segment>::iterator it = rays.begin(); it != rays.end(); ++it) {
-    //     cout << *it << "\n";
-    // }
+    read_segments(wall_segments_file, &wall_segments);
+    read_segments(trajectories_file, &trajectories);
 
-    // test3();
-
-    Robot robot = Robot(Position(4,3,90,0));
-    // Robot robot = Robot(Position(3, 4, 270, 15));
+    Robot robot = Robot(Position(4,3,90));
     test4(robot);
 
-    map_file.close();
-    rays_file.close();
+    Laser laser = Laser();
+    cout << laser.FOV_degree << "\n";
+
+
+    wall_segments_file.close();
+    trajectories_file.close();
     return 0;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 void test4(Robot &robot)
 {
-    cout << "Robot(" << robot.position.x << "," << robot.position.y << "," << robot.position.theta << "," << robot.position.velocity << ")" << "\n";
-    robot.laser_scan(robot.position);
+    cout << "Robot(" << robot.position.x << "," << robot.position.y << "," << robot.position.theta << "," << robot.position.position_vector << ")" << "\n";
+    // robot.laser_scan(robot.position);
 }
 
 void test3()
@@ -168,11 +185,11 @@ void test2()
     Segment vb = Segment(Vec2f(2,1), Vec2f(5,5));
     // Segment vb = Segment(Vec2f(1,6), Vec2f(5,2));
     Vec2f btoa = vb.start - va.start;
-    Vec2f bnom = vb.segment_unit_norm;
+    Vec2f bnom = vb.segment_norm_unit;
     Vec2f ad = va.segment_unit;
     float t = btoa.dot(bnom) / ad.dot(bnom);
     Vec2f atob = va.start - vb.start;
-    Vec2f anom = va.segment_unit_norm;
+    Vec2f anom = va.segment_norm_unit;
     Vec2f bd = vb.segment_unit;
     float u = atob.dot(anom) / bd.dot(anom);
     Vec2f interab = va.start + t*(va.segment_unit);
@@ -189,7 +206,7 @@ void test2()
     Vec2f bunit = vb.segment.normalized();
     // cout << bortho << "\n";
     // cout << bunit << "\n";
-    // cout << vb.segment.dot(vb.segment_unit_norm) << "\n";
+    // cout << vb.segment.dot(vb.segment_norm_unit) << "\n";
     cout << "interab:\n" << interab << "\n";
     cout << "t:" << t << "\n";
     cout << "u:" << u << "\n";

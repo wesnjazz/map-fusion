@@ -1,21 +1,21 @@
 #ifndef ROBOT_H
 #define ROBOT_H
 
-#include <vector>
+// #include <vector>
+// #include "trajectory.h"
 #include "laser.h"
-#include "trajectory.h"
 #include "position.h"
+// #include "laser_parameter.h"
 
 struct Robot
 {
+    Robot();
     Robot(Position pos);
-    vector<Laser> lasers;
-    vector<Trajectory> trajectories;
-    vector<Segment> closest_segments;
+    float velocity;
     Position position;
+    Laser sensor_laser;
+    // WheelEncoder sensor_wheel_encoder;
 
-    void laser_scan(Position pos);
-    void wheel_encode();
 };
 
 #endif

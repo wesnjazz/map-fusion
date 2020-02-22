@@ -1,12 +1,9 @@
-#ifndef LASER_H
-#define LASER_H
+#ifndef LASER_PARAMETER_H
+#define LASER_PARAMETER_H
 
-#include <vector>
-#include "segment.h"
-#include "position.h"
+#include "math.h"
 
-
-struct Laser
+struct LaserParameter
 {
     const float FOV_degree = 270;
     const float FOV = FOV_degree * (M_PI / 180.0);
@@ -19,18 +16,5 @@ struct Laser
     const float noise_mean = 0.2;
     const float noise_sigma = 1.0;
 };
-
-
-// const struct
-// {
-//     // Laser(Position pos);
-//     Position position;
-
-//     vector<Segment> rays;
-
-//     void create_rays();
-//     int add_ray(Segment ray);
-//     void print_rays();
-// } Laser ;
 
 #endif
