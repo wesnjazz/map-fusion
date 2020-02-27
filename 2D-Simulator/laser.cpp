@@ -1,8 +1,19 @@
 #include "laser.h"
 
-Segment Laser::create_a_ray(Position pos, float angle)
+Laser::Laser()
 {
-    Segment ray = Segment(pos.position_vector, this->ray_length, pos.theta_degree + angle);
+    // noise = Noise(0.0, 0.0);
+    ;
+}
+
+Segment Laser::create_a_ray(Position pos, float angle, Noise &noise)
+{
+    double noisy_length = this->ray_length + noise.gaussian();
+    // cout << "noisy_length: " << noisy_length << endl;
+    double noisy_angle_degree = pos.theta_degree + angle + noise.gaussian();
+    // cout << "noisy_angle: " << noisy_angle_degree << endl;
+    Segment ray = Segment(pos.position_vector, noisy_length, noisy_angle_degree);
+    // Segment ray = Segment(pos.position_vector, this->ray_length, pos.theta_degree + angle);
     return ray;
 }
 

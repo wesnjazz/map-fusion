@@ -1,9 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "segment.h"
-#include "laser.h"
 #include "robot.h"
+#include "segment.h"
+#include "position.h"
+#include "laser.h"
+#include "noise.h"
+#include "map.h"
+#include "trajectory.h"
 #include <Eigen/Dense>
 
 using namespace std;
@@ -13,6 +17,7 @@ void test2();
 void test3();
 void test4(Robot &robot);
 void test5(Robot &robot);
+void test_noise(Noise &noise);
 
 /** Todo 
  * Read map data
@@ -93,33 +98,48 @@ void print_segments(vector<Segment> &segs)
 }
 
 
-vector<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser *laser_sensor)
+vector<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser *laser_sensor, Noise *noise)
 {
-    vector<Segment*> closest_segs;
-    Position pos;
+    vector<Segment*> closest_segs;                                      // Vector of detected closest segmenst from the robot
+    float angle = robot->position.theta_degree 
+                - (laser_sensor->FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
 
-    float angle = robot->position.theta_degree - (laser_sensor->FOV_degree / 2.0);
-    for(int i = 0; i <= laser_sensor->num_total_rays; i++) {
-
+    for(int i = 1; i <= laser_sensor->num_total_rays; i++) {            // For all each laser ray
         cout << "------ rays ----------\n";
-        Segment ray = laser_sensor->create_a_ray(robot->position, angle);
+        Segment ray = 
+            laser_sensor->create_a_ray(robot->position, angle, *noise); // Create a ray
         cout << ray << "\n-------------------------\n";
-        angle += laser_sensor->angular_resolution_degree;
+        angle += laser_sensor->angular_resolution_degree;               // Get the next ray's angle
 
-        float min_t = 99999;
+        float min_t = 99999;                                            // Temp value for min
+        Segment *min_seg = NULL;                                        // Pointer of the closest segment at the moment
 
-        for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {
-            if (!ray.isParallel(*it)) {
-                Vec2f intersect_vector = ray.intersection_point(*it);
-                if (ray.ifIntersect(*it)) {
-                    if (fabs(ray.t) < fabs(min_t)) {
+        for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {  // For all each wall segment
+            if (!ray.isParallel(*it)) {                                 // If two segments(Laser ray & Wall segment) is not Parallel
+                Vec2f intersect_vector = ray.intersection_point(*it);   // Get the intersection point as a Vec2f
+                if (ray.ifIntersect(*it)) {                             // In two intersects on its length (not on a extended line)
+                    if (fabs(ray.t) < fabs(min_t)) {                    // Takes as closest wall segment at the moment
                         cout << "(" << intersect_vector.x() << "," << intersect_vector.y() << ") with a wall " << *it << "\n";
-                        min_t = ray.t;
-                        closest_segs.push_back(&(*it));
+                        min_t = ray.t;                                  // Remember the min t (length)
+                        min_seg = &(*it);                               // Remember its location in memory
                     }
                 }
             }
         }
+        if (min_seg != NULL) {                                          // If there existed any closest wall segment
+            cout << "adding min!" << endl;
+            cout << *min_seg << endl;
+            if (min_t < laser_sensor->range_min) {
+                cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor->range_min << endl;
+            } else {
+                closest_segs.push_back(min_seg);                            // Push back into a vector of Segment* pointers
+            }
+        } else {
+            cout << "nothing to add!" << endl;
+        }
+        min_t = 99999;                                                  // Reset min
+        min_seg = NULL;                                                 // Reset pointer
+
         cout << "\n\n";
     }
 
@@ -168,11 +188,16 @@ int main(int argc, char **argv)
     // test4(robot);
     // test5(robot);
 
-    vector<Segment*> closest_walls = simulate_scan(&robot, &wall_segments, &laser_sensor);
+
+    Noise noise = Noise(0.0, 5);
+    vector<Segment*> closest_walls = simulate_scan(&robot, &wall_segments, &laser_sensor, &noise);
     for(vector<Segment*>::iterator it = closest_walls.begin(); it != closest_walls.end(); it++) {
         cout << *it << "\n";
         cout << **it << "\n";
     }
+
+    // Noise noise = Noise(5.0, 3.0);
+    test_noise(noise);
 
     wall_segments_file.close();
     trajectories_file.close();
@@ -183,6 +208,10 @@ int main(int argc, char **argv)
 
 
 
+void test_noise(Noise &noise)
+{
+    cout << noise.gaussian() << endl;
+}
 
 
 void test5(Robot &robot)

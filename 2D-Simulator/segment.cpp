@@ -11,9 +11,14 @@ Segment::Segment(Vec2f p1, Vec2f p2)
 Segment::Segment(Vec2f st, float length, float angle_degree)
 {
     start = st;
-    float angle_radian = angle_degree * (M_PI / 180.0);
-    float end_x = st.x() + length * cos(angle_radian);
-    float end_y = st.y() + length * sin(angle_radian);
+    cout << st;
+    angle_radian = angle_degree * (M_PI / 180.0);
+    float length_x = cos(angle_radian);
+    float length_y = sin(angle_radian);
+    if (fabs(length_x) < 0.00001) { length_x = 0.0; }
+    if (fabs(length_y) < 0.00001) { length_y = 0.0; }
+    float end_x = st.x() + length * length_x;
+    float end_y = st.y() + length * length_y;
     end = Vec2f(end_x, end_y);
     calculate_members();
 }
