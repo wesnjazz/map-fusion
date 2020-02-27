@@ -100,21 +100,22 @@ vector<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Las
 
     float angle = robot->position.theta_degree - (laser_sensor->FOV_degree / 2.0);
     for(int i = 0; i <= laser_sensor->num_total_rays; i++) {
-        cout << "------walls----------\n";
+        cout << "------ rays ----------\n";
         Segment ray = laser_sensor->create_a_ray(robot->position, angle);
-        cout << ray << "\n";
+        cout << ray << "\n-------------------------\n";
         angle += laser_sensor->angular_resolution_degree;
         for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {
             // cout << *it << "\n";
             if (!ray.isParallel(*it)) {
-                Vec2f intersect = ray.intersection_point(*it);
+                Vec2f intersect_vector = ray.intersection_point(*it);
                 if (ray.ifIntersect(*it)) {
-                    cout << intersect << "\nwith" << *it << "\n";
+                    cout << "(" << intersect_vector.x() << "," << intersect_vector.y() << ") with a wall " << *it << "\n";
                     closest_segs.push_back(&(*it));
                 }
             }
         }
-        cout << "--------------\n\n";
+        // cout << "**************************************************\n\n";
+        cout << "\n\n";
     }
 
     return closest_segs;

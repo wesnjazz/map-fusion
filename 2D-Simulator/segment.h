@@ -13,7 +13,7 @@ typedef Eigen::Hyperplane<float, 2> Line;
 struct Segment
 {
     Segment(Vec2f p1, Vec2f p2);
-    Segment(Vec2f start, float length, float angle);
+    Segment(Vec2f start, float length, float angle_degree);
     Vec2f start;                // start point vector
     Vec2f end;                  // end point vector
     Vec2f segment;              // segment(line) vector = end - start
@@ -23,7 +23,7 @@ struct Segment
     float t;                    // t in the parametric equation: a_vector = a_start + (a_direction) * t
     float x_diff;
     float y_diff;
-    float angle;
+    float angle_radian;
     float angle_degree;
     float length;
 
@@ -31,6 +31,7 @@ struct Segment
     bool isParallel(const Segment &seg2);
     Vec2f intersection_point(Segment &seg2);
     bool ifIntersect(const Segment &seg2);
+    void remove_small_error_values(Vec2f &vec);
 
     friend std::ostream& operator<<(std::ostream& os, const Segment &sg)
     {
@@ -42,7 +43,7 @@ struct Segment
         os << "[" << to_string(sg.start.x()) << "," << to_string(sg.start.y()) << "]";
         os << "->";
         os << "[" << to_string(sg.end.x()) << "," << to_string(sg.end.y()) << "]";
-        os << "\tlength:" << sg.length << "\tangle:" << sg.angle << "\tangle_degree:" << sg.angle_degree;
+        os << "\tlength:" << sg.length << "\tangle:" << sg.angle_radian << "\tangle_degree:" << sg.angle_degree;
         return os;
     }
 };
