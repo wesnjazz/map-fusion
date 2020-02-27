@@ -51,6 +51,10 @@ bool Segment::ifIntersect(const Segment &seg2)
     // t: The distance on the segment line 1 to the intersecting point with segment 2
     // u: The distance on the segment line 2 to the intersecting point with segment 1
     // If t and u both are less or equal to itselves, then two line segments intersect!
+    // if ((0.0 < t && t <= length)) {
+    //     cout << "\t\tIntersect! at\n";
+    // }
+    // return (0.0 < t && t <= length);
     if ((0.0 < t && t <= length) && (0.0 < seg2.t && seg2.t <= seg2.length)) {
         cout << "\t\tIntersect! at\n";
     }

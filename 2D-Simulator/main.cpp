@@ -100,7 +100,6 @@ void print_segments(vector<Segment> &segs)
 
 
 set<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser *laser_sensor, Noise *length_noise, Noise *angle_noise)
-// vector<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser *laser_sensor, Noise *noise)
 {
     // vector<Segment*> closest_segs;                                      // Vector of detected closest segmenst from the robot
     set<Segment*> closest_segs;
@@ -150,18 +149,6 @@ set<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser 
     return closest_segs;
 }
 
-    // while (trajectories->size() != 0) {
-    //     pos = trajectories->at(0);
-    //     cout << "at " << pos << "\n";
-    //     for(int i = 0; i <= laser_sensor->num_total_rays; i++) {
-
-    //     }
-    //     // copy(trajectories->begin(), trajectories->begin(), pos);
-    //     trajectories->erase(trajectories->begin());
-    // }
-    // return closest_segs;
-
-
 
 int main(int argc, char **argv)
 {
@@ -188,15 +175,12 @@ int main(int argc, char **argv)
     read_segments(wall_segments_file, &wall_segments);
     read_positions(trajectories_file, &trajectories);
 
-    Robot robot = Robot(Position(4,3,0));
-    // test4(robot);
-    // test5(robot);
+    Robot robot = Robot(Position(1,0,0));
+    Noise length_noise = Noise(0.0, 0.0);
+    Noise angle_noise = Noise(0.0, 0.00);
 
-
-    Noise length_noise = Noise(0.0, 1.5);
-    Noise angle_noise = Noise(0.0, 0.1);
     set<Segment*> closest_walls = simulate_scan(&robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
-    // vector<Segment*> closest_walls = simulate_scan(&robot, &wall_segments, &laser_sensor, &noise);
+
     cout << "Set of Segment* (wall segment pointer)" << endl;
     for(set<Segment*>::iterator it = closest_walls.begin(); it != closest_walls.end(); it++) {
         cout << *it << "\n";
@@ -207,6 +191,16 @@ int main(int argc, char **argv)
     trajectories_file.close();
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
