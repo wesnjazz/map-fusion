@@ -12,6 +12,7 @@ void test();
 void test2();
 void test3();
 void test4(Robot &robot);
+void test5(Robot &robot);
 
 /** Todo 
  * Read map data
@@ -92,26 +93,28 @@ void print_segments(vector<Segment> &segs)
 }
 
 
-vector<Segment> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser *laser_sensor)
+vector<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser *laser_sensor)
 {
-    vector<Segment> closest_segs;
+    vector<Segment*> closest_segs;
     Position pos;
 
     float angle = robot->position.theta_degree - (laser_sensor->FOV_degree / 2.0);
     for(int i = 0; i <= laser_sensor->num_total_rays; i++) {
-
+        cout << "------walls----------\n";
         Segment ray = laser_sensor->create_a_ray(robot->position, angle);
         cout << ray << "\n";
         angle += laser_sensor->angular_resolution_degree;
         for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {
-            if (ray.isParallel(*it) && ray.ifIntersect(*it)) {
+            // cout << *it << "\n";
+            if (!ray.isParallel(*it)) {
                 Vec2f intersect = ray.intersection_point(*it);
-                cout << intersect << "\n";
+                if (ray.ifIntersect(*it)) {
+                    cout << intersect << "\nwith" << *it << "\n";
+                    closest_segs.push_back(&(*it));
+                }
             }
         }
-        // for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {
-
-        // }
+        cout << "--------------\n\n";
     }
 
     return closest_segs;
@@ -156,9 +159,10 @@ int main(int argc, char **argv)
     read_positions(trajectories_file, &trajectories);
 
     Robot robot = Robot(Position(4,3,0));
-    test4(robot);
+    // test4(robot);
+    // test5(robot);
 
-    vector<Segment> closest_walls = simulate_scan(&robot, &wall_segments, &laser_sensor);
+    vector<Segment*> closest_walls = simulate_scan(&robot, &wall_segments, &laser_sensor);
 
     wall_segments_file.close();
     trajectories_file.close();
@@ -171,7 +175,36 @@ int main(int argc, char **argv)
 
 
 
+void test5(Robot &robot)
+{
+    Segment a = Segment(Vec2f(0, 0), Vec2f(20, 0));
+    Segment b = Segment(Vec2f(20, 0), Vec2f(20, 10));
+    Segment d = Segment(Vec2f(20, 0), Vec2f(20, -10));
+    Segment r = Segment(Vec2f(4, 3), Vec2f(4, -6));
 
+    Vec2f a_unit = a.segment_unit;
+    Vec2f a_norm = a.segment_norm_unit;
+    cout << a_unit << "\n";
+    cout << a_norm << "\n";
+    Vec2f b_unit = b.segment_unit;
+    Vec2f b_norm = b.segment_norm_unit;
+    cout << b_unit << "\n";
+    cout << b_norm << "\n";
+    Vec2f d_unit = d.segment_unit;
+    Vec2f d_norm = d.segment_norm_unit;
+    cout << d_unit << "\n";
+    cout << d_norm << "\n\nr:\n";
+    Vec2f r_unit = r.segment_unit;
+    Vec2f r_norm = r.segment_norm_unit;
+    cout << r_unit << "\n";
+    cout << r_norm << "\n";
+
+    cout << "\n\ndot product\n";
+    float r_dot_a_unit = r.segment_unit.dot(d_norm);
+    cout << r_unit << "\ndot\n" << d_norm << " : " << r_dot_a_unit << "\n";
+
+    cout << r.intersection_point(d) << "\n";
+}
 
 
 
