@@ -59,6 +59,7 @@ Vec2f Segment::intersection_point(Segment &seg2)
     t = (seg2.start - start).dot(seg2.segment_norm_unit) / (segment_unit).dot(seg2.segment_norm_unit);
     seg2.t = (start - seg2.start).dot(segment_norm_unit) / (seg2.segment_unit).dot(segment_norm_unit);
     Vec2f intersect_vector = start + t*(segment_unit);
+    cout << "\nt:" << t << "\tu:" << seg2.t << "\n";
     remove_small_error_values(intersect_vector);
     return intersect_vector;
 }
