@@ -6,12 +6,16 @@ Laser::Laser()
     ;
 }
 
-Segment Laser::create_a_ray(Position pos, float angle, Noise &noise)
+Segment Laser::create_a_ray(Position pos, float angle, Noise &length_noise, Noise &angle_noise)
 {
-    double noisy_length = this->ray_length + noise.gaussian();
-    // cout << "noisy_length: " << noisy_length << endl;
-    double noisy_angle_degree = pos.theta_degree + angle + noise.gaussian();
-    // cout << "noisy_angle: " << noisy_angle_degree << endl;
+    double ln = length_noise.gaussian();
+    double noisy_length = this->ray_length + ln;
+    // double noisy_length = this->ray_length + length_noise.gaussian();
+    cout << "noisy_length: " << noisy_length << "\tnoise: " << ln << "\t\t(mean, std): (" << length_noise.mean << ", " << length_noise.std << ")" << endl;
+    double an = angle_noise.gaussian();
+    double noisy_angle_degree = pos.theta_degree + angle + an;
+    // double noisy_angle_degree = pos.theta_degree + angle + angle_noise.gaussian();
+    cout << "noisy_angle: " << noisy_angle_degree << "\tnoise: " << an << "\t\t(mean, std): (" << angle_noise.mean << ", " << angle_noise.std << ")" << endl;
     Segment ray = Segment(pos.position_vector, noisy_length, noisy_angle_degree);
     // Segment ray = Segment(pos.position_vector, this->ray_length, pos.theta_degree + angle);
     return ray;

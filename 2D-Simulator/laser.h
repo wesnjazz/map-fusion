@@ -18,7 +18,7 @@ struct Laser
     const float angular_resolution_radian = FOV_radian / num_total_rays;
     const float angular_resolution_degree = FOV_degree / num_total_rays;
 
-    Segment create_a_ray(Position pos, float angle, Noise &noise);
+    Segment create_a_ray(Position pos, float angle, Noise &length_noise, Noise &angle_noise);
 };
 
 #endif
