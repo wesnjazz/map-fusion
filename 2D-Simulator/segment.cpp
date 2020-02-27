@@ -22,13 +22,9 @@ void Segment::calculate_members()
 {
     segment = end - start;  // Get a vector of the line
     segment_unit = segment.normalized();    // Unit vector
-    remove_small_error_values(segment_unit);
-    // if (fabs(segment_unit.x()) < 0.00001) { segment_unit = Vec2f(0, segment_unit.y()); }    // Replace very small number with zero
-    // if (fabs(segment_unit.y()) < 0.00001) { segment_unit = Vec2f(segment_unit.x(), 0); }
     segment_norm_unit = segment.unitOrthogonal();   // Normal Unit vector
+    remove_small_error_values(segment_unit);    // Replace very small number with zero
     remove_small_error_values(segment_norm_unit);
-    // if (fabs(segment_norm_unit.x()) < 0.00001) { segment_norm_unit = Vec2f(0, segment_norm_unit.y()); }
-    // if (fabs(segment_norm_unit.y()) < 0.00001) { segment_norm_unit = Vec2f(segment_norm_unit.x(), 0); }
 
     x_diff = end.x()-start.x();     // Difference of x coordinate
     y_diff = end.y()-start.y();     // Difference of y coordinate
