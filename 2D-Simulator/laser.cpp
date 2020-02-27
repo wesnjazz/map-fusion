@@ -1,5 +1,11 @@
 #include "laser.h"
 
+Segment Laser::create_a_ray(Position pos, float angle)
+{
+    Segment ray = Segment(pos.position_vector, this->ray_length, pos.theta_degree + angle);
+    return ray;
+}
+
 // Laser::Laser(Position pos)
 // {
 //     position = pos;

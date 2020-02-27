@@ -33,7 +33,7 @@ void read_segments(ifstream &seg_file, vector<Segment> *segs)
     Vec2f p1 = Vec2f(0,0);
     Vec2f p2 = Vec2f(0,0);
     Segment seg = Segment(p1, p2);
-    int x, y;
+    float x, y;
     int count = 0;
     string line;
     while(getline(seg_file, line)) {
@@ -42,16 +42,41 @@ void read_segments(ifstream &seg_file, vector<Segment> *segs)
             count++;
             switch (count)
             {
-            case 1: x = stoi(line); break;
-            case 2: y = stoi(line); p1 = Vec2f(x, y); break;
-            case 3: x = stoi(line); break;
+            case 1: x = stof(line); break;
+            case 2: y = stof(line); p1 = Vec2f(x, y); break;
+            case 3: x = stof(line); break;
             case 4: 
-                y = stoi(line);
+                y = stof(line);
                 p2 = Vec2f(x, y);
                 count = 0;
                 // Segment seg = Segment(p1, p2);
                 seg = Segment(p1, p2);
                 segs->push_back(seg);
+                break;
+            default: break;
+            }
+        }
+    }
+}
+
+void read_positions(ifstream &pos_file, vector<Position> *positions)
+{
+    Position pos = Position(0, 0);
+    float x, y;
+    int count = 0;
+    string line;
+    while(getline(pos_file, line)) {
+        stringstream ss(line);
+        while(getline(ss, line, ',')) {
+            count++;
+            switch (count)
+            {
+            case 1: x = stof(line); break;
+            case 2: 
+                y = stof(line); 
+                pos.move_to(x, y); 
+                count = 0;
+                positions->push_back(pos);
                 break;
             default: break;
             }
@@ -67,12 +92,51 @@ void print_segments(vector<Segment> &segs)
 }
 
 
+vector<Segment> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser *laser_sensor)
+{
+    vector<Segment> closest_segs;
+    Position pos;
+
+    float angle = robot->position.theta_degree - (laser_sensor->FOV_degree / 2.0);
+    for(int i = 0; i <= laser_sensor->num_total_rays; i++) {
+
+        Segment ray = laser_sensor->create_a_ray(robot->position, angle);
+        cout << ray << "\n";
+        angle += laser_sensor->angular_resolution_degree;
+        for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {
+            if (ray.isParallel(*it) && ray.ifIntersect(*it)) {
+                Vec2f intersect = ray.intersection_point(*it);
+                cout << intersect << "\n";
+            }
+        }
+        // for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {
+
+        // }
+    }
+
+    return closest_segs;
+}
+
+    // while (trajectories->size() != 0) {
+    //     pos = trajectories->at(0);
+    //     cout << "at " << pos << "\n";
+    //     for(int i = 0; i <= laser_sensor->num_total_rays; i++) {
+
+    //     }
+    //     // copy(trajectories->begin(), trajectories->begin(), pos);
+    //     trajectories->erase(trajectories->begin());
+    // }
+    // return closest_segs;
+
+
+
 int main(int argc, char **argv)
 {
     vector<Segment> wall_segments;
-    vector<Segment> trajectories;
+    vector<Position> trajectories;
     ifstream wall_segments_file;
     ifstream trajectories_file;
+    Laser laser_sensor = Laser();
 
     // Check number of arguments
     if (argc <= 1 || 4 <= argc) {
@@ -89,14 +153,12 @@ int main(int argc, char **argv)
     }
 
     read_segments(wall_segments_file, &wall_segments);
-    read_segments(trajectories_file, &trajectories);
+    read_positions(trajectories_file, &trajectories);
 
-    Robot robot = Robot(Position(4,3,90));
+    Robot robot = Robot(Position(4,3,0));
     test4(robot);
 
-    Laser laser = Laser();
-    cout << laser.FOV_degree << "\n";
-
+    vector<Segment> closest_walls = simulate_scan(&robot, &wall_segments, &laser_sensor);
 
     wall_segments_file.close();
     trajectories_file.close();
@@ -114,11 +176,9 @@ int main(int argc, char **argv)
 
 
 
-
-
 void test4(Robot &robot)
 {
-    cout << "Robot(" << robot.position.x << "," << robot.position.y << "," << robot.position.theta << "," << robot.position.position_vector << ")" << "\n";
+    cout << "Robot(" << robot.position.x << "," << robot.position.y << "," << robot.position.theta_degree << ", [" << robot.position.position_vector << "])" << "\n";
     // robot.laser_scan(robot.position);
 }
 
