@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/src
+CMAKE_SOURCE_DIR = /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build
+CMAKE_BINARY_DIR = /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build
 
 # Utility rule file for std_msgs_generate_messages_lisp.
 
@@ -63,10 +63,10 @@ indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 
 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_lisp.dir/cmake_clean.cmake
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint && $(CMAKE_COMMAND) -P CMakeFiles/std_msgs_generate_messages_lisp.dir/cmake_clean.cmake
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/clean
 
 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/depend:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/src /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/src/indep_study_task01_textreadprint /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/indep_study_task01_textreadprint /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/depend
 

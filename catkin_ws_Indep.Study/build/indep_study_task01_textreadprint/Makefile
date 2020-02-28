@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/src
+CMAKE_SOURCE_DIR = /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build
+CMAKE_BINARY_DIR = /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,14 +137,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/CMakeFiles /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/CMakeFiles/progress.marks
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/CMakeFiles 0
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/CMakeFiles /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/CMakeFiles/progress.marks
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/clean
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/clean
 .PHONY : clean
 
 # The main clean target
@@ -154,22 +154,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/preinstall
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/preinstall
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -179,12 +179,12 @@ roscpp_generate_messages_py: indep_study_task01_textreadprint/CMakeFiles/roscpp_
 
 # fast build rule for target.
 roscpp_generate_messages_py/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/build
 .PHONY : roscpp_generate_messages_py/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -194,12 +194,12 @@ roscpp_generate_messages_eus: indep_study_task01_textreadprint/CMakeFiles/roscpp
 
 # fast build rule for target.
 roscpp_generate_messages_eus/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/build
 .PHONY : roscpp_generate_messages_eus/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -209,12 +209,12 @@ roscpp_generate_messages_lisp: indep_study_task01_textreadprint/CMakeFiles/roscp
 
 # fast build rule for target.
 roscpp_generate_messages_lisp/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/build
 .PHONY : roscpp_generate_messages_lisp/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -224,12 +224,12 @@ rosgraph_msgs_generate_messages_cpp: indep_study_task01_textreadprint/CMakeFiles
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_cpp/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -239,12 +239,12 @@ std_msgs_generate_messages_lisp: indep_study_task01_textreadprint/CMakeFiles/std
 
 # fast build rule for target.
 std_msgs_generate_messages_lisp/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -254,12 +254,12 @@ roscpp_generate_messages_cpp: indep_study_task01_textreadprint/CMakeFiles/roscpp
 
 # fast build rule for target.
 roscpp_generate_messages_cpp/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -269,12 +269,12 @@ rosgraph_msgs_generate_messages_eus: indep_study_task01_textreadprint/CMakeFiles
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_eus/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
@@ -284,12 +284,12 @@ rosgraph_msgs_generate_messages_lisp: indep_study_task01_textreadprint/CMakeFile
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_lisp/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
@@ -299,12 +299,12 @@ std_msgs_generate_messages_cpp: indep_study_task01_textreadprint/CMakeFiles/std_
 
 # fast build rule for target.
 std_msgs_generate_messages_cpp/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -314,12 +314,12 @@ rosgraph_msgs_generate_messages_nodejs: indep_study_task01_textreadprint/CMakeFi
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_nodejs/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
 .PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -329,12 +329,12 @@ rosgraph_msgs_generate_messages_py: indep_study_task01_textreadprint/CMakeFiles/
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_py/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
@@ -344,12 +344,12 @@ std_msgs_generate_messages_eus: indep_study_task01_textreadprint/CMakeFiles/std_
 
 # fast build rule for target.
 std_msgs_generate_messages_eus/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/build
 .PHONY : std_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -359,12 +359,12 @@ std_msgs_generate_messages_nodejs: indep_study_task01_textreadprint/CMakeFiles/s
 
 # fast build rule for target.
 std_msgs_generate_messages_nodejs/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
 .PHONY : std_msgs_generate_messages_nodejs/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/rule
 
 # Convenience name for target.
@@ -374,12 +374,12 @@ roscpp_generate_messages_nodejs: indep_study_task01_textreadprint/CMakeFiles/ros
 
 # fast build rule for target.
 roscpp_generate_messages_nodejs/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
 .PHONY : roscpp_generate_messages_nodejs/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
@@ -389,12 +389,12 @@ std_msgs_generate_messages_py: indep_study_task01_textreadprint/CMakeFiles/std_m
 
 # fast build rule for target.
 std_msgs_generate_messages_py/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/rule:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/rule
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/rule
 .PHONY : indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/rule
 
 # Convenience name for target.
@@ -404,7 +404,7 @@ textreadprint: indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/rul
 
 # fast build rule for target.
 textreadprint/fast:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build
 .PHONY : textreadprint/fast
 
 src/textreadprint.o: src/textreadprint.cpp.o
@@ -413,7 +413,7 @@ src/textreadprint.o: src/textreadprint.cpp.o
 
 # target to build an object file
 src/textreadprint.cpp.o:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/src/textreadprint.cpp.o
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/src/textreadprint.cpp.o
 .PHONY : src/textreadprint.cpp.o
 
 src/textreadprint.i: src/textreadprint.cpp.i
@@ -422,7 +422,7 @@ src/textreadprint.i: src/textreadprint.cpp.i
 
 # target to preprocess a source file
 src/textreadprint.cpp.i:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/src/textreadprint.cpp.i
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/src/textreadprint.cpp.i
 .PHONY : src/textreadprint.cpp.i
 
 src/textreadprint.s: src/textreadprint.cpp.s
@@ -431,7 +431,7 @@ src/textreadprint.s: src/textreadprint.cpp.s
 
 # target to generate assembly for a file
 src/textreadprint.cpp.s:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/src/textreadprint.cpp.s
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/src/textreadprint.cpp.s
 .PHONY : src/textreadprint.cpp.s
 
 # Help Target
@@ -477,6 +477,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

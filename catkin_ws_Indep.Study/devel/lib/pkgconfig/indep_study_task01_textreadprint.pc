@@ -1,4 +1,4 @@
-prefix=/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/devel
+prefix=/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel
 
 Name: indep_study_task01_textreadprint
 Description: Description of indep_study_task01_textreadprint

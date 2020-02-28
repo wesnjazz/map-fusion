@@ -1,2 +1,2 @@
-indep_study_task01_textreadprint
--DCATKIN_DEVEL_PREFIX=/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/devel -DCMAKE_INSTALL_PREFIX=/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/install -G Unix Makefiles
+indep_study_task01_textreadprint:indep_study_task02_rviztest
+-DCATKIN_DEVEL_PREFIX=/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel -DCMAKE_INSTALL_PREFIX=/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install -G Unix Makefiles

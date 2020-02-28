@@ -1,8 +1,8 @@
-# Install script for directory: /home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/src/indep_study_task01_textreadprint
+# Install script for directory: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/indep_study_task01_textreadprint
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/install")
+  set(CMAKE_INSTALL_PREFIX "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/catkin_generated/installspace/indep_study_task01_textreadprint.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/catkin_generated/installspace/indep_study_task01_textreadprint.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/indep_study_task01_textreadprint/cmake" TYPE FILE FILES
-    "/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/catkin_generated/installspace/indep_study_task01_textreadprintConfig.cmake"
-    "/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/catkin_generated/installspace/indep_study_task01_textreadprintConfig-version.cmake"
+    "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/catkin_generated/installspace/indep_study_task01_textreadprintConfig.cmake"
+    "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/catkin_generated/installspace/indep_study_task01_textreadprintConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/indep_study_task01_textreadprint" TYPE FILE FILES "/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/src/indep_study_task01_textreadprint/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/indep_study_task01_textreadprint" TYPE FILE FILES "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/indep_study_task01_textreadprint/package.xml")
 endif()
 

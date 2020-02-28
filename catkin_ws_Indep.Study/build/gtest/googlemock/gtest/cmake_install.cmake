@@ -2,7 +2,7 @@
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/dpark/IndependentStudy2020SP/catkin_ws_Indep.Study/install")
+  set(CMAKE_INSTALL_PREFIX "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
