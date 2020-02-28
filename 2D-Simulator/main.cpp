@@ -2,6 +2,9 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include <unordered_set>
+#include <Eigen/Dense>
+// #include <cxxopts.hpp>
 #include "robot.h"
 #include "segment.h"
 #include "position.h"
@@ -9,7 +12,6 @@
 #include "noise.h"
 #include "map.h"
 #include "trajectory.h"
-#include <Eigen/Dense>
 
 using namespace std;
 typedef Eigen::Vector2f Vec2f;
@@ -99,10 +101,9 @@ void print_segments(vector<Segment> &segs)
 }
 
 
-set<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser *laser_sensor, Noise *length_noise, Noise *angle_noise)
+void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wall_segments,
+                            Laser *laser_sensor, Noise *length_noise, Noise *angle_noise)
 {
-    // vector<Segment*> closest_segs;                                      // Vector of detected closest segmenst from the robot
-    set<Segment*> closest_segs;
     float angle = robot->position.theta_degree 
                 - (laser_sensor->FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
 
@@ -114,46 +115,59 @@ set<Segment*> simulate_scan(Robot *robot, vector<Segment> *wall_segments, Laser 
         angle += laser_sensor->angular_resolution_degree;               // Get the next ray's angle
 
         float min_t = 99999;                                            // Temp value for min
-        Segment *min_seg = NULL;                                        // Pointer of the closest segment at the moment
+        bool point_exists = false;
+        Vec2f min_point;                                                // Pointer of the closest segment at the moment
 
         for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {  // For all each wall segment
             if (!ray.isParallel(*it)) {                                 // If two segments(Laser ray & Wall segment) is not Parallel
-                Vec2f intersect_vector = ray.intersection_point(*it);   // Get the intersection point as a Vec2f
+                min_point = ray.intersection_point(*it);                // Get the intersection point as a Vec2f
                 if (ray.ifIntersect(*it)) {                             // In two intersects on its length (not on a extended line)
                     if (fabs(ray.t) < fabs(min_t)) {                    // Takes as closest wall segment at the moment
-                        cout << "(" << intersect_vector.x() << "," << intersect_vector.y() << ") with a wall " << *it << "\n";
+                        point_exists = true;
+                        cout << "(" << min_point.x() << "," << min_point.y() << ") with a wall " << *it << "\n";
                         min_t = ray.t;                                  // Remember the min t (length)
-                        min_seg = &(*it);                               // Remember its location in memory
                     }
                 }
             }
         }
-        if (min_seg != NULL) {                                          // If there existed any closest wall segment
+
+        if (point_exists) {                                             // If there existed any closest wall segment
             cout << "adding min!" << endl;
-            cout << *min_seg << endl;
-            if (min_t < laser_sensor->range_min) {
+            cout << min_point << endl;
+            if (min_t < laser_sensor->range_min) {                      // Too close point (closer than min_range of laser)
                 cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor->range_min << endl;
             } else {
-                closest_segs.insert(min_seg);                            // Push back into a vector of Segment* pointers
-                // closest_segs.push_back(min_seg);                            // Push back into a vector of Segment* pointers
+                point_cloud->push_back(min_point);                      // Push back into a vector of Segment* pointers
             }
         } else {
             cout << "nothing to add!" << endl;
         }
-        min_t = 99999;                                                  // Reset min
-        min_seg = NULL;                                                 // Reset pointer
-
         cout << "\n\n";
     }
-
-    return closest_segs;
 }
 
 
 int main(int argc, char **argv)
 {
+    // cxxopts::Options options("MyProgram", "2D Simluator");
+    // options.add_options()
+    //     ("m,map", "Map file", cxxopts::value<std::string>())
+    //     ("t,traj", "Trajectory flie", cxxopts::value<std::string>())
+    //     ("nll,noise", "Param foo", cxxopts::value<int>()->default_value("10"))
+    //     ("h,help", "Print usage")
+    // ;
+
+    // auto result = options.parse(argc, argv);
+    // if (result.count("help"))
+    // {
+    //   std::cout << options.help() << std::endl;
+    //   exit(0);
+    // }
+
+
     vector<Segment> wall_segments;
     vector<Position> trajectories;
+    vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
     ifstream wall_segments_file;
     ifstream trajectories_file;
     Laser laser_sensor = Laser();
@@ -176,16 +190,17 @@ int main(int argc, char **argv)
     read_positions(trajectories_file, &trajectories);
 
     Robot robot = Robot(Position(1,0,0));
-    Noise length_noise = Noise(0.0, 0.0);
-    Noise angle_noise = Noise(0.0, 0.00);
 
-    set<Segment*> closest_walls = simulate_scan(&robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
+    Noise length_noise = Noise(0.0, 0.5);
+    Noise angle_noise = Noise(0.0, 0.02);
 
-    cout << "Set of Segment* (wall segment pointer)" << endl;
-    for(set<Segment*>::iterator it = closest_walls.begin(); it != closest_walls.end(); it++) {
-        cout << *it << "\n";
-        cout << **it << "\n";
-    }
+    simulate_scan(&point_cloud, &robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
+
+    cout << "Point Cloud: (intersection points)" << endl;
+    // for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); it++) {
+    //     cout << *it << "\n";
+    // }
+    cout << "point cloud size:" << point_cloud.size() << endl;
 
     wall_segments_file.close();
     trajectories_file.close();
