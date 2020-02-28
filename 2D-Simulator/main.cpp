@@ -141,16 +141,10 @@ void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wa
                 cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor->range_min << endl;
             } else {
                 point_cloud->push_back(min_point);                      // Push back into a vector of Segment* pointers
-                if (min_point.x() > 100 || min_point.y() > 100) {
-                    getchar();
-                }
             }
-            getchar();
         } else {
             cout << "nothing to add!" << endl;
         }
-        min_t = 99999;
-        point_exists = false;
         cout << "\n\n";
     }
 }
