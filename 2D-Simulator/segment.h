@@ -7,7 +7,6 @@
 
 using namespace std;
 typedef Eigen::Vector2f Vec2f;
-typedef Eigen::Hyperplane<float, 2> Line;
 
 
 struct Segment
@@ -45,6 +44,12 @@ struct Segment
         os << "[" << to_string(sg.end.x()) << "," << to_string(sg.end.y()) << "]";
         os << "\tlength:" << sg.length << "\tangle:" << sg.angle_radian << "\tangle_degree:" << sg.angle_degree;
         return os;
+    }
+};
+
+struct compare_xy {
+    bool operator ()(const Vec2f &a, const Vec2f &b) const {
+        return (a.x() == b.x() ? a.y() < b.y() : a.x() < b.x());
     }
 };
 

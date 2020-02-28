@@ -118,14 +118,17 @@ void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wa
         bool point_exists = false;
         Vec2f min_point;                                                // Pointer of the closest segment at the moment
 
-        for(vector<Segment>::iterator it = wall_segments->begin(); it != wall_segments->end(); it++) {  // For all each wall segment
-            if (!ray.isParallel(*it)) {                                 // If two segments(Laser ray & Wall segment) is not Parallel
-                min_point = ray.intersection_point(*it);                // Get the intersection point as a Vec2f
-                if (ray.ifIntersect(*it)) {                             // In two intersects on its length (not on a extended line)
+        for(vector<Segment>::iterator wall_it = wall_segments->begin(); wall_it != wall_segments->end(); wall_it++) {  // For all each wall segment
+            if (!ray.isParallel(*wall_it)) {                                 // If two segments(Laser ray & Wall segment) is not Parallel
+                Vec2f new_point = ray.intersection_point(*wall_it);                // Get the intersection point as a Vec2f
+                cout << "(" << new_point.x() << "," << new_point.y() << ")" << endl;
+                    cout << ray.t << " ** " << min_t << endl;                       // In two intersects on its length (not on a extended line)
+                if (ray.ifIntersect(*wall_it)) {      
                     if (fabs(ray.t) < fabs(min_t)) {                    // Takes as closest wall segment at the moment
                         point_exists = true;
-                        cout << "(" << min_point.x() << "," << min_point.y() << ") with a wall " << *it << "\n";
                         min_t = ray.t;                                  // Remember the min t (length)
+                        min_point = new_point;
+                        cout << "(" << min_point.x() << "," << min_point.y() << ") with a wall " << *wall_it << "\n";
                     }
                 }
             }
@@ -138,10 +141,16 @@ void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wa
                 cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor->range_min << endl;
             } else {
                 point_cloud->push_back(min_point);                      // Push back into a vector of Segment* pointers
+                if (min_point.x() > 100 || min_point.y() > 100) {
+                    getchar();
+                }
             }
+            getchar();
         } else {
             cout << "nothing to add!" << endl;
         }
+        min_t = 99999;
+        point_exists = false;
         cout << "\n\n";
     }
 }
@@ -195,12 +204,17 @@ int main(int argc, char **argv)
     Noise angle_noise = Noise(0.0, 0.02);
 
     simulate_scan(&point_cloud, &robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
-
+    #include <algorithm>
+    sort(point_cloud.begin(), point_cloud.end(), compare_xy());
     cout << "Point Cloud: (intersection points)" << endl;
-    // for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); it++) {
-    //     cout << *it << "\n";
-    // }
-    cout << "point cloud size:" << point_cloud.size() << endl;
+    for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); it++) {
+        cout << *it << "\n";
+    }
+    int a = point_cloud.size();
+    cout << "point cloud size:" << a << endl;
+    point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
+    a = point_cloud.size();
+    cout << "point cloud size:" << a << endl;
 
     wall_segments_file.close();
     trajectories_file.close();
