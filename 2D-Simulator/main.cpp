@@ -173,14 +173,16 @@ int main(int argc, char **argv)
     vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
     ifstream wall_segments_file;
     ifstream trajectories_file;
+    ofstream point_cloud_file;
     Laser laser_sensor = Laser();
 
     // Check number of arguments
-    if (argc <= 1 || 4 <= argc) {
+    if (argc <= 1 || 5 <= argc) {
         usage(argv[0]);
     }
     if (argc >= 2) { wall_segments_file = ifstream(argv[1]); }
     if (argc >= 3) { trajectories_file = ifstream(argv[2]); }
+    point_cloud_file = ofstream(argv[3]);
     if (!wall_segments_file && !trajectories_file) {
         cout << "The file [";
         if (!wall_segments_file) { cout << argv[1]; }
@@ -209,9 +211,13 @@ int main(int argc, char **argv)
     point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
     a = point_cloud.size();
     cout << "point cloud size:" << a << endl;
+    for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); it++) {
+        point_cloud_file << (*it).x() << ", " << (*it).y() << "\n";
+    }
 
     wall_segments_file.close();
     trajectories_file.close();
+    point_cloud_file.close();
     return 0;
 }
 

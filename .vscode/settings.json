@@ -64,6 +64,7 @@
         "list": "cpp",
         "unordered_set": "cpp",
         "mutex": "cpp",
-        "typeindex": "cpp"
+        "typeindex": "cpp",
+        "regex": "cpp"
     }
 }
