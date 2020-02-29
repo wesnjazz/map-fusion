@@ -204,3 +204,5 @@ include_directories(
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+add_executable(${PROJECT_NAME}_node src/indep_study_task02_rviztest_node.cpp)

@@ -294,7 +294,7 @@ roscpp_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 roscpp_generate_messages_py/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_py.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_py.dir/build.make indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_py.dir/build
 .PHONY : roscpp_generate_messages_py/fast
 
 #=============================================================================
@@ -307,8 +307,21 @@ roscpp_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 roscpp_generate_messages_eus/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_eus.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_eus.dir/build.make indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_eus.dir/build
 .PHONY : roscpp_generate_messages_eus/fast
+
+#=============================================================================
+# Target rules for targets named indep_study_task02_rviztest_node
+
+# Build rule for target.
+indep_study_task02_rviztest_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 indep_study_task02_rviztest_node
+.PHONY : indep_study_task02_rviztest_node
+
+# fast build rule for target.
+indep_study_task02_rviztest_node/fast:
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/indep_study_task02_rviztest_node.dir/build.make indep_study_task02_rviztest/CMakeFiles/indep_study_task02_rviztest_node.dir/build
+.PHONY : indep_study_task02_rviztest_node/fast
 
 #=============================================================================
 # Target rules for targets named roscpp_generate_messages_lisp
@@ -320,7 +333,7 @@ roscpp_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 roscpp_generate_messages_lisp/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_lisp.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_lisp.dir/build
 .PHONY : roscpp_generate_messages_lisp/fast
 
 #=============================================================================
@@ -333,7 +346,7 @@ rosgraph_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -346,7 +359,7 @@ std_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
 .PHONY : std_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -359,7 +372,7 @@ roscpp_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 roscpp_generate_messages_cpp/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_cpp.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_cpp.dir/build
 .PHONY : roscpp_generate_messages_cpp/fast
 
 #=============================================================================
@@ -372,7 +385,7 @@ rosgraph_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_eus/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build
 .PHONY : rosgraph_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -385,7 +398,7 @@ rosgraph_msgs_generate_messages_lisp: cmake_check_build_system
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_lisp/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build
 .PHONY : rosgraph_msgs_generate_messages_lisp/fast
 
 #=============================================================================
@@ -398,7 +411,7 @@ std_msgs_generate_messages_cpp: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_cpp/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
 .PHONY : std_msgs_generate_messages_cpp/fast
 
 #=============================================================================
@@ -411,7 +424,7 @@ rosgraph_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build
 .PHONY : rosgraph_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -424,7 +437,7 @@ rosgraph_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 rosgraph_msgs_generate_messages_py/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make indep_study_task02_rviztest/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
 #=============================================================================
@@ -437,7 +450,7 @@ std_msgs_generate_messages_eus: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_eus/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_eus.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_eus.dir/build
 .PHONY : std_msgs_generate_messages_eus/fast
 
 #=============================================================================
@@ -450,7 +463,7 @@ std_msgs_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_nodejs/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build
 .PHONY : std_msgs_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -463,7 +476,7 @@ roscpp_generate_messages_nodejs: cmake_check_build_system
 
 # fast build rule for target.
 roscpp_generate_messages_nodejs/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make indep_study_task01_textreadprint/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make indep_study_task02_rviztest/CMakeFiles/roscpp_generate_messages_nodejs.dir/build
 .PHONY : roscpp_generate_messages_nodejs/fast
 
 #=============================================================================
@@ -476,21 +489,8 @@ std_msgs_generate_messages_py: cmake_check_build_system
 
 # fast build rule for target.
 std_msgs_generate_messages_py/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/build.make indep_study_task01_textreadprint/CMakeFiles/std_msgs_generate_messages_py.dir/build
+	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_py.dir/build.make indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
-
-#=============================================================================
-# Target rules for targets named textreadprint
-
-# Build rule for target.
-textreadprint: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 textreadprint
-.PHONY : textreadprint
-
-# fast build rule for target.
-textreadprint/fast:
-	$(MAKE) -f indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build.make indep_study_task01_textreadprint/CMakeFiles/textreadprint.dir/build
-.PHONY : textreadprint/fast
 
 # Help Target
 help:
@@ -516,6 +516,7 @@ help:
 	@echo "... gtest"
 	@echo "... roscpp_generate_messages_py"
 	@echo "... roscpp_generate_messages_eus"
+	@echo "... indep_study_task02_rviztest_node"
 	@echo "... roscpp_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... std_msgs_generate_messages_lisp"
@@ -529,7 +530,6 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
-	@echo "... textreadprint"
 .PHONY : help
 
 

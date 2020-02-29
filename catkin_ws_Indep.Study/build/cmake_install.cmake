@@ -131,7 +131,6 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/gtest/cmake_install.cmake")
-  include("/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task01_textreadprint/cmake_install.cmake")
   include("/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task02_rviztest/cmake_install.cmake")
 
 endif()
