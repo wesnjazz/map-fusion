@@ -7,6 +7,7 @@
 #include "robot.h"
 #include "laser.h"
 #include "noise.h"
+#include <geometry_msgs/Vector3.h>
 
 
 void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wall_segments,

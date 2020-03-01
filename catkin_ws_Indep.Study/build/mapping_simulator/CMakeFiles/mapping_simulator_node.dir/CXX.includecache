@@ -29,6 +29,12 @@ noise.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/mapping_simulator_node.cpp
 simulator.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
+segment.h
+/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
+vector
+-
+algorithm
+-
 ros/ros.h
 -
 geometry_msgs/Vector3.h
@@ -75,6 +81,8 @@ string
 -
 Eigen/Dense
 -
+geometry_msgs/Vector3.h
+-
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.cpp
 iostream
@@ -89,6 +97,10 @@ laser.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 noise.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
+geometry_msgs/Vector3.h
+-
+visualization_msgs/Marker.h
+-
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 vector
@@ -103,6 +115,8 @@ laser.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 noise.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
+geometry_msgs/Vector3.h
+-
 
 /opt/ros/melodic/include/geometry_msgs/Point.h
 string

@@ -4,6 +4,9 @@
 #include "robot.h"
 #include "laser.h"
 #include "noise.h"
+#include <geometry_msgs/Vector3.h>
+#include <visualization_msgs/Marker.h>
+
 
 
 void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wall_segments,
@@ -45,6 +48,10 @@ void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wa
             if (min_t < laser_sensor->range_min) {                      // Too close point (closer than min_range of laser)
                 cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor->range_min << endl;
             } else {
+                // geometry_msgs::Vector3 vec;
+                // vec.x = min_point.x();
+                // vec.y = min_point.y();
+                // vec.z = 0;
                 point_cloud->push_back(min_point);                      // Push back into a vector of Segment* pointers
             }
         } else {

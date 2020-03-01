@@ -3,6 +3,7 @@
 
 #include <string>
 #include <Eigen/Dense>
+#include <geometry_msgs/Vector3.h>
 typedef Eigen::Vector2f Vec2f;
 using namespace std;
 
@@ -46,9 +47,16 @@ struct Segment
 };
 
 
-struct compare_xy {
+struct compare_xy_Vec2f {
     bool operator ()(const Vec2f &a, const Vec2f &b) const {
         return (a.x() == b.x() ? a.y() < b.y() : a.x() < b.x());
+    }
+};
+
+
+struct compare_xy_Vec3 {
+    bool operator ()(const geometry_msgs::Vector3 &a, const geometry_msgs::Vector3 &b) const {
+        return (a.x == b.x ? a.y < b.y : a.x < b.x);
     }
 };
 

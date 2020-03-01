@@ -1,4 +1,7 @@
 #include "simulator.h"
+#include "segment.h"
+#include <vector>
+#include <algorithm>
 #include <ros/ros.h>
 #include <geometry_msgs/Vector3.h>
 #include <visualization_msgs/Marker.h>
@@ -21,9 +24,9 @@ int main(int argc, char **argv)
     ifstream wall_segments_file;
     vector<Position> trajectories;
     ifstream trajectories_file;
-    // vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
+    vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
     // ofstream point_cloud_file;
-    // Laser laser_sensor = Laser();
+    Laser laser_sensor = Laser();
 
     /** File loading **/
     if (argc <= 1 || 4 <= argc) {
@@ -43,9 +46,33 @@ int main(int argc, char **argv)
 
 
 
+    Robot robot = Robot(Position(1,0,0));
+    Noise length_noise = Noise(0.0, 0.5);
+    Noise angle_noise = Noise(0.0, 0.02);
+
+    simulate_scan(&point_cloud, &robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
+    sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
+    cout << "Point Cloud: (intersection points)" << endl;
+    for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); it++) {
+        cout << *it << "\n";
+    }
+    int a = point_cloud.size();
+    cout << "point cloud size:" << a << endl;
+    point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
+    a = point_cloud.size();
+    cout << "point cloud size:" << a << endl;
+
     // int count = 0;
     // string line;
     vector<geometry_msgs::Vector3> points;
+    for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
+        geometry_msgs::Vector3 vec;
+        vec.x = (*it).x();
+        vec.y = (*it).y();
+        vec.z = 0;
+        points.push_back(vec);
+    }
+    cout << "geometry Vector3 points size:" << points.size() << endl;
     // vector<visualization_msgs::Marker> markers;
     // while(getline(point_cloud_file, line)) {
     //     geometry_msgs::Vector3 vec;
@@ -92,7 +119,7 @@ int main(int argc, char **argv)
     //     // marker.pose.position.z = 0;
         marker.scale.x = 0.1;
         marker.scale.y = 0.1;
-        marker.scale.z = 0.1;
+        // marker.scale.z = 0.1;
         marker.color.r = 0.0f;
         marker.color.g = 1.0f;
         marker.color.b = 0.0f;
