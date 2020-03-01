@@ -13,7 +13,7 @@ Segment::Segment(Vec2f p1, Vec2f p2)
 Segment::Segment(Vec2f st, float length, float angle_degree)
 {
     start = st;
-    cout << st;
+    // cout << st;
     angle_radian = angle_degree * (M_PI / 180.0);
     float length_x = cos(angle_radian);
     float length_y = sin(angle_radian);
@@ -57,9 +57,10 @@ bool Segment::ifIntersect(const Segment &seg2)
     //     cout << "\t\tIntersect! at\n";
     // }
     // return (0.0 < t && t <= length);
-    if ((0.0 < t && t <= length) && (0.0 < seg2.t && seg2.t <= seg2.length)) {
-        cout << "\t\tIntersect! at\n";
-    }
+
+    // if ((0.0 < t && t <= length) && (0.0 < seg2.t && seg2.t <= seg2.length)) {
+    //     cout << "\t\tIntersect! at\n";
+    // }
     return (0.0 < t && t <= length) &&
             (0.0 < seg2.t && seg2.t <= seg2.length);
 }
@@ -70,7 +71,7 @@ Vec2f Segment::intersection_point(Segment &seg2)
     t = (seg2.start - start).dot(seg2.segment_norm_unit) / (segment_unit).dot(seg2.segment_norm_unit);
     seg2.t = (start - seg2.start).dot(segment_norm_unit) / (seg2.segment_unit).dot(segment_norm_unit);
     Vec2f intersect_vector = start + t*(segment_unit);
-    cout << "\nt:" << t << "\tu:" << seg2.t << "\n";
+    // cout << "\nt:" << t << "\tu:" << seg2.t << "\n";
     remove_small_error_values(intersect_vector);
     return intersect_vector;
 }

@@ -2,6 +2,8 @@
 #include "segment.h"
 #include <vector>
 #include <algorithm>
+#include <chrono>
+#include <ctime>
 #include <ros/ros.h>
 #include <geometry_msgs/Vector3.h>
 #include <visualization_msgs/Marker.h>
@@ -14,19 +16,16 @@ int main(int argc, char **argv)
     /** ROS initialization **/
     ros::init(argc, argv, "Mapping_Simulator");
     ros::NodeHandle n;
-    ros::Publisher cloud_pub = n.advertise<geometry_msgs::Vector3>("cloud", 1000);
-    ros::Rate loop_rate(20);
-    ifstream point_cloud_file = ifstream(argv[1]);
+    ros::Rate loop_rate(2);
     ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+    // ifstream point_cloud_file = ifstream(argv[1]);
+    // ros::Publisher cloud_pub = n.advertise<geometry_msgs::Vector3>("cloud", 1000);
 
     /** Variables **/
     vector<Segment> wall_segments;
     ifstream wall_segments_file;
     vector<Position> trajectories;
     ifstream trajectories_file;
-    vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
-    // ofstream point_cloud_file;
-    Laser laser_sensor = Laser();
 
     /** File loading **/
     if (argc <= 1 || 4 <= argc) {
@@ -44,68 +43,57 @@ int main(int argc, char **argv)
     read_segments(wall_segments_file, &wall_segments);
     read_positions(trajectories_file, &trajectories);
 
+    // simulate_scan(&point_cloud, &robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
+    // sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
+    // cout << "Point Cloud: (intersection points)" << endl;
+    // for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); it++) {
+    //     cout << *it << "\n";
+    // }
+    // int a = point_cloud.size();
+    // cout << "point cloud size:" << a << endl;
+    // point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
+    // a = point_cloud.size();
+    // cout << "point cloud size:" << a << endl;
 
 
-    Robot robot = Robot(Position(1,0,0));
+
+    double pos_x = 0;
+    double pos_y = 0;
+    double angle = 0;
+    Position position(pos_x, pos_y, angle);
+
+    /** Create objects **/
+    Robot robot = Robot(position);
+    Laser laser_sensor = Laser();
     Noise length_noise = Noise(0.0, 0.5);
     Noise angle_noise = Noise(0.0, 0.02);
 
-    simulate_scan(&point_cloud, &robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
-    sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
-    cout << "Point Cloud: (intersection points)" << endl;
-    for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); it++) {
-        cout << *it << "\n";
-    }
-    int a = point_cloud.size();
-    cout << "point cloud size:" << a << endl;
-    point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
-    a = point_cloud.size();
-    cout << "point cloud size:" << a << endl;
 
-    // int count = 0;
-    // string line;
-    vector<geometry_msgs::Vector3> points;
-    for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
-        geometry_msgs::Vector3 vec;
-        vec.x = (*it).x();
-        vec.y = (*it).y();
-        vec.z = 0;
-        points.push_back(vec);
-    }
-    cout << "geometry Vector3 points size:" << points.size() << endl;
-    // vector<visualization_msgs::Marker> markers;
-    // while(getline(point_cloud_file, line)) {
-    //     geometry_msgs::Vector3 vec;
-    //     stringstream ss(line);
-    //     while(getline(ss, line, ',')) {
-    //         count++;
-    //         switch (count)
-    //         {
-    //         case 1: vec.x = stof(line); break;
-    //         case 2: 
-    //             vec.y = stof(line); 
-    //             vec.z = 0;
-    //             points.push_back(vec);
-    //             count = 0;
-    //             break;
-    //         default: break;
-    //         }
-    //     }
-    //     cout << vec << endl;
-    // }
-
-    // vector<geometry_msgs::Vector3>::iterator it=points.begin();
-    // vector<visualization_msgs::Marker>::iterator it=markers.begin();
     while (ros::ok())
-    {
-    //     // cout << *it << endl;
-    //     // if (it == points.end()) {
-    //     //     it = points.begin();
-    //     // }
-    //     // cloud_pub.publish(*it);
-        visualization_msgs::Marker marker;
-    //     uint32_t shape = visualization_msgs::Marker::CUBE;
+    {   pos_x += 0.1;
+        position.new_position(pos_x, pos_y, angle);
+        robot.move_to(position);
+        /** Simulate scan **/
+        vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
+        simulate_scan(&point_cloud, &robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
+        sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
+        point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
+        cout << "point cloud size:" << point_cloud.size() << endl;
 
+
+        /** Convert Eigen::Vector2f to geometry_msg::Vector3 **/
+        vector<geometry_msgs::Vector3> points;
+        for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
+            geometry_msgs::Vector3 vec;
+            vec.x = (*it).x();
+            vec.y = (*it).y();
+            vec.z = 0;
+            points.push_back(vec);
+        }
+        cout << "geometry Vector3 points size:" << points.size() << endl;
+
+
+        visualization_msgs::Marker marker;
         marker.header.frame_id = "/my_frame";
         marker.header.stamp = ros::Time::now();
         marker.ns = "basic_shapes";
@@ -132,16 +120,16 @@ int main(int argc, char **argv)
             p.z = (*it).z;
             marker.points.push_back(p);
         }
-
-
         marker_pub.publish(marker);
-    //     // ++it;
-    //     // ros::spinOnce();
+
+
+        auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now()); 
+        cout << ctime(&timenow) << endl; 
+
         loop_rate.sleep();
     }
 
     wall_segments_file.close();
     trajectories_file.close();
-    // point_cloud_file.close();
     return 0;
 }

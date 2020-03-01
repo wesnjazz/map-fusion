@@ -9,6 +9,8 @@ struct Robot
 {
     Robot();
     Robot(Position pos);
+    void move_to(Position pos);
+
     float velocity;
     Position position;
     Laser sensor_laser;

@@ -28,14 +28,14 @@ Position::Position(float x, float y, float theta)
     position_vector = Vec2f(x, y);
 }
 
-void Position::move_to(float x, float y)
+void Position::new_position(float x, float y)
 {
     this->x = x;
     this->y = y;
     position_vector = Vec2f(x, y);
 }
 
-void Position::move_to(float x, float y, float theta)
+void Position::new_position(float x, float y, float theta)
 {
     this->x = x;
     this->y = y;

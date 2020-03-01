@@ -16,10 +16,10 @@ void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wa
                 - (laser_sensor->FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
 
     for(int i = 1; i <= laser_sensor->num_total_rays; i++) {            // For all each laser ray
-        cout << "------ rays ----------\n";
+        // cout << "------ rays ----------\n";
         Segment ray = 
             laser_sensor->create_a_ray(robot->position, angle, *length_noise, *angle_noise); // Create a ray
-        cout << ray << "\n-------------------------\n";
+        // cout << ray << "\n-------------------------\n";
         angle += laser_sensor->angular_resolution_degree;               // Get the next ray's angle
 
         float min_t = 99999;                                            // Temp value for min
@@ -29,24 +29,25 @@ void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wa
         for(vector<Segment>::iterator wall_it = wall_segments->begin(); wall_it != wall_segments->end(); wall_it++) {  // For all each wall segment
             if (!ray.isParallel(*wall_it)) {                                 // If two segments(Laser ray & Wall segment) is not Parallel
                 Vec2f new_point = ray.intersection_point(*wall_it);                // Get the intersection point as a Vec2f
-                cout << "(" << new_point.x() << "," << new_point.y() << ")" << endl;
-                    cout << ray.t << " ** " << min_t << endl;                       // In two intersects on its length (not on a extended line)
+                // cout << "(" << new_point.x() << "," << new_point.y() << ")" << endl;
+                    // cout << ray.t << " ** " << min_t << endl;                       // In two intersects on its length (not on a extended line)
                 if (ray.ifIntersect(*wall_it)) {      
                     if (fabs(ray.t) < fabs(min_t)) {                    // Takes as closest wall segment at the moment
                         point_exists = true;
                         min_t = ray.t;                                  // Remember the min t (length)
                         min_point = new_point;
-                        cout << "(" << min_point.x() << "," << min_point.y() << ") with a wall " << *wall_it << "\n";
+                        // cout << "(" << min_point.x() << "," << min_point.y() << ") with a wall " << *wall_it << "\n";
                     }
                 }
             }
         }
 
         if (point_exists) {                                             // If there existed any closest wall segment
-            cout << "adding min!" << endl;
-            cout << min_point << endl;
+            // cout << "adding min!" << endl;
+            // cout << min_point << endl;
             if (min_t < laser_sensor->range_min) {                      // Too close point (closer than min_range of laser)
-                cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor->range_min << endl;
+                ;
+                // cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor->range_min << endl;
             } else {
                 // geometry_msgs::Vector3 vec;
                 // vec.x = min_point.x();
@@ -55,9 +56,10 @@ void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wa
                 point_cloud->push_back(min_point);                      // Push back into a vector of Segment* pointers
             }
         } else {
-            cout << "nothing to add!" << endl;
+            ;
+            // cout << "nothing to add!" << endl;
         }
-        cout << "\n\n";
+        // cout << "\n\n";
     }
 }
 
@@ -116,7 +118,7 @@ void read_positions(ifstream &pos_file, vector<Position> *positions)
             case 1: x = stof(line); break;
             case 2: 
                 y = stof(line); 
-                pos.move_to(x, y); 
+                pos.new_position(x, y); 
                 count = 0;
                 positions->push_back(pos);
                 break;
