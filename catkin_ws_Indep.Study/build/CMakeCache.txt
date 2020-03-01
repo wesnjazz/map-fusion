@@ -351,6 +351,12 @@ indep_study_task02_rviztest_SOURCE_DIR:STATIC=/home/dpark/Independent-Study-2020
 //Path to a library.
 lib:FILEPATH=/opt/ros/melodic/lib/libxmlrpcpp.so
 
+//Value Computed by CMake
+mapping_simulator_BINARY_DIR:STATIC=/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/mapping_simulator
+
+//Value Computed by CMake
+mapping_simulator_SOURCE_DIR:STATIC=/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator
+
 //The directory containing a CMake configuration file for message_runtime.
 message_runtime_DIR:PATH=/opt/ros/melodic/share/message_runtime/cmake
 
@@ -494,7 +500,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=5
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=6
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

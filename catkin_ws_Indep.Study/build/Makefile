@@ -622,6 +622,19 @@ std_msgs_generate_messages_py/fast:
 	$(MAKE) -f indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_py.dir/build.make indep_study_task02_rviztest/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
+#=============================================================================
+# Target rules for targets named mapping_simulator_node
+
+# Build rule for target.
+mapping_simulator_node: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mapping_simulator_node
+.PHONY : mapping_simulator_node
+
+# fast build rule for target.
+mapping_simulator_node/fast:
+	$(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build
+.PHONY : mapping_simulator_node/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -670,6 +683,7 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... mapping_simulator_node"
 .PHONY : help
 
 
