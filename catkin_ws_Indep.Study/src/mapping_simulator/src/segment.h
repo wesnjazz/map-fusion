@@ -11,19 +11,19 @@ using namespace std;
 struct Segment
 {
     Segment(Vec2f p1, Vec2f p2);
-    Segment(Vec2f start, float length, float angle_degree);
+    Segment(Vec2f start, double length, double angle_degree);
     Vec2f start;                // start point vector
     Vec2f end;                  // end point vector
     Vec2f segment;              // segment(line) vector = end - start
     Vec2f segment_unit;         // unit vector of segment
     Vec2f segment_norm_unit;    // unit vector of normal vector of segment
     
-    float t;                    // t in the parametric equation: a_vector = a_start + (a_direction) * t
-    float x_diff;
-    float y_diff;
-    float angle_radian;
-    float angle_degree;
-    float length;
+    double t;                    // t in the parametric equation: a_vector = a_start + (a_direction) * t
+    double x_diff;
+    double y_diff;
+    double angle_radian;
+    double angle_degree;
+    double length;
 
     void calculate_members();
     bool isParallel(const Segment &seg2);
@@ -33,11 +33,11 @@ struct Segment
 
     friend std::ostream& operator<<(std::ostream& os, const Segment &sg)
     {
-        float x = sg.end.x()-sg.start.x();
-        float x2 = pow(x,2.0);
-        float y = sg.end.y()-sg.start.y();
-        float y2 = pow(y,2.0);
-        float z = sqrt(x2+y2);
+        double x = sg.end.x()-sg.start.x();
+        double x2 = pow(x,2.0);
+        double y = sg.end.y()-sg.start.y();
+        double y2 = pow(y,2.0);
+        double z = sqrt(x2+y2);
         os << "[" << to_string(sg.start.x()) << "," << to_string(sg.start.y()) << "]";
         os << "->";
         os << "[" << to_string(sg.end.x()) << "," << to_string(sg.end.y()) << "]";

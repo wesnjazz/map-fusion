@@ -64,6 +64,51 @@ void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wa
     }
 }
 
+double get_vector_length(Vec2f &v)
+{
+    return sqrt((pow(v.x(), 2.0) + pow(v.y(), 2.0)));
+}
+
+deque<Position> interpolate_curve_points(Robot &robot, Position &goal)
+// vector<Position> interpolate_curve_points(Robot &robot, Position &goal, int addiotional_num_cut, int default_num_cut)
+{
+    Vec2f L0 = robot.velocity;
+    Vec2f L1 = goal.position_vector - L0;
+    cout << "L0: " << L0 << endl;
+    cout << "L1: " << L1 << endl;
+
+    double L0_length = get_vector_length(L0);
+    double L1_length = get_vector_length(L1);
+    cout << "L0 len: " << L0_length << endl;
+    cout << "L1 len: " << L1_length << endl;
+
+    if (L0_length <= 5.0) { L0_length = 5.0; }
+    if (L1_length <= 5.0) { L1_length = 5.0; }
+    double delta = 1 / (L0_length * L1_length);
+    double t = 0.0;
+    cout << "L0 len * L1 len = " << (L0_length * L1_length) << endl;
+    cout << "delta:" << delta << endl;
+
+    double robot_cur_angle = robot.position.theta_degree;
+    Position P0 = Position(0, 0, robot_cur_angle);
+    Position P1 = Position(L0.x(), L0.y(), robot_cur_angle);
+    cout << "P0:" << P0 << endl;
+    cout << "P1:" << P1 << endl;
+
+    deque<Position> curves;
+    for(double curve_point = 0.0; curve_point <= 1.0; curve_point += delta) {
+        cout << "curve_point: " << curve_point << endl;
+        Position p = (P0 * pow((1 - curve_point), 2.0)) +
+                    (P1 * 2 * (1 - curve_point) * curve_point) +
+                    (goal * pow(curve_point, 2.0));
+        cout << "new pos: " << p << endl;
+        curves.push_back(p);
+        // getchar();
+    }
+
+    return curves;
+}
+
 
 int usage(char *app_name) {
     cout << "Usage: " << app_name << " [text file]\n";

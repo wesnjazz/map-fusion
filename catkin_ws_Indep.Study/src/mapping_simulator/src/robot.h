@@ -8,11 +8,14 @@
 struct Robot
 {
     Robot();
-    Robot(Position pos);
+    Robot(Position pos, double speed = 0.2);
     void move_to(Position pos);
+    void set_speed(double speed);
+    void set_velocity();
 
-    float velocity;
-    Position position;
+    double speed;
+    Vec2f velocity;                 // Speed and Direction
+    Position position;              // Position in world frame
     Laser sensor_laser;
     // WheelEncoder sensor_wheel_encoder;
 

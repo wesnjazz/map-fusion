@@ -8,20 +8,20 @@
 struct Position
 {
     Position();
-    Position(float x, float y);
-    Position(float x, float y, float theta);
-    void new_position(float x, float y);
-    void new_position(float x, float y, float theta);
+    Position(double x, double y);
+    Position(double x, double y, double theta);
+    void new_position(double x, double y);
+    void new_position(double x, double y, double theta);
     void update_position_vector();
-    vector<Position> calculate_curve_points(Position &p1, int addiotional_num_cut = 0, int default_num_cut = 10);
-    float x;
-    float y;
-    float theta_radian;
-    float theta_degree;
+    // vector<Position> calculate_curve_points(Position &p1, int addiotional_num_cut = 0, int default_num_cut = 10);
+    double x;
+    double y;
+    double theta_radian;
+    double theta_degree;
     Vec2f position_vector;
     vector<Position> curves;
 
-    Position operator*(float const k)
+    Position operator*(double const k)
     {
         Position p;
         p.x = this->x * k;
@@ -32,10 +32,26 @@ struct Position
         return p;
     }
 
+    Position operator+(const Position &k)
+    {
+        Position p;
+        p.x = this->x + k.x;
+        p.y = this->y + k.y;
+        p.theta_radian = this->theta_radian;
+        p.theta_degree = this->theta_degree;
+        p.update_position_vector();
+        return p;
+    }
+
+    bool operator!=(const Position &k)
+    {
+        return (this->x == k.x) && (this->y == k.y);
+    }
+
     friend std::ostream& operator<<(std::ostream& os, const Position &pos)
     {
-        float x = pos.x;
-        float y = pos.y;
+        double x = pos.x;
+        double y = pos.y;
         os << "(" << to_string(pos.x) << "," << to_string(pos.y) << "," << to_string(pos.theta_degree) << ")";
         return os;
     }

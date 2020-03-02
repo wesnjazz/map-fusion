@@ -33,6 +33,8 @@ segment.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 vector
 -
+deque
+-
 algorithm
 -
 chrono
@@ -114,6 +116,8 @@ visualization_msgs/Marker.h
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 vector
+-
+deque
 -
 fstream
 -

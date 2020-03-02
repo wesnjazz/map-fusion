@@ -10,17 +10,17 @@ Segment::Segment(Vec2f p1, Vec2f p2)
     calculate_members();
 }
 
-Segment::Segment(Vec2f st, float length, float angle_degree)
+Segment::Segment(Vec2f st, double length, double angle_degree)
 {
     start = st;
     // cout << st;
     angle_radian = angle_degree * (M_PI / 180.0);
-    float length_x = cos(angle_radian);
-    float length_y = sin(angle_radian);
+    double length_x = cos(angle_radian);
+    double length_y = sin(angle_radian);
     if (fabs(length_x) < 0.00001) { length_x = 0.0; }
     if (fabs(length_y) < 0.00001) { length_y = 0.0; }
-    float end_x = st.x() + length * length_x;
-    float end_y = st.y() + length * length_y;
+    double end_x = st.x() + length * length_x;
+    double end_y = st.y() + length * length_y;
     end = Vec2f(end_x, end_y);
     calculate_members();
 }
@@ -43,7 +43,7 @@ void Segment::calculate_members()
 
 bool Segment::isParallel(const Segment &seg2)
 {
-    float dot_product = (segment_unit).dot(seg2.segment_norm_unit);     // Parallel if dot product is zero
+    double dot_product = (segment_unit).dot(seg2.segment_norm_unit);     // Parallel if dot product is zero
     return (dot_product == 0.0) ? true : false;
 }
 

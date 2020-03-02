@@ -10,7 +10,7 @@ Position::Position()
     position_vector = Vec2f(x, y);
 }
 
-Position::Position(float x, float y)
+Position::Position(double x, double y)
 {
     this->x = x;
     this->y = y;
@@ -19,7 +19,7 @@ Position::Position(float x, float y)
     position_vector = Vec2f(x, y);
 }
 
-Position::Position(float x, float y, float theta)
+Position::Position(double x, double y, double theta)
 {
     this->x = x;
     this->y = y;
@@ -28,14 +28,14 @@ Position::Position(float x, float y, float theta)
     position_vector = Vec2f(x, y);
 }
 
-void Position::new_position(float x, float y)
+void Position::new_position(double x, double y)
 {
     this->x = x;
     this->y = y;
     position_vector = Vec2f(x, y);
 }
 
-void Position::new_position(float x, float y, float theta)
+void Position::new_position(double x, double y, double theta)
 {
     this->x = x;
     this->y = y;
@@ -48,17 +48,4 @@ void Position::new_position(float x, float y, float theta)
 void Position::update_position_vector()
 {
     this->position_vector = Vec2f(this->x, this->y);
-}
-
-
-vector<Position> Position::calculate_curve_points(Position &p1, int addiotional_num_cut, int default_num_cut)
-{
-    Vec2f L0 = this->position_vector;
-    Vec2f L1 = p1.position_vector - L0;
-
-    // Segment s = Segment()
-
-    vector<Position> curves;
-
-    return curves;
 }
