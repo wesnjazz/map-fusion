@@ -59,8 +59,12 @@ random
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/position.cpp
 position.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/position.h
+segment.h
+/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/position.h
+vector
+-
 segment.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 
@@ -90,6 +94,8 @@ geometry_msgs/Vector3.h
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.cpp
 iostream
+-
+string
 -
 simulator.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h

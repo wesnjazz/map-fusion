@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "simulator.h"
 #include "segment.h"
 #include "robot.h"
@@ -6,7 +7,7 @@
 #include "noise.h"
 #include <geometry_msgs/Vector3.h>
 #include <visualization_msgs/Marker.h>
-
+using namespace std;
 
 
 void simulate_scan(vector<Vec2f> *point_cloud, Robot *robot, vector<Segment> *wall_segments,
@@ -110,8 +111,10 @@ void read_positions(ifstream &pos_file, vector<Position> *positions)
     int count = 0;
     string line;
     while(getline(pos_file, line)) {
+        cout << "asdf";
         stringstream ss(line);
         while(getline(ss, line, ',')) {
+            cout << line << endl;
             count++;
             switch (count)
             {
@@ -122,6 +125,7 @@ void read_positions(ifstream &pos_file, vector<Position> *positions)
                 count = 0;
                 positions->push_back(pos);
                 break;
+            case 3: break;
             default: break;
             }
         }

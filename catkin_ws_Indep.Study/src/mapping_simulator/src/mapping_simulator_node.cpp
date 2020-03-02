@@ -21,11 +21,17 @@ int main(int argc, char **argv)
     // ifstream point_cloud_file = ifstream(argv[1]);
     // ros::Publisher cloud_pub = n.advertise<geometry_msgs::Vector3>("cloud", 1000);
 
+
     /** Variables **/
     vector<Segment> wall_segments;
     ifstream wall_segments_file;
     vector<Position> trajectories;
     ifstream trajectories_file;
+    double pos_x = 0;
+    double pos_y = 0;
+    double angle = 0;
+    Position position(pos_x, pos_y, angle);
+
 
     /** File loading **/
     if (argc <= 1 || 4 <= argc) {
@@ -41,26 +47,8 @@ int main(int argc, char **argv)
         exit(0);
     }
     read_segments(wall_segments_file, &wall_segments);
-    read_positions(trajectories_file, &trajectories);
+    // read_positions(trajectories_file, &trajectories);
 
-    // simulate_scan(&point_cloud, &robot, &wall_segments, &laser_sensor, &length_noise, &angle_noise);
-    // sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
-    // cout << "Point Cloud: (intersection points)" << endl;
-    // for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); it++) {
-    //     cout << *it << "\n";
-    // }
-    // int a = point_cloud.size();
-    // cout << "point cloud size:" << a << endl;
-    // point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
-    // a = point_cloud.size();
-    // cout << "point cloud size:" << a << endl;
-
-
-
-    double pos_x = 0;
-    double pos_y = 0;
-    double angle = 0;
-    Position position(pos_x, pos_y, angle);
 
     /** Create objects **/
     Robot robot = Robot(position);
@@ -113,6 +101,8 @@ int main(int argc, char **argv)
         marker.color.b = 0.0f;
         marker.color.a = 1.0f;
 
+
+        /** Points for wall segments **/
         for(vector<geometry_msgs::Vector3>::iterator it=points.begin(); it !=points.end(); ++it) {
             geometry_msgs::Point p;
             p.x = (*it).x;
@@ -120,6 +110,17 @@ int main(int argc, char **argv)
             p.z = (*it).z;
             marker.points.push_back(p);
         }
+
+
+        /** Point for a Robot **/
+        geometry_msgs::Point r;
+        r.x = robot.position.x;
+        r.y = robot.position.y;
+        r.z = 0;
+        marker.points.push_back(r);
+
+
+        /** Publishing marker **/
         marker_pub.publish(marker);
 
 
