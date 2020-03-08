@@ -26,6 +26,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/eigen3"
+  "/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include"
+  "/home/dpark/map-fusion/map-fusion/gui/gui/src/gui"
   )
 
 # Targets to which this target links.

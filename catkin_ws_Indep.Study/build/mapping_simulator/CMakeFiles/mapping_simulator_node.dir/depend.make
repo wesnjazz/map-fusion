@@ -242,6 +242,9 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_no
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/map-fusion/gui/gui/src/gui/gui_publisher_helper.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Point.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Pose.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Quaternion.h

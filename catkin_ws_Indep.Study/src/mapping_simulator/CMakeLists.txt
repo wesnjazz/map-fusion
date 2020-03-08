@@ -120,6 +120,8 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
   /usr/include/eigen3/
+  /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/
+  /home/dpark/map-fusion/map-fusion/gui/gui/src/gui/
 )
 
 ## Declare a C++ library

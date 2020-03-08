@@ -243,6 +243,9 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_no
  /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
  /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
  /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
+ /home/dpark/map-fusion/map-fusion/gui/gui/src/gui/gui_publisher_helper.h
+ /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h
+ /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
  /opt/ros/melodic/include/geometry_msgs/Point.h
  /opt/ros/melodic/include/geometry_msgs/Pose.h
  /opt/ros/melodic/include/geometry_msgs/Quaternion.h
