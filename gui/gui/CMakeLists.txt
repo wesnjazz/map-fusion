@@ -80,8 +80,8 @@ FIND_PACKAGE(GLUT REQUIRED)
 FIND_PACKAGE(Lua51 REQUIRED)
 #FIND_PACKAGE(SDL REQUIRED)
 #FIND_PACKAGE(SDL_ttf REQUIRED)
-FIND_PACKAGE(Ceres REQUIRED)
-INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
+#FIND_PACKAGE(Ceres REQUIRED)
+#INCLUDE_DIRECTORIES(${CERES_INCLUDE_DIRS})
 
 SET(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
@@ -143,7 +143,7 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src/shared/util)
 #add_subdirectory(${PROJECT_SOURCE_DIR}/src/shared/util)
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/gui)
-add_subdirectory(${PROJECT_SOURCE_DIR}/src/human_in_the_loop_slam)
+#add_subdirectory(${PROJECT_SOURCE_DIR}/src/human_in_the_loop_slam)
 
 #add_subdirectory(${PROJECT_SOURCE_DIR}/src/hardware)
 #add_subdirectory(${PROJECT_SOURCE_DIR}/src/human_detector)
@@ -191,8 +191,12 @@ INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 INCLUDE_DIRECTORIES(${USB_INCLUDE_DIR})
 
 SET(libs roslib roscpp ncurses popt pthread ${GTK2_LIBRARIES} glut
-    ${OPENGL_LIBRARY} ${GLEW_LIBRARY} ${LUA_LIBRARIES} rt -lboost_system
+    ${OPENGL_LIBRARY} ${LUA_LIBRARIES} rt -lboost_system
     ${BUILD_SPECIFIC_LIBRARIES} glog rosbag X11)
+
+#SET(libs roslib roscpp ncurses popt pthread ${GTK2_LIBRARIES} glut
+#    ${OPENGL_LIBRARY} ${GLEW_LIBRARY} ${LUA_LIBRARIES} rt -lboost_system
+#    ${BUILD_SPECIFIC_LIBRARIES} glog rosbag X11)
 
 #SET(HW_SRCS
 #  src/hardware/serial.cc

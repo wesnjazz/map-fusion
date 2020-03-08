@@ -1,25 +1,10 @@
-# Human-in-the-Loop SLAM
+# Map Fusion
 
 This repository contains a C++ implementation of Human-in-the-Loop SLAM, for use in post-hoc metric map repair and correction. A ROS 
 wrapper is provided, which handles communication between GUI and backend. The source code is designed to be readable and extensible, and 
 can be easily modified to fit the needs of a particular project.
 
 - Author: [Samer Nashed](TODO)
-
-## Publication
-
-If you use this software in an academic work or find it relevant to your research, kindly cite:
-
-```
-@article{nashed2017human,
-  title={Human-in-the-Loop SLAM},
-  author={Nashed, Samer B and Biswas, Joydeep},
-  journal={arXiv preprint arXiv:1711.08566},
-  year={2017}
-}
-```
-
-Link to paper: [https://arxiv.org/pdf/1711.08566.pdf](https://arxiv.org/pdf/1711.08566.pdf)
 
 ## Dependencies
 

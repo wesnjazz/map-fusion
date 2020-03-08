@@ -241,7 +241,7 @@ int main(int argc, char *argv[]) {
   }
   else {
     //ConfigReader config_((ros::package::getPath("cobot_linux") + "/").c_str());
-    ConfigReader config_((ros::package::getPath("HitL-SLAM") + "/").c_str());
+    ConfigReader config_((ros::package::getPath("gui") + "/").c_str());
     config_.init();
     config_.addFile("config/robot.cfg");
     config_.addFile("config/non_markov_localization.cfg");

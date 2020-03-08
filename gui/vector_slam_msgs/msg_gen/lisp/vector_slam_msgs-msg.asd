@@ -1,0 +1,36 @@
+
+(cl:in-package :asdf)
+
+(defsystem "vector_slam_msgs-msg"
+  :depends-on (:roslisp-msg-protocol :roslisp-utils :geometry_msgs-msg
+               :sensor_msgs-msg
+               :std_msgs-msg
+)
+  :components ((:file "_package")
+    (:file "GuiMouseClickEvent" :depends-on ("_package_GuiMouseClickEvent"))
+    (:file "_package_GuiMouseClickEvent" :depends-on ("_package"))
+    (:file "CobotLocalization3DMsg" :depends-on ("_package_CobotLocalization3DMsg"))
+    (:file "_package_CobotLocalization3DMsg" :depends-on ("_package"))
+    (:file "LocalizationMsg" :depends-on ("_package_LocalizationMsg"))
+    (:file "_package_LocalizationMsg" :depends-on ("_package"))
+    (:file "GuiKeyboardEvent" :depends-on ("_package_GuiKeyboardEvent"))
+    (:file "_package_GuiKeyboardEvent" :depends-on ("_package"))
+    (:file "CobotOdometryMsg" :depends-on ("_package_CobotOdometryMsg"))
+    (:file "_package_CobotOdometryMsg" :depends-on ("_package"))
+    (:file "CobotAnomalyMonitorRectangleMsg" :depends-on ("_package_CobotAnomalyMonitorRectangleMsg"))
+    (:file "_package_CobotAnomalyMonitorRectangleMsg" :depends-on ("_package"))
+    (:file "CobotCameraMsg" :depends-on ("_package_CobotCameraMsg"))
+    (:file "_package_CobotCameraMsg" :depends-on ("_package"))
+    (:file "CobotStatusMsg" :depends-on ("_package_CobotStatusMsg"))
+    (:file "_package_CobotStatusMsg" :depends-on ("_package"))
+    (:file "GuiMouseMoveEvent" :depends-on ("_package_GuiMouseMoveEvent"))
+    (:file "_package_GuiMouseMoveEvent" :depends-on ("_package"))
+    (:file "CobotAnomalyMonitorMsg" :depends-on ("_package_CobotAnomalyMonitorMsg"))
+    (:file "_package_CobotAnomalyMonitorMsg" :depends-on ("_package"))
+    (:file "LidarDisplayMsg" :depends-on ("_package_LidarDisplayMsg"))
+    (:file "_package_LidarDisplayMsg" :depends-on ("_package"))
+    (:file "CobotLocalizationMsg" :depends-on ("_package_CobotLocalizationMsg"))
+    (:file "_package_CobotLocalizationMsg" :depends-on ("_package"))
+    (:file "CobotEventsMsg" :depends-on ("_package_CobotEventsMsg"))
+    (:file "_package_CobotEventsMsg" :depends-on ("_package"))
+  ))
