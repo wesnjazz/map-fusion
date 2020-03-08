@@ -245,6 +245,7 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_no
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/map-fusion/gui/gui/src/gui/gui_publisher_helper.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Point.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Pose.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Quaternion.h
@@ -305,6 +306,7 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_no
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/ros/wall_timer.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/ros/wall_timer_options.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/rosconsole/macros_generated.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/sensor_msgs/LaserScan.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/std_msgs/ColorRGBA.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/std_msgs/Header.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/visualization_msgs/Marker.h
@@ -993,8 +995,13 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /usr/in
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
 
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/position.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.cpp
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /opt/ros/melodic/include/geometry_msgs/Vector3.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /opt/ros/melodic/include/ros/builtin_message_traits.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /opt/ros/melodic/include/ros/datatypes.h

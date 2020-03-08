@@ -51,7 +51,11 @@ vector_slam_msgs/LidarDisplayMsg.h
 -
 vector_slam_msgs/CobotStatusMsg.h
 -
+vector_slam_msgs/LocalizationMsg.h
+-
 gui_publisher_helper.h
+-
+sensor_msgs/LaserScan.h
 -
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.cpp
@@ -81,8 +85,6 @@ robot.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
-position.h
-/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/position.h
 laser.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 
@@ -91,6 +93,8 @@ iostream
 -
 segment.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
+simulator.h
+/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 string
@@ -191,6 +195,30 @@ ros/macros.h
 /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/ros/macros.h
 ros/assert.h
 /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/ros/assert.h
+
+/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h
+string
+-
+vector
+-
+map
+-
+ostream
+-
+ros/serialization.h
+/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/ros/serialization.h
+ros/builtin_message_traits.h
+/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/ros/builtin_message_traits.h
+ros/message_operations.h
+/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/ros/message_operations.h
+ros/time.h
+/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/ros/time.h
+ros/macros.h
+/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/ros/macros.h
+ros/assert.h
+/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/ros/assert.h
+geometry_msgs/Vector3.h
+/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/geometry_msgs/Vector3.h
 
 /opt/ros/melodic/include/geometry_msgs/Point.h
 string
@@ -905,6 +933,24 @@ ros/forwards.h
 /opt/ros/melodic/include/ros/ros/forwards.h
 
 /opt/ros/melodic/include/rosconsole/macros_generated.h
+
+/opt/ros/melodic/include/sensor_msgs/LaserScan.h
+string
+-
+vector
+-
+map
+-
+ros/types.h
+-
+ros/serialization.h
+-
+ros/builtin_message_traits.h
+-
+ros/message_operations.h
+-
+std_msgs/Header.h
+-
 
 /opt/ros/melodic/include/std_msgs/ColorRGBA.h
 string

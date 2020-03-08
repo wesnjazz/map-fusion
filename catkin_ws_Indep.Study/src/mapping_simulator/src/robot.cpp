@@ -1,20 +1,21 @@
 #include "robot.h"
 
 
-Robot::Robot(Position position, double speed)
+Robot::Robot(Vec2f &position, float angle_degree, float speed)
 {
     this->position = position;
+    this->angle_degree = angle_degree;
+    this->angle_radian = angle_degree * (M_PI / 180.0);
     this->speed = speed;
     this->set_velocity();
 }
 
-void Robot::move_to(Position position)
+void Robot::move_to(Vec2f &position)
 {
     this->position = position;
-    this->set_velocity();
 }
 
-void Robot::set_speed(double speed)
+void Robot::set_speed(float speed)
 {
     this->speed = speed;
     this->set_velocity();
@@ -22,7 +23,7 @@ void Robot::set_speed(double speed)
 
 void Robot::set_velocity()
 {
-    double x = this->speed * cos(this->position.theta_radian);
-    double y = this->speed * sin(this->position.theta_radian);
+    float x = this->speed * cos(angle_radian);
+    float y = this->speed * sin(angle_radian);
     this->velocity = Vec2f(x, y);
 }
