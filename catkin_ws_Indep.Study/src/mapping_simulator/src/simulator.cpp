@@ -71,10 +71,12 @@ float get_vector_length(Vec2f &v)
 }
 
 
-deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &goal)
+deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive)
 {
+    // L0: depart ~ interpoint
+    // L1: interpoint ~ arrive
     Vec2f L0 = robot.velocity;
-    Vec2f L1 = goal - L0;
+    Vec2f L1 = arrive - L0;
     cout << "L0: " << L0 << endl;
     cout << "L1: " << L1 << endl;
 
@@ -91,25 +93,27 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &goal)
     cout << "delta:" << delta << endl;
     
     deque<Vec2f> curves;
+    Vec2f p_before = L0;
     for(float curve_point = 0.0; curve_point <= 1.0; curve_point += delta) {
         cout << "curve_point: " << curve_point << endl;
         // Position p = (P0 * pow((1 - curve_point), 2.0)) +
         //             (P1 * 2 * (1 - curve_point) * curve_point) +
-        //             (goal * pow(curve_point, 2.0));
-        float x = (robot.position.x() * pow((1 - curve_point), 2.0)) +
-                    (robot.velocity.x() * 2 * (1 - curve_point) * curve_point) +
-                    (goal.x() * pow(curve_point, 2.0));
-        float y = (robot.position.y() * pow((1 - curve_point), 2.0)) +
-                    (robot.velocity.y() * 2 * (1 - curve_point) * curve_point) +
-                    (goal.y() * pow(curve_point, 2.0));
-        Vec2f p = Vec2f(x, y);
-        Vec2f o = robot.position;
-        robot.move_to(p);
-        robot.angle_degree += atan2((p.y()-o.y()), (p.x()-o.x()));
+        //             (arrive * pow(curve_point, 2.0));
+        float x = (depart.x() * pow((1 - curve_point), 2.0)) +
+                    (L0.x() * 2 * (1 - curve_point) * curve_point) +
+                    (arrive.x() * pow(curve_point, 2.0));
+        float y = (depart.y() * pow((1 - curve_point), 2.0)) +
+                    (L0.y() * 2 * (1 - curve_point) * curve_point) +
+                    (arrive.y() * pow(curve_point, 2.0));
+        Vec2f p_next = Vec2f(x, y);
+        // p_before = Vec2f()
+        // Vec2f q = robot.position;
+        // robot.move_to(p);
+        // robot.angle_degree += atan2((p_before.y()-q.y()), (p_before.x()-q.x()));
         // robot.set_velocity();
-        cout << "new pos: " << p << "\t\tRobot pos:" << "(" << robot.position.x() << "," << robot.position.y() << ")" << endl;
+        cout << "new pos: " << p_next << "\t\tRobot pos:" << "(" << robot.position.x() << "," << robot.position.y() << ")" << endl;
         cout << "Robot pos:" << "(" << robot.position.x() << "," << robot.position.y() << ")  angle:" << robot.angle_degree << endl;
-        curves.push_back(p);
+        curves.push_back(p_next);
         // getchar();
     }
 

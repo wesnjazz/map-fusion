@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     /** ROS initialization **/
     ros::init(argc, argv, "Mapping_Simulator");
     ros::NodeHandle n;
-    ros::Rate loop_rate(2);
+    ros::Rate loop_rate(100);
     ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 10);
     ros::Publisher marker2_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 10);
     ros::Publisher lidar_msg_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 1000);
@@ -83,14 +83,23 @@ int main(int argc, char **argv)
     /** ROS node loop **/
     while (ros::ok())
     {   
-        // deque<Vec2f> trajectories = interpolate_curve_points(robot, goal);
-        // cout << "tracj size:" << trajectories.size() << endl;
-        // pos_x += 0.1;
-        // position.new_position(pos_x, pos_y, angle);
-        // robot.move_to(position);
+        /** Initial position **/
+        Vec2f depart = waypoints.front();
+        waypoints.pop_front();
 
-        while (!waypoints.empty())
+        while (!waypoints.empty())  // While there's a waypoint to visit
         {
+            Vec2f arrive = waypoints.front();
+            waypoints.pop_front();
+
+            deque<Vec2f> trajectories = interpolate_curve_points(robot, depart, arrive);
+
+            while (!trajectories.empty())
+            {
+                Vec2f p = trajectories.front();
+                trajectories.pop_front();
+                robot.move_to(p);
+
             time++;
             cout << "time: " << time << endl;
             vector_slam_msgs::CobotStatusMsg cobot_msg;
@@ -124,11 +133,9 @@ int main(int argc, char **argv)
             // lidar_msg.points_x.push_back(x);
             // lidar_msg.points_y.push_back(y);
 
-            cout << "waypoints size: " << waypoints.size() << endl;
-            Vec2f new_pos = waypoints.front();
-            waypoints.pop_front();
-            robot.move_to(new_pos);
-            cout << "waypoints size: " << waypoints.size() << endl;
+            // cout << "waypoints size: " << waypoints.size() << endl;
+            // robot.move_to(arrive);
+            // cout << "waypoints size: " << waypoints.size() << endl;
             // lidar_msg.robotLocX = robot.position.x;
             // lidar_msg.robotLocY = robot.position.y;
             // lidar_msg.robotAngle = robot.position.theta_degree;
@@ -257,6 +264,8 @@ int main(int argc, char **argv)
 
             ros::spinOnce();
             loop_rate.sleep();
+            depart = Vec2f(arrive);
+            }
         }
         cout << "Travel finished!" << endl;
         robot.move_to(robot_init_position);

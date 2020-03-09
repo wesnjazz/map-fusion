@@ -14,7 +14,7 @@
 void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wall_segments,
                             Laser &laser_sensor, Noise &length_noise, Noise &angle_noise);
 float get_vector_length(Vec2f &v);
-deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &goal);
+deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive);
 
 int usage(char *app_name);
 void read_segments(ifstream &seg_file, vector<Segment> &segments);
