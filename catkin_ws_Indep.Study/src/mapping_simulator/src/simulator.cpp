@@ -71,7 +71,7 @@ float get_vector_length(Vec2f &v)
 }
 
 
-deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive)
+deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive, bool noisy, Noise *noise)
 {
     // L0: depart ~ interpoint
     // L1: interpoint ~ arrive
@@ -87,7 +87,7 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive
 
     if (L0_length <= 5.0) { L0_length = 5.0; }
     if (L1_length <= 5.0) { L1_length = 5.0; }
-    float delta = 1 / (L0_length * L1_length);
+    float delta = 1 / (L0_length * L1_length * 2);
     float t = 0.0;
     cout << "L0 len * L1 len = " << (L0_length * L1_length) << endl;
     cout << "delta:" << delta << endl;
@@ -105,6 +105,15 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive
         float y = (depart.y() * pow((1 - curve_point), 2.0)) +
                     (L0.y() * 2 * (1 - curve_point) * curve_point) +
                     (arrive.y() * pow(curve_point, 2.0));
+        // if (noisy) {
+        //     float x_n = noise->gaussian();
+        //     float y_n = x_n;
+        //     // float y_n = noise->gaussian();
+        //     x += x_n;
+        //     y += y_n;
+        //     depart.x() += x_n;
+        //     depart.y() += y_n;
+        // }                    
         Vec2f p_next = Vec2f(x, y);
         // p_before = Vec2f()
         // Vec2f q = robot.position;
@@ -115,6 +124,22 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive
         cout << "Robot pos:" << "(" << robot.position.x() << "," << robot.position.y() << ")  angle:" << robot.angle_degree << endl;
         curves.push_back(p_next);
         // getchar();
+    }
+
+    if (noisy) {
+        deque<Vec2f> noised_curves;
+        Vec2f last_p = curves.front();
+        float x_accm = 0.0;
+        float y_accm = 0.0;
+        for (deque<Vec2f>::iterator it = curves.begin(); it != curves.end(); ++it) {
+            x_accm += noise->gaussian();
+            y_accm += noise->gaussian();
+            float noised_x = it->x() + x_accm;
+            float noised_y = it->y() + y_accm;
+            last_p = Vec2f(noised_x, noised_y);
+            noised_curves.push_back(last_p);
+        }
+        return noised_curves;
     }
 
     return curves;
