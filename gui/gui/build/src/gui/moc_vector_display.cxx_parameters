@@ -1,6 +1,6 @@
--I/home/dpark/map-fusion/map-fusion/gui/gui/include
--I/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include
--I/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/srv_gen/cpp/include
+-I/home/dpark/map-fusion/gui/gui/include
+-I/home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include
+-I/home/dpark/map-fusion/gui/vector_slam_msgs/srv_gen/cpp/include
 -I/opt/ros/melodic/include
 -I/usr/include/eigen3
 -I/usr/include/pcl-1.8
@@ -29,9 +29,9 @@
 -I/usr/include/qt4/QtGui
 -I/usr/include/qt4/QtNetwork
 -I/usr/include/qt4/QtCore
--I/home/dpark/map-fusion/map-fusion/gui/gui/src/perception_tools
--I/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math
--I/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util
+-I/home/dpark/map-fusion/gui/gui/src/perception_tools
+-I/home/dpark/map-fusion/gui/gui/src/shared/math
+-I/home/dpark/map-fusion/gui/gui/src/shared/util
 -I/usr/include/lua5.1
 -DROS_PACKAGE_NAME="gui"
 -DROS_BUILD_SHARED_LIBS=1
@@ -41,5 +41,5 @@
 -DQT_NETWORK_LIB
 -DQT_CORE_LIB
 -o
-/home/dpark/map-fusion/map-fusion/gui/gui/build/src/gui/moc_vector_display.cxx
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/vector_display.h
+/home/dpark/map-fusion/gui/gui/build/src/gui/moc_vector_display.cxx
+/home/dpark/map-fusion/gui/gui/src/gui/vector_display.h

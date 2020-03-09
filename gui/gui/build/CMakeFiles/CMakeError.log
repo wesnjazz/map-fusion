@@ -1,24 +1,24 @@
 Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
+Change Dir: /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_759ae/fast"
-/usr/bin/make -f CMakeFiles/cmTC_759ae.dir/build.make CMakeFiles/cmTC_759ae.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_759ae.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_759ae.dir/CheckSymbolExists.c.o   -c /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_759ae
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_759ae.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_759ae.dir/CheckSymbolExists.c.o  -o cmTC_759ae 
-CMakeFiles/cmTC_759ae.dir/CheckSymbolExists.c.o: In function `main':
+Run Build Command:"/usr/bin/make" "cmTC_9e026/fast"
+/usr/bin/make -f CMakeFiles/cmTC_9e026.dir/build.make CMakeFiles/cmTC_9e026.dir/build
+make[1]: Entering directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9e026.dir/CheckSymbolExists.c.o
+/usr/bin/cc    -o CMakeFiles/cmTC_9e026.dir/CheckSymbolExists.c.o   -c /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_9e026
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9e026.dir/link.txt --verbose=1
+/usr/bin/cc      -rdynamic CMakeFiles/cmTC_9e026.dir/CheckSymbolExists.c.o  -o cmTC_9e026 
+CMakeFiles/cmTC_9e026.dir/CheckSymbolExists.c.o: In function `main':
 CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_759ae.dir/build.make:97: recipe for target 'cmTC_759ae' failed
-make[1]: *** [cmTC_759ae] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_759ae/fast' failed
-make: *** [cmTC_759ae/fast] Error 2
+CMakeFiles/cmTC_9e026.dir/build.make:97: recipe for target 'cmTC_9e026' failed
+make[1]: *** [cmTC_9e026] Error 1
+make[1]: Leaving directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_9e026/fast' failed
+make: *** [cmTC_9e026/fast] Error 2
 
-File /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+File /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
 /* */
 #include <pthread.h>
 
@@ -34,48 +34,48 @@ int main(int argc, char** argv)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
+Change Dir: /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_8b776/fast"
-/usr/bin/make -f CMakeFiles/cmTC_8b776.dir/build.make CMakeFiles/cmTC_8b776.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_8b776.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_8b776.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_8b776
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8b776.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_8b776.dir/CheckFunctionExists.c.o  -o cmTC_8b776 -lpthreads 
+Run Build Command:"/usr/bin/make" "cmTC_4c57d/fast"
+/usr/bin/make -f CMakeFiles/cmTC_4c57d.dir/build.make CMakeFiles/cmTC_4c57d.dir/build
+make[1]: Entering directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4c57d.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_4c57d.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
+Linking C executable cmTC_4c57d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4c57d.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_4c57d.dir/CheckFunctionExists.c.o  -o cmTC_4c57d -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_8b776.dir/build.make:97: recipe for target 'cmTC_8b776' failed
-make[1]: *** [cmTC_8b776] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_8b776/fast' failed
-make: *** [cmTC_8b776/fast] Error 2
+CMakeFiles/cmTC_4c57d.dir/build.make:97: recipe for target 'cmTC_4c57d' failed
+make[1]: *** [cmTC_4c57d] Error 1
+make[1]: Leaving directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_4c57d/fast' failed
+make: *** [cmTC_4c57d/fast] Error 2
 
 
 Determining if the Q_WS_WIN exist failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
+Change Dir: /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_ecc49/fast"
-/usr/bin/make -f CMakeFiles/cmTC_ecc49.dir/build.make CMakeFiles/cmTC_ecc49.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_ecc49.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_ecc49.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
+Run Build Command:"/usr/bin/make" "cmTC_0fb92/fast"
+/usr/bin/make -f CMakeFiles/cmTC_0fb92.dir/build.make CMakeFiles/cmTC_0fb92.dir/build
+make[1]: Entering directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_0fb92.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_0fb92.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
    return ((int*)(&Q_WS_WIN))[argc];
                    ^~~~~~~~
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
    return ((int*)(&Q_WS_WIN))[argc];
                    ^~~~~~~~
                    Q_WS_X11
-CMakeFiles/cmTC_ecc49.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_ecc49.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_ecc49.dir/CheckSymbolExists.cxx.o] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_ecc49/fast' failed
-make: *** [cmTC_ecc49/fast] Error 2
+CMakeFiles/cmTC_0fb92.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_0fb92.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_0fb92.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: Leaving directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_0fb92/fast' failed
+make: *** [cmTC_0fb92/fast] Error 2
 
-File /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+File /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */
 #include <QtCore/qglobal.h>
 
@@ -91,28 +91,28 @@ int main(int argc, char** argv)
 }
 
 Determining if the Q_WS_QWS exist failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
+Change Dir: /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_6e6bc/fast"
-/usr/bin/make -f CMakeFiles/cmTC_6e6bc.dir/build.make CMakeFiles/cmTC_6e6bc.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_6e6bc.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_6e6bc.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
+Run Build Command:"/usr/bin/make" "cmTC_f0e27/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f0e27.dir/build.make CMakeFiles/cmTC_f0e27.dir/build
+make[1]: Entering directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f0e27.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_f0e27.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
    return ((int*)(&Q_WS_QWS))[argc];
                    ^~~~~~~~
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
    return ((int*)(&Q_WS_QWS))[argc];
                    ^~~~~~~~
                    Q_WS_X11
-CMakeFiles/cmTC_6e6bc.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_6e6bc.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_6e6bc.dir/CheckSymbolExists.cxx.o] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_6e6bc/fast' failed
-make: *** [cmTC_6e6bc/fast] Error 2
+CMakeFiles/cmTC_f0e27.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_f0e27.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_f0e27.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: Leaving directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_f0e27/fast' failed
+make: *** [cmTC_f0e27/fast] Error 2
 
-File /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+File /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */
 #include <QtCore/qglobal.h>
 
@@ -128,194 +128,28 @@ int main(int argc, char** argv)
 }
 
 Determining if the Q_WS_MAC exist failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
+Change Dir: /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/make" "cmTC_61d20/fast"
-/usr/bin/make -f CMakeFiles/cmTC_61d20.dir/build.make CMakeFiles/cmTC_61d20.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_61d20.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_61d20.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
+Run Build Command:"/usr/bin/make" "cmTC_f938a/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f938a.dir/build.make CMakeFiles/cmTC_f938a.dir/build
+make[1]: Entering directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f938a.dir/CheckSymbolExists.cxx.o
+/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_f938a.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
    return ((int*)(&Q_WS_MAC))[argc];
                    ^~~~~~~~
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
-   return ((int*)(&Q_WS_MAC))[argc];
-                   ^~~~~~~~
-                   Q_WS_X11
-CMakeFiles/cmTC_61d20.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_61d20.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_61d20.dir/CheckSymbolExists.cxx.o] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_61d20/fast' failed
-make: *** [cmTC_61d20/fast] Error 2
-
-File /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
-/* */
-#include <QtCore/qglobal.h>
-
-int main(int argc, char** argv)
-{
-  (void)argv;
-#ifndef Q_WS_MAC
-  return ((int*)(&Q_WS_MAC))[argc];
-#else
-  (void)argc;
-  return 0;
-#endif
-}
-
-Determining if the pthread_create exist failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
-
-Run Build Command:"/usr/bin/make" "cmTC_e4fe3/fast"
-/usr/bin/make -f CMakeFiles/cmTC_e4fe3.dir/build.make CMakeFiles/cmTC_e4fe3.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_e4fe3.dir/CheckSymbolExists.c.o
-/usr/bin/cc    -o CMakeFiles/cmTC_e4fe3.dir/CheckSymbolExists.c.o   -c /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
-Linking C executable cmTC_e4fe3
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e4fe3.dir/link.txt --verbose=1
-/usr/bin/cc      -rdynamic CMakeFiles/cmTC_e4fe3.dir/CheckSymbolExists.c.o  -o cmTC_e4fe3 
-CMakeFiles/cmTC_e4fe3.dir/CheckSymbolExists.c.o: In function `main':
-CheckSymbolExists.c:(.text+0x1b): undefined reference to `pthread_create'
-collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_e4fe3.dir/build.make:97: recipe for target 'cmTC_e4fe3' failed
-make[1]: *** [cmTC_e4fe3] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_e4fe3/fast' failed
-make: *** [cmTC_e4fe3/fast] Error 2
-
-File /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
-/* */
-#include <pthread.h>
-
-int main(int argc, char** argv)
-{
-  (void)argv;
-#ifndef pthread_create
-  return ((int*)(&pthread_create))[argc];
-#else
-  (void)argc;
-  return 0;
-#endif
-}
-
-Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
-
-Run Build Command:"/usr/bin/make" "cmTC_2ff43/fast"
-/usr/bin/make -f CMakeFiles/cmTC_2ff43.dir/build.make CMakeFiles/cmTC_2ff43.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_2ff43.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_2ff43.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.10/Modules/CheckFunctionExists.c
-Linking C executable cmTC_2ff43
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2ff43.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_2ff43.dir/CheckFunctionExists.c.o  -o cmTC_2ff43 -lpthreads 
-/usr/bin/ld: cannot find -lpthreads
-collect2: error: ld returned 1 exit status
-CMakeFiles/cmTC_2ff43.dir/build.make:97: recipe for target 'cmTC_2ff43' failed
-make[1]: *** [cmTC_2ff43] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_2ff43/fast' failed
-make: *** [cmTC_2ff43/fast] Error 2
-
-
-Determining if the Q_WS_WIN exist failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
-
-Run Build Command:"/usr/bin/make" "cmTC_390e6/fast"
-/usr/bin/make -f CMakeFiles/cmTC_390e6.dir/build.make CMakeFiles/cmTC_390e6.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_390e6.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_390e6.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_WIN’ was not declared in this scope
-   return ((int*)(&Q_WS_WIN))[argc];
-                   ^~~~~~~~
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
-   return ((int*)(&Q_WS_WIN))[argc];
-                   ^~~~~~~~
-                   Q_WS_X11
-CMakeFiles/cmTC_390e6.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_390e6.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_390e6.dir/CheckSymbolExists.cxx.o] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_390e6/fast' failed
-make: *** [cmTC_390e6/fast] Error 2
-
-File /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
-/* */
-#include <QtCore/qglobal.h>
-
-int main(int argc, char** argv)
-{
-  (void)argv;
-#ifndef Q_WS_WIN
-  return ((int*)(&Q_WS_WIN))[argc];
-#else
-  (void)argc;
-  return 0;
-#endif
-}
-
-Determining if the Q_WS_QWS exist failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
-
-Run Build Command:"/usr/bin/make" "cmTC_bcf02/fast"
-/usr/bin/make -f CMakeFiles/cmTC_bcf02.dir/build.make CMakeFiles/cmTC_bcf02.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_bcf02.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_bcf02.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_QWS’ was not declared in this scope
-   return ((int*)(&Q_WS_QWS))[argc];
-                   ^~~~~~~~
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
-   return ((int*)(&Q_WS_QWS))[argc];
-                   ^~~~~~~~
-                   Q_WS_X11
-CMakeFiles/cmTC_bcf02.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_bcf02.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_bcf02.dir/CheckSymbolExists.cxx.o] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_bcf02/fast' failed
-make: *** [cmTC_bcf02/fast] Error 2
-
-File /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
-/* */
-#include <QtCore/qglobal.h>
-
-int main(int argc, char** argv)
-{
-  (void)argv;
-#ifndef Q_WS_QWS
-  return ((int*)(&Q_WS_QWS))[argc];
-#else
-  (void)argc;
-  return 0;
-#endif
-}
-
-Determining if the Q_WS_MAC exist failed with the following output:
-Change Dir: /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp
-
-Run Build Command:"/usr/bin/make" "cmTC_0707e/fast"
-/usr/bin/make -f CMakeFiles/cmTC_0707e.dir/build.make CMakeFiles/cmTC_0707e.dir/build
-make[1]: Entering directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_0707e.dir/CheckSymbolExists.cxx.o
-/usr/bin/c++   -I/usr/include/qt4  -std=c++11 -march=native -Wall -g -rdynamic    -o CMakeFiles/cmTC_0707e.dir/CheckSymbolExists.cxx.o -c /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx: In function ‘int main(int, char**)’:
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: error: ‘Q_WS_MAC’ was not declared in this scope
-   return ((int*)(&Q_WS_MAC))[argc];
-                   ^~~~~~~~
-/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
+/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:8:19: note: suggested alternative: ‘Q_WS_X11’
    return ((int*)(&Q_WS_MAC))[argc];
                    ^~~~~~~~
                    Q_WS_X11
-CMakeFiles/cmTC_0707e.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_0707e.dir/CheckSymbolExists.cxx.o' failed
-make[1]: *** [CMakeFiles/cmTC_0707e.dir/CheckSymbolExists.cxx.o] Error 1
-make[1]: Leaving directory '/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
-Makefile:126: recipe for target 'cmTC_0707e/fast' failed
-make: *** [cmTC_0707e/fast] Error 2
+CMakeFiles/cmTC_f938a.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_f938a.dir/CheckSymbolExists.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_f938a.dir/CheckSymbolExists.cxx.o] Error 1
+make[1]: Leaving directory '/home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_f938a/fast' failed
+make: *** [cmTC_f938a/fast] Error 2
 
-File /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
+File /home/dpark/map-fusion/gui/gui/build/CMakeFiles/CMakeTmp/CheckSymbolExists.cxx:
 /* */
 #include <QtCore/qglobal.h>
 

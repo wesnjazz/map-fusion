@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs
+CMAKE_SOURCE_DIR = /home/dpark/map-fusion/gui/vector_slam_msgs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build
+CMAKE_BINARY_DIR = /home/dpark/map-fusion/gui/vector_slam_msgs/build
 
 # Utility rule file for ROSBUILD_genmsg_py.
 
@@ -69,8 +69,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/__init__.py: ../src/vector_slam_msgs/msg/_GuiMouseMoveEvent.py
 ../src/vector_slam_msgs/msg/__init__.py: ../src/vector_slam_msgs/msg/_LidarDisplayMsg.py
 ../src/vector_slam_msgs/msg/__init__.py: ../src/vector_slam_msgs/msg/_LocalizationMsg.py
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../src/vector_slam_msgs/msg/__init__.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorRectangleMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotCameraMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotEventsMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotLocalization3DMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotLocalizationMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotOdometryMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotStatusMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiKeyboardEvent.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiMouseClickEvent.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiMouseMoveEvent.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/LidarDisplayMsg.msg /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/LocalizationMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../src/vector_slam_msgs/msg/__init__.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --initpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorRectangleMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotCameraMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotEventsMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotLocalization3DMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotLocalizationMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotOdometryMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotStatusMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiKeyboardEvent.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiMouseClickEvent.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiMouseMoveEvent.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/LidarDisplayMsg.msg /home/dpark/map-fusion/gui/vector_slam_msgs/msg/LocalizationMsg.msg
 
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorMsg.py: ../msg/CobotAnomalyMonitorMsg.msg
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -103,8 +103,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorMsg.msg
 
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorRectangleMsg.py: ../msg/CobotAnomalyMonitorRectangleMsg.msg
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorRectangleMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -137,8 +137,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorRectangleMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorRectangleMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorRectangleMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorRectangleMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorRectangleMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating ../src/vector_slam_msgs/msg/_CobotAnomalyMonitorRectangleMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorRectangleMsg.msg
 
 ../src/vector_slam_msgs/msg/_CobotCameraMsg.py: ../msg/CobotCameraMsg.msg
 ../src/vector_slam_msgs/msg/_CobotCameraMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -172,8 +172,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_CobotCameraMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_CobotCameraMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_CobotCameraMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating ../src/vector_slam_msgs/msg/_CobotCameraMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotCameraMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating ../src/vector_slam_msgs/msg/_CobotCameraMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotCameraMsg.msg
 
 ../src/vector_slam_msgs/msg/_CobotEventsMsg.py: ../msg/CobotEventsMsg.msg
 ../src/vector_slam_msgs/msg/_CobotEventsMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -205,8 +205,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_CobotEventsMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_CobotEventsMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_CobotEventsMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating ../src/vector_slam_msgs/msg/_CobotEventsMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotEventsMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating ../src/vector_slam_msgs/msg/_CobotEventsMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotEventsMsg.msg
 
 ../src/vector_slam_msgs/msg/_CobotLocalization3DMsg.py: ../msg/CobotLocalization3DMsg.msg
 ../src/vector_slam_msgs/msg/_CobotLocalization3DMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -238,8 +238,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_CobotLocalization3DMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_CobotLocalization3DMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_CobotLocalization3DMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating ../src/vector_slam_msgs/msg/_CobotLocalization3DMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotLocalization3DMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating ../src/vector_slam_msgs/msg/_CobotLocalization3DMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotLocalization3DMsg.msg
 
 ../src/vector_slam_msgs/msg/_CobotLocalizationMsg.py: ../msg/CobotLocalizationMsg.msg
 ../src/vector_slam_msgs/msg/_CobotLocalizationMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -271,8 +271,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_CobotLocalizationMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_CobotLocalizationMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_CobotLocalizationMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating ../src/vector_slam_msgs/msg/_CobotLocalizationMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotLocalizationMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating ../src/vector_slam_msgs/msg/_CobotLocalizationMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotLocalizationMsg.msg
 
 ../src/vector_slam_msgs/msg/_CobotOdometryMsg.py: ../msg/CobotOdometryMsg.msg
 ../src/vector_slam_msgs/msg/_CobotOdometryMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -305,8 +305,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_CobotOdometryMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_CobotOdometryMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_CobotOdometryMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating ../src/vector_slam_msgs/msg/_CobotOdometryMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotOdometryMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating ../src/vector_slam_msgs/msg/_CobotOdometryMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotOdometryMsg.msg
 
 ../src/vector_slam_msgs/msg/_CobotStatusMsg.py: ../msg/CobotStatusMsg.msg
 ../src/vector_slam_msgs/msg/_CobotStatusMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -339,8 +339,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_CobotStatusMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_CobotStatusMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_CobotStatusMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating ../src/vector_slam_msgs/msg/_CobotStatusMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotStatusMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating ../src/vector_slam_msgs/msg/_CobotStatusMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotStatusMsg.msg
 
 ../src/vector_slam_msgs/msg/_GuiKeyboardEvent.py: ../msg/GuiKeyboardEvent.msg
 ../src/vector_slam_msgs/msg/_GuiKeyboardEvent.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -373,8 +373,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_GuiKeyboardEvent.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_GuiKeyboardEvent.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_GuiKeyboardEvent.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating ../src/vector_slam_msgs/msg/_GuiKeyboardEvent.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiKeyboardEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating ../src/vector_slam_msgs/msg/_GuiKeyboardEvent.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiKeyboardEvent.msg
 
 ../src/vector_slam_msgs/msg/_GuiMouseClickEvent.py: ../msg/GuiMouseClickEvent.msg
 ../src/vector_slam_msgs/msg/_GuiMouseClickEvent.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -408,8 +408,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_GuiMouseClickEvent.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_GuiMouseClickEvent.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_GuiMouseClickEvent.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating ../src/vector_slam_msgs/msg/_GuiMouseClickEvent.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiMouseClickEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating ../src/vector_slam_msgs/msg/_GuiMouseClickEvent.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiMouseClickEvent.msg
 
 ../src/vector_slam_msgs/msg/_GuiMouseMoveEvent.py: ../msg/GuiMouseMoveEvent.msg
 ../src/vector_slam_msgs/msg/_GuiMouseMoveEvent.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -443,8 +443,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_GuiMouseMoveEvent.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_GuiMouseMoveEvent.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_GuiMouseMoveEvent.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating ../src/vector_slam_msgs/msg/_GuiMouseMoveEvent.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiMouseMoveEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating ../src/vector_slam_msgs/msg/_GuiMouseMoveEvent.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiMouseMoveEvent.msg
 
 ../src/vector_slam_msgs/msg/_LidarDisplayMsg.py: ../msg/LidarDisplayMsg.msg
 ../src/vector_slam_msgs/msg/_LidarDisplayMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -476,8 +476,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_LidarDisplayMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_LidarDisplayMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_LidarDisplayMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating ../src/vector_slam_msgs/msg/_LidarDisplayMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/LidarDisplayMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating ../src/vector_slam_msgs/msg/_LidarDisplayMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/LidarDisplayMsg.msg
 
 ../src/vector_slam_msgs/msg/_LocalizationMsg.py: ../msg/LocalizationMsg.msg
 ../src/vector_slam_msgs/msg/_LocalizationMsg.py: /opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py
@@ -510,8 +510,8 @@ CMakeFiles/ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
 ../src/vector_slam_msgs/msg/_LocalizationMsg.py: /opt/ros/melodic/share/rospack/package.xml
 ../src/vector_slam_msgs/msg/_LocalizationMsg.py: /opt/ros/melodic/share/roslib/package.xml
 ../src/vector_slam_msgs/msg/_LocalizationMsg.py: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating ../src/vector_slam_msgs/msg/_LocalizationMsg.py"
-	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/LocalizationMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Generating ../src/vector_slam_msgs/msg/_LocalizationMsg.py"
+	/opt/ros/melodic/share/rospy/rosbuild/scripts/genmsg_py.py --noinitpy /home/dpark/map-fusion/gui/vector_slam_msgs/msg/LocalizationMsg.msg
 
 ROSBUILD_genmsg_py: CMakeFiles/ROSBUILD_genmsg_py
 ROSBUILD_genmsg_py: ../src/vector_slam_msgs/msg/__init__.py
@@ -542,6 +542,6 @@ CMakeFiles/ROSBUILD_genmsg_py.dir/clean:
 .PHONY : CMakeFiles/ROSBUILD_genmsg_py.dir/clean
 
 CMakeFiles/ROSBUILD_genmsg_py.dir/depend:
-	cd /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles/ROSBUILD_genmsg_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dpark/map-fusion/gui/vector_slam_msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles/ROSBUILD_genmsg_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ROSBUILD_genmsg_py.dir/depend
 

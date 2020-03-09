@@ -60,13 +60,13 @@ sys/time.h
 time.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/build/src/gui/moc_vector_display.cxx
+/home/dpark/map-fusion/gui/gui/build/src/gui/moc_vector_display.cxx
 ../../../src/gui/vector_display.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/vector_display.h
+/home/dpark/map-fusion/gui/gui/src/gui/vector_display.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/gltext.cpp
+/home/dpark/map-fusion/gui/gui/src/gui/gltext.cpp
 gltext.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/gltext.h
+/home/dpark/map-fusion/gui/gui/src/gui/gltext.h
 eigen3/Eigen/Dense
 -
 QVector
@@ -84,7 +84,7 @@ string
 float.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/gltext.h
+/home/dpark/map-fusion/gui/gui/src/gui/gltext.h
 eigen3/Eigen/Dense
 -
 GL/glu.h
@@ -94,9 +94,9 @@ QVector
 QtGui
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/vector_display.cpp
+/home/dpark/map-fusion/gui/gui/src/gui/vector_display.cpp
 vector_display.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/vector_display.h
+/home/dpark/map-fusion/gui/gui/src/gui/vector_display.h
 algorithm
 -
 eigen3/Eigen/Dense
@@ -110,15 +110,15 @@ stdio.h
 vector
 -
 eigen_helper.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/eigen_helper.h
+/home/dpark/map-fusion/gui/gui/src/gui/eigen_helper.h
 gltext.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/gltext.h
+/home/dpark/map-fusion/gui/gui/src/gui/gltext.h
 ../shared/util/helpers.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/helpers.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/helpers.h
 timer.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/timer.h
+/home/dpark/map-fusion/gui/gui/src/gui/timer.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/vector_display.h
+/home/dpark/map-fusion/gui/gui/src/gui/vector_display.h
 eigen3/Eigen/Dense
 -
 QWidget
@@ -136,9 +136,9 @@ QFileDialog
 vector
 -
 gltext.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/gltext.h
+/home/dpark/map-fusion/gui/gui/src/gui/gltext.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/helpers.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/helpers.h
 assert.h
 -
 glog/logging.h

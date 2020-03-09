@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs
+CMAKE_SOURCE_DIR = /home/dpark/map-fusion/gui/vector_slam_msgs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build
+CMAKE_BINARY_DIR = /home/dpark/map-fusion/gui/vector_slam_msgs/build
 
 # Utility rule file for ROSBUILD_genmsg_lisp.
 
@@ -125,8 +125,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/CobotAnomalyMonitorMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/CobotAnomalyMonitorMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/CobotAnomalyMonitorMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../msg_gen/lisp/CobotAnomalyMonitorMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotAnomalyMonitorMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../msg_gen/lisp/CobotAnomalyMonitorMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotAnomalyMonitorMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/CobotAnomalyMonitorMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -165,8 +165,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/CobotAnomalyMonitorRectangleMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/CobotAnomalyMonitorRectangleMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/CobotAnomalyMonitorRectangleMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../msg_gen/lisp/CobotAnomalyMonitorRectangleMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotAnomalyMonitorRectangleMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorRectangleMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../msg_gen/lisp/CobotAnomalyMonitorRectangleMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotAnomalyMonitorRectangleMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorRectangleMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/CobotAnomalyMonitorRectangleMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -206,8 +206,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/CobotCameraMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/CobotCameraMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/CobotCameraMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating ../msg_gen/lisp/CobotCameraMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotCameraMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotCameraMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating ../msg_gen/lisp/CobotCameraMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotCameraMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotCameraMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/CobotCameraMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -245,8 +245,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/CobotEventsMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/CobotEventsMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/CobotEventsMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating ../msg_gen/lisp/CobotEventsMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotEventsMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotEventsMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating ../msg_gen/lisp/CobotEventsMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotEventsMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotEventsMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/CobotEventsMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -284,8 +284,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/CobotLocalization3DMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/CobotLocalization3DMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/CobotLocalization3DMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating ../msg_gen/lisp/CobotLocalization3DMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotLocalization3DMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotLocalization3DMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating ../msg_gen/lisp/CobotLocalization3DMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotLocalization3DMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotLocalization3DMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/CobotLocalization3DMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -323,8 +323,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/CobotLocalizationMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/CobotLocalizationMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/CobotLocalizationMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating ../msg_gen/lisp/CobotLocalizationMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotLocalizationMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotLocalizationMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating ../msg_gen/lisp/CobotLocalizationMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotLocalizationMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotLocalizationMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/CobotLocalizationMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -363,8 +363,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/CobotOdometryMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/CobotOdometryMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/CobotOdometryMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating ../msg_gen/lisp/CobotOdometryMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotOdometryMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotOdometryMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating ../msg_gen/lisp/CobotOdometryMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotOdometryMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotOdometryMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/CobotOdometryMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -403,8 +403,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/CobotStatusMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/CobotStatusMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/CobotStatusMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating ../msg_gen/lisp/CobotStatusMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotStatusMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotStatusMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating ../msg_gen/lisp/CobotStatusMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_CobotStatusMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotStatusMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/CobotStatusMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -443,8 +443,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/GuiKeyboardEvent.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/GuiKeyboardEvent.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/GuiKeyboardEvent.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating ../msg_gen/lisp/GuiKeyboardEvent.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_GuiKeyboardEvent.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiKeyboardEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating ../msg_gen/lisp/GuiKeyboardEvent.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_GuiKeyboardEvent.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiKeyboardEvent.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/GuiKeyboardEvent.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -484,8 +484,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/GuiMouseClickEvent.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/GuiMouseClickEvent.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/GuiMouseClickEvent.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating ../msg_gen/lisp/GuiMouseClickEvent.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_GuiMouseClickEvent.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiMouseClickEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating ../msg_gen/lisp/GuiMouseClickEvent.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_GuiMouseClickEvent.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiMouseClickEvent.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/GuiMouseClickEvent.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -525,8 +525,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/GuiMouseMoveEvent.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/GuiMouseMoveEvent.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/GuiMouseMoveEvent.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating ../msg_gen/lisp/GuiMouseMoveEvent.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_GuiMouseMoveEvent.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiMouseMoveEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating ../msg_gen/lisp/GuiMouseMoveEvent.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_GuiMouseMoveEvent.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiMouseMoveEvent.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/GuiMouseMoveEvent.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -564,8 +564,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/LidarDisplayMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/LidarDisplayMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/LidarDisplayMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating ../msg_gen/lisp/LidarDisplayMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_LidarDisplayMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/LidarDisplayMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating ../msg_gen/lisp/LidarDisplayMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_LidarDisplayMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/LidarDisplayMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/LidarDisplayMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -604,8 +604,8 @@ CMakeFiles/ROSBUILD_genmsg_lisp: ../msg_gen/lisp/_package_LocalizationMsg.lisp
 ../msg_gen/lisp/LocalizationMsg.lisp: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/lisp/LocalizationMsg.lisp: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/lisp/LocalizationMsg.lisp: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating ../msg_gen/lisp/LocalizationMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_LocalizationMsg.lisp"
-	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/LocalizationMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating ../msg_gen/lisp/LocalizationMsg.lisp, ../msg_gen/lisp/_package.lisp, ../msg_gen/lisp/_package_LocalizationMsg.lisp"
+	/opt/ros/melodic/share/roslisp/rosbuild/scripts/genmsg_lisp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/LocalizationMsg.msg
 
 ../msg_gen/lisp/_package.lisp: ../msg_gen/lisp/LocalizationMsg.lisp
 	@$(CMAKE_COMMAND) -E touch_nocreate ../msg_gen/lisp/_package.lisp
@@ -667,6 +667,6 @@ CMakeFiles/ROSBUILD_genmsg_lisp.dir/clean:
 .PHONY : CMakeFiles/ROSBUILD_genmsg_lisp.dir/clean
 
 CMakeFiles/ROSBUILD_genmsg_lisp.dir/depend:
-	cd /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dpark/map-fusion/gui/vector_slam_msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles/ROSBUILD_genmsg_lisp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ROSBUILD_genmsg_lisp.dir/depend
 

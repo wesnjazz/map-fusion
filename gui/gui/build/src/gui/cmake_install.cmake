@@ -1,4 +1,4 @@
-# Install script for directory: /home/dpark/map-fusion/map-fusion/gui/gui/src/gui
+# Install script for directory: /home/dpark/map-fusion/gui/gui/src/gui
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

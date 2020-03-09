@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs
+CMAKE_SOURCE_DIR = /home/dpark/map-fusion/gui/vector_slam_msgs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build
+CMAKE_BINARY_DIR = /home/dpark/map-fusion/gui/vector_slam_msgs/build
 
 # Utility rule file for tests.
 
@@ -67,6 +67,6 @@ CMakeFiles/tests.dir/clean:
 .PHONY : CMakeFiles/tests.dir/clean
 
 CMakeFiles/tests.dir/depend:
-	cd /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dpark/map-fusion/gui/vector_slam_msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles/tests.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/tests.dir/depend
 

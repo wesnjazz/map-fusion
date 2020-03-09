@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dpark/map-fusion/map-fusion/gui/gui
+CMAKE_SOURCE_DIR = /home/dpark/map-fusion/gui/gui
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dpark/map-fusion/map-fusion/gui/gui/build
+CMAKE_BINARY_DIR = /home/dpark/map-fusion/gui/gui/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/shared_libraries.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/shared_libraries.dir/flags.make
 
 CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.o: CMakeFiles/shared_libraries.dir/flags.make
 CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.o: ../src/shared/math/gvector.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.o -c /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math/gvector.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.o -c /home/dpark/map-fusion/gui/gui/src/shared/math/gvector.cpp
 
 CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math/gvector.cpp > CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/gui/gui/src/shared/math/gvector.cpp > CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.i
 
 CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math/gvector.cpp -o CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/gui/gui/src/shared/math/gvector.cpp -o CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.s
 
 CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.o.requires:
 
@@ -83,16 +83,16 @@ CMakeFiles/shared_libraries.dir/src/shared/math/gvector.cpp.o.provides.build: CM
 
 CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.o: CMakeFiles/shared_libraries.dir/flags.make
 CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.o: ../src/shared/util/helpers.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.o -c /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/helpers.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.o -c /home/dpark/map-fusion/gui/gui/src/shared/util/helpers.cpp
 
 CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/helpers.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/gui/gui/src/shared/util/helpers.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.i
 
 CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/helpers.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/gui/gui/src/shared/util/helpers.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.s
 
 CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.o.requires:
 
@@ -107,16 +107,16 @@ CMakeFiles/shared_libraries.dir/src/shared/util/helpers.cpp.o.provides.build: CM
 
 CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.o: CMakeFiles/shared_libraries.dir/flags.make
 CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.o: ../src/shared/util/proghelp.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.o -c /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/proghelp.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.o -c /home/dpark/map-fusion/gui/gui/src/shared/util/proghelp.cc
 
 CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/proghelp.cc > CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/gui/gui/src/shared/util/proghelp.cc > CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.i
 
 CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/proghelp.cc -o CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/gui/gui/src/shared/util/proghelp.cc -o CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.s
 
 CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.o.requires:
 
@@ -131,16 +131,16 @@ CMakeFiles/shared_libraries.dir/src/shared/util/proghelp.cc.o.provides.build: CM
 
 CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.o: CMakeFiles/shared_libraries.dir/flags.make
 CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.o: ../src/shared/util/pthread_utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.o -c /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/pthread_utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.o -c /home/dpark/map-fusion/gui/gui/src/shared/util/pthread_utils.cpp
 
 CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/pthread_utils.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/gui/gui/src/shared/util/pthread_utils.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.i
 
 CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/pthread_utils.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/gui/gui/src/shared/util/pthread_utils.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.s
 
 CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.o.requires:
 
@@ -155,16 +155,16 @@ CMakeFiles/shared_libraries.dir/src/shared/util/pthread_utils.cpp.o.provides.bui
 
 CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.o: CMakeFiles/shared_libraries.dir/flags.make
 CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.o: ../src/shared/util/terminal_utils.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.o -c /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/terminal_utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.o -c /home/dpark/map-fusion/gui/gui/src/shared/util/terminal_utils.cpp
 
 CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/terminal_utils.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/gui/gui/src/shared/util/terminal_utils.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.i
 
 CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/terminal_utils.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/gui/gui/src/shared/util/terminal_utils.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.s
 
 CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.o.requires:
 
@@ -179,16 +179,16 @@ CMakeFiles/shared_libraries.dir/src/shared/util/terminal_utils.cpp.o.provides.bu
 
 CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.o: CMakeFiles/shared_libraries.dir/flags.make
 CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.o: ../src/shared/util/configreader.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.o -c /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/configreader.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.o -c /home/dpark/map-fusion/gui/gui/src/shared/util/configreader.cpp
 
 CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/configreader.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/gui/gui/src/shared/util/configreader.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.i
 
 CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/configreader.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/gui/gui/src/shared/util/configreader.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.s
 
 CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.o.requires:
 
@@ -203,16 +203,16 @@ CMakeFiles/shared_libraries.dir/src/shared/util/configreader.cpp.o.provides.buil
 
 CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.o: CMakeFiles/shared_libraries.dir/flags.make
 CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.o: ../src/shared/util/watch_files.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.o -c /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/watch_files.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dpark/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.o -c /home/dpark/map-fusion/gui/gui/src/shared/util/watch_files.cpp
 
 CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/watch_files.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dpark/map-fusion/gui/gui/src/shared/util/watch_files.cpp > CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.i
 
 CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/watch_files.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dpark/map-fusion/gui/gui/src/shared/util/watch_files.cpp -o CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.s
 
 CMakeFiles/shared_libraries.dir/src/shared/util/watch_files.cpp.o.requires:
 
@@ -251,7 +251,7 @@ shared_libraries_EXTERNAL_OBJECTS =
 ../lib/libshared_libraries.so: /usr/lib/x86_64-linux-gnu/liblua5.1.so
 ../lib/libshared_libraries.so: /usr/lib/x86_64-linux-gnu/libm.so
 ../lib/libshared_libraries.so: CMakeFiles/shared_libraries.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX shared library ../lib/libshared_libraries.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dpark/map-fusion/gui/gui/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX shared library ../lib/libshared_libraries.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/shared_libraries.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -274,6 +274,6 @@ CMakeFiles/shared_libraries.dir/clean:
 .PHONY : CMakeFiles/shared_libraries.dir/clean
 
 CMakeFiles/shared_libraries.dir/depend:
-	cd /home/dpark/map-fusion/map-fusion/gui/gui/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/map-fusion/gui/gui /home/dpark/map-fusion/map-fusion/gui/gui /home/dpark/map-fusion/map-fusion/gui/gui/build /home/dpark/map-fusion/map-fusion/gui/gui/build /home/dpark/map-fusion/map-fusion/gui/gui/build/CMakeFiles/shared_libraries.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dpark/map-fusion/gui/gui/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/gui/gui /home/dpark/map-fusion/gui/gui /home/dpark/map-fusion/gui/gui/build /home/dpark/map-fusion/gui/gui/build /home/dpark/map-fusion/gui/gui/build/CMakeFiles/shared_libraries.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/shared_libraries.dir/depend
 

@@ -18,21 +18,21 @@ algorithm
 stdio.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math/gvector.cpp
+/home/dpark/map-fusion/gui/gui/src/shared/math/gvector.cpp
 gvector.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math/gvector.h
+/home/dpark/map-fusion/gui/gui/src/shared/math/gvector.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math/gvector.h
+/home/dpark/map-fusion/gui/gui/src/shared/math/gvector.h
 cmath
 -
 util.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math/util.h
+/home/dpark/map-fusion/gui/gui/src/shared/math/util.h
 xmmintrin.h
 -
 smmintrin.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/math/util.h
+/home/dpark/map-fusion/gui/gui/src/shared/math/util.h
 stdint.h
 -
 cmath
@@ -44,11 +44,11 @@ algorithm
 stdio.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/ansicolor.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/ansicolor.h
 stdio.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/configreader.cpp
+/home/dpark/map-fusion/gui/gui/src/shared/util/configreader.cpp
 sys/types.h
 -
 sys/stat.h
@@ -64,13 +64,13 @@ lualib.h
 lauxlib.h
 -
 ansicolor.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/ansicolor.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/ansicolor.h
 util.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/util.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/util.h
 configreader.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/configreader.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/configreader.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/configreader.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/configreader.h
 vector
 -
 string
@@ -78,13 +78,13 @@ string
 unistd.h
 -
 sstring.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/sstring.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/sstring.h
 watch_files.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/watch_files.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/watch_files.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/helpers.cpp
+/home/dpark/map-fusion/gui/gui/src/shared/util/helpers.cpp
 helpers.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/helpers.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/helpers.h
 execinfo.h
 -
 stdio.h
@@ -102,7 +102,7 @@ unistd.h
 cstdarg
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/helpers.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/helpers.h
 assert.h
 -
 glog/logging.h
@@ -114,7 +114,7 @@ cstdarg
 string
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/proghelp.cc
+/home/dpark/map-fusion/gui/gui/src/shared/util/proghelp.cc
 sys/resource.h
 -
 sys/time.h
@@ -132,25 +132,25 @@ string.h
 unistd.h
 -
 timer.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/timer.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/timer.h
 proghelp.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/proghelp.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/proghelp.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/proghelp.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/proghelp.h
 stdint.h
 -
 sstring.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/sstring.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/sstring.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/pthread_utils.cpp
+/home/dpark/map-fusion/gui/gui/src/shared/util/pthread_utils.cpp
 pthread.h
 -
 stdio.h
 -
 pthread_utils.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/pthread_utils.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/pthread_utils.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/pthread_utils.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/pthread_utils.h
 assert.h
 -
 glog/logging.h
@@ -158,7 +158,7 @@ glog/logging.h
 pthread.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/sstring.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/sstring.h
 stdarg.h
 -
 stdio.h
@@ -168,11 +168,11 @@ string.h
 stdlib.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/terminal_utils.cpp
+/home/dpark/map-fusion/gui/gui/src/shared/util/terminal_utils.cpp
 terminal_utils.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/terminal_utils.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/terminal_utils.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/terminal_utils.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/terminal_utils.h
 iostream
 -
 stdio.h
@@ -182,7 +182,7 @@ string
 windows.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/timer.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/timer.h
 stdlib.h
 -
 stdio.h
@@ -204,7 +204,7 @@ sys/time.h
 time.h
 -
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/watch_files.cpp
+/home/dpark/map-fusion/gui/gui/src/shared/util/watch_files.cpp
 sys/types.h
 -
 sys/stat.h
@@ -214,9 +214,9 @@ fcntl.h
 stdio.h
 -
 watch_files.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/watch_files.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/watch_files.h
 
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/watch_files.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/watch_files.h
 sys/inotify.h
 -
 vector
@@ -226,7 +226,7 @@ unistd.h
 fstream
 -
 sstring.h
-/home/dpark/map-fusion/map-fusion/gui/gui/src/shared/util/sstring.h
+/home/dpark/map-fusion/gui/gui/src/shared/util/sstring.h
 
 /usr/include/lua5.1/lauxlib.h
 stddef.h

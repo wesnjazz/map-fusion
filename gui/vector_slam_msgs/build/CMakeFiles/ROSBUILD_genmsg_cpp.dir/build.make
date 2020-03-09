@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs
+CMAKE_SOURCE_DIR = /home/dpark/map-fusion/gui/vector_slam_msgs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build
+CMAKE_BINARY_DIR = /home/dpark/map-fusion/gui/vector_slam_msgs/build
 
 # Utility rule file for ROSBUILD_genmsg_cpp.
 
@@ -99,8 +99,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorRectangleMsg.h: ../msg/CobotAnomalyMonitorRectangleMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorRectangleMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -133,8 +133,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorRectangleMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorRectangleMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorRectangleMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorRectangleMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorRectangleMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorRectangleMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotAnomalyMonitorRectangleMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/CobotCameraMsg.h: ../msg/CobotCameraMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/CobotCameraMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -168,8 +168,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/CobotCameraMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotCameraMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotCameraMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotCameraMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotCameraMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotCameraMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotCameraMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/CobotEventsMsg.h: ../msg/CobotEventsMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/CobotEventsMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -201,8 +201,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/CobotEventsMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotEventsMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotEventsMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotEventsMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotEventsMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotEventsMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotEventsMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalization3DMsg.h: ../msg/CobotLocalization3DMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalization3DMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -234,8 +234,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalization3DMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalization3DMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalization3DMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalization3DMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotLocalization3DMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalization3DMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotLocalization3DMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalizationMsg.h: ../msg/CobotLocalizationMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalizationMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -267,8 +267,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalizationMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalizationMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalizationMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalizationMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotLocalizationMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotLocalizationMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotLocalizationMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/CobotOdometryMsg.h: ../msg/CobotOdometryMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/CobotOdometryMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -301,8 +301,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/CobotOdometryMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotOdometryMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotOdometryMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotOdometryMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotOdometryMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotOdometryMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotOdometryMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h: ../msg/CobotStatusMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -335,8 +335,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/CobotStatusMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Generating ../msg_gen/cpp/include/vector_slam_msgs/CobotStatusMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/CobotStatusMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/GuiKeyboardEvent.h: ../msg/GuiKeyboardEvent.msg
 ../msg_gen/cpp/include/vector_slam_msgs/GuiKeyboardEvent.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -369,8 +369,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/GuiKeyboardEvent.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/GuiKeyboardEvent.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/GuiKeyboardEvent.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating ../msg_gen/cpp/include/vector_slam_msgs/GuiKeyboardEvent.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiKeyboardEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Generating ../msg_gen/cpp/include/vector_slam_msgs/GuiKeyboardEvent.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiKeyboardEvent.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseClickEvent.h: ../msg/GuiMouseClickEvent.msg
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseClickEvent.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -404,8 +404,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseClickEvent.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseClickEvent.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseClickEvent.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseClickEvent.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiMouseClickEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Generating ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseClickEvent.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiMouseClickEvent.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseMoveEvent.h: ../msg/GuiMouseMoveEvent.msg
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseMoveEvent.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -439,8 +439,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseMoveEvent.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseMoveEvent.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseMoveEvent.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseMoveEvent.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/GuiMouseMoveEvent.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Generating ../msg_gen/cpp/include/vector_slam_msgs/GuiMouseMoveEvent.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/GuiMouseMoveEvent.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h: ../msg/LidarDisplayMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -472,8 +472,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating ../msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/LidarDisplayMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Generating ../msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/LidarDisplayMsg.msg
 
 ../msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h: ../msg/LocalizationMsg.msg
 ../msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h: /opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py
@@ -506,8 +506,8 @@ CMakeFiles/ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/Localiza
 ../msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h: /opt/ros/melodic/share/rospack/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h: /opt/ros/melodic/share/roslib/package.xml
 ../msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h: /opt/ros/melodic/share/rospy/package.xml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating ../msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h"
-	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg/LocalizationMsg.msg
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Generating ../msg_gen/cpp/include/vector_slam_msgs/LocalizationMsg.h"
+	/opt/ros/melodic/share/roscpp/rosbuild/scripts/genmsg_cpp.py /home/dpark/map-fusion/gui/vector_slam_msgs/msg/LocalizationMsg.msg
 
 ROSBUILD_genmsg_cpp: CMakeFiles/ROSBUILD_genmsg_cpp
 ROSBUILD_genmsg_cpp: ../msg_gen/cpp/include/vector_slam_msgs/CobotAnomalyMonitorMsg.h
@@ -537,6 +537,6 @@ CMakeFiles/ROSBUILD_genmsg_cpp.dir/clean:
 .PHONY : CMakeFiles/ROSBUILD_genmsg_cpp.dir/clean
 
 CMakeFiles/ROSBUILD_genmsg_cpp.dir/depend:
-	cd /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dpark/map-fusion/gui/vector_slam_msgs/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dpark/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/gui/vector_slam_msgs /home/dpark/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/gui/vector_slam_msgs/build /home/dpark/map-fusion/gui/vector_slam_msgs/build/CMakeFiles/ROSBUILD_genmsg_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ROSBUILD_genmsg_cpp.dir/depend
 
