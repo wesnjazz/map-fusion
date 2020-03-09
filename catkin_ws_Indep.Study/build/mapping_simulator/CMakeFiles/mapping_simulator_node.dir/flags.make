@@ -6,5 +6,5 @@ CXX_FLAGS =
 
 CXX_DEFINES = -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\"mapping_simulator\"
 
-CXX_INCLUDES = -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include -I/home/dpark/map-fusion/map-fusion/gui/gui/src/gui 
+CXX_INCLUDES = -I/opt/ros/melodic/include -I/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp -I/usr/include/eigen3 -I/home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include -I/home/dpark/map-fusion/gui/gui/src/gui 
 

@@ -7,8 +7,8 @@
                 "/usr/include/linux",
                 "/usr/include/eigen3/",
                 "/opt/ros/melodic/include/",
-                "/home/dpark/map-fusion/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/",
-                "/home/dpark/map-fusion/map-fusion/gui/gui/src/gui/"
+                "/home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/",
+                "/home/dpark/map-fusion/gui/gui/src/gui/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
