@@ -196,9 +196,9 @@ int main(int argc, char **argv)
                 marker_robot_ideal.scale.x = 0.1;
                 marker_robot_ideal.scale.y = 0.1;
                 marker_robot_ideal.scale.z = 0.1;
-                marker_robot_ideal.color.r = 1.0f;
+                marker_robot_ideal.color.r = 0.0f;
                 marker_robot_ideal.color.g = 0.0f;
-                marker_robot_ideal.color.b = 0.0f;
+                marker_robot_ideal.color.b = 1.0f;
                 marker_robot_ideal.color.a = 1.0f;
 
                 /** Points for wall segments **/
@@ -235,7 +235,7 @@ int main(int argc, char **argv)
                 marker_robot_actual.points.push_back(r_actual);
                 std_msgs::ColorRGBA c_actual;
                 c_actual.r = 1.0;
-                c_actual.g = 0.0;
+                c_actual.g = 1.0;
                 c_actual.b = 0.0;
                 c_actual.a = 1.0;
                 marker_robot_actual.colors.push_back(c_actual);
