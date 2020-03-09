@@ -72,7 +72,6 @@ float get_vector_length(Vec2f &v)
 
 
 deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &goal)
-// vector<Position> interpolate_curve_points(Robot &robot, Position &goal, int addiotional_num_cut, int default_num_cut)
 {
     Vec2f L0 = robot.velocity;
     Vec2f L1 = goal - L0;
@@ -90,13 +89,7 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &goal)
     float t = 0.0;
     cout << "L0 len * L1 len = " << (L0_length * L1_length) << endl;
     cout << "delta:" << delta << endl;
-
-    float robot_cur_angle = robot.angle_degree;
-    Position P0 = Position(0, 0, robot_cur_angle);
-    Position P1 = Position(L0.x(), L0.y(), robot_cur_angle);
-    cout << "P0:" << P0 << endl;
-    cout << "P1:" << P1 << endl;
-
+    
     deque<Vec2f> curves;
     for(float curve_point = 0.0; curve_point <= 1.0; curve_point += delta) {
         cout << "curve_point: " << curve_point << endl;
@@ -110,7 +103,12 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &goal)
                     (robot.velocity.y() * 2 * (1 - curve_point) * curve_point) +
                     (goal.y() * pow(curve_point, 2.0));
         Vec2f p = Vec2f(x, y);
+        Vec2f o = robot.position;
+        robot.move_to(p);
+        robot.angle_degree += atan2((p.y()-o.y()), (p.x()-o.x()));
+        // robot.set_velocity();
         cout << "new pos: " << p << "\t\tRobot pos:" << "(" << robot.position.x() << "," << robot.position.y() << ")" << endl;
+        cout << "Robot pos:" << "(" << robot.position.x() << "," << robot.position.y() << ")  angle:" << robot.angle_degree << endl;
         curves.push_back(p);
         // getchar();
     }
@@ -127,7 +125,7 @@ int usage(char *app_name) {
 }
 
 
-void read_segments(ifstream &seg_file, vector<Segment> &segs)
+void read_segments(ifstream &seg_file, vector<Segment> &segments)
 {
     Vec2f p1 = Vec2f(0,0);
     Vec2f p2 = Vec2f(0,0);
@@ -150,7 +148,7 @@ void read_segments(ifstream &seg_file, vector<Segment> &segs)
                 count = 0;
                 // Segment seg = Segment(p1, p2);
                 seg = Segment(p1, p2);
-                segs.push_back(seg);
+                segments.push_back(seg);
                 break;
             default: break;
             }
@@ -165,30 +163,26 @@ float cut_redundant_epsilon(float x, float threshold)
 }
 
 
-// void read_positions(ifstream &pos_file, vector<Position> *positions)
-// {
-//     Position pos = Position(0, 0);
-//     float x, y;
-//     int count = 0;
-//     string line;
-//     while(getline(pos_file, line)) {
-//         cout << "asdf";
-//         stringstream ss(line);
-//         while(getline(ss, line, ',')) {
-//             cout << line << endl;
-//             count++;
-//             switch (count)
-//             {
-//             case 1: x = stof(line); break;
-//             case 2: 
-//                 y = stof(line); 
-//                 pos.new_position(x, y); 
-//                 count = 0;
-//                 positions->push_back(pos);
-//                 break;
-//             case 3: break;
-//             default: break;
-//             }
-//         }
-//     }
-// }
+void read_waypoints(ifstream &pos_file, deque<Vec2f> &positions)
+{
+    float x, y;
+    int count = 0;
+    string line;
+    while(getline(pos_file, line)) {
+        stringstream ss(line);
+        while(getline(ss, line, ',')) {
+            cout << line << endl;
+            count++;
+            switch (count)
+            {
+            case 1: x = stof(line); break;
+            case 2: 
+                y = stof(line); 
+                positions.push_back(Vec2f(x, y));
+                count = 0;
+                break;
+            default: break;
+            }
+        }
+    }
+}

@@ -10,16 +10,19 @@ Robot::Robot(Vec2f &position, float angle_degree, float speed)
     this->set_velocity();
 }
 
+
 void Robot::move_to(Vec2f &position)
 {
     this->position = position;
 }
+
 
 void Robot::set_speed(float speed)
 {
     this->speed = speed;
     this->set_velocity();
 }
+
 
 void Robot::set_velocity()
 {

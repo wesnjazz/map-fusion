@@ -43,6 +43,8 @@ ctime
 -
 ros/ros.h
 -
+std_msgs/ColorRGBA.h
+-
 geometry_msgs/Vector3.h
 -
 visualization_msgs/Marker.h

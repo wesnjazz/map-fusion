@@ -6,6 +6,7 @@
 #include <chrono>
 #include <ctime>
 #include <ros/ros.h>
+#include <std_msgs/ColorRGBA.h>
 #include <geometry_msgs/Vector3.h>
 #include <visualization_msgs/Marker.h>
 #include <vector_slam_msgs/LidarDisplayMsg.h>
@@ -19,8 +20,9 @@ int main(int argc, char **argv)
     /** ROS initialization **/
     ros::init(argc, argv, "Mapping_Simulator");
     ros::NodeHandle n;
-    ros::Rate loop_rate(4);
-    ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 1);
+    ros::Rate loop_rate(2);
+    ros::Publisher marker_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 10);
+    ros::Publisher marker2_pub = n.advertise<visualization_msgs::Marker>("visualization_marker", 10);
     ros::Publisher lidar_msg_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 1000);
     ros::Publisher cobot_msg_pub = n.advertise<vector_slam_msgs::CobotStatusMsg>("/Cobot/Status", 1000);
     // ros::Publisher cobot_msg_pub = n.advertise<vector_slam_msgs::LocalizationMsg>("/Cobot/Status", 1000);
@@ -30,8 +32,8 @@ int main(int argc, char **argv)
     /** Variables **/
     vector<Segment> wall_segments;
     ifstream wall_segments_file;
-    // vector<Position> trajectories;
-    // ifstream trajectories_file;
+    deque<Vec2f> waypoints;
+    ifstream waypoints_file;
 
 
     /** File loading **/
@@ -39,29 +41,28 @@ int main(int argc, char **argv)
         usage(argv[0]);
     }
     if (argc >= 2) { wall_segments_file = ifstream(argv[1]); }
-    // if (argc >= 3) { trajectories_file = ifstream(argv[2]); }
-    if (!wall_segments_file) { // && !trajectories_file) {
+    if (argc >= 3) { waypoints_file = ifstream(argv[2]); }
+    if (!wall_segments_file) { // && !waypoints_file) {
         cout << "The file [";
         if (!wall_segments_file) { cout << argv[1]; }
-        // if (!trajectories_file) { cout << ", " << argv[2]; }
+        if (!waypoints_file) { cout << ", " << argv[2]; }
         cout << "] doesn't exists.\n\n";
         exit(0);
     }
     read_segments(wall_segments_file, wall_segments);
-    // read_positions(trajectories_file, &trajectories);
-
+    read_waypoints(waypoints_file, waypoints);
+    deque<Vec2f> *waypoints_backup = new deque<Vec2f>(waypoints);   // Deep copy
 
     /** Create objects **/
-    float pos_x = 0;
-    float pos_y = 0;
-    float angle = 0;
+    /** Sets robot's init position **/
+    Vec2f robot_init_position;
+    if (waypoints.empty()) { robot_init_position = Vec2f(0, 0); }
+    else { Vec2f robot_init_position = waypoints.at(0); }
 
-    Vec2f robot_init_position = Vec2f(pos_x, pos_y);
-    Robot robot = Robot(robot_init_position, angle, 0.5);
+    Robot robot = Robot(robot_init_position, 0.0, 0.2);
     Laser laser_sensor = Laser();
     Noise length_noise = Noise(0.0, 0.8);
     Noise angle_noise = Noise(0.0, 0.2);
-    // Position goal = Position (0,5);
     Vec2f goal = Vec2f (0,5);
 
 
@@ -82,13 +83,13 @@ int main(int argc, char **argv)
     /** ROS node loop **/
     while (ros::ok())
     {   
-        deque<Vec2f> trajectories = interpolate_curve_points(robot, goal);
-        cout << "tracj size:" << trajectories.size() << endl;
+        // deque<Vec2f> trajectories = interpolate_curve_points(robot, goal);
+        // cout << "tracj size:" << trajectories.size() << endl;
         // pos_x += 0.1;
         // position.new_position(pos_x, pos_y, angle);
         // robot.move_to(position);
 
-        while (!trajectories.empty())
+        while (!waypoints.empty())
         {
             time++;
             cout << "time: " << time << endl;
@@ -123,10 +124,11 @@ int main(int argc, char **argv)
             // lidar_msg.points_x.push_back(x);
             // lidar_msg.points_y.push_back(y);
 
-            cout << "traj size: " << trajectories.size() << endl;
-            Vec2f new_pos = trajectories.front();
-            trajectories.pop_front();
+            cout << "waypoints size: " << waypoints.size() << endl;
+            Vec2f new_pos = waypoints.front();
+            waypoints.pop_front();
             robot.move_to(new_pos);
+            cout << "waypoints size: " << waypoints.size() << endl;
             // lidar_msg.robotLocX = robot.position.x;
             // lidar_msg.robotLocY = robot.position.y;
             // lidar_msg.robotAngle = robot.position.theta_degree;
@@ -160,7 +162,6 @@ int main(int argc, char **argv)
             }
 
 
-
             /** Convert Eigen::Vector2f to geometry_msg::Vector3 **/
             vector<geometry_msgs::Vector3> points;
             for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
@@ -186,13 +187,33 @@ int main(int argc, char **argv)
         //     // marker.pose.position.x = (*it).x;
         //     // marker.pose.position.y = (*it).y;
         //     // marker.pose.position.z = 0;
-            marker.scale.x = 0.1;
-            marker.scale.y = 0.1;
+            marker.scale.x = 0.04;
+            marker.scale.y = 0.04;
             // marker.scale.z = 0.1;
             marker.color.r = 0.0f;
             marker.color.g = 1.0f;
             marker.color.b = 0.0f;
             marker.color.a = 1.0f;
+
+            visualization_msgs::Marker marker2;
+            marker2.header.frame_id = "/my_frame";
+            marker2.header.stamp = ros::Time::now();
+            marker2.ns = "basic_shapes";
+            marker2.id = 1;
+            marker2.type = visualization_msgs::Marker::SPHERE_LIST;
+            marker2.action = visualization_msgs::Marker::ADD;
+            marker2.pose.orientation.w = 1.0;
+            marker2.lifetime = ros::Duration();
+        //     // marker2.pose.position.x = (*it).x;
+        //     // marker2.pose.position.y = (*it).y;
+        //     // marker2.pose.position.z = 0;
+            marker2.scale.x = 0.1;
+            marker2.scale.y = 0.1;
+            marker2.scale.z = 0.1;
+            marker2.color.r = 1.0f;
+            marker2.color.g = 1.0f;
+            marker2.color.b = 0.0f;
+            marker2.color.a = 1.0f;
 
 
             /** Points for wall segments **/
@@ -202,6 +223,12 @@ int main(int argc, char **argv)
                 p.y = (*it).y;
                 p.z = (*it).z;
                 marker.points.push_back(p);
+                std_msgs::ColorRGBA c;
+                c.r = 0.1;
+                c.g = 1.0;
+                c.b = 0.1;
+                c.a = 1.0;
+                marker.colors.push_back(c);
             }
 
 
@@ -210,11 +237,18 @@ int main(int argc, char **argv)
             r.x = robot.position.x();
             r.y = robot.position.y();
             r.z = 0;
-            marker.points.push_back(r);
+            marker2.points.push_back(r);
+            std_msgs::ColorRGBA c;
+            c.r = 1.0;
+            c.g = 0.0;
+            c.b = 0.0;
+            c.a = 1.0;
+            marker2.colors.push_back(c);
 
 
             /** Publishing marker **/
             marker_pub.publish(marker);
+            marker2_pub.publish(marker2);
             lidar_msg_pub.publish(lidar_msg);
 
 
@@ -225,8 +259,11 @@ int main(int argc, char **argv)
             loop_rate.sleep();
         }
         cout << "Travel finished!" << endl;
-        // robot.move_to(robot_init_position);
+        robot.move_to(robot_init_position);
         getchar();
+        for(deque<Vec2f>::iterator it = waypoints_backup->begin(); it != waypoints_backup->end(); ++it) {
+            waypoints.push_back(*it);
+        }
     }
 
     wall_segments_file.close();
