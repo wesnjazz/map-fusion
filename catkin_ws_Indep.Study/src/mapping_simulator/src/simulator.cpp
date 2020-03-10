@@ -146,6 +146,22 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive
 }
 
 
+void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &lidar_msg)
+{
+    float robot_length = 0.5;
+    // float robot_length = get_vector_length(robot_ideal.position) * 10;
+    float heading_x = robot_length * cos(robot_ideal.angle_radian);
+    float heading_y = robot_length * sin(robot_ideal.angle_radian);
+    cout << "robot_x:" << robot_ideal.position.x() << " y:" << robot_ideal.position.y() << " angle:" << robot_ideal.angle_degree
+        << " length:" << robot_length << " heading_x:" << heading_x << " y:" << heading_y << endl;
+    lidar_msg.lines_p1x.push_back(robot_ideal.position.x());
+    lidar_msg.lines_p1y.push_back(robot_ideal.position.y());
+    lidar_msg.lines_p2x.push_back(heading_x);
+    lidar_msg.lines_p2y.push_back(heading_y);
+    lidar_msg.lines_col.push_back(0xFF000000);
+}
+
+
 int usage(char *app_name) {
     cout << "Usage: " << app_name << " [text file]\n";
     cout << "Options:\n";
@@ -214,4 +230,16 @@ void read_waypoints(ifstream &pos_file, deque<Vec2f> &positions)
             }
         }
     }
+}
+
+
+float degree_to_radian(float theta)
+{
+    return theta * (M_PI / 180.0);
+}
+
+
+float radian_to_degree(float theta)
+{
+    return theta * (180.0 / M_PI);
 }

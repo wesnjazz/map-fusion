@@ -371,6 +371,33 @@ src/simulator.cpp.s:
 	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.s
 .PHONY : src/simulator.cpp.s
 
+src/transformation.o: src/transformation.cpp.o
+
+.PHONY : src/transformation.o
+
+# target to build an object file
+src/transformation.cpp.o:
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o
+.PHONY : src/transformation.cpp.o
+
+src/transformation.i: src/transformation.cpp.i
+
+.PHONY : src/transformation.i
+
+# target to preprocess a source file
+src/transformation.cpp.i:
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.i
+.PHONY : src/transformation.cpp.i
+
+src/transformation.s: src/transformation.cpp.s
+
+.PHONY : src/transformation.s
+
+# target to generate assembly for a file
+src/transformation.cpp.s:
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.s
+.PHONY : src/transformation.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -406,6 +433,9 @@ help:
 	@echo "... src/simulator.o"
 	@echo "... src/simulator.i"
 	@echo "... src/simulator.s"
+	@echo "... src/transformation.o"
+	@echo "... src/transformation.i"
+	@echo "... src/transformation.s"
 .PHONY : help
 
 

@@ -1,5 +1,6 @@
 #include "simulator.h"
 #include "segment.h"
+#include "transformation.h"
 #include <vector>
 #include <deque>
 #include <algorithm>
@@ -21,8 +22,7 @@ int main(int argc, char **argv)
     ros::init(argc, argv, "Mapping_Simulator");
     ros::NodeHandle n;
     ros::Rate loop_rate(100);
-    ros::Publisher gui_laser_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 100);
-    ros::Publisher gui_wall_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 100);
+    ros::Publisher lidar_msg_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 1000);
 
 
     /** Variables **/
@@ -88,13 +88,13 @@ int main(int argc, char **argv)
         waypoints.pop_front();
 
         /** Draw Wall segments **/
-        vector_slam_msgs::LidarDisplayMsg gui_wall;
+        vector_slam_msgs::LidarDisplayMsg lidar_msg;
         for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
-            gui_wall.lines_p1x.push_back(5 + it->start.x());
-            gui_wall.lines_p1y.push_back(5 + it->start.y());
-            gui_wall.lines_p2x.push_back(5 + it->end.x());
-            gui_wall.lines_p2y.push_back(5 + it->end.y());
-            gui_wall.lines_col.push_back(cobot_gui::kColorBlack);
+            lidar_msg.lines_p1x.push_back(it->start.x());
+            lidar_msg.lines_p1y.push_back(it->start.y());
+            lidar_msg.lines_p2x.push_back(it->end.x());
+            lidar_msg.lines_p2y.push_back(it->end.y());
+            lidar_msg.lines_col.push_back(cobot_gui::kColorBlack);
         }
 
         /** Loop until visit all waypoints **/
@@ -121,6 +121,7 @@ int main(int argc, char **argv)
 
                 /** Move robot **/
                 robot_ideal.move_to(p_ideal);
+                draw_robot_vector(robot_ideal, lidar_msg);
                 robot.move_to(p_actual);
 
                 /** Simulate scan **/
@@ -131,11 +132,10 @@ int main(int argc, char **argv)
                 cout << "point cloud size:" << point_cloud.size() << endl;
 
                 /** Draw laser scan points **/
-                vector_slam_msgs::LidarDisplayMsg gui_laser;
                 for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
-                    gui_laser.points_x.push_back(it->x());
-                    gui_laser.points_y.push_back(it->y());
-                    gui_laser.points_col.push_back(0xFFA500FF); // Orange
+                    lidar_msg.points_x.push_back(it->x());
+                    lidar_msg.points_y.push_back(it->y());
+                    lidar_msg.points_col.push_back(0xFFA500FF); // Orange
                 }
 
                 /** Convert Eigen::Vector2f to geometry_msg::Vector3 **/
@@ -157,16 +157,15 @@ int main(int argc, char **argv)
                 float l = x*x + y;
                 float line_x = x + 10;
                 float line_y = y + 10;
-                gui_laser.robotLocX = robot_x++;
-                gui_laser.robotLocY = robot_y + l;
-                gui_laser.timestamp = x;
-                gui_laser.robotAngle = x * 10;
-                gui_laser.windowSize = x;
+                lidar_msg.robotLocX = robot_x++;
+                lidar_msg.robotLocY = robot_y + l;
+                lidar_msg.timestamp = x;
+                lidar_msg.robotAngle = x * 10;
+                lidar_msg.windowSize = x;
 
 
                 /** Publishing msgs **/
-                gui_laser_pub.publish(gui_laser);
-                gui_wall_pub.publish(gui_wall);
+                lidar_msg_pub.publish(lidar_msg);
 
                 auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now()); 
                 cout << ctime(&timenow) << endl; 
@@ -177,13 +176,34 @@ int main(int argc, char **argv)
 
         cout << "Travel finished!" << endl;
         robot.move_to(robot_init_position);
-        getchar();
         for(deque<Vec2f>::iterator it = waypoints_backup->begin(); it != waypoints_backup->end(); ++it) {
             waypoints.push_back(*it);
         }
         ros::spinOnce();
         loop_rate.sleep();
         cout << "time: " << time << endl;
+
+        Vec2f p1 = Vec2f(3, 3);
+        Vec2f p2 = Vec2f(6, 0);
+        Vec2f p3 = get_translation_vec2f(p1, p2);
+        // Eigen::Matrix2f r1;
+        // r1 << 2, 3, 4, 5;
+        Eigen::Matrix2f r1 = get_rotation_matrix2f(degree_to_radian(45));
+        Vec2f p4 = r1 * p2;
+        Vec2f p5 = r1 * p4;
+
+        cout <<"p1:" << p1 << endl;
+        cout <<"p2:" << p2 << endl;
+        cout <<"p3:" << p3 << endl;
+        cout <<"R(45):" << r1 << endl;
+        cout <<"p4:" << p4 << endl;
+        cout <<"p5:" << p5 << endl;
+
+        Eigen::Matrix3f homo;
+        homo << 0, 0, 0, 0, 0, 0;
+        cout << "homo:" << homo << endl;
+
+        getchar();
     }
 
     wall_segments_file.close();

@@ -144,6 +144,7 @@ add_executable(${PROJECT_NAME}_node src/mapping_simulator_node.cpp
   src/robot.cpp
   src/noise.cpp
   src/laser.cpp
+  src/transformation.cpp
 )
 
 ## Rename C++ executable without prefix
