@@ -147,6 +147,8 @@ transformation.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/transformation.h
 segment.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
+simulator.h
+/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 Eigen/Dense
 -
 

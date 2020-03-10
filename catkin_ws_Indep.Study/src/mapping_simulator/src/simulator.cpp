@@ -10,6 +10,12 @@
 using namespace std;
 
 
+float get_delta_t(Laser &laser)
+{
+    float delta_t = 1 / laser.frequency;
+}
+
+
 void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wall_segments,
                             Laser &laser_sensor, Noise &length_noise, Noise &angle_noise)
 {

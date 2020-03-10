@@ -51,6 +51,7 @@ int main(int argc, char **argv)
 
 
     /** Create objects **/
+    
     /** Sets robot's init position **/
     Vec2f robot_init_position;
     if (waypoints.empty()) { robot_init_position = Vec2f(0, 0); }
@@ -65,6 +66,9 @@ int main(int argc, char **argv)
     Noise angle_noise = Noise(0.0, 0.2);
     Vec2f goal = Vec2f (0,5);
 
+    /** Variables for the simulator **/
+    float delta_t = get_delta_t(laser_sensor);
+    float time_stamp = 0.0;
 
     /** LaserScan msg **/
     sensor_msgs::LaserScan laserscan;
@@ -110,7 +114,7 @@ int main(int argc, char **argv)
             deque<Vec2f> trajectories_ideal = interpolate_curve_points(robot_ideal, depart, arrive);
             deque<Vec2f> trajectories_actual = interpolate_curve_points(robot, depart, arrive, true, &trajectories_noise);
 
-            /** Loop until visit all curve points **/
+            /** Traverse all curve points between point P0 and P1 **/
             while (!trajectories_ideal.empty())
             {
                 /** Extract the next curve point **/
@@ -170,7 +174,23 @@ int main(int argc, char **argv)
                 auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now()); 
                 cout << ctime(&timenow) << endl; 
 
+
+
+                /** Successfull Tests **/
+                Vec2f P1 = Vec2f(0, 0);
+                Vec2f P2 = Vec2f(2, 2);
+                Vec2f P3 = Vec2f(3, 4);
+                Eigen::Matrix3f P1TP2 = get_homogeneous_transform(P1, P2);
+                Eigen::Matrix3f P2TP3 = get_homogeneous_transform(P2, P3);
+                Eigen::Matrix3f P1TP3 = get_homogeneous_transform(P1, P3);
+                Eigen::Matrix3f P3TP1 = get_homogeneous_transform(P3, P1);
+                cout << P1TP2 << endl;
+                cout << P2TP3 << endl;
+                cout << P1TP3 << endl;
+                cout << P3TP1 << endl;
+
                 getchar();
+                return 0;
             }
             depart = Vec2f(arrive);
         }
@@ -181,8 +201,10 @@ int main(int argc, char **argv)
         }
         ros::spinOnce();
         loop_rate.sleep();
-        cout << "time: " << time << endl;
+        cout << "time_stamp: " << time_stamp << endl;
+        cout << "delta_t: " << delta_t << endl;
         cout << "Travel finished!" << endl;
+        time_stamp += delta_t;
         getchar();
     }
 

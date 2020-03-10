@@ -24,5 +24,7 @@ void read_waypoints(ifstream &pos_file, deque<Vec2f> &positions);
 float cut_redundant_epsilon(float x, float threshold = 0.000001);
 float degree_to_radian(float theta);
 float radian_to_degree(float theta);
+float get_delta_t(Laser &laser);
+
 
 #endif
