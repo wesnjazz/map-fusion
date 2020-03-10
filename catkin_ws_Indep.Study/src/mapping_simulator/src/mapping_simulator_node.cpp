@@ -125,7 +125,7 @@ int main(int argc, char **argv)
 
                 /** Move robot **/
                 robot_ideal.move_to(p_ideal);
-                // draw_robot_vector(robot_ideal, lidar_msg);
+                draw_robot_vector(robot_ideal, lidar_msg);
                 robot.move_to(p_actual);
 
                 /** Draw Robot's velocity **/
@@ -142,7 +142,7 @@ int main(int argc, char **argv)
                 simulate_scan(point_cloud, robot, wall_segments, laser_sensor, length_noise, angle_noise);
                 sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
                 point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
-                cout << "point cloud size:" << point_cloud.size() << endl;
+                // cout << "point cloud size:" << point_cloud.size() << endl;
 
                 /** Update time delta t after one laser scan **/
                 time_stamp += delta_t;
@@ -156,8 +156,6 @@ int main(int argc, char **argv)
 
 
                 /** Draft **/
-                time++;
-                cout << "time: " << time << endl;
                 x += 0.1;
                 y += 0.1;
                 float l = x*x + y;

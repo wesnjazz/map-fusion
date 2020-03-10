@@ -38,6 +38,7 @@ float get_angle_degree_between_two_vectors(Vec2f &P0, Vec2f &P1)
     float x_diff = P1.x() - P0.x();
     float y_diff = P1.y() - P0.y();
     float angle_degree = radian_to_degree(atan2(y_diff, x_diff));
+    cout << "P0:"<<P0<<"\tP1:"<<P1<<endl;
     return angle_degree;
 }
 

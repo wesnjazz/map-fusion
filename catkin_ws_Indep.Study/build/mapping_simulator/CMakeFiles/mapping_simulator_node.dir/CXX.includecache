@@ -81,6 +81,10 @@ segment.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.cpp
 robot.h
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
+simulator.h
+/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
+transformation.h
+/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/transformation.h
 
 /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
 laser.h

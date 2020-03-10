@@ -8,7 +8,7 @@ struct Robot
 {
     Robot();
     Robot(Vec2f &position, float angle_degree = 0.0, float speed = 0.2);
-    void move_to(Vec2f &posistion);
+    void move_to(Vec2f &position);
     void set_speed(float speed);
     void set_velocity();
 

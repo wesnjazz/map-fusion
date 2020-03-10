@@ -1,5 +1,6 @@
 #include "robot.h"
-
+#include "simulator.h"
+#include "transformation.h"
 
 Robot::Robot(Vec2f &position, float angle_degree, float speed)
 {
@@ -13,7 +14,11 @@ Robot::Robot(Vec2f &position, float angle_degree, float speed)
 
 void Robot::move_to(Vec2f &position)
 {
+    this->angle_degree = get_angle_degree_between_two_vectors(this->position, position);
+    this->angle_radian = degree_to_radian(angle_degree);
     this->position = position;
+    this->set_velocity();
+    cout << "robot angle:" << angle_degree << "\t"<< angle_radian << endl;
 }
 
 
