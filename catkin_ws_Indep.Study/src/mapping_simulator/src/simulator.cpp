@@ -73,6 +73,7 @@ float get_vector_length(Vec2f &v)
 
 deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive, bool noisy, Noise *noise)
 {
+    /** Calculate the interpoint based on robot's velocity **/
     // L0: depart ~ interpoint
     // L1: interpoint ~ arrive
     Vec2f L0 = robot.velocity;
@@ -85,6 +86,8 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive
     cout << "L0 len: " << L0_length << endl;
     cout << "L1 len: " << L1_length << endl;
 
+
+    /** Calculate delta(division step of a single curve line) **/
     if (L0_length <= 5.0) { L0_length = 5.0; }
     if (L1_length <= 5.0) { L1_length = 5.0; }
     float delta = 1 / (L0_length * L1_length * 2);
@@ -92,40 +95,31 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive
     cout << "L0 len * L1 len = " << (L0_length * L1_length) << endl;
     cout << "delta:" << delta << endl;
     
+
+    /** Getting curve points (Vec2f) **/
     deque<Vec2f> curves;
     Vec2f p_before = L0;
     for(float curve_point = 0.0; curve_point <= 1.0; curve_point += delta) {
         cout << "curve_point: " << curve_point << endl;
-        // Position p = (P0 * pow((1 - curve_point), 2.0)) +
-        //             (P1 * 2 * (1 - curve_point) * curve_point) +
-        //             (arrive * pow(curve_point, 2.0));
         float x = (depart.x() * pow((1 - curve_point), 2.0)) +
                     (L0.x() * 2 * (1 - curve_point) * curve_point) +
                     (arrive.x() * pow(curve_point, 2.0));
         float y = (depart.y() * pow((1 - curve_point), 2.0)) +
                     (L0.y() * 2 * (1 - curve_point) * curve_point) +
                     (arrive.y() * pow(curve_point, 2.0));
-        // if (noisy) {
-        //     float x_n = noise->gaussian();
-        //     float y_n = x_n;
-        //     // float y_n = noise->gaussian();
-        //     x += x_n;
-        //     y += y_n;
-        //     depart.x() += x_n;
-        //     depart.y() += y_n;
-        // }                    
         Vec2f p_next = Vec2f(x, y);
-        // p_before = Vec2f()
-        // Vec2f q = robot.position;
-        // robot.move_to(p);
-        // robot.angle_degree += atan2((p_before.y()-q.y()), (p_before.x()-q.x()));
-        // robot.set_velocity();
         cout << "new pos: " << p_next << "\t\tRobot pos:" << "(" << robot.position.x() << "," << robot.position.y() << ")" << endl;
         cout << "Robot pos:" << "(" << robot.position.x() << "," << robot.position.y() << ")  angle:" << robot.angle_degree << endl;
         curves.push_back(p_next);
-        // getchar();
+        /** Todo
+         * - Get a pure translation
+         * - Get a pure rotation
+         * - Combine those into a homogeneous transformation
+         **/
+        
     }
 
+    /** Apply Noise (Odometry simulation) **/
     if (noisy) {
         deque<Vec2f> noised_curves;
         Vec2f last_p = curves.front();
@@ -142,6 +136,7 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive
         return noised_curves;
     }
 
+    /** return ideal curve points (no Noises) **/
     return curves;
 }
 

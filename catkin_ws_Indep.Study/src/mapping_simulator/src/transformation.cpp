@@ -3,10 +3,10 @@
 #include <Eigen/Dense>
 
 
-Eigen::Matrix2f get_rotation_matrix2f(float theta)
+Eigen::Matrix2f get_rotation_matrix2f(float theta_radian)
 {
     Eigen::Matrix2f rot;
-    rot << cos(theta), -sin(theta), sin(theta), cos(theta);
+    rot << cos(theta_radian), -sin(theta_radian), sin(theta_radian), cos(theta_radian);
     return rot;
 }
 
