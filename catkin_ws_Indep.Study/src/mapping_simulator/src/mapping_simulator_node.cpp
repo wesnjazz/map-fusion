@@ -58,7 +58,7 @@ int main(int argc, char **argv)
     else { Vec2f robot_init_position = waypoints.at(0); }
 
     float heading = 0.0;
-    float speed = 0.1;
+    float speed = 0.5;
     Robot robot = Robot(robot_init_position, heading, speed);
     Robot robot_ideal = Robot(robot_init_position, heading, speed);
     Laser laser_sensor = Laser();
@@ -125,8 +125,17 @@ int main(int argc, char **argv)
 
                 /** Move robot **/
                 robot_ideal.move_to(p_ideal);
-                draw_robot_vector(robot_ideal, lidar_msg);
+                // draw_robot_vector(robot_ideal, lidar_msg);
                 robot.move_to(p_actual);
+
+                /** Draw Robot's velocity **/
+                lidar_msg.points_x.push_back(p_ideal.x());
+                lidar_msg.points_y.push_back(p_ideal.y());
+                lidar_msg.points_col.push_back(0xFFFF0000);
+
+                lidar_msg.points_x.push_back(p_actual.x());
+                lidar_msg.points_y.push_back(p_actual.y());
+                lidar_msg.points_col.push_back(0xFF0000FF);
 
                 /** Simulate scan **/
                 vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
@@ -145,16 +154,6 @@ int main(int argc, char **argv)
                     lidar_msg.points_col.push_back(0xFFA500FF); // Orange
                 }
 
-                /** Convert Eigen::Vector2f to geometry_msg::Vector3 **/
-                vector<geometry_msgs::Vector3> points;
-                for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
-                    geometry_msgs::Vector3 vec;
-                    vec.x = (*it).x();
-                    vec.y = (*it).y();
-                    vec.z = 0;
-                    points.push_back(vec);
-                }
-                cout << "geometry Vector3 points size:" << points.size() << endl;
 
                 /** Draft **/
                 time++;
@@ -180,17 +179,17 @@ int main(int argc, char **argv)
 
 
                 /** Successfull Tests **/
-                Vec2f P1 = Vec2f(0, 0);
-                Vec2f P2 = Vec2f(2, 2);
-                Vec2f P3 = Vec2f(3, 4);
-                Eigen::Matrix3f P1TP2 = get_homogeneous_transform(P1, P2);
-                Eigen::Matrix3f P2TP3 = get_homogeneous_transform(P2, P3);
-                Eigen::Matrix3f P1TP3 = get_homogeneous_transform(P1, P3);
-                Eigen::Matrix3f P3TP1 = get_homogeneous_transform(P3, P1);
-                cout << P1TP2 << endl;
-                cout << P2TP3 << endl;
-                cout << P1TP3 << endl;
-                cout << P3TP1 << endl;
+                // Vec2f P1 = Vec2f(0, 0);
+                // Vec2f P2 = Vec2f(2, 2);
+                // Vec2f P3 = Vec2f(3, 4);
+                // Eigen::Matrix3f P1TP2 = get_homogeneous_transform(P1, P2);
+                // Eigen::Matrix3f P2TP3 = get_homogeneous_transform(P2, P3);
+                // Eigen::Matrix3f P1TP3 = get_homogeneous_transform(P1, P3);
+                // Eigen::Matrix3f P3TP1 = get_homogeneous_transform(P3, P1);
+                // cout << P1TP2 << endl;
+                // cout << P2TP3 << endl;
+                // cout << P1TP3 << endl;
+                // cout << P3TP1 << endl;
 
                 // getchar();
                 // return 0;
@@ -198,7 +197,7 @@ int main(int argc, char **argv)
                 cout << "delta_t: " << delta_t << endl;
                 ros::spinOnce();
                 loop_rate.sleep();
-                getchar();
+                // getchar();
             }
             depart = Vec2f(arrive);
         }
@@ -207,6 +206,7 @@ int main(int argc, char **argv)
         for(deque<Vec2f>::iterator it = waypoints_backup->begin(); it != waypoints_backup->end(); ++it) {
             waypoints.push_back(*it);
         }
+        cout << "arrived at:(" << robot_ideal.position.x() << ", " << robot_ideal.position.y() << ")" << endl;
         cout << "Travel finished!" << endl;
         getchar();
     }
