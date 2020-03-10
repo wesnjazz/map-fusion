@@ -199,9 +199,58 @@ int main(int argc, char **argv)
         cout <<"p4:" << p4 << endl;
         cout <<"p5:" << p5 << endl;
 
-        Eigen::Matrix3f homo;
-        homo << 0, 0, 0, 0, 0, 0;
-        cout << "homo:" << homo << endl;
+        cout << get_homogeneous_transform(r1, p2) << endl;
+
+        // Eigen::Matrix3f homo;
+        // homo.setIdentity();
+        // cout << homo << endl;
+        // homo.block<2, 2>(0, 0) = r1;
+        // cout << homo << endl;
+        // homo.block<2, 1>(0, 2) = p1;
+        // cout << homo << endl;
+
+        // Eigen::Matrix3f homo;
+        // homo.setZero();
+        // // Eigen::MatrixXf append(3);
+        // cout << homo << endl;
+        // homo.block(0, 0, 2, 2) = r1;
+        // cout << homo << endl;
+        // // homo.col(2) = p1.transpose();
+        // // Eigen::Vector3f trans = Eigen::Vector3f::Constant(1);
+        // Eigen::Vector2f trans = Eigen::Vector2f(p1);
+        // cout << trans << endl;
+        // cout << trans.homogeneous() << endl;
+        // trans.block(0, 0, 2, 0) = p1;
+        
+
+        // Eigen::Matrix3f m = Eigen::Matrix3f::setZero();
+        // Eigen::Matrix3f m;
+        // m.setZero();
+        // Eigen::Matrix3f A = Eigen::Matrix3f::Constant(0.1);
+        // Eigen::Vector4f b = Eigen::Vector4f::Constant(0.2), c = Eigen::Vector4f::Constant(0.3);
+        // Eigen::Matrix2f homo;
+        // homo << r1;
+        // // homo << 1, 1, 1, 
+        // //         2, 2, 2, 
+        // //         3, 3, 3;
+        // // homo << r1.row(1), p3.x(), r1.row(2), p3.y();
+        // homo.conservativeResize(3, 5);
+        // cout << "homo:" << homo << endl;
+
+        // Eigen::Matrix4f m = Eigen::Matrix4f::Random();
+        // Eigen::Matrix3f A = Eigen::Matrix3f::Constant(0.1);
+        // Eigen::Vector4f b = Eigen::Vector4f::Constant(0.2), c = Eigen::Vector4f::Constant(0.3);
+        // cout << m << endl << endl;
+        // cout << A << endl << endl;
+        // cout << b << endl << endl;
+        // cout << c << endl << endl;
+
+        // m.block(0, 0, 3, 3) = A;
+        // m.col(3) = b;
+        // m.row(3) = c;
+
+        // cout << m << endl << endl;
+
 
         getchar();
     }

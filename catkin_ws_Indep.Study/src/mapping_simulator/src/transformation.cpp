@@ -20,6 +20,8 @@ Vec2f get_translation_vec2f(Vec2f &vec_a, Vec2f &vec_b)
 Eigen::Matrix3f get_homogeneous_transform(Eigen::Matrix2f &rotation, Vec2f translation)
 {
     Eigen::Matrix3f homo;
-    homo << 0, 0, 0, 0, 0, 0;
+    homo.setIdentity();
+    homo.block<2, 2>(0, 0) = rotation;
+    homo.block<2, 1>(0, 2) = translation;
     return homo;
 }
