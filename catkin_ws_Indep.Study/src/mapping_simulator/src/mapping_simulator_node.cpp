@@ -111,8 +111,8 @@ int main(int argc, char **argv)
             /** Calculate curve points(trajectories) from current waypoint to the next waypoint **/
             Noise trajectories_noise = Noise(0.0, 0.01);        // For simulating noises on Odometry
             /** Separate curve points.  Ideal: Where robot think it is.  Actual: Actual position of the robot **/
-            deque<Vec2f> trajectories_ideal = interpolate_curve_points(robot_ideal, depart, arrive);
-            deque<Vec2f> trajectories_actual = interpolate_curve_points(robot, depart, arrive, true, &trajectories_noise);
+            deque<Vec2f> trajectories_ideal = interpolate_curve_points(delta_t, robot_ideal, depart, arrive);
+            deque<Vec2f> trajectories_actual = interpolate_curve_points(delta_t, robot, depart, arrive, true, &trajectories_noise);
 
             /** Traverse all curve points between point P0 and P1 **/
             while (!trajectories_ideal.empty())
@@ -134,6 +134,9 @@ int main(int argc, char **argv)
                 sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
                 point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
                 cout << "point cloud size:" << point_cloud.size() << endl;
+
+                /** Update time delta t after one laser scan **/
+                time_stamp += delta_t;
 
                 /** Draw laser scan points **/
                 for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
@@ -189,8 +192,13 @@ int main(int argc, char **argv)
                 cout << P1TP3 << endl;
                 cout << P3TP1 << endl;
 
+                // getchar();
+                // return 0;
+                cout << "time_stamp: " << time_stamp << endl;
+                cout << "delta_t: " << delta_t << endl;
+                ros::spinOnce();
+                loop_rate.sleep();
                 getchar();
-                return 0;
             }
             depart = Vec2f(arrive);
         }
@@ -199,12 +207,7 @@ int main(int argc, char **argv)
         for(deque<Vec2f>::iterator it = waypoints_backup->begin(); it != waypoints_backup->end(); ++it) {
             waypoints.push_back(*it);
         }
-        ros::spinOnce();
-        loop_rate.sleep();
-        cout << "time_stamp: " << time_stamp << endl;
-        cout << "delta_t: " << delta_t << endl;
         cout << "Travel finished!" << endl;
-        time_stamp += delta_t;
         getchar();
     }
 

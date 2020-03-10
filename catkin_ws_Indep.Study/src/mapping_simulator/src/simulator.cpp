@@ -12,7 +12,8 @@ using namespace std;
 
 float get_delta_t(Laser &laser)
 {
-    float delta_t = 1 / laser.frequency;
+    float delta_t = 1.0f / laser.frequency;
+    return delta_t;
 }
 
 
@@ -77,8 +78,13 @@ float get_vector_length(Vec2f &v)
 }
 
 
-deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive, bool noisy, Noise *noise)
+deque<Vec2f> interpolate_curve_points(float delta_t, Robot &robot, Vec2f &depart, Vec2f &arrive, bool noisy, Noise *noise)
 {
+    float move = delta_t * robot.speed;
+    float num_points = (int)(get_vector_length(arrive) / move);
+    cout << "depart:" << depart << "\tarrive:" << arrive << "\tlength:" << get_vector_length(arrive) << endl;
+    cout << "move:" << move << "\tdelta_t:"<<delta_t<<"\tspeed:"<<robot.speed<< "\tnum_points:" << num_points << endl;
+    getchar();
     /** Calculate the interpoint based on robot's velocity **/
     // L0: depart ~ interpoint
     // L1: interpoint ~ arrive
@@ -96,7 +102,8 @@ deque<Vec2f> interpolate_curve_points(Robot &robot, Vec2f &depart, Vec2f &arrive
     /** Calculate delta(division step of a single curve line) **/
     if (L0_length <= 5.0) { L0_length = 5.0; }
     if (L1_length <= 5.0) { L1_length = 5.0; }
-    float delta = 1 / (L0_length * L1_length * 2);
+    float delta = 1.0 / num_points;
+    // float delta = 1 / (L0_length * L1_length * 2);
     float t = 0.0;
     cout << "L0 len * L1 len = " << (L0_length * L1_length) << endl;
     cout << "delta:" << delta << endl;
