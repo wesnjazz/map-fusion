@@ -277,8 +277,8 @@ void test5(Robot &robot)
 
 void test4(Robot &robot)
 {
-    cout << "Robot(" << robot.position.x << "," << robot.position.y << "," << robot.position.theta_degree << ", [" << robot.position.position_vector << "])" << "\n";
-    // robot.laser_scan(robot.position);
+    cout << "Robot(" << robot.position_W.x << "," << robot.position_W.y << "," << robot.position_W.theta_degree << ", [" << robot.position_W.position_vector << "])" << "\n";
+    // robot.laser_scan(robot.position_W);
 }
 
 void test3()

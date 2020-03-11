@@ -5,13 +5,13 @@
 struct Noise
 {
     Noise();
-    Noise(double mean, double std);
-    double mean;
-    double std;
+    Noise(float mean, float std);
+    float mean;
+    float std;
     unsigned seed;
 
-    void change_mean_std(double mean, double std);
-    double gaussian();
+    void change_mean_std(float mean, float std);
+    float gaussian();
 };
 
 #endif
