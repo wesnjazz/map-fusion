@@ -31,7 +31,7 @@ void Robot::set_speed(float speed)
 
 void Robot::set_velocity()
 {
-    float x = this->speed * cos(angle_radian);
-    float y = this->speed * sin(angle_radian);
+    float x = this->position.x() + (this->speed * cos(angle_radian));
+    float y = this->position.y() + (this->speed * sin(angle_radian));
     this->velocity = Vec2f(x, y);
 }

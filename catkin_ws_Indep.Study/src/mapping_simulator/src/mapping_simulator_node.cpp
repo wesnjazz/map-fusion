@@ -87,10 +87,6 @@ int main(int argc, char **argv)
     /** ROS node loop **/
     while (ros::ok())
     {   
-        /** Initial position **/
-        Vec2f depart = waypoints.front();
-        waypoints.pop_front();
-
         /** Draw Wall segments **/
         vector_slam_msgs::LidarDisplayMsg lidar_msg;
         for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
@@ -101,13 +97,20 @@ int main(int argc, char **argv)
             lidar_msg.lines_col.push_back(cobot_gui::kColorBlack);
         }
 
+        /** Initial position **/
+        Vec2f depart = waypoints.front();
+        waypoints.pop_front();
+
         /** Loop until visit all waypoints **/
         while (!waypoints.empty())  // While there's a waypoint to visit
         {
             /** Extract the next waypoint **/
             Vec2f arrive = waypoints.front();
             waypoints.pop_front();
-
+            cout << "depart:" << depart << endl;
+            cout << "arrive:" << arrive << endl;
+            getchar();
+            
             /** Calculate curve points(trajectories) from current waypoint to the next waypoint **/
             Noise trajectories_noise = Noise(0.0, 0.01);        // For simulating noises on Odometry
             /** Separate curve points.  Ideal: Where robot think it is.  Actual: Actual position of the robot **/
@@ -198,9 +201,16 @@ int main(int argc, char **argv)
                 // getchar();
             }
             depart = Vec2f(arrive);
+            cout << "angle:" << robot.angle_degree << "\tcurrent:(" << robot.position.x() 
+                << "," << robot.position.y() << ")" << "\tarrive:(" << arrive.x() << "," << arrive.y() << ")" << endl;
+            cout << "robot's velocity:" << robot.velocity << endl;
+            cout << "waypoints.front():" << waypoints.front() << endl;
+
+
+            getchar();
         }
 
-        robot.move_to(robot_init_position);
+        // robot.move_to(robot_init_position);
         for(deque<Vec2f>::iterator it = waypoints_backup->begin(); it != waypoints_backup->end(); ++it) {
             waypoints.push_back(*it);
         }
