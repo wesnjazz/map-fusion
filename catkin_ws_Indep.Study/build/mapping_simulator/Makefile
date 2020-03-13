@@ -398,6 +398,33 @@ src/transformation.cpp.s:
 	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.s
 .PHONY : src/transformation.cpp.s
 
+src/wheelencoder.o: src/wheelencoder.cpp.o
+
+.PHONY : src/wheelencoder.o
+
+# target to build an object file
+src/wheelencoder.cpp.o:
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o
+.PHONY : src/wheelencoder.cpp.o
+
+src/wheelencoder.i: src/wheelencoder.cpp.i
+
+.PHONY : src/wheelencoder.i
+
+# target to preprocess a source file
+src/wheelencoder.cpp.i:
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.i
+.PHONY : src/wheelencoder.cpp.i
+
+src/wheelencoder.s: src/wheelencoder.cpp.s
+
+.PHONY : src/wheelencoder.s
+
+# target to generate assembly for a file
+src/wheelencoder.cpp.s:
+	cd /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build && $(MAKE) -f mapping_simulator/CMakeFiles/mapping_simulator_node.dir/build.make mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.s
+.PHONY : src/wheelencoder.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -436,6 +463,9 @@ help:
 	@echo "... src/transformation.o"
 	@echo "... src/transformation.i"
 	@echo "... src/transformation.s"
+	@echo "... src/wheelencoder.o"
+	@echo "... src/wheelencoder.i"
+	@echo "... src/wheelencoder.s"
 .PHONY : help
 
 

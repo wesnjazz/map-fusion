@@ -5,6 +5,9 @@
 #include <Eigen/Dense>
 #include <geometry_msgs/Vector3.h>
 typedef Eigen::Vector2f Vec2f;
+typedef Eigen::Vector3f Vec3f;
+typedef Eigen::Matrix2f Mat2f;
+typedef Eigen::Matrix3f Mat3f;
 using namespace std;
 
 

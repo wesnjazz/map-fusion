@@ -1,6 +1,7 @@
 #include "simulator.h"
 #include "segment.h"
 #include "transformation.h"
+#include "wheelencoder.h"
 #include <vector>
 #include <deque>
 #include <algorithm>
@@ -64,7 +65,9 @@ int main(int argc, char **argv)
     Laser laser_sensor = Laser();
     Noise length_noise = Noise(0.0, 0.8);
     Noise angle_noise = Noise(0.0, 0.2);
-    
+    Noise wheel_encoder_dx_noise = Noise(0.0, 0.02);
+    Noise wheel_encoder_dy_noise = Noise(0.0, 0.02);
+    WheelEncoder wheel_encoder = WheelEncoder();
 
     /** Variables for the simulator **/
     float delta_t = get_delta_t(laser_sensor);
@@ -104,7 +107,7 @@ int main(int argc, char **argv)
             waypoints.pop_front();
             cout << "depart:" << depart << endl;
             cout << "arrive:" << arrive << endl;
-            getchar();
+            // getchar();
 
 
             deque<Eigen::Matrix3f> homos;
@@ -135,7 +138,7 @@ int main(int argc, char **argv)
             Eigen::Vector3f last = first.transpose() * final_homo;
             cout << "last:\n"<< last << endl;
             cout << "final_homo:\n" << final_homo << endl;
-            getchar();
+            // getchar();
 
 
             /** Traverse all curve points between point P0 and P1 **/
@@ -148,9 +151,9 @@ int main(int argc, char **argv)
                 trajectories_actual.pop_front();
 
                 /** Move robot **/
-                robot_ideal.move_to(p_ideal);
-                draw_robot_vector(robot_ideal, lidar_msg);
-                robot_actual.move_to(p_actual);
+                // robot_ideal.move_to(p_ideal);
+                // draw_robot_vector(robot_ideal, lidar_msg);
+                // robot_actual.move_to(p_actual);
 
                 /** Draw Robot's velocity **/
                 lidar_msg.points_x.push_back(p_ideal.x());
@@ -167,9 +170,9 @@ int main(int argc, char **argv)
 
                 /** Simulate scan **/
                 vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
-                simulate_scan(point_cloud, robot_actual, wall_segments, laser_sensor, length_noise, angle_noise);
-                sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
-                point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
+                // simulate_scan(point_cloud, robot_actual, wall_segments, laser_sensor, length_noise, angle_noise);
+                // sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
+                // point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
                 // cout << "point cloud size:" << point_cloud.size() << endl;
 
                 /** Update time delta t after one laser scan **/
@@ -182,25 +185,85 @@ int main(int argc, char **argv)
                     lidar_msg.points_col.push_back(0xFFA500FF); // Orange
                 }
 
-                /** Publishing msgs **/
-                lidar_msg_pub.publish(lidar_msg);
-
-                auto timenow = chrono::system_clock::to_time_t(chrono::system_clock::now()); 
-                cout << ctime(&timenow) << endl; 
-
-
                 /** Successfull Tests **/
-                // Vec2f P1 = Vec2f(0, 0);
-                // Vec2f P2 = Vec2f(2, 2);
-                // Vec2f P3 = Vec2f(3, 4);
-                // Eigen::Matrix3f P1TP2 = get_homogeneous_transform(P1, P2);
-                // Eigen::Matrix3f P2TP3 = get_homogeneous_transform(P2, P3);
-                // Eigen::Matrix3f P1TP3 = get_homogeneous_transform(P1, P3);
-                // Eigen::Matrix3f P3TP1 = get_homogeneous_transform(P3, P1);
-                // cout << P1TP2 << endl;
-                // cout << P2TP3 << endl;
-                // cout << P1TP3 << endl;
-                // cout << P3TP1 << endl;
+                Vec2f F1 = Vec2f(0, 0);
+                Vec2f F2 = Vec2f(4, 0);
+                // Vec2f F1_frameF2 = Vec2f(-4, -3);
+                Vec2f F3 = Vec2f(2, 4);
+                // Vec2f F3_frameF2 = Vec2f(0, 2);
+                Vec2f P9 = Vec2f(5, 1);
+                Mat3f A12 = get_homogeneous_transform_between_two_frames(F1.x(), F1.y(), 0, F2.x(), F2.y(), 45);
+                Mat3f A21 = get_homogeneous_transform_between_two_frames(F2.x(), F2.y(), 45, F1.x(), F1.y(), 0);
+                Mat3f A23 = get_homogeneous_transform_between_two_frames(F2.x(), F2.y(), 45, F3.x(), F3.y(), 90);
+                Mat3f A13 = get_homogeneous_transform_between_two_frames(F1.x(), F1.y(), 0, F3.x(), F3.y(), 90);
+                // Eigen::Matrix3f A31 = get_homogeneous_transform(F3, F1);
+                cout << A12 << endl;
+                cout << A23 << endl;
+                cout << A13 << endl;
+                // cout << A31 << endl;
+                Vec3f F1toF2 = A12 * F1.homogeneous();
+                Vec3f P9inF2 = A21 * P9.homogeneous();
+                // Vec3f F2toF3 = A23 * A12 * F1.homogeneous();
+                // Vec3f F1toF3 = A13 * F1.homogeneous();
+                // Vec3f F1toF3p = A12 * A23 * F1.homogeneous();
+                // Vec3f F3_in_W_frame = A12 * F3_frameF2.homogeneous();
+                cout << "-----------------------------------" << endl;
+                cout << F1 << endl << P9 << endl;
+                cout << F1toF2 << endl;
+                cout << P9inF2 << endl;
+                cout << "-----------------------------------" << endl;
+                // cout << F2 << endl;
+                // cout << F2toF3 << endl;
+                // cout << "-----------------------------------" << endl;
+                // cout << F3 << endl;
+                // cout << F1toF3 << endl;
+                // cout << "-----------------------------------" << endl;
+                // cout << F3 << endl;
+                // cout << F1toF3p << endl;
+                // cout << "-----------------------------------" << endl;
+                // cout << F3 << endl;
+                // cout << F3_in_W_frame << endl;
+                cout << "-----------------------------------" << endl;
+                // F1toF2 = A12 * F1;
+                // Eigen::Vector3f F1toF2 = Eigen::Vector3f(A12 * F1);
+                // Eigen::Vector3f F2toF3 = Eigen::Vector3f(A23 * F2);
+                // Eigen::Vector3f F1toF3 = Eigen::Vector3f(A23 * A12 * F1);
+                lidar_msg.points_x.push_back(F1.x());
+                lidar_msg.points_y.push_back(F1.y());
+                lidar_msg.points_col.push_back(0xFF00FF00);
+                lidar_msg.points_x.push_back(F2.x());
+                lidar_msg.points_y.push_back(F2.y());
+                lidar_msg.points_col.push_back(0xFF00FF00);
+                lidar_msg.points_x.push_back(F3.x());
+                lidar_msg.points_y.push_back(F3.y());
+                lidar_msg.points_col.push_back(0xFF00FF00);
+
+
+                /** Odometry Test **/
+                Vec2f O1 = Vec2f(0, 0);
+                Vec2f O2 = Vec2f(2, 0);
+                Vec2f O3 = Vec2f(4, 2);
+                Vec2f O4 = Vec2f(4, 4);
+                float speed_wheel = 0.1;
+                float del_t = 0.1;
+
+                float x_pos = 0;
+                float y_pos = 0;
+                // float dx_ns = wheel_encoder_dx_noise.gaussian();
+                // float dy_ns = wheel_encoder_dy_noise.gaussian();
+                for (int i = 0; i <= 100000; ++i) {
+                    wheel_encoder.simulate_odometry( speed_wheel, del_t, 
+                                    fabs(wheel_encoder_dx_noise.gaussian()), fabs(wheel_encoder_dy_noise.gaussian()) );
+                                    Vec2f pp = Vec2f(robot_ideal.position_W.x()+wheel_encoder.dx, robot_ideal.position_W.y()+wheel_encoder.dy);
+                                    robot_ideal.move_to(pp);
+                    lidar_msg.points_x.push_back( robot_ideal.position_W.x() );
+                    lidar_msg.points_y.push_back( robot_ideal.position_W.y() );
+                    lidar_msg.points_col.push_back(0xFF55A3B0);
+                lidar_msg_pub.publish(lidar_msg);
+                getchar();
+                }
+
+                /** Publishing msgs **/
 
                 // getchar();
                 // return 0;
@@ -217,7 +280,7 @@ int main(int argc, char **argv)
             cout << "waypoints.front():" << waypoints.front() << endl;
 
 
-            getchar();
+            // getchar();
         }
 
         // robot.move_to(robot_init_position);
@@ -226,7 +289,7 @@ int main(int argc, char **argv)
         }
         cout << "arrived at:(" << robot_ideal.position_W.x() << ", " << robot_ideal.position_W.y() << ")" << endl;
         cout << "Travel finished!" << endl;
-        getchar();
+        // getchar();
 
         heading = (robot_headings.empty() ? 0.0 : robot_headings.front());
         speed = 0.5;
