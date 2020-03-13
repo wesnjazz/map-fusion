@@ -83,20 +83,20 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
 {
     float move = delta_t * robot.speed;
     float num_points = (int)(get_vector_length(arrive) / move);
-    cout << "depart:" << depart << "\tarrive:" << arrive << "\tlength:" << get_vector_length(arrive) << endl;
-    cout << "move:" << move << "\tdelta_t:"<<delta_t<<"\tspeed:"<<robot.speed<< "\tnum_points:" << num_points << endl;
+    // cout << "depart:" << depart << "\tarrive:" << arrive << "\tlength:" << get_vector_length(arrive) << endl;
+    // cout << "move:" << move << "\tdelta_t:"<<delta_t<<"\tspeed:"<<robot.speed<< "\tnum_points:" << num_points << endl;
     /** Calculate the interpoint based on robot's velocity **/
     // L0: depart ~ interpoint
     // L1: interpoint ~ arrive
     Vec2f L0 = robot.velocity;
     Vec2f L1 = arrive - L0;
-    cout << "L0: " << L0 << endl;
-    cout << "L1: " << L1 << endl;
+    // cout << "L0: " << L0 << endl;
+    // cout << "L1: " << L1 << endl;
 
     float L0_length = get_vector_length(L0);
     float L1_length = get_vector_length(L1);
-    cout << "L0 len: " << L0_length << endl;
-    cout << "L1 len: " << L1_length << endl;
+    // cout << "L0 len: " << L0_length << endl;
+    // cout << "L1 len: " << L1_length << endl;
 
 
     /** Calculate delta(division step of a single curve line) **/
@@ -105,15 +105,15 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
     float delta = 1.0 / num_points;
     // float delta = 1 / (L0_length * L1_length * 2);
     float t = 0.0;
-    cout << "L0 len * L1 len = " << (L0_length * L1_length) << endl;
-    cout << "delta:" << delta << endl;
+    // cout << "L0 len * L1 len = " << (L0_length * L1_length) << endl;
+    // cout << "delta:" << delta << endl;
     
 
     /** Getting curve points (Vec2f) **/
     deque<Vec2f> curves;
     Vec2f p_before = L0;
     for(float curve_point = 0.0; curve_point <= 1.0; curve_point += delta) {
-        cout << "curve_point: " << curve_point << endl;
+        // cout << "curve_point: " << curve_point << endl;
         float x = (depart.x() * pow((1 - curve_point), 2.0)) +
                     (L0.x() * 2 * (1 - curve_point) * curve_point) +
                     (arrive.x() * pow(curve_point, 2.0));
@@ -127,8 +127,8 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
         Eigen::Matrix3f homo = get_homogeneous_transform(p_before, p_next);
         homos.push_back(homo);
         cout << homo << endl;
-        cout << "new pos: " << p_next << "\t\tRobot pos:" << "(" << robot.position_W.x() << "," << robot.position_W.y() << ")" << endl;
-        cout << "Robot pos:" << "(" << robot.position_W.x() << "," << robot.position_W.y() << ")  angle:" << robot.heading_degree << endl;
+        // cout << "new pos: " << p_next << "\t\tRobot pos:" << "(" << robot.position_W.x() << "," << robot.position_W.y() << ")" << endl;
+        // cout << "Robot pos:" << "(" << robot.position_W.x() << "," << robot.position_W.y() << ")  angle:" << robot.heading_degree << endl;
         // getchar();
         curves.push_back(p_next);
         p_before = Vec2f(p_next);
@@ -169,8 +169,8 @@ void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &li
     // float robot_length = get_vector_length(robot_ideal.position_W) * 10;
     float heading_x = robot_ideal.position_W.x() + (robot_length * cos(robot_ideal.heading_radian));
     float heading_y = robot_ideal.position_W.y() + (robot_length * sin(robot_ideal.heading_radian));
-    cout << "robot_x:" << robot_ideal.position_W.x() << " y:" << robot_ideal.position_W.y() << " angle:" << robot_ideal.heading_degree
-        << " length:" << robot_length << " heading_x:" << heading_x << " y:" << heading_y << endl;
+    // cout << "robot_x:" << robot_ideal.position_W.x() << " y:" << robot_ideal.position_W.y() << " angle:" << robot_ideal.heading_degree
+    //     << " length:" << robot_length << " heading_x:" << heading_x << " y:" << heading_y << endl;
     lidar_msg.lines_p1x.push_back(robot_ideal.position_W.x());
     lidar_msg.lines_p1y.push_back(robot_ideal.position_W.y());
     lidar_msg.lines_p2x.push_back(heading_x);

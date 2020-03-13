@@ -24,7 +24,8 @@ void Robot::move_to(Vec2f &position)
     this->heading_radian = degree_to_radian(heading_degree);
     this->position_W = position;
     this->set_velocity();
-    cout << "robot angle:" << heading_degree << "\t"<< heading_radian << endl;
+    this->set_frame_robot();
+    // cout << "robot angle:" << heading_degree << "\t"<< heading_radian << endl;
 }
 
 
@@ -40,6 +41,7 @@ void Robot::set_heading(float heading_degree)
     this->heading_degree = heading_degree;
     this->heading_radian = degree_to_radian(heading_degree);
     this->set_velocity();
+    this->set_frame_robot();
 }
 
 
@@ -52,4 +54,10 @@ void Robot::set_velocity()
     float x = this->position_W.x() + (this->speed * cos(heading_radian));
     float y = this->position_W.y() + (this->speed * sin(heading_radian));
     this->velocity = Vec2f(x, y);
+}
+
+
+void Robot::set_frame_robot()
+{
+    this->frame_robot = Vec3f(this->position_W.x(), this->position_W.y(), this->heading_degree);
 }
