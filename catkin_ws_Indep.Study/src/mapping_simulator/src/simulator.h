@@ -26,6 +26,7 @@ float cut_redundant_epsilon(float x, float threshold = 0.000001);
 float degree_to_radian(float theta);
 float radian_to_degree(float theta);
 float get_delta_t(Laser &laser);
+bool if_arrived_at_W(Robot &robot, Vec3f &goal, float threshold_distance = 0.01, float threshold_heading_degree = 1);
 
 
 #endif

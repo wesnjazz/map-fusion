@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     /** Sets robot's init position **/
     Vec2f robot_init_position = (waypoints.empty() ? Vec2f(0, 0) : waypoints.front());
     float heading = (robot_headings.empty() ? 0.0 : robot_headings.front());
-    float speed = 0.5;
+    float speed = 0.2;
 
     Robot robot_actual = Robot(robot_init_position, heading, speed);
     Robot robot_ideal = Robot(robot_init_position, heading, speed);
@@ -65,8 +65,8 @@ int main(int argc, char **argv)
     Laser laser_sensor = Laser();
     Noise length_noise = Noise(0.0, 0.8);
     Noise angle_noise = Noise(0.0, 0.2);
-    Noise wheel_encoder_dx_noise = Noise(0.0, 0.01);
-    Noise wheel_encoder_dy_noise = Noise(0.0, 0.05);
+    Noise wheel_encoder_dx_noise = Noise(0.0, speed / 100);
+    Noise wheel_encoder_dy_noise = Noise(0.0, speed / 50);
     WheelEncoder wheel_encoder = WheelEncoder();
     Vec3f frame_world = Vec3f(0, 0, 0);
 
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
         Vec2f depart = waypoints.front();
         waypoints.pop_front();
 
-
+            /** Drawing Grid **/
             lidar_msg.lines_p1x.push_back(0);
             lidar_msg.lines_p1y.push_back(0);
             lidar_msg.lines_p2x.push_back(200);
@@ -139,51 +139,29 @@ int main(int argc, char **argv)
 
 
         /** Loop until visit all waypoints **/
-        while (true)  // While there's a waypoint to visit
-        // while (!waypoints.empty())  // While there's a waypoint to visit
+        // while (true)  // While there's a waypoint to visit
+        while (!waypoints.empty())  // While there's a waypoint to visit
         {
             /** Extract the next waypoint **/
-            // Vec2f arrive = waypoints.front();
-            // waypoints.pop_front();
-            // cout << "depart:" << depart << endl;
-            // cout << "arrive:" << arrive << endl;
+            Vec2f arrive = waypoints.front();
+            waypoints.pop_front();
+            cout << "depart:" << depart << endl;
+            cout << "arrive:" << arrive << endl;
             // getchar();
 
 
-            deque<Eigen::Matrix3f> homos;
+            // deque<Eigen::Matrix3f> homos;
             /** Calculate curve points(trajectories) from current waypoint to the next waypoint **/
-            Noise trajectories_noise = Noise(0.0, 0.01);        // For simulating noises on Odometry
+            // Noise trajectories_noise = Noise(0.0, 0.01);        // For simulating noises on Odometry
             /** Separate curve points.  Ideal: Where robot think it is.  Actual: Actual position of the robot **/
             // deque<Vec2f> trajectories_ideal = interpolate_curve_points(homos, delta_t, robot_ideal, depart, arrive);
             // deque<Vec2f> trajectories_actual = interpolate_curve_points(homos, delta_t, robot_actual, depart, arrive, true, &trajectories_noise);
 
 
-            // Eigen::Matrix3f final_homo = homos.front();
-            // homos.pop_front();
-            // for (deque<Eigen::Matrix3f>::iterator it = homos.begin(); it != homos.end(); ++it) {
-            //     Eigen::Matrix3f h = homos.front();
-            //     homos.pop_front();
-            //     final_homo = final_homo * h;
-            // }
-
-            Eigen::Vector3f first;
-            first.row(0) = robot_init_position.row(0);
-            first.row(1) = robot_init_position.row(1);
-            first.row(2) << 1;
-            // Eigen::Vector3f first = final_homo.block<1, 3>(0, 0);
-            // Eigen::Vector3f first;
-            // first.setIdentity();
-            // Eigen::Vector3f last = robot_init_position.transpose() * final_homo;
-            // cout << "first:\n"<< first << endl;
-            // Eigen::Vector3f last = first.transpose() * final_homo;
-            // cout << "last:\n"<< last << endl;
-            // cout << "final_homo:\n" << final_homo << endl;
-            // getchar();
-
-
             /** Traverse all curve points between point P0 and P1 **/
             // while (!trajectories_ideal.empty())
             // {
+                
                 /** Extract the next curve point **/
                 // Vec2f p_ideal = trajectories_ideal.front();
                 // Vec2f p_actual = trajectories_actual.front();
@@ -244,7 +222,7 @@ int main(int argc, char **argv)
                 // lidar_msg.robotAngle = robot_actual.heading_radian;
 
                 /** Simulate scan **/
-                vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
+                // vector<Vec2f> point_cloud;                      // Vector: intersection points cloud
                 // simulate_scan(point_cloud, robot_actual, wall_segments, laser_sensor, length_noise, angle_noise);
                 // sort(point_cloud.begin(), point_cloud.end(), compare_xy_Vec2f());
                 // point_cloud.erase( unique(point_cloud.begin(), point_cloud.end()), point_cloud.end());
@@ -254,11 +232,11 @@ int main(int argc, char **argv)
                 time_stamp += delta_t;
 
                 /** Draw laser scan points **/
-                for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
-                    lidar_msg.points_x.push_back(it->x());
-                    lidar_msg.points_y.push_back(it->y());
-                    lidar_msg.points_col.push_back(0xFFA500FF); // Orange
-                }
+                // for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
+                //     lidar_msg.points_x.push_back(it->x());
+                //     lidar_msg.points_y.push_back(it->y());
+                //     lidar_msg.points_col.push_back(0xFFA500FF); // Orange
+                // }
 
                 /** Successfull Tests **/
                 // Vec2f F1 = Vec2f(0, 0);

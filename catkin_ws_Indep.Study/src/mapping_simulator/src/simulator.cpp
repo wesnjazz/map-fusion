@@ -79,6 +79,15 @@ float get_vector_length(Vec2f &v)
 }
 
 
+bool if_arrived_at_W(Robot &robot, Vec3f &goal, float threshold_distance, float threshold_heading_degree)
+{
+    bool within_x = fabs(robot.position_W.x() - goal.x()) < threshold_distance;
+    bool within_y = fabs(robot.position_W.y() - goal.y()) < threshold_distance;
+    bool within_heading_degree = fabs(robot.heading_degree - goal.z()) < threshold_heading_degree;
+    return (within_x && within_y && within_heading_degree) ? true : false;
+}
+
+
 deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta_t, Robot &robot, Vec2f &depart, Vec2f &arrive, bool noisy, Noise *noise)
 {
     float move = delta_t * robot.speed;
@@ -165,19 +174,19 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
 
 void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &lidar_msg)
 {
-    float robot_length = 0.1;
-    // float robot_length = get_vector_length(robot_ideal.position_W) * 10;
-    float heading_x = robot_ideal.position_W.x() + (robot_length * cos(robot_ideal.heading_radian));
-    float heading_y = robot_ideal.position_W.y() + (robot_length * sin(robot_ideal.heading_radian));
+    float vector_length = robot_ideal.speed / 5.0;
+    // float vector_length = get_vector_length(robot_ideal.position_W) * 10;
+    float heading_x = robot_ideal.position_W.x() + (vector_length * cos(robot_ideal.heading_radian));
+    float heading_y = robot_ideal.position_W.y() + (vector_length * sin(robot_ideal.heading_radian));
     // cout << "robot_x:" << robot_ideal.position_W.x() << " y:" << robot_ideal.position_W.y() << " angle:" << robot_ideal.heading_degree
-    //     << " length:" << robot_length << " heading_x:" << heading_x << " y:" << heading_y << endl;
+    //     << " length:" << vector_length << " heading_x:" << heading_x << " y:" << heading_y << endl;
     lidar_msg.lines_p1x.push_back(robot_ideal.position_W.x());
     lidar_msg.lines_p1y.push_back(robot_ideal.position_W.y());
     lidar_msg.lines_p2x.push_back(heading_x);
     lidar_msg.lines_p2y.push_back(heading_y);
     lidar_msg.lines_col.push_back(0xFF000000);
 
-    float arrow_length = robot_length / 2.0;
+    float arrow_length = vector_length / 2.0;
     float left_head_x = robot_ideal.position_W.x() + (arrow_length * cos(robot_ideal.heading_radian - degree_to_radian(45)));
     float left_head_y = robot_ideal.position_W.y() + (arrow_length * sin(robot_ideal.heading_radian - degree_to_radian(45)));
     float right_head_x = robot_ideal.position_W.x() + (arrow_length * cos(robot_ideal.heading_radian + degree_to_radian(45)));
