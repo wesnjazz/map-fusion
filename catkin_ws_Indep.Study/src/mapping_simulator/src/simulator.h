@@ -21,12 +21,12 @@ void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &li
 
 int usage(char *app_name);
 void read_segments(ifstream &seg_file, vector<Segment> &segments);
-void read_waypoints(ifstream &pos_file, deque<Vec2f> &positions, deque<float>robot_headings);
+void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, deque<float>robot_headings, vector_slam_msgs::LidarDisplayMsg &msg);
 float cut_redundant_epsilon(float x, float threshold = 0.000001);
 float degree_to_radian(float theta);
 float radian_to_degree(float theta);
 float get_delta_t(Laser &laser);
-bool if_arrived_at_W(Robot &robot, Vec3f &goal, float threshold_distance = 0.01, float threshold_heading_degree = 1);
+bool if_arrived_at_a_point_frameW(Robot &robot, Vec3f &goal, float threshold_distance = 0.01, float threshold_heading_degree = 1);
 
 
 #endif

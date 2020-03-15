@@ -15,6 +15,7 @@ void WheelEncoder::simulate_odometry(float speed, float time, float dx_noise, fl
 {
     this->dx = cut_redundant_epsilon( speed * time + dx_noise );
     this->dy = dy_noise;
+    cout << "dx, dy: " << dx << ", " << dy << endl;
     // this->dy = cut_redundant_epsilon( speed * time + dy_noise );
     this->dtheta_radian = cut_redundant_epsilon( atan2( dy, dx ) );
     this->dtheta_degree = cut_redundant_epsilon( radian_to_degree(this->dtheta_radian) );

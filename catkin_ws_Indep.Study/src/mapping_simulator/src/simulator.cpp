@@ -21,13 +21,13 @@ float get_delta_t(Laser &laser)
 void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wall_segments,
                             Laser &laser_sensor, Noise &length_noise, Noise &angle_noise)
 {
-    float angle = robot.heading_degree 
+    float angle = robot.heading_degree_in_Wframe 
                 - (laser_sensor.FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
 
     for(int i = 1; i <= laser_sensor.num_total_rays; i++) {            // For all each laser ray
         // cout << "------ rays ----------\n";
         Segment ray = 
-            laser_sensor.create_a_ray(robot.position_W, angle, length_noise, angle_noise); // Create a ray
+            laser_sensor.create_a_ray(robot.position_in_Wframe, angle, length_noise, angle_noise); // Create a ray
         // cout << ray << "\n-------------------------\n";
         angle += laser_sensor.angular_resolution_degree;               // Get the next ray's angle
 
@@ -79,11 +79,11 @@ float get_vector_length(Vec2f &v)
 }
 
 
-bool if_arrived_at_W(Robot &robot, Vec3f &goal, float threshold_distance, float threshold_heading_degree)
+bool if_arrived_at_a_point_frameW(Robot &robot, Vec3f &goal, float threshold_distance, float threshold_heading_degree)
 {
-    bool within_x = fabs(robot.position_W.x() - goal.x()) < threshold_distance;
-    bool within_y = fabs(robot.position_W.y() - goal.y()) < threshold_distance;
-    bool within_heading_degree = fabs(robot.heading_degree - goal.z()) < threshold_heading_degree;
+    bool within_x = fabs(robot.position_in_Wframe.x() - goal.x()) < threshold_distance;
+    bool within_y = fabs(robot.position_in_Wframe.y() - goal.y()) < threshold_distance;
+    bool within_heading_degree = fabs(robot.heading_degree_in_Wframe - goal.x()) < threshold_heading_degree;
     return (within_x && within_y && within_heading_degree) ? true : false;
 }
 
@@ -97,7 +97,7 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
     /** Calculate the interpoint based on robot's velocity **/
     // L0: depart ~ interpoint
     // L1: interpoint ~ arrive
-    Vec2f L0 = robot.velocity;
+    Vec2f L0 = robot.velocity_in_Wframe;
     Vec2f L1 = arrive - L0;
     // cout << "L0: " << L0 << endl;
     // cout << "L1: " << L1 << endl;
@@ -136,8 +136,8 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
         Eigen::Matrix3f homo = get_homogeneous_transform(p_before, p_next);
         homos.push_back(homo);
         cout << homo << endl;
-        // cout << "new pos: " << p_next << "\t\tRobot pos:" << "(" << robot.position_W.x() << "," << robot.position_W.y() << ")" << endl;
-        // cout << "Robot pos:" << "(" << robot.position_W.x() << "," << robot.position_W.y() << ")  angle:" << robot.heading_degree << endl;
+        // cout << "new pos: " << p_next << "\t\tRobot pos:" << "(" << robot.position_in_Wframe.x() << "," << robot.position_in_Wframe.y() << ")" << endl;
+        // cout << "Robot pos:" << "(" << robot.position_in_Wframe.x() << "," << robot.position_in_Wframe.y() << ")  angle:" << robot.heading_degree_in_Wframe << endl;
         // getchar();
         curves.push_back(p_next);
         p_before = Vec2f(p_next);
@@ -175,22 +175,22 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
 void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &lidar_msg)
 {
     float vector_length = robot_ideal.speed / 5.0;
-    // float vector_length = get_vector_length(robot_ideal.position_W) * 10;
-    float heading_x = robot_ideal.position_W.x() + (vector_length * cos(robot_ideal.heading_radian));
-    float heading_y = robot_ideal.position_W.y() + (vector_length * sin(robot_ideal.heading_radian));
-    // cout << "robot_x:" << robot_ideal.position_W.x() << " y:" << robot_ideal.position_W.y() << " angle:" << robot_ideal.heading_degree
+    // float vector_length = get_vector_length(robot_ideal.position_in_Wframe) * 10;
+    float heading_x = robot_ideal.position_in_Wframe.x() + (vector_length * cos(robot_ideal.heading_radian_in_Wframe));
+    float heading_y = robot_ideal.position_in_Wframe.y() + (vector_length * sin(robot_ideal.heading_radian_in_Wframe));
+    // cout << "robot_x:" << robot_ideal.position_in_Wframe.x() << " y:" << robot_ideal.position_in_Wframe.y() << " angle:" << robot_ideal.heading_degree_in_Wframe
     //     << " length:" << vector_length << " heading_x:" << heading_x << " y:" << heading_y << endl;
-    lidar_msg.lines_p1x.push_back(robot_ideal.position_W.x());
-    lidar_msg.lines_p1y.push_back(robot_ideal.position_W.y());
+    lidar_msg.lines_p1x.push_back(robot_ideal.position_in_Wframe.x());
+    lidar_msg.lines_p1y.push_back(robot_ideal.position_in_Wframe.y());
     lidar_msg.lines_p2x.push_back(heading_x);
     lidar_msg.lines_p2y.push_back(heading_y);
     lidar_msg.lines_col.push_back(0xFF000000);
 
     float arrow_length = vector_length / 2.0;
-    float left_head_x = robot_ideal.position_W.x() + (arrow_length * cos(robot_ideal.heading_radian - degree_to_radian(45)));
-    float left_head_y = robot_ideal.position_W.y() + (arrow_length * sin(robot_ideal.heading_radian - degree_to_radian(45)));
-    float right_head_x = robot_ideal.position_W.x() + (arrow_length * cos(robot_ideal.heading_radian + degree_to_radian(45)));
-    float right_head_y = robot_ideal.position_W.y() + (arrow_length * sin(robot_ideal.heading_radian + degree_to_radian(45)));
+    float left_head_x = robot_ideal.position_in_Wframe.x() + (arrow_length * cos(robot_ideal.heading_radian_in_Wframe - degree_to_radian(45)));
+    float left_head_y = robot_ideal.position_in_Wframe.y() + (arrow_length * sin(robot_ideal.heading_radian_in_Wframe - degree_to_radian(45)));
+    float right_head_x = robot_ideal.position_in_Wframe.x() + (arrow_length * cos(robot_ideal.heading_radian_in_Wframe + degree_to_radian(45)));
+    float right_head_y = robot_ideal.position_in_Wframe.y() + (arrow_length * sin(robot_ideal.heading_radian_in_Wframe + degree_to_radian(45)));
     lidar_msg.lines_p1x.push_back(left_head_x);
     lidar_msg.lines_p1y.push_back(left_head_y);
     lidar_msg.lines_p2x.push_back(heading_x);
@@ -251,9 +251,9 @@ float cut_redundant_epsilon(float x, float threshold)
 }
 
 
-void read_waypoints(ifstream &pos_file, deque<Vec2f> &positions, deque<float>robot_headings)
+void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, deque<float>robot_headings, vector_slam_msgs::LidarDisplayMsg &msg)
 {
-    float x, y, theta;
+    float x, y, theta_degree;
     int count = 0;
     string line;
     while(getline(pos_file, line)) {
@@ -266,9 +266,13 @@ void read_waypoints(ifstream &pos_file, deque<Vec2f> &positions, deque<float>rob
             case 1: x = stof(line); break;
             case 2: y = stof(line); break;
             case 3: 
-                theta = stof(line); 
-                positions.push_back(Vec2f(x, y));
-                robot_headings.push_back(theta);
+                theta_degree = stof(line); 
+                msg.points_x.push_back(x);
+                msg.points_y.push_back(y);
+                msg.points_col.push_back(0xFF00FF00);
+
+                positions.push_back(Vec3f(x, y, theta_degree));
+                robot_headings.push_back(theta_degree);
                 count = 0;
                 break;
             default: break;
