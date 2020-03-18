@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     Vec2f robot_init_position = robot_init_frame.block<2, 1>(0, 0);
     cout << "robot_init_frame:\n" << robot_init_frame << endl;
     cout << "robot_init_position:\n" << robot_init_position << endl;
-    float speed = 1;;
+    float speed = 1;
 
     Robot robot_actual = Robot(robot_init_position, robot_init_frame.z(), speed);
     Robot robot_ideal = Robot(robot_init_position, robot_init_frame.z(), speed);
@@ -70,8 +70,8 @@ int main(int argc, char **argv)
     Laser laser_sensor = Laser();
     Noise laser_length_noise = Noise(0.0, 0.8);
     Noise laser_angle_noise = Noise(0.0, 0.2);
-    Noise wheel_encoder_dx_noise = Noise(0.0, 1);
-    Noise wheel_encoder_dy_noise = Noise(0.0, 1);
+    Noise wheel_encoder_dx_noise = Noise(0.0, 0.0);
+    Noise wheel_encoder_dy_noise = Noise(0.05, 0.0);
     // Noise wheel_encoder_dx_noise = Noise(0.0, speed / 100);
     // Noise wheel_encoder_dy_noise = Noise(0.0, speed / 50);
     WheelEncoder wheel_encoder = WheelEncoder();
@@ -187,34 +187,35 @@ int main(int argc, char **argv)
             lidar_msg.lines_col.push_back(0xFF00DD00);
 
 
-            Mat3f AAtfAA;
-            Mat2f AArotAA;
-            Vec2f AAtAA = Vec2f(0, 0);
-            AArotAA << 1, 0, 0, 1;
-            AAtfAA.setIdentity();
-            AAtfAA.block<2, 2>(0, 0) = AArotAA;
-            AAtfAA.block<2, 1>(0, 2) = AAtAA;
+            Mat3f Init_frame;
+            Mat2f Init_rot;
+            Vec2f Init_trans = Vec2f(0, 0);
+            Init_rot << 1, 0, 0, 1;
+            Init_frame.setIdentity();
+            Init_frame.block<2, 2>(0, 0) = Init_rot;
+            Init_frame.block<2, 1>(0, 2) = Init_trans;
 
 
         vector<Mat3f> TFs;
-        TFs.push_back(AAtfAA);
+        // TFs.push_back(Init_frame);
         vector<Vec2f> odometries;
-        odometries.push_back(Vec2f(0, 0));
+        // odometries.push_back(Vec2f(0, 0));
         vector<Vec3f>frames;
-        frames.push_back(Vec3f(0, 0, 0));
+        // frames.push_back(Vec3f(0, 0, 0));
 
-        int i = 20;
+        int i = 0;
         // int i = waypoints.size();
         /** Loop until visit all waypoints **/
         // while (true)  // While there's a waypoint to visit
         Mat3f new_point_ht;
-        float headings = 0.0;
+        float headings_degree = 0.0;
         while (!waypoints.empty())  // While there's a waypoint to visit
         {
-            new_point_ht.setIdentity();
-            i--;
             cout << "---------  i: " << i << "  --------------------------------------------------------------\n";
-            if (i < 0) exit(0);
+            if (i >= 10) exit(0);
+
+            new_point_ht.setIdentity();
+
             /** Extract the next waypoint **/
             Vec3f arrive_W = waypoints.front();
             waypoints.pop_front();
@@ -243,37 +244,24 @@ int main(int argc, char **argv)
                 float dx_ns = wheel_encoder_dx_noise.gaussian();
                 float dy_ns = wheel_encoder_dy_noise.gaussian();
                 wheel_encoder.simulate_odometry( robot_ideal.speed, delta_t, dx_ns, dy_ns );
-                // wheel_encoder.dx = 1;
-                // wheel_encoder.dy = 0;
+                wheel_encoder.dx = 1;
+                wheel_encoder.dy = 1;
 
-                float WthetaA_radian = cut_redundant_epsilon( degree_to_radian( atan2(wheel_encoder.dy, wheel_encoder.dx) ) );
+                float WthetaA_radian = cut_redundant_epsilon( ( atan2(wheel_encoder.dy, wheel_encoder.dx) ) );
+                // float WthetaA_degree = radian_to_degree( WthetaA_radian );
+                // float WthetaA_radian = cut_redundant_epsilon( degree_to_radian( A_frame.z() - W_frame.z() ));
                 float WthetaA_degree = radian_to_degree( WthetaA_radian );
                 // float WthetaA_radian = cut_redundant_epsilon( degree_to_radian( A_frame.z() - W_frame.z() ) );
-                cout << "\nANGLE: " << ( A_frame.z() - W_frame.z() ) << endl;
+                cout << "\nANGLE: " << WthetaA_radian << "\t" << WthetaA_degree << endl;
+                // cout << "\nANGLE: " << ( A_frame.z() - W_frame.z() ) << endl;
                 float cos_WthetaA = cut_redundant_epsilon( cos(WthetaA_radian) );
                 float sin_WthetaA = cut_redundant_epsilon( sin(WthetaA_radian) );
                 Mat2f WrotA;
                 WrotA << cos_WthetaA, -sin_WthetaA, sin_WthetaA, cos_WthetaA;
 
-                headings += WthetaA_degree;
-
-                Vec2f WtransA = Vec2f(wheel_encoder.dx, wheel_encoder.dy);
-                Vec3f point_frame = Vec3f(0, 0, 1);
-
-                Mat3f WtfA;
-                WtfA.setIdentity();
-                WtfA.block<2, 2>(0, 0) = WrotA;
-                WtfA.block<2, 1>(0, 2) = WtransA;
-
-                Mat3f last_transform = TFs.at(TFs.size()-1);
-                Vec3f new_frame = last_transform * point_frame;
-                new_frame.z() = headings;
-
-                TFs.push_back(WtfA);
-                odometries.push_back(WtransA);
-                frames.push_back(new_frame);
-
-                // Vec2f new_point = Vec2f(new_frame.x(), new_frame.y());
+                headings_degree += WthetaA_degree;
+                cout
+                    << "headings_degree:" << headings_degree << endl;
 
                 int j = TFs.size();
                 // for (vector<Mat3f>::iterator it = TFs.begin(); it != TFs.end(); ++it) {
@@ -281,27 +269,73 @@ int main(int argc, char **argv)
                     // new_point_ht = (*it) * new_point_ht;
                     new_point_ht = TFs.at(k) * new_point_ht;
                 }
-                Vec3f new_point_3 = new_point_ht * odometries.at(j-1).homogeneous();
+
+
+                // Vec2f WtransA = Vec2f(wheel_encoder.dx, wheel_encoder.dy);
+                Vec2f WtransA_in_world_frame = Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y());
+                Vec3f WtransA3f = new_point_ht * Vec2f(wheel_encoder.dx, wheel_encoder.dy).homogeneous();
+                // Vec3f WtransA3f = new_point_ht * Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y()).homogeneous();
+                Vec2f WtransA = Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y());
+                // Vec2f WtransA = Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y());
+                Vec3f point_frame = Vec3f(0, 0, 1);
+
+                Mat3f WtfA;
+                WtfA.setIdentity();
+                WtfA.block<2, 2>(0, 0) = WrotA;
+                WtfA.block<3, 1>(0, 2) = WtransA.homogeneous();
+
+                Mat3f last_transform;
+                last_transform = last_transform.setZero();
+                cout << "size:" << TFs.size() << endl;
+                if (TFs.empty()) { last_transform = Init_frame; }
+                else { last_transform = TFs.at(TFs.size()-1); }
+                // Mat3f last_transform = TFs.at(TFs.size()-1);
+                Vec3f new_frame = last_transform * point_frame;
+                new_frame.z() = headings_degree;
+
+                TFs.push_back(WtfA);
+                odometries.push_back(WtransA);
+                frames.push_back(new_frame);
+
+                Mat3f cur_TF = TFs.at(i);
+                Vec2f cur_odo = odometries.at(i);
+                Vec3f cur_frame = frames.at(i);
+                i++;
+
+                // Vec2f new_point = Vec2f(new_frame.x(), new_frame.y());
+
+                Vec3f new_point_3 = new_point_ht * WtransA.homogeneous();
+                // Vec3f new_point_3 = new_point_ht * odometries.at(j-1).homogeneous();
                 Vec2f new_point = Vec2f(new_point_3.x(), new_point_3.y());
-                float new_heading = acos(cos_WthetaA);
-                robot_ideal.move_to(new_point);
-                robot_ideal.set_heading(headings);
+                Vec2f new_frame_point = Vec2f(new_frame.x(), new_frame.y());
+                float new_heading = radian_to_degree( acos(cos_WthetaA) );
+                robot_ideal.move_to(new_frame_point);
+                robot_ideal.set_heading(new_frame.z());
                 // robot_ideal.set_heading(WthetaA_degree);
                 // robot_ideal.set_heading(A_frame.z());
-                draw_robot_vector(robot_ideal, lidar_msg);
+                // draw_robot_vector(robot_ideal, lidar_msg);
                 // robot_ideal.set_heading(frames.at(frames.size()-1).z());
 
                 cout
-                        << "W_frame:" << endl << W_frame << endl
-                        << "A_frame:" << endl << A_frame << endl
-                        << "WthetaA:" << endl << radian_to_degree( WthetaA_radian ) << endl
+                        << "W_frame:" << endl << "(" << W_frame.x() << "," << W_frame.y() << "," << W_frame.z() << ")" << endl
+                        << "A_frame:" << endl << "(" << A_frame.x() << "," << A_frame.y() << "," << A_frame.z() << ")" << endl
+                        << "WthetaA_degree:" << endl << "(" << radian_to_degree( WthetaA_radian ) << endl
                         // << "cos_WthetaA:" << endl << cos_WthetaA << endl
                         // << "sin_WthetaA:" << endl << sin_WthetaA << endl
                         << "WrotA:" << endl << WrotA << endl
                         << "WtransA:" << endl << WtransA << endl
                         << "WtfA:" << endl << WtfA << endl
                         << "last_transform:" << endl << last_transform << endl
-                        << "new_frame:" << endl << new_frame << endl;
+                        << "new_frame:" << endl << new_frame
+                        << "cur_TF:" << endl << cur_TF << endl
+                        << "cur_odo: (" << cur_odo.x() << "," << cur_odo.y() << ")" << endl
+                        << "cur_frame: (" << cur_frame.x() << "," << cur_frame.y() << "," << cur_frame.z() << ")" << endl
+                        << "ROBOT x,y,theta: " << robot_ideal.position_in_Wframe.x() << "," 
+                                               << robot_ideal.position_in_Wframe.y() << ","
+                                               << robot_ideal.heading_degree_in_Wframe << endl
+                        << "ROBOT position_Vector:" << endl << robot_ideal.velocity_in_Wframe
+                        << endl;
+
 
                 lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
                 lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
@@ -488,11 +522,11 @@ int main(int argc, char **argv)
                 lidar_msg.points_col.push_back(0xFFFF0000);
                 time_stamp += delta_t;
                 lidar_msg_pub.publish(lidar_msg);
-                cout << "-----------------------------------------------------------------------\n\n";
-                getchar();
+                cout << "-----------------------------------------------------------------------";
 
             // }
             cout << "Arrived at point:(" << arrive_W.x() << ", " << arrive_W.y() << ")" << endl;
+                getchar();
                 // cout << "prev_W: (" << previous_frame_W.x() << ", " << previous_frame_W.y() << ")" << endl;
 
                 // cout << "next_R: (" << next_R.x() << ", " << next_R.y() << ")" << endl;
