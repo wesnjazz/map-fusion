@@ -300,3 +300,64 @@ float radian_to_degree(float theta)
 {
     return theta * (180.0 / M_PI);
 }
+
+
+void draw_grid_line_of_robot_frame(Robot &robot_ideal, Mat3f &new_HT, Vec3f &arrival_R, vector_slam_msgs::LidarDisplayMsg &lidar_msg, bool erase)
+{
+        /** Grid lines of the robot frame **/
+    Vec3f arrival_of_R_in_W = new_HT * arrival_R;
+
+    uint32_t color_draw_grid = 0x442266AA;
+    uint32_t color_draw_axis = 0x99DD6633;
+    uint32_t color_erase = 0xFFFFFFFF;
+
+    int l = 10; // length
+    int n = 10; // number of lines
+    if (!erase)
+    {
+        for(int i = -n; i <= n; ++i)    // Draw
+        {
+            Vec3f R_gridx1u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(i, l, 0);
+            Vec3f R_gridx1d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(i, -l, 0);
+            lidar_msg.lines_p1x.push_back(R_gridx1u.x());
+            lidar_msg.lines_p1y.push_back(R_gridx1u.y());
+            lidar_msg.lines_p2x.push_back(R_gridx1d.x());
+            lidar_msg.lines_p2y.push_back(R_gridx1d.y());
+            if (i == 0) {
+                lidar_msg.lines_col.push_back(color_draw_axis);
+            } else {
+                lidar_msg.lines_col.push_back(color_draw_grid);
+            }
+            Vec3f R_gridy1u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(l, i, 0);
+            Vec3f R_gridy1d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-l, i, 0);
+            lidar_msg.lines_p1x.push_back(R_gridy1u.x());
+            lidar_msg.lines_p1y.push_back(R_gridy1u.y());
+            lidar_msg.lines_p2x.push_back(R_gridy1d.x());
+            lidar_msg.lines_p2y.push_back(R_gridy1d.y());
+            if (i == 0) {
+                lidar_msg.lines_col.push_back(color_draw_axis);
+            } else {
+                lidar_msg.lines_col.push_back(color_draw_grid);
+            }
+        }
+    } else
+    {
+        for(int i = -n; i <= n; ++i)    // Erase
+        {
+            Vec3f R_gridx1u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(i, l, 0);
+            Vec3f R_gridx1d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(i, -l, 0);
+            lidar_msg.lines_p1x.push_back(R_gridx1u.x());
+            lidar_msg.lines_p1y.push_back(R_gridx1u.y());
+            lidar_msg.lines_p2x.push_back(R_gridx1d.x());
+            lidar_msg.lines_p2y.push_back(R_gridx1d.y());
+            lidar_msg.lines_col.push_back(color_erase);
+            Vec3f R_gridy1u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(l, i, 0);
+            Vec3f R_gridy1d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-l, i, 0);
+            lidar_msg.lines_p1x.push_back(R_gridy1u.x());
+            lidar_msg.lines_p1y.push_back(R_gridy1u.y());
+            lidar_msg.lines_p2x.push_back(R_gridy1d.x());
+            lidar_msg.lines_p2y.push_back(R_gridy1d.y());
+            lidar_msg.lines_col.push_back(color_erase);
+        }
+    }
+}

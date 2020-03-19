@@ -27,6 +27,6 @@ float degree_to_radian(float theta);
 float radian_to_degree(float theta);
 float get_delta_t(Laser &laser);
 bool if_arrived_at_a_point_frameW(Robot &robot, Vec3f &goal, float threshold_distance = 0.01, float threshold_heading_degree = 1);
-
+void draw_grid_line_of_robot_frame(Robot &robot_ideal, Mat3f &new_HT, Vec3f &arrival_R, vector_slam_msgs::LidarDisplayMsg &lidar_msg, bool erase=false);
 
 #endif
