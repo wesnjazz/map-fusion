@@ -60,7 +60,7 @@ int main(int argc, char **argv)
     Vec2f robot_init_position = robot_init_frame.block<2, 1>(0, 0);
     cout << "robot_init_frame:\n" << robot_init_frame << endl;
     cout << "robot_init_position:\n" << robot_init_position << endl;
-    float speed = 1;
+    float speed = 5;
 
     Robot robot_actual = Robot(robot_init_position, robot_init_frame.z(), speed);
     Robot robot_ideal = Robot(robot_init_position, robot_init_frame.z(), speed);
@@ -71,7 +71,7 @@ int main(int argc, char **argv)
     Noise laser_length_noise = Noise(0.0, 0.8);
     Noise laser_angle_noise = Noise(0.0, 0.2);
     Noise wheel_encoder_dx_noise = Noise(0.0, 0.0);
-    Noise wheel_encoder_dy_noise = Noise(0.05, 0.0);
+    Noise wheel_encoder_dy_noise = Noise(0.0, 0.2);
     // Noise wheel_encoder_dx_noise = Noise(0.0, speed / 100);
     // Noise wheel_encoder_dy_noise = Noise(0.0, speed / 50);
     WheelEncoder wheel_encoder = WheelEncoder();
@@ -211,6 +211,13 @@ int main(int argc, char **argv)
         float headings_degree = 0.0;
         while (!waypoints.empty())  // While there's a waypoint to visit
         {
+            draw_robot_vector(robot_ideal, lidar_msg);
+            lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
+            lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
+            lidar_msg.points_col.push_back(0xFF00FFFF);
+            time_stamp += delta_t;
+            lidar_msg_pub.publish(lidar_msg);
+
             cout << "---------  i: " << i << "  --------------------------------------------------------------\n";
             if (i >= 10) exit(0);
 
@@ -224,8 +231,6 @@ int main(int argc, char **argv)
             float dx_ns = wheel_encoder_dx_noise.gaussian();
             float dy_ns = wheel_encoder_dy_noise.gaussian();
             wheel_encoder.simulate_odometry( robot_ideal.speed, delta_t, dx_ns, dy_ns );
-            wheel_encoder.dx = 1;
-            wheel_encoder.dy = 1;
 
             float WthetaA_radian = cut_redundant_epsilon( ( atan2(wheel_encoder.dy, wheel_encoder.dx) ) );
             float WthetaA_degree = radian_to_degree( WthetaA_radian );
@@ -242,8 +247,13 @@ int main(int argc, char **argv)
             cur_HT.block<2, 2>(0, 0) = WrotA;
             cur_HT.block<2, 1>(0, 2) = odometry_in_robot_frame;
 
-            Mat3f new_HT = cur_HT * TFs.back();
+            Mat3f new_HT = TFs.back() * cur_HT;
             TFs.push_back(new_HT);
+            cout 
+                    << "cur_HT:" << endl << cur_HT << endl
+                    << "new_HT:" << endl << new_HT << endl
+                    << "TFs.back:" << endl << TFs.back() << endl
+                    << endl;
             Vec3f new_frame = new_HT * pivot;
             Vec2f new_frame2f = Vec2f(new_frame.x(), new_frame.y());
 
@@ -274,10 +284,6 @@ int main(int argc, char **argv)
 
             // TFs.push_back(WtfA);
 
-            for (vector<Mat3f>::iterator it = TFs.begin(); it != TFs.end(); ++it) {
-                new_point_ht = (*it) * new_point_ht;
-            }
-            getchar();
 
 
 
