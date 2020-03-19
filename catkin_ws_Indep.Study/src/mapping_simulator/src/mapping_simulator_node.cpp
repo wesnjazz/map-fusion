@@ -197,11 +197,11 @@ int main(int argc, char **argv)
 
 
         vector<Mat3f> TFs;
-        // TFs.push_back(Init_frame);
+        TFs.push_back(Init_frame);
         vector<Vec2f> odometries;
-        // odometries.push_back(Vec2f(0, 0));
+        odometries.push_back(Vec2f(0, 0));
         vector<Vec3f>frames;
-        // frames.push_back(Vec3f(0, 0, 0));
+        frames.push_back(Vec3f(0, 0, 0));
 
         int i = 0;
         // int i = waypoints.size();
@@ -214,132 +214,145 @@ int main(int argc, char **argv)
             cout << "---------  i: " << i << "  --------------------------------------------------------------\n";
             if (i >= 10) exit(0);
 
+            lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
+            lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
+            lidar_msg.points_col.push_back(0xFFFF00FF);
+
             new_point_ht.setIdentity();
 
-            /** Extract the next waypoint **/
-            Vec3f arrive_W = waypoints.front();
-            waypoints.pop_front();
-            cout 
-                << "depart:(" << depart_W.x() << "," << depart_W.y() << "," << depart_W.z() << ")\t" 
-                << "arrive:(" << arrive_W.x() << "," << arrive_W.y() << "," << arrive_W.z() << ")\t"  
-                << "angle:" << arrive_W.z() - depart_W.z()
-                << endl;
+            /** Get the next location N_R in robot frame **/
+            float dx_ns = wheel_encoder_dx_noise.gaussian();
+            float dy_ns = wheel_encoder_dy_noise.gaussian();
+            wheel_encoder.simulate_odometry( robot_ideal.speed, delta_t, dx_ns, dy_ns );
+            wheel_encoder.dx = 1;
+            wheel_encoder.dy = 1;
 
-            lidar_msg.lines_p1x.push_back(depart_W.x());
-            lidar_msg.lines_p1y.push_back(depart_W.y());
-            lidar_msg.lines_p2x.push_back(arrive_W.x());
-            lidar_msg.lines_p2y.push_back(arrive_W.y());
-            lidar_msg.lines_col.push_back(0xFF6666EE);
+            float WthetaA_radian = cut_redundant_epsilon( ( atan2(wheel_encoder.dy, wheel_encoder.dx) ) );
+            float WthetaA_degree = radian_to_degree( WthetaA_radian );
+            float cos_WthetaA = cut_redundant_epsilon( cos(WthetaA_radian) );
+            float sin_WthetaA = cut_redundant_epsilon( sin(WthetaA_radian) );
+            headings_degree += WthetaA_degree;
 
-            // while (!if_arrived_at_a_point_frameW(robot_ideal, arrive_W)) {
-                // Vec3f W_frame = Vec3f(0, 0, 0);
-                // Vec3f A_frame = Vec3f(0, 0, 30);
-                // Vec3f B_frame = Vec3f(2, 1, 45);
-                // Vec3f C_frame = Vec3f(3, 3, 90);
+            Vec3f pivot = Vec3f(0, 0, 1);
 
-                Vec3f W_frame = depart_W;
-                Vec3f A_frame = arrive_W;
+            Mat2f WrotA;
+            WrotA << cos_WthetaA, -sin_WthetaA, sin_WthetaA, cos_WthetaA;
+            Vec2f odometry_in_robot_frame = Vec2f(wheel_encoder.dx, wheel_encoder.dy);
+            Mat3f cur_HT = cur_HT.setIdentity();
+            cur_HT.block<2, 2>(0, 0) = WrotA;
+            cur_HT.block<2, 1>(0, 2) = odometry_in_robot_frame;
 
-                /** Get the next location N_R in robot frame **/
-                float dx_ns = wheel_encoder_dx_noise.gaussian();
-                float dy_ns = wheel_encoder_dy_noise.gaussian();
-                wheel_encoder.simulate_odometry( robot_ideal.speed, delta_t, dx_ns, dy_ns );
-                wheel_encoder.dx = 1;
-                wheel_encoder.dy = 1;
+            Mat3f new_HT = cur_HT * TFs.back();
+            TFs.push_back(new_HT);
+            Vec3f new_frame = new_HT * pivot;
+            Vec2f new_frame2f = Vec2f(new_frame.x(), new_frame.y());
 
-                float WthetaA_radian = cut_redundant_epsilon( ( atan2(wheel_encoder.dy, wheel_encoder.dx) ) );
-                // float WthetaA_degree = radian_to_degree( WthetaA_radian );
-                // float WthetaA_radian = cut_redundant_epsilon( degree_to_radian( A_frame.z() - W_frame.z() ));
-                float WthetaA_degree = radian_to_degree( WthetaA_radian );
-                // float WthetaA_radian = cut_redundant_epsilon( degree_to_radian( A_frame.z() - W_frame.z() ) );
-                cout << "\nANGLE: " << WthetaA_radian << "\t" << WthetaA_degree << endl;
-                // cout << "\nANGLE: " << ( A_frame.z() - W_frame.z() ) << endl;
-                float cos_WthetaA = cut_redundant_epsilon( cos(WthetaA_radian) );
-                float sin_WthetaA = cut_redundant_epsilon( sin(WthetaA_radian) );
-                Mat2f WrotA;
-                WrotA << cos_WthetaA, -sin_WthetaA, sin_WthetaA, cos_WthetaA;
+            lidar_msg.points_x.push_back(new_frame.x());
+            lidar_msg.points_y.push_back(new_frame.y());
+            lidar_msg.points_col.push_back(0xFFFF0000);
 
-                headings_degree += WthetaA_degree;
-                cout
-                    << "headings_degree:" << headings_degree << endl;
+            robot_ideal.move_to(new_frame2f);
 
-                int j = TFs.size();
-                // for (vector<Mat3f>::iterator it = TFs.begin(); it != TFs.end(); ++it) {
-                for (int k = 0; k < j; ++k) {
-                    // new_point_ht = (*it) * new_point_ht;
-                    new_point_ht = TFs.at(k) * new_point_ht;
-                }
+            // Mat2f WrotA_inverse = WrotA.transpose();
+            // Vec2f Rtp_negative = -WrotA * odometry_in_robot_frame;
+            // Vec2f WtransA_in_robot_frame = Rtp_negative;
+            // Mat3f WtfA_inverse = WtfA_inverse.setIdentity();
+            // WtfA_inverse.block<2, 2>(0, 0) = WrotA_inverse;
+            // WtfA_inverse.block<3, 1>(0, 2) = WtransA_in_robot_frame.homogeneous();
+            // Vec3f trans_in_world_frame = WtfA_inverse * odometry_in_robot_frame.homogeneous();
+
+            // Mat3f accum_tf;
+            // accum_tf.setIdentity();
+            // for (vector<Mat3f>::iterator it = TFs.begin(); it != TFs.end(); ++it) {
+            //     accum_tf = (*it) * accum_tf;
+            // }
+            // Vec3f new_point3f = accum_tf * Vec2f(wheel_encoder.dx, wheel_encoder.dy).homogeneous();
+            // Vec2f WtransA_in_robot_frame = Vec2f(new_point3f.x(), new_point3f.y());
+            // Mat3f WtfA = WtfA.setIdentity();
+            // WtfA.block<2, 2>(0, 0) = WrotA;
+            // WtfA.block<3, 1>(0, 2) = WtransA_in_robot_frame.homogeneous();
+
+            // TFs.push_back(WtfA);
+
+            for (vector<Mat3f>::iterator it = TFs.begin(); it != TFs.end(); ++it) {
+                new_point_ht = (*it) * new_point_ht;
+            }
+            getchar();
 
 
-                // Vec2f WtransA = Vec2f(wheel_encoder.dx, wheel_encoder.dy);
-                Vec2f WtransA_in_world_frame = Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y());
-                Vec3f WtransA3f = new_point_ht * Vec2f(wheel_encoder.dx, wheel_encoder.dy).homogeneous();
-                // Vec3f WtransA3f = new_point_ht * Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y()).homogeneous();
-                Vec2f WtransA = Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y());
+
+
+
+
+
+
+
+                // // Vec2f WtransA = Vec2f(wheel_encoder.dx, wheel_encoder.dy);
+                // Vec2f WtransA_in_world_frame = Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y());
+                // Vec3f WtransA3f = new_point_ht * Vec2f(wheel_encoder.dx, wheel_encoder.dy).homogeneous();
+                // // Vec3f WtransA3f = new_point_ht * Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y()).homogeneous();
                 // Vec2f WtransA = Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y());
-                Vec3f point_frame = Vec3f(0, 0, 1);
+                // // Vec2f WtransA = Vec2f(A_frame.x() - W_frame.x(), A_frame.y() - W_frame.y());
+                // Vec3f point_frame = Vec3f(0, 0, 1);
 
-                Mat3f WtfA;
-                WtfA.setIdentity();
-                WtfA.block<2, 2>(0, 0) = WrotA;
-                WtfA.block<3, 1>(0, 2) = WtransA.homogeneous();
+                // Mat3f WtfA;
+                // WtfA.setIdentity();
+                // WtfA.block<2, 2>(0, 0) = WrotA;
+                // WtfA.block<3, 1>(0, 2) = WtransA.homogeneous();
 
-                Mat3f last_transform;
-                last_transform = last_transform.setZero();
-                cout << "size:" << TFs.size() << endl;
-                if (TFs.empty()) { last_transform = Init_frame; }
-                else { last_transform = TFs.at(TFs.size()-1); }
-                // Mat3f last_transform = TFs.at(TFs.size()-1);
-                Vec3f new_frame = last_transform * point_frame;
-                new_frame.z() = headings_degree;
+                // Mat3f last_transform;
+                // last_transform = last_transform.setZero();
+                // cout << "size:" << TFs.size() << endl;
+                // if (TFs.empty()) { last_transform = Init_frame; }
+                // else { last_transform = TFs.at(TFs.size()-1); }
+                // // Mat3f last_transform = TFs.at(TFs.size()-1);
+                // Vec3f new_frame = last_transform * point_frame;
+                // new_frame.z() = headings_degree;
 
-                TFs.push_back(WtfA);
-                odometries.push_back(WtransA);
-                frames.push_back(new_frame);
+                // TFs.push_back(WtfA);
+                // odometries.push_back(WtransA);
+                // frames.push_back(new_frame);
 
-                Mat3f cur_TF = TFs.at(i);
-                Vec2f cur_odo = odometries.at(i);
-                Vec3f cur_frame = frames.at(i);
-                i++;
+                // Mat3f cur_TF = TFs.at(i);
+                // Vec2f cur_odo = odometries.at(i);
+                // Vec3f cur_frame = frames.at(i);
+                // i++;
 
-                // Vec2f new_point = Vec2f(new_frame.x(), new_frame.y());
+                // // Vec2f new_point = Vec2f(new_frame.x(), new_frame.y());
 
-                Vec3f new_point_3 = new_point_ht * WtransA.homogeneous();
-                // Vec3f new_point_3 = new_point_ht * odometries.at(j-1).homogeneous();
-                Vec2f new_point = Vec2f(new_point_3.x(), new_point_3.y());
-                Vec2f new_frame_point = Vec2f(new_frame.x(), new_frame.y());
-                float new_heading = radian_to_degree( acos(cos_WthetaA) );
-                robot_ideal.move_to(new_frame_point);
-                robot_ideal.set_heading(new_frame.z());
-                // robot_ideal.set_heading(WthetaA_degree);
-                // robot_ideal.set_heading(A_frame.z());
-                // draw_robot_vector(robot_ideal, lidar_msg);
-                // robot_ideal.set_heading(frames.at(frames.size()-1).z());
+                // Vec3f new_point_3 = new_point_ht * WtransA.homogeneous();
+                // // Vec3f new_point_3 = new_point_ht * odometries.at(j-1).homogeneous();
+                // Vec2f new_point = Vec2f(new_point_3.x(), new_point_3.y());
+                // Vec2f new_frame_point = Vec2f(new_frame.x(), new_frame.y());
+                // float new_heading = radian_to_degree( acos(cos_WthetaA) );
+                // robot_ideal.move_to(new_frame_point);
+                // robot_ideal.set_heading(new_frame.z());
+                // // robot_ideal.set_heading(WthetaA_degree);
+                // // robot_ideal.set_heading(A_frame.z());
+                // // draw_robot_vector(robot_ideal, lidar_msg);
+                // // robot_ideal.set_heading(frames.at(frames.size()-1).z());
 
-                cout
-                        << "W_frame:" << endl << "(" << W_frame.x() << "," << W_frame.y() << "," << W_frame.z() << ")" << endl
-                        << "A_frame:" << endl << "(" << A_frame.x() << "," << A_frame.y() << "," << A_frame.z() << ")" << endl
-                        << "WthetaA_degree:" << endl << "(" << radian_to_degree( WthetaA_radian ) << endl
-                        // << "cos_WthetaA:" << endl << cos_WthetaA << endl
-                        // << "sin_WthetaA:" << endl << sin_WthetaA << endl
-                        << "WrotA:" << endl << WrotA << endl
-                        << "WtransA:" << endl << WtransA << endl
-                        << "WtfA:" << endl << WtfA << endl
-                        << "last_transform:" << endl << last_transform << endl
-                        << "new_frame:" << endl << new_frame
-                        << "cur_TF:" << endl << cur_TF << endl
-                        << "cur_odo: (" << cur_odo.x() << "," << cur_odo.y() << ")" << endl
-                        << "cur_frame: (" << cur_frame.x() << "," << cur_frame.y() << "," << cur_frame.z() << ")" << endl
-                        << "ROBOT x,y,theta: " << robot_ideal.position_in_Wframe.x() << "," 
-                                               << robot_ideal.position_in_Wframe.y() << ","
-                                               << robot_ideal.heading_degree_in_Wframe << endl
-                        << "ROBOT position_Vector:" << endl << robot_ideal.velocity_in_Wframe
-                        << endl;
+                // cout
+                //         << "W_frame:" << endl << "(" << W_frame.x() << "," << W_frame.y() << "," << W_frame.z() << ")" << endl
+                //         << "A_frame:" << endl << "(" << A_frame.x() << "," << A_frame.y() << "," << A_frame.z() << ")" << endl
+                //         << "WthetaA_degree:" << endl << "(" << radian_to_degree( WthetaA_radian ) << endl
+                //         // << "cos_WthetaA:" << endl << cos_WthetaA << endl
+                //         // << "sin_WthetaA:" << endl << sin_WthetaA << endl
+                //         << "WrotA:" << endl << WrotA << endl
+                //         << "WtransA:" << endl << WtransA << endl
+                //         << "WtfA:" << endl << WtfA << endl
+                //         << "last_transform:" << endl << last_transform << endl
+                //         << "new_frame:" << endl << new_frame
+                //         << "cur_TF:" << endl << cur_TF << endl
+                //         << "cur_odo: (" << cur_odo.x() << "," << cur_odo.y() << ")" << endl
+                //         << "cur_frame: (" << cur_frame.x() << "," << cur_frame.y() << "," << cur_frame.z() << ")" << endl
+                //         << "ROBOT x,y,theta: " << robot_ideal.position_in_Wframe.x() << "," 
+                //                                << robot_ideal.position_in_Wframe.y() << ","
+                //                                << robot_ideal.heading_degree_in_Wframe << endl
+                //         << "ROBOT position_Vector:" << endl << robot_ideal.velocity_in_Wframe
+                //         << endl;
 
 
-                lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
-                lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
-                lidar_msg.points_col.push_back(0xFFFF0000);
                 
 
                 // Vec2f dx_dy_1 = Vec2f(1,0);
@@ -519,13 +532,13 @@ int main(int argc, char **argv)
                 draw_robot_vector(robot_ideal, lidar_msg);
                 lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
                 lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
-                lidar_msg.points_col.push_back(0xFFFF0000);
+                lidar_msg.points_col.push_back(0xFF00FFFF);
                 time_stamp += delta_t;
                 lidar_msg_pub.publish(lidar_msg);
                 cout << "-----------------------------------------------------------------------";
 
             // }
-            cout << "Arrived at point:(" << arrive_W.x() << ", " << arrive_W.y() << ")" << endl;
+            // cout << "Arrived at point:(" << arrive_W.x() << ", " << arrive_W.y() << ")" << endl;
                 getchar();
                 // cout << "prev_W: (" << previous_frame_W.x() << ", " << previous_frame_W.y() << ")" << endl;
 
@@ -693,7 +706,7 @@ int main(int argc, char **argv)
                 loop_rate.sleep();
                 // getchar();
             // }
-            depart_W = Vec3f(arrive_W);
+            // depart_W = Vec3f(arrive_W);
             // cout << "angle:" << robot_actual.heading_degree << "\tcurrent:(" << robot_actual.position_in_Wframe.x() 
             //     << "," << robot_actual.position_in_Wframe.y() << ")" << "\tarrive:(" << arrive.x() << "," << arrive.y() << ")" << endl;
             // cout << "robot's velocity:" << robot_actual.velocity << endl;
