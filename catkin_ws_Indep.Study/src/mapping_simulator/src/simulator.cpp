@@ -73,6 +73,14 @@ void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wa
 }
 
 
+// void adjust_heading(Robot &robot, Vec2f &goal, float threshold)
+// {
+//     float angle_diff_degree = get_angle_degree_between_two_vectors(robot.position_in_Wframe, goal);
+
+
+// }
+
+
 float get_vector_length(Vec2f &v)
 {
     return sqrt((pow(v.x(), 2.0) + pow(v.y(), 2.0)));
