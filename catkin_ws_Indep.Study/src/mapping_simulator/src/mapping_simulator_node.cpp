@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     float robot_init_heading = robot_init_frame.z();
     cout << "robot_init_frame:\n" << robot_init_frame << endl;
     cout << "robot_init_position:\n" << robot_init_position << endl;
-    float speed = 0.2;
+    float speed = 1;
 
     Robot robot_actual = Robot(robot_init_position, robot_init_heading, speed);
     Robot robot_ideal = Robot(robot_init_position, robot_init_heading, speed);
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
     Noise laser_length_noise = Noise(0.0, 0.8);
     Noise laser_angle_noise = Noise(0.0, 0.2);
     Noise wheel_encoder_dx_noise = Noise(0.0, 0.001);
-    Noise wheel_encoder_dy_noise = Noise(0.0, 0.001);
+    Noise wheel_encoder_dy_noise = Noise(0.0, 0.05);
     WheelEncoder wheel_encoder = WheelEncoder();
     Vec3f World_frame = Vec3f(0, 0, 0);
 
@@ -157,12 +157,6 @@ int main(int argc, char **argv)
                     break;
                 }
 
-                /** Draw robot's position and its velocity vector **/
-                draw_robot_vector(robot_ideal, lidar_msg);
-                lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
-                lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
-                lidar_msg.points_col.push_back(0xFF00FFFF);
-                lidar_msg_pub.publish(lidar_msg);
                 cout << "round: " << ++i << endl;
 
                 /** Laser Scan **/
@@ -245,6 +239,163 @@ int main(int argc, char **argv)
                 lidar_msg.points_col.push_back(0xFFFF0000);
 
 
+                lidar_msg.lines_p1x.push_back(arrival_W2f.x());
+                lidar_msg.lines_p1y.push_back(arrival_W2f.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0x229999FF);
+
+
+                Vec3f arrival_of_R_in_W = new_HT * arrival_R;
+                Vec3f R_gridx0  = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(0, 5, 0);
+                Vec3f R_gridx1u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(1, 5, 0);
+                Vec3f R_gridx1d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(1, 0, 0);
+                Vec3f R_gridx2u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(2, 5, 0);
+                Vec3f R_gridx2d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(2, 0, 0);
+                Vec3f R_gridxn1u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-1, 5, 0);
+                Vec3f R_gridxn1d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-1, 0, 0);
+                Vec3f R_gridxn2u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-2, 5, 0);
+                Vec3f R_gridxn2d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-2, 0, 0);
+                Vec3f R_gridy1u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(5, 1, 0);
+                Vec3f R_gridy1d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(0, 1, 0);
+                Vec3f R_gridy2u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(5, 2, 0);
+                Vec3f R_gridy2d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(0, 2, 0);
+                Vec3f R_gridyn1u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-5, 1, 0);
+                Vec3f R_gridyn1d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(0, 1, 0);
+                Vec3f R_gridyn2u = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-5, 2, 0);
+                Vec3f R_gridyn2d = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(0, 2, 0);
+                Vec3f R_gridyl  = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(-5, 0, 0);
+                Vec3f R_gridyr  = (robot_ideal.position_in_Wframe).homogeneous() + new_HT * Vec3f(5, 0, 0);
+                lidar_msg.lines_p1x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p1y.push_back(arrival_of_R_in_W.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0xAA3333FF);
+                lidar_msg.lines_p1x.push_back(R_gridx0.x());
+                lidar_msg.lines_p1y.push_back(R_gridx0.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0xBBDD6622);
+                lidar_msg.lines_p1x.push_back(R_gridx1u.x());
+                lidar_msg.lines_p1y.push_back(R_gridx1u.y());
+                lidar_msg.lines_p2x.push_back(R_gridx1d.x());
+                lidar_msg.lines_p2y.push_back(R_gridx1d.y());
+                lidar_msg.lines_col.push_back(0x882266AA);
+                lidar_msg.lines_p1x.push_back(R_gridx2u.x());
+                lidar_msg.lines_p1y.push_back(R_gridx2u.y());
+                lidar_msg.lines_p2x.push_back(R_gridx2d.x());
+                lidar_msg.lines_p2y.push_back(R_gridx2d.y());
+                lidar_msg.lines_col.push_back(0x882266AA);
+                lidar_msg.lines_p1x.push_back(R_gridxn1u.x());
+                lidar_msg.lines_p1y.push_back(R_gridxn1u.y());
+                lidar_msg.lines_p2x.push_back(R_gridxn1d.x());
+                lidar_msg.lines_p2y.push_back(R_gridxn1d.y());
+                lidar_msg.lines_col.push_back(0x882266AA);
+                lidar_msg.lines_p1x.push_back(R_gridxn2u.x());
+                lidar_msg.lines_p1y.push_back(R_gridxn2u.y());
+                lidar_msg.lines_p2x.push_back(R_gridxn2d.x());
+                lidar_msg.lines_p2y.push_back(R_gridxn2d.y());
+                lidar_msg.lines_col.push_back(0x882266AA);
+                lidar_msg.lines_p1x.push_back(R_gridy1u.x());
+                lidar_msg.lines_p1y.push_back(R_gridy1u.y());
+                lidar_msg.lines_p2x.push_back(R_gridy1d.x());
+                lidar_msg.lines_p2y.push_back(R_gridy1d.y());
+                lidar_msg.lines_col.push_back(0x882266AA);
+                lidar_msg.lines_p1x.push_back(R_gridy2u.x());
+                lidar_msg.lines_p1y.push_back(R_gridy2u.y());
+                lidar_msg.lines_p2x.push_back(R_gridy2d.x());
+                lidar_msg.lines_p2y.push_back(R_gridy2d.y());
+                lidar_msg.lines_col.push_back(0x882266AA);
+                lidar_msg.lines_p1x.push_back(R_gridyn1u.x());
+                lidar_msg.lines_p1y.push_back(R_gridyn1u.y());
+                lidar_msg.lines_p2x.push_back(R_gridyn1d.x());
+                lidar_msg.lines_p2y.push_back(R_gridyn1d.y());
+                lidar_msg.lines_col.push_back(0x882266AA);
+                lidar_msg.lines_p1x.push_back(R_gridyn2u.x());
+                lidar_msg.lines_p1y.push_back(R_gridyn2u.y());
+                lidar_msg.lines_p2x.push_back(R_gridyn2d.x());
+                lidar_msg.lines_p2y.push_back(R_gridyn2d.y());
+                lidar_msg.lines_col.push_back(0x882266AA);
+                lidar_msg.lines_p1x.push_back(R_gridyl.x());
+                lidar_msg.lines_p1y.push_back(R_gridyl.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0x7722EE55);
+                lidar_msg.lines_p1x.push_back(R_gridyr.x());
+                lidar_msg.lines_p1y.push_back(R_gridyr.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0x7722EE55);
+
+                /** Draw robot's position and its velocity vector **/
+                draw_robot_vector(robot_ideal, lidar_msg);
+                lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.points_col.push_back(0xFF00FFFF);
+                lidar_msg_pub.publish(lidar_msg);
+
+
+
+                lidar_msg.lines_p1x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p1y.push_back(arrival_of_R_in_W.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridx0.x());
+                lidar_msg.lines_p1y.push_back(R_gridx0.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridx1u.x());
+                lidar_msg.lines_p1y.push_back(R_gridx1u.y());
+                lidar_msg.lines_p2x.push_back(R_gridx1d.x());
+                lidar_msg.lines_p2y.push_back(R_gridx1d.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridx2u.x());
+                lidar_msg.lines_p1y.push_back(R_gridx2u.y());
+                lidar_msg.lines_p2x.push_back(R_gridx2d.x());
+                lidar_msg.lines_p2y.push_back(R_gridx2d.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridxn1u.x());
+                lidar_msg.lines_p1y.push_back(R_gridxn1u.y());
+                lidar_msg.lines_p2x.push_back(R_gridxn1d.x());
+                lidar_msg.lines_p2y.push_back(R_gridxn1d.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridxn2u.x());
+                lidar_msg.lines_p1y.push_back(R_gridxn2u.y());
+                lidar_msg.lines_p2x.push_back(R_gridxn2d.x());
+                lidar_msg.lines_p2y.push_back(R_gridxn2d.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridy1u.x());
+                lidar_msg.lines_p1y.push_back(R_gridy1u.y());
+                lidar_msg.lines_p2x.push_back(R_gridy1d.x());
+                lidar_msg.lines_p2y.push_back(R_gridy1d.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridy2u.x());
+                lidar_msg.lines_p1y.push_back(R_gridy2u.y());
+                lidar_msg.lines_p2x.push_back(R_gridy2d.x());
+                lidar_msg.lines_p2y.push_back(R_gridy2d.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridyn1u.x());
+                lidar_msg.lines_p1y.push_back(R_gridyn1u.y());
+                lidar_msg.lines_p2x.push_back(R_gridyn1d.x());
+                lidar_msg.lines_p2y.push_back(R_gridyn1d.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridyn2u.x());
+                lidar_msg.lines_p1y.push_back(R_gridyn2u.y());
+                lidar_msg.lines_p2x.push_back(R_gridyn2d.x());
+                lidar_msg.lines_p2y.push_back(R_gridyn2d.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridyl.x());
+                lidar_msg.lines_p1y.push_back(R_gridyl.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
+                lidar_msg.lines_p1x.push_back(R_gridyr.x());
+                lidar_msg.lines_p1y.push_back(R_gridyr.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0xFFFFFFFF);
 
 
 
