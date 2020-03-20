@@ -9,4 +9,4 @@
 # modified environment variables
 export CMAKE_PREFIX_PATH="/home/dpark/map-fusion/gui/vector_slam_msgs/build/devel:$CMAKE_PREFIX_PATH"
 export ROSLISP_PACKAGE_DIRECTORIES="/home/dpark/map-fusion/gui/vector_slam_msgs/build/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/dpark/map-fusion/gui/vector_slam_msgs:/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src:/opt/ros/melodic/share"
+export ROS_PACKAGE_PATH="/home/dpark/map-fusion/gui/vector_slam_msgs:/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src:/home/dpark/map-fusion/catkin_ws_Indep.Study/src:/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src:/opt/ros/melodic/share"
