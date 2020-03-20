@@ -22,7 +22,7 @@ void draw_grids(vector_slam_msgs::LidarDisplayMsg &lidar_msg, uint32_t color = 0
 
 int usage(char *app_name);
 void read_segments(ifstream &seg_file, vector<Segment> &segments);
-void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, deque<float>robot_headings, vector_slam_msgs::LidarDisplayMsg &msg);
+void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, vector_slam_msgs::LidarDisplayMsg &msg);
 float cut_redundant_epsilon(float x, float threshold = 0.000001);
 float degree_to_radian(float theta);
 float radian_to_degree(float theta);

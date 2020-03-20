@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     ifstream wall_segments_file;    // file stream of wall segments
     deque<Vec3f> waypoints;         // vector of waypoints
     ifstream waypoints_file;        // file stream of waypoints
-    deque<float> robot_headings;     // deque of robot headings
+    // deque<float> robot_headings;     // deque of robot headings
 
 
     /** Create objects **/
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
     /** Sensors and Noises **/
     Laser laser_sensor = Laser();
     Noise laser_length_noise = Noise(0.0, 0.8);
-    Noise laser_angle_noise = Noise(0.0, 0.2);
+    Noise laser_angle_noise = Noise(0.0, 0.8);
     Noise wheel_encoder_dx_noise = Noise(0.0, 0.001);
     Noise wheel_encoder_dy_noise = Noise(0.0, 0.002);
     WheelEncoder wheel_encoder = WheelEncoder();
@@ -73,9 +73,7 @@ int main(int argc, char **argv)
     }
     vector_slam_msgs::LidarDisplayMsg lidar_msg;
     read_segments(wall_segments_file, wall_segments);
-    read_waypoints(waypoints_file, waypoints, robot_headings, lidar_msg);
-    deque<Vec3f> *waypoints_backup = new deque<Vec3f>(waypoints);   // Deep copy
-
+    read_waypoints(waypoints_file, waypoints, lidar_msg);
 
     Robot robot_actual = Robot(robot_init_position, robot_init_heading, speed);
     Robot robot_ideal = Robot(robot_init_position, robot_init_heading, speed);
@@ -109,11 +107,11 @@ int main(int argc, char **argv)
 
         /** History of transformations, odometries, frames **/
         vector<Mat3f> HTs;
-        vector<Vec2f> odometries;
-        vector<Vec3f> frames;
         HTs.push_back(initial_frame);
-        odometries.push_back(Vec2f(0, 0));
-        frames.push_back(Vec3f(0, 0, 0));
+        // vector<Vec2f> odometries;
+        // vector<Vec3f> frames;
+        // odometries.push_back(Vec2f(0, 0));
+        // frames.push_back(Vec3f(0, 0, 0));
 
         /** Draw Wall segments **/
         for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
@@ -135,6 +133,7 @@ int main(int argc, char **argv)
             /** Get the next waypoint **/
             Vec3f arrival_W = waypoints.front();
             waypoints.pop_front();
+            bool arrival_circle_drew = false;
 
             while (true)
             {
@@ -187,6 +186,7 @@ int main(int argc, char **argv)
                  *  sHTt = sHT1 * 1HT2 * ... * (k-1)HTk * kHTt
                  *  **/
                 Mat3f W_HT_R = HTs.back() * current_R_HT_new_R;
+                HTs.pop_back();
                 HTs.push_back(W_HT_R);
                 // cout 
                 //         << "current_R_HT_new_R:" << endl << current_R_HT_new_R << endl
@@ -239,6 +239,7 @@ int main(int argc, char **argv)
                 //  *  sHTt = sHT1 * 1HT2 * ... * (k-1)HTk * kHTt
                 //  *  **/
                 Mat3f new_HT_adjust_heading = HTs.back() * current_HT_adjust_heading;
+                HTs.pop_back();
                 HTs.push_back(new_HT_adjust_heading);
 
                 float new_ang_degree = cut_redundant_epsilon( radian_to_degree( acos( new_HT_adjust_heading(0,0) ) ));
@@ -246,22 +247,24 @@ int main(int argc, char **argv)
                 //     << "new_ang:" << new_ang_degree << endl;
                     
                 /** Draw robot's position and its velocity vector **/
-                // draw_robot_vector(robot_ideal, lidar_msg);
+                draw_robot_vector(robot_ideal, lidar_msg);
                 lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
                 lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
-                lidar_msg.points_col.push_back(0xFF00FFFF);
+                lidar_msg.points_col.push_back(0xFF5555FF);
+
+                // lidar_msg.points_x.push_back(new_frame_W.x());
+                // lidar_msg.points_y.push_back(new_frame_W.y());
+                // lidar_msg.points_col.push_back(0xFFFF0000);
 
                 /** For debugging **/                
                 // draw_grid_line_of_robot_frame(robot_ideal, W_HT_R, arrival_R, lidar_msg);
 
-                lidar_msg.circles_x.push_back(arrival_W.x());
-                lidar_msg.circles_y.push_back(arrival_W.y());
-                lidar_msg.circles_col.push_back(0xFFFF00FF);
-
-                /** Robot mark **/
-                lidar_msg.points_x.push_back(new_frame_W.x());
-                lidar_msg.points_y.push_back(new_frame_W.y());
-                lidar_msg.points_col.push_back(0xFFFF0000);
+                if (!arrival_circle_drew) {
+                    lidar_msg.circles_x.push_back(arrival_W.x());
+                    lidar_msg.circles_y.push_back(arrival_W.y());
+                    lidar_msg.circles_col.push_back(0xFFFF00FF);
+                    arrival_circle_drew = true;
+                }
 
                 /** Line from robot to arrival **/
                 // lidar_msg.lines_p1x.push_back(arrival_W_only_xy.x());
@@ -272,6 +275,27 @@ int main(int argc, char **argv)
 
                 /** Publish lidar msg **/
                 lidar_msg_pub.publish(lidar_msg);
+
+                /** Deletes drawing **/
+                // lidar_msg.points_x.pop_back();
+                // lidar_msg.points_y.pop_back();
+                // lidar_msg.points_col.pop_back();
+                lidar_msg.lines_p1x.pop_back();
+                lidar_msg.lines_p1y.pop_back();
+                lidar_msg.lines_p2x.pop_back();
+                lidar_msg.lines_p2y.pop_back();
+                lidar_msg.lines_col.pop_back();
+                lidar_msg.lines_p1x.pop_back();
+                lidar_msg.lines_p1y.pop_back();
+                lidar_msg.lines_p2x.pop_back();
+                lidar_msg.lines_p2y.pop_back();
+                lidar_msg.lines_col.pop_back();
+                lidar_msg.lines_p1x.pop_back();
+                lidar_msg.lines_p1y.pop_back();
+                lidar_msg.lines_p2x.pop_back();
+                lidar_msg.lines_p2y.pop_back();
+                lidar_msg.lines_col.pop_back();
+
 
                 // draw_grid_line_of_robot_frame(robot_ideal, W_HT_R, arrival_R, lidar_msg, true);
 
