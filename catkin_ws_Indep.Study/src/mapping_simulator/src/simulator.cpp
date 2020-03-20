@@ -91,8 +91,44 @@ bool if_arrived_at_a_point_frameW(Robot &robot, Vec3f &goal, float threshold_dis
 {
     bool within_x = fabs(robot.position_in_Wframe.x() - goal.x()) < threshold_distance;
     bool within_y = fabs(robot.position_in_Wframe.y() - goal.y()) < threshold_distance;
-    bool within_heading_degree = fabs(robot.heading_degree_in_Wframe - goal.x()) < threshold_heading_degree;
+    bool within_heading_degree = fabs(robot.heading_degree_in_Wframe - goal.z()) < threshold_heading_degree;
+    cout
+        << "difference: "
+        << "x:" << fabs(robot.position_in_Wframe.x() - goal.x())
+        << "y:" << fabs(robot.position_in_Wframe.y() - goal.y())
+        << "th:" << fabs(robot.heading_degree_in_Wframe - goal.z())
+        << endl;
+
     return (within_x && within_y && within_heading_degree) ? true : false;
+}
+
+
+bool if_arrived_at_xy_frameW(Robot &robot, float x, float y, float threshold_distance)
+{
+    float x_diff = fabs(robot.position_in_Wframe.x() - x);
+    float y_diff = fabs(robot.position_in_Wframe.y() - y);
+    bool within_x = x_diff < threshold_distance;
+    bool within_y = y_diff < threshold_distance;
+    cout
+        << "\ndifference: "
+        << "  x:" << within_x
+        << "  y:" << within_y
+        << endl;
+
+    return (within_x && within_y) ? true : false;
+}
+
+
+bool if_arrived_at_theta_degree_frameW(Robot &robot, float theta_degree, float threshold_theta)
+{
+    float theta_diff = fabs(robot.heading_degree_in_Wframe - theta_degree);
+    bool within_theta = theta_diff < threshold_theta;
+    cout
+        << "\ndifference: "
+        << "  theta:" << within_theta
+        << endl;
+
+    return (within_theta) ? true : false;
 }
 
 
@@ -180,7 +216,7 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
 }
 
 
-void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &lidar_msg)
+void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &lidar_msg, uint32_t color)
 {
     float vector_length = robot_ideal.speed / 5.0;
     // float vector_length = get_vector_length(robot_ideal.position_in_Wframe) * 10;
@@ -192,7 +228,7 @@ void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &li
     lidar_msg.lines_p1y.push_back(robot_ideal.position_in_Wframe.y());
     lidar_msg.lines_p2x.push_back(heading_x);
     lidar_msg.lines_p2y.push_back(heading_y);
-    lidar_msg.lines_col.push_back(0xFF000000);
+    lidar_msg.lines_col.push_back(color);
 
     float arrow_length = vector_length / 2.0;
     float left_head_x = robot_ideal.position_in_Wframe.x() + (arrow_length * cos(robot_ideal.heading_radian_in_Wframe - degree_to_radian(45)));
@@ -203,13 +239,32 @@ void draw_robot_vector(Robot &robot_ideal, vector_slam_msgs::LidarDisplayMsg &li
     lidar_msg.lines_p1y.push_back(left_head_y);
     lidar_msg.lines_p2x.push_back(heading_x);
     lidar_msg.lines_p2y.push_back(heading_y);
-    lidar_msg.lines_col.push_back(0xFF000000);
+    lidar_msg.lines_col.push_back(color);
     lidar_msg.lines_p1x.push_back(right_head_x);
     lidar_msg.lines_p1y.push_back(right_head_y);
     lidar_msg.lines_p2x.push_back(heading_x);
     lidar_msg.lines_p2y.push_back(heading_y);
-    lidar_msg.lines_col.push_back(0xFF000000);
+    lidar_msg.lines_col.push_back(color);
 
+}
+
+
+void draw_grids(vector_slam_msgs::LidarDisplayMsg &lidar_msg, uint32_t color)
+{
+    for (int i = -30; i <= 30; ++i)
+    {
+        lidar_msg.lines_p1x.push_back(i);
+        lidar_msg.lines_p1y.push_back(-30);
+        lidar_msg.lines_p2x.push_back(i);
+        lidar_msg.lines_p2y.push_back(30);
+        lidar_msg.lines_col.push_back(color);
+
+        lidar_msg.lines_p1x.push_back(-30);
+        lidar_msg.lines_p1y.push_back(i);
+        lidar_msg.lines_p2x.push_back(30);
+        lidar_msg.lines_p2y.push_back(i);
+        lidar_msg.lines_col.push_back(color);
+    }
 }
 
 

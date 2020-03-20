@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     float robot_init_heading = robot_init_frame.z();
     cout << "robot_init_frame:\n" << robot_init_frame << endl;
     cout << "robot_init_position:\n" << robot_init_position << endl;
-    float speed = 1;
+    float speed = 0.4;
 
     Robot robot_actual = Robot(robot_init_position, robot_init_heading, speed);
     Robot robot_ideal = Robot(robot_init_position, robot_init_heading, speed);
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
     Noise laser_length_noise = Noise(0.0, 0.8);
     Noise laser_angle_noise = Noise(0.0, 0.2);
     Noise wheel_encoder_dx_noise = Noise(0.0, 0.001);
-    Noise wheel_encoder_dy_noise = Noise(0.0, 0.05);
+    Noise wheel_encoder_dy_noise = Noise(0.0, 0.002);
     WheelEncoder wheel_encoder = WheelEncoder();
     Vec3f World_frame = Vec3f(0, 0, 0);
 
@@ -87,39 +87,14 @@ int main(int argc, char **argv)
     laserscan.angle_max = laser_sensor.FOV_radian;
     laserscan.angle_min = 0.0;
 
-
     vector<Vec2f> point_cloud;
 
     /** ROS node loop **/
     while (ros::ok())
     {   
-        /** Draw Wall segments **/
-        for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
-            lidar_msg.lines_p1x.push_back(it->start.x());
-            lidar_msg.lines_p1y.push_back(it->start.y());
-            lidar_msg.lines_p2x.push_back(it->end.x());
-            lidar_msg.lines_p2y.push_back(it->end.y());
-            lidar_msg.lines_col.push_back(0xFF99ff33);
-        }
-
         /** Initial position **/
         Vec3f departure_W = waypoints.front();
         waypoints.pop_front();
-
-            /** Drawing Grid **/
-            for (int i = -30; i <= 30; ++i) {
-                lidar_msg.lines_p1x.push_back(i);
-                lidar_msg.lines_p1y.push_back(-30);
-                lidar_msg.lines_p2x.push_back(i);
-                lidar_msg.lines_p2y.push_back(30);
-                lidar_msg.lines_col.push_back(0x10000000);
-
-                lidar_msg.lines_p1x.push_back(-30);
-                lidar_msg.lines_p1y.push_back(i);
-                lidar_msg.lines_p2x.push_back(30);
-                lidar_msg.lines_p2y.push_back(i);
-                lidar_msg.lines_col.push_back(0x10000000);
-            }
 
         /** Initial Transformation **/
         Mat3f initial_frame;
@@ -138,8 +113,21 @@ int main(int argc, char **argv)
         odometries.push_back(Vec2f(0, 0));
         frames.push_back(Vec3f(0, 0, 0));
 
-        int i = 0;
-        /** Loop until visit all waypoints **/
+        /** Draw Wall segments **/
+        for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
+            lidar_msg.lines_p1x.push_back(it->start.x());
+            lidar_msg.lines_p1y.push_back(it->start.y());
+            lidar_msg.lines_p2x.push_back(it->end.x());
+            lidar_msg.lines_p2y.push_back(it->end.y());
+            lidar_msg.lines_col.push_back(0xFF99ff33);
+        }
+
+        /** Drawing Grid **/
+        draw_grids(lidar_msg);
+        draw_robot_vector(robot_ideal, lidar_msg);
+
+        int round = 0;
+        /** Loop untround visit all waypoints **/
         while (!waypoints.empty())  // While there's a waypoint to visit
         {
             /** Get the next waypoint **/
@@ -148,16 +136,23 @@ int main(int argc, char **argv)
 
             while (true)
             {
+                cout 
+                    << "Departure:" << endl << departure_W << endl
+                    << "Arrival:" << endl << arrival_W << endl
+                    << "theta_robot:" << robot_ideal.heading_degree_in_Wframe << endl
+                    << "theta_waypoint:" << arrival_W.z() << endl
+                    ;
+
                 /** If arrived at the waypoint, get the next waypoint **/
-                if (if_arrived_at_a_point_frameW(robot_ideal, arrival_W)) {
+                if (if_arrived_at_xy_frameW(robot_ideal, arrival_W.x(), arrival_W.y(), 0.1)) {
                     cout 
-                        << "Arrived at point:(" << arrival_W.x() << ", " << arrival_W.y() << ")" << endl
-                        << "Departure was: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
-                        ;
+                        << "\t\tArrived at point:(" << arrival_W.x() << ", " << arrival_W.y() << ")" << endl
+                        << "\t\tDeparture was: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
+                        << endl;
                     break;
                 }
 
-                cout << "round: " << ++i << endl;
+                cout << "round: " << ++round << endl;
 
                 /** Laser Scan **/
                 simulate_scan(point_cloud, robot_ideal, wall_segments, robot_ideal.sensor_laser, laser_length_noise, laser_angle_noise);
@@ -177,43 +172,35 @@ int main(int argc, char **argv)
                 float sin_dtheta = cut_redundant_epsilon( sin(dtheta_radian) );
 
 
-                // cout 
-                //     << "Departure:" << endl << departure_W << endl
-                //     << "Arrival:" << endl << arrival_W << endl
-                //     << "theta_waypoint:" << arrival_W << endl
-                //     << "theta_goal:" << robot_ideal.heading_degree_in_Wframe << endl
-                //     ;
-
                 /** New HT(homogeneous transformation matrix) in robot frame **/
                 Mat2f sROTt;
                 sROTt << cos_dtheta, -sin_dtheta, sin_dtheta, cos_dtheta;
                 Vec2f sTRANSt = Vec2f(wheel_encoder.dx, wheel_encoder.dy);
-                Mat3f current_HT = current_HT.setIdentity();
-                current_HT.block<2, 2>(0, 0) = sROTt;
-                current_HT.block<2, 1>(0, 2) = sTRANSt;
+                Mat3f current_R_HT_new_R = current_R_HT_new_R.setIdentity();
+                current_R_HT_new_R.block<2, 2>(0, 0) = sROTt;
+                current_R_HT_new_R.block<2, 1>(0, 2) = sTRANSt;
 
                 /** New HT in world frame
                  *  sHTt = sHT1 * 1HT2 * ... * (k-1)HTk * kHTt
                  *  **/
-                Mat3f new_HT = HTs.back() * current_HT;
-                HTs.push_back(new_HT);
+                Mat3f W_HT_R = HTs.back() * current_R_HT_new_R;
+                HTs.push_back(W_HT_R);
                 // cout 
-                //         << "current_HT:" << endl << current_HT << endl
-                //         << "new_HT:" << endl << new_HT << endl
+                //         << "current_R_HT_new_R:" << endl << current_R_HT_new_R << endl
+                //         << "W_HT_R:" << endl << W_HT_R << endl
                 //         << "HTs.back:" << endl << HTs.back() << endl
                 //         << endl;
-                Vec3f pivot = Vec3f(0, 0, 1);   /** current position in the current frame **/
-                Vec3f new_frame = new_HT * pivot;
-                Vec2f new_position = Vec2f(new_frame.x(), new_frame.y());
+                Vec3f pivot_R = Vec3f(0, 0, 1);   /** current position in the current frame **/
+                Vec3f new_frame_W = W_HT_R * pivot_R;
+                Vec2f new_position_W = Vec2f(new_frame_W.x(), new_frame_W.y());
 
                 /** Move the robot **/
-                robot_ideal.move_to(new_position);
-
+                robot_ideal.move_to(new_position_W);
 
                 /** Calculate arrival_R: arrival_W in robot frame **/
                 Mat3f new_HT_inverse = new_HT_inverse.setIdentity();
-                Mat2f new_HT_ROT = new_HT.block<2, 2>(0, 0);
-                Vec2f new_HT_TRANS = new_HT.block<2, 1>(0, 2);
+                Mat2f new_HT_ROT = W_HT_R.block<2, 2>(0, 0);
+                Vec2f new_HT_TRANS = W_HT_R.block<2, 1>(0, 2);
                 Mat2f new_HT_ROT_neg = -new_HT_ROT;
                 Vec2f TRANS_in_inverse = new_HT_ROT_neg.transpose() * new_HT_TRANS;
                 new_HT_inverse.block<2, 2>(0, 0) = new_HT_ROT.transpose();
@@ -224,35 +211,37 @@ int main(int argc, char **argv)
                 /** Get angle of goal point in robot frame **/
                 float angle_goal_robot_frame_degree = cut_redundant_epsilon( radian_to_degree( atan2(arrival_R.y(), arrival_R.x()) ));
 
-                lidar_msg.circles_x.push_back(arrival_W.x());
-                lidar_msg.circles_y.push_back(arrival_W.y());
-                lidar_msg.circles_col.push_back(0xFFFF00FF);
-
-
-                
                 cout 
-                    << "Departure: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
-                    << "Arrival_W: (" << arrival_W.x() << ", " << arrival_W.y() << ")" << endl
-                    << "Arrival_R: (" << arrival_R.x() << ", " << arrival_R.y() << ")" << endl
+                    << "Departure: (" << departure_W.x() << ", " << departure_W.y() << ", " << departure_W.z() << ")" << endl
+                    << "Arrival_W: (" << arrival_W.x() << ", " << arrival_W.y() << ", " << arrival_W.z() << ")" << endl
+                    << "Arrival_R: (" << arrival_R.x() << ", " << arrival_R.y() << ", " << arrival_R.z() << ")" << endl
                     << "  Current: (" << robot_ideal.position_in_Wframe.x() << ", " << robot_ideal.position_in_Wframe.y() << ")" << endl
                     << " Robot's heading in W: " << robot_ideal.heading_degree_in_Wframe << endl
                     << "   Angle to goal in R: " << angle_goal_robot_frame_degree << endl
                     ;
 
 
+                /** New HT(homogeneous transformation matrix) in robot frame **/
+                float angle_goal_robot_frame_radian = degree_to_radian(angle_goal_robot_frame_degree / 4.0);
+                float cos_adjust_heading = cut_redundant_epsilon( cos(angle_goal_robot_frame_radian) );
+                float sin_adjust_heading = cut_redundant_epsilon( sin(angle_goal_robot_frame_radian) );
+                Mat2f aROTb;
+                aROTb << cos_adjust_heading, -sin_adjust_heading, sin_adjust_heading, cos_adjust_heading;
+                Vec2f aTRANSb = Vec2f(0, 0);
+                Mat3f current_HT_adjust_heading = current_HT_adjust_heading.setIdentity();
+                current_HT_adjust_heading.block<2, 2>(0, 0) = aROTb;
+                current_HT_adjust_heading.block<2, 1>(0, 2) = aTRANSb;
 
-                lidar_msg.points_x.push_back(new_frame.x());
-                lidar_msg.points_y.push_back(new_frame.y());
-                lidar_msg.points_col.push_back(0xFFFF0000);
+                // /** New HT in world frame
+                //  *  sHTt = sHT1 * 1HT2 * ... * (k-1)HTk * kHTt
+                //  *  **/
+                Mat3f new_HT_adjust_heading = HTs.back() * current_HT_adjust_heading;
+                HTs.push_back(new_HT_adjust_heading);
 
-
-                lidar_msg.lines_p1x.push_back(arrival_W_only_xy.x());
-                lidar_msg.lines_p1y.push_back(arrival_W_only_xy.y());
-                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
-                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
-                lidar_msg.lines_col.push_back(0x229999FF);
-
-
+                float new_ang_degree = cut_redundant_epsilon( radian_to_degree( acos( new_HT_adjust_heading(0,0) ) ));
+                cout
+                    << "new_ang:" << new_ang_degree << endl;
+                    
                 /** Draw robot's position and its velocity vector **/
                 draw_robot_vector(robot_ideal, lidar_msg);
                 lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
@@ -260,15 +249,35 @@ int main(int argc, char **argv)
                 lidar_msg.points_col.push_back(0xFF00FFFF);
 
                 /** For debugging **/                
-                draw_grid_line_of_robot_frame(robot_ideal, new_HT, arrival_R, lidar_msg);
+                // draw_grid_line_of_robot_frame(robot_ideal, W_HT_R, arrival_R, lidar_msg);
+
+                lidar_msg.circles_x.push_back(arrival_W.x());
+                lidar_msg.circles_y.push_back(arrival_W.y());
+                lidar_msg.circles_col.push_back(0xFFFF00FF);
+
+                lidar_msg.points_x.push_back(new_frame_W.x());
+                lidar_msg.points_y.push_back(new_frame_W.y());
+                lidar_msg.points_col.push_back(0xFFFF0000);
+
+                lidar_msg.lines_p1x.push_back(arrival_W_only_xy.x());
+                lidar_msg.lines_p1y.push_back(arrival_W_only_xy.y());
+                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                lidar_msg.lines_col.push_back(0x229999FF);
 
                 /** Publish lidar msg **/
                 lidar_msg_pub.publish(lidar_msg);
 
-                draw_grid_line_of_robot_frame(robot_ideal, new_HT, arrival_R, lidar_msg, true);
+                // draw_grid_line_of_robot_frame(robot_ideal, W_HT_R, arrival_R, lidar_msg, true);
+
+                cout
+                    << "robot heading:" << robot_ideal.heading_degree_in_Wframe << endl
+                    ;
 
                 /** timestep increasing **/
                 time_stamp += delta_t;
+                cout 
+                    << "robot is at:(" << robot_ideal.position_in_Wframe.x() << ", " << robot_ideal.position_in_Wframe.y() << ")" << endl;
                 getchar();
             }
 
