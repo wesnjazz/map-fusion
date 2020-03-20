@@ -121,11 +121,11 @@ int main(int argc, char **argv)
             lidar_msg.lines_p1y.push_back(it->start.y());
             lidar_msg.lines_p2x.push_back(it->end.x());
             lidar_msg.lines_p2y.push_back(it->end.y());
-            lidar_msg.lines_col.push_back(0xFF99ff33);
+            lidar_msg.lines_col.push_back(0x22555555);
         }
 
         /** Drawing Grid **/
-        draw_grids(lidar_msg);
+        // draw_grids(lidar_msg);
         draw_robot_vector(robot_ideal, lidar_msg);
 
         int round = 0;
@@ -138,12 +138,12 @@ int main(int argc, char **argv)
 
             while (true)
             {
-                cout 
-                    << "Departure:" << endl << departure_W << endl
-                    << "Arrival:" << endl << arrival_W << endl
-                    << "theta_robot:" << robot_ideal.heading_degree_in_Wframe << endl
-                    << "theta_waypoint:" << arrival_W.z() << endl
-                    ;
+                // cout 
+                //     << "Departure:" << endl << departure_W << endl
+                //     << "Arrival:" << endl << arrival_W << endl
+                //     << "theta_robot:" << robot_ideal.heading_degree_in_Wframe << endl
+                //     << "theta_waypoint:" << arrival_W.z() << endl
+                //     ;
 
                 /** If arrived at the waypoint, get the next waypoint **/
                 if (if_arrived_at_xy_frameW(robot_ideal, arrival_W.x(), arrival_W.y(), 0.1)) {
@@ -154,7 +154,8 @@ int main(int argc, char **argv)
                     break;
                 }
 
-                cout << "round: " << ++round << endl;
+                round++;
+                // cout << "round: " << round << endl;
 
                 /** Laser Scan **/
                 simulate_scan(point_cloud, robot_ideal, wall_segments, robot_ideal.sensor_laser, laser_length_noise, laser_angle_noise);
@@ -213,14 +214,14 @@ int main(int argc, char **argv)
                 /** Get angle of goal point in robot frame **/
                 float angle_goal_robot_frame_degree = cut_redundant_epsilon( radian_to_degree( atan2(arrival_R.y(), arrival_R.x()) ));
 
-                cout 
-                    << "Departure: (" << departure_W.x() << ", " << departure_W.y() << ", " << departure_W.z() << ")" << endl
-                    << "Arrival_W: (" << arrival_W.x() << ", " << arrival_W.y() << ", " << arrival_W.z() << ")" << endl
-                    << "Arrival_R: (" << arrival_R.x() << ", " << arrival_R.y() << ", " << arrival_R.z() << ")" << endl
-                    << "  Current: (" << robot_ideal.position_in_Wframe.x() << ", " << robot_ideal.position_in_Wframe.y() << ")" << endl
-                    << " Robot's heading in W: " << robot_ideal.heading_degree_in_Wframe << endl
-                    << "   Angle to goal in R: " << angle_goal_robot_frame_degree << endl
-                    ;
+                // cout 
+                //     << "Departure: (" << departure_W.x() << ", " << departure_W.y() << ", " << departure_W.z() << ")" << endl
+                //     << "Arrival_W: (" << arrival_W.x() << ", " << arrival_W.y() << ", " << arrival_W.z() << ")" << endl
+                //     << "Arrival_R: (" << arrival_R.x() << ", " << arrival_R.y() << ", " << arrival_R.z() << ")" << endl
+                //     << "  Current: (" << robot_ideal.position_in_Wframe.x() << ", " << robot_ideal.position_in_Wframe.y() << ")" << endl
+                //     << " Robot's heading in W: " << robot_ideal.heading_degree_in_Wframe << endl
+                //     << "   Angle to goal in R: " << angle_goal_robot_frame_degree << endl
+                //     ;
 
 
                 /** New HT(homogeneous transformation matrix) in robot frame **/
@@ -241,11 +242,11 @@ int main(int argc, char **argv)
                 HTs.push_back(new_HT_adjust_heading);
 
                 float new_ang_degree = cut_redundant_epsilon( radian_to_degree( acos( new_HT_adjust_heading(0,0) ) ));
-                cout
-                    << "new_ang:" << new_ang_degree << endl;
+                // cout
+                //     << "new_ang:" << new_ang_degree << endl;
                     
                 /** Draw robot's position and its velocity vector **/
-                draw_robot_vector(robot_ideal, lidar_msg);
+                // draw_robot_vector(robot_ideal, lidar_msg);
                 lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
                 lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
                 lidar_msg.points_col.push_back(0xFF00FFFF);
@@ -257,30 +258,32 @@ int main(int argc, char **argv)
                 lidar_msg.circles_y.push_back(arrival_W.y());
                 lidar_msg.circles_col.push_back(0xFFFF00FF);
 
+                /** Robot mark **/
                 lidar_msg.points_x.push_back(new_frame_W.x());
                 lidar_msg.points_y.push_back(new_frame_W.y());
                 lidar_msg.points_col.push_back(0xFFFF0000);
 
-                lidar_msg.lines_p1x.push_back(arrival_W_only_xy.x());
-                lidar_msg.lines_p1y.push_back(arrival_W_only_xy.y());
-                lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
-                lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
-                lidar_msg.lines_col.push_back(0x229999FF);
+                /** Line from robot to arrival **/
+                // lidar_msg.lines_p1x.push_back(arrival_W_only_xy.x());
+                // lidar_msg.lines_p1y.push_back(arrival_W_only_xy.y());
+                // lidar_msg.lines_p2x.push_back(robot_ideal.position_in_Wframe.x());
+                // lidar_msg.lines_p2y.push_back(robot_ideal.position_in_Wframe.y());
+                // lidar_msg.lines_col.push_back(0x229999FF);
 
                 /** Publish lidar msg **/
                 lidar_msg_pub.publish(lidar_msg);
 
                 // draw_grid_line_of_robot_frame(robot_ideal, W_HT_R, arrival_R, lidar_msg, true);
 
-                cout
-                    << "robot heading:" << robot_ideal.heading_degree_in_Wframe << endl
-                    ;
+                // cout
+                //     << "robot heading:" << robot_ideal.heading_degree_in_Wframe << endl
+                //     ;
 
                 /** timestep increasing **/
                 time_stamp += delta_t;
-                cout 
-                    << "robot is at:(" << robot_ideal.position_in_Wframe.x() << ", " << robot_ideal.position_in_Wframe.y() << ")" << endl;
-                getchar();
+                // cout 
+                    // << "robot is at:(" << robot_ideal.position_in_Wframe.x() << ", " << robot_ideal.position_in_Wframe.y() << ")" << endl;
+                // getchar();
             }
 
             /** Update the next departure waypoint to the current position **/
@@ -292,6 +295,8 @@ int main(int argc, char **argv)
 
         cout << "arrived at:(" << robot_ideal.position_in_Wframe.x() << ", " << robot_ideal.position_in_Wframe.y() << ")" << endl;
         cout << "Travel finished!" << endl;
+        cout << "Press to continue...";
+        getchar();
     }
 
     wall_segments_file.close();

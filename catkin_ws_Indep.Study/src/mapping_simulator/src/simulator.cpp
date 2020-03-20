@@ -109,11 +109,11 @@ bool if_arrived_at_xy_frameW(Robot &robot, float x, float y, float threshold_dis
     float y_diff = fabs(robot.position_in_Wframe.y() - y);
     bool within_x = x_diff < threshold_distance;
     bool within_y = y_diff < threshold_distance;
-    cout
-        << "\ndifference: "
-        << "  x:" << within_x
-        << "  y:" << within_y
-        << endl;
+    // cout
+    //     << "\ndifference: "
+    //     << "  x:" << within_x
+    //     << "  y:" << within_y
+    //     << endl;
 
     return (within_x && within_y) ? true : false;
 }
