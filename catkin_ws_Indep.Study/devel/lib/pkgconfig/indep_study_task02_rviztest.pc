@@ -1,8 +1,8 @@
-prefix=/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel
+prefix=/home/dpark/map-fusion/catkin_ws_Indep.Study/devel
 
 Name: indep_study_task02_rviztest
 Description: Description of indep_study_task02_rviztest
 Version: 0.0.0
-Cflags: -I/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/indep_study_task02_rviztest/include
+Cflags: 
 Libs: -L${prefix}/lib 
 Requires: 

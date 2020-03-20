@@ -141,7 +141,7 @@ int main(int argc, char **argv)
                     cout 
                         << "\t\tDeparture was: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
                         << "\t\t   Arrived at: (" << arrival_W.x() << ", " << arrival_W.y() << ")" << endl
-                        << "\t\t  Robot speed: " << robot_actual.speed << "\t delta_t: " << delta_t << endl
+                        << "\t\t  Robot speeddddd: " << robot_actual.speed << "\t delta_t: " << delta_t << endl
                         << endl;
                     break;
                 }

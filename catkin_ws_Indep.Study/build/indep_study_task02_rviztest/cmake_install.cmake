@@ -1,8 +1,8 @@
-# Install script for directory: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/indep_study_task02_rviztest
+# Install script for directory: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/indep_study_task02_rviztest
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install")
+  set(CMAKE_INSTALL_PREFIX "/home/dpark/map-fusion/catkin_ws_Indep.Study/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task02_rviztest/catkin_generated/installspace/indep_study_task02_rviztest.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/dpark/map-fusion/catkin_ws_Indep.Study/build/indep_study_task02_rviztest/catkin_generated/installspace/indep_study_task02_rviztest.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/indep_study_task02_rviztest/cmake" TYPE FILE FILES
-    "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task02_rviztest/catkin_generated/installspace/indep_study_task02_rviztestConfig.cmake"
-    "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/indep_study_task02_rviztest/catkin_generated/installspace/indep_study_task02_rviztestConfig-version.cmake"
+    "/home/dpark/map-fusion/catkin_ws_Indep.Study/build/indep_study_task02_rviztest/catkin_generated/installspace/indep_study_task02_rviztestConfig.cmake"
+    "/home/dpark/map-fusion/catkin_ws_Indep.Study/build/indep_study_task02_rviztest/catkin_generated/installspace/indep_study_task02_rviztestConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/indep_study_task02_rviztest" TYPE FILE FILES "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/indep_study_task02_rviztest/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/indep_study_task02_rviztest" TYPE FILE FILES "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/indep_study_task02_rviztest/package.xml")
 endif()
 

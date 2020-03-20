@@ -1,4 +1,4 @@
-prefix=/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel
+prefix=/home/dpark/map-fusion/catkin_ws_Indep.Study/devel
 
 Name: mapping_simulator
 Description: Description of mapping_simulator

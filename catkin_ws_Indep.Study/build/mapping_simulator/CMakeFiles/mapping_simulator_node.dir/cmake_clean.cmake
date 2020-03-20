@@ -8,8 +8,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/mapping_simulator_node.dir/src/laser.cpp.o"
   "CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o"
   "CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o"
-  "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel/lib/mapping_simulator/mapping_simulator_node.pdb"
-  "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel/lib/mapping_simulator/mapping_simulator_node"
+  "/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/mapping_simulator/mapping_simulator_node.pdb"
+  "/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/mapping_simulator/mapping_simulator_node"
 )
 
 # Per-language clean rules from dependency scanning.

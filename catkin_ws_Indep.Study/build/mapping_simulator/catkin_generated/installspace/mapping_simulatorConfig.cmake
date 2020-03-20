@@ -67,14 +67,14 @@ set(mapping_simulator_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(mapping_simulator_SOURCE_PREFIX /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator)
-  set(mapping_simulator_DEVEL_PREFIX /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel)
+  set(mapping_simulator_SOURCE_PREFIX /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator)
+  set(mapping_simulator_DEVEL_PREFIX /home/dpark/map-fusion/catkin_ws_Indep.Study/devel)
   set(mapping_simulator_INSTALL_PREFIX "")
   set(mapping_simulator_PREFIX ${mapping_simulator_DEVEL_PREFIX})
 else()
   set(mapping_simulator_SOURCE_PREFIX "")
   set(mapping_simulator_DEVEL_PREFIX "")
-  set(mapping_simulator_INSTALL_PREFIX /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install)
+  set(mapping_simulator_INSTALL_PREFIX /home/dpark/map-fusion/catkin_ws_Indep.Study/install)
   set(mapping_simulator_PREFIX ${mapping_simulator_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install/lib;/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/dpark/map-fusion/catkin_ws_Indep.Study/install/lib;/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib;/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

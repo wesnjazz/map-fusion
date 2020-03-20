@@ -1,8 +1,8 @@
-# Install script for directory: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator
+# Install script for directory: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install")
+  set(CMAKE_INSTALL_PREFIX "/home/dpark/map-fusion/catkin_ws_Indep.Study/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/mapping_simulator/catkin_generated/installspace/mapping_simulator.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/dpark/map-fusion/catkin_ws_Indep.Study/build/mapping_simulator/catkin_generated/installspace/mapping_simulator.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mapping_simulator/cmake" TYPE FILE FILES
-    "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/mapping_simulator/catkin_generated/installspace/mapping_simulatorConfig.cmake"
-    "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/build/mapping_simulator/catkin_generated/installspace/mapping_simulatorConfig-version.cmake"
+    "/home/dpark/map-fusion/catkin_ws_Indep.Study/build/mapping_simulator/catkin_generated/installspace/mapping_simulatorConfig.cmake"
+    "/home/dpark/map-fusion/catkin_ws_Indep.Study/build/mapping_simulator/catkin_generated/installspace/mapping_simulatorConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mapping_simulator" TYPE FILE FILES "/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/mapping_simulator/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/mapping_simulator" TYPE FILE FILES "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/package.xml")
 endif()
 

@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel/setup.sh
+    local-name: /home/dpark/map-fusion/catkin_ws_Indep.Study/devel/setup.sh

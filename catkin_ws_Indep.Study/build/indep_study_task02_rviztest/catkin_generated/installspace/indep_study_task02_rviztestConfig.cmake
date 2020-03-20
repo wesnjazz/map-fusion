@@ -67,14 +67,14 @@ set(indep_study_task02_rviztest_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(indep_study_task02_rviztest_SOURCE_PREFIX /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/src/indep_study_task02_rviztest)
-  set(indep_study_task02_rviztest_DEVEL_PREFIX /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel)
+  set(indep_study_task02_rviztest_SOURCE_PREFIX /home/dpark/map-fusion/catkin_ws_Indep.Study/src/indep_study_task02_rviztest)
+  set(indep_study_task02_rviztest_DEVEL_PREFIX /home/dpark/map-fusion/catkin_ws_Indep.Study/devel)
   set(indep_study_task02_rviztest_INSTALL_PREFIX "")
   set(indep_study_task02_rviztest_PREFIX ${indep_study_task02_rviztest_DEVEL_PREFIX})
 else()
   set(indep_study_task02_rviztest_SOURCE_PREFIX "")
   set(indep_study_task02_rviztest_DEVEL_PREFIX "")
-  set(indep_study_task02_rviztest_INSTALL_PREFIX /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install)
+  set(indep_study_task02_rviztest_INSTALL_PREFIX /home/dpark/map-fusion/catkin_ws_Indep.Study/install)
   set(indep_study_task02_rviztest_PREFIX ${indep_study_task02_rviztest_INSTALL_PREFIX})
 endif()
 
@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(indep_study_task02_rviztest_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "include " STREQUAL " ")
+if(NOT " " STREQUAL " ")
   set(indep_study_task02_rviztest_INCLUDE_DIRS "")
-  set(_include_dirs "include")
+  set(_include_dirs "")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/install/lib;/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel/lib;/opt/ros/melodic/lib)
+    foreach(path /home/dpark/map-fusion/catkin_ws_Indep.Study/install/lib;/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib;/home/dpark/Independent-Study-2020SP/catkin_ws_Indep.Study/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)
