@@ -62,6 +62,15 @@ void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wa
                 // vec.x = min_point.x();
                 // vec.y = min_point.y();
                 // vec.z = 0;
+                // cout 
+                //     << "---original---" << endl
+                //     << "min_point:" << endl << min_point << endl;
+
+                min_point = Vec2f(min_point.x() + length_noise.gaussian(), min_point.y() + angle_noise.gaussian());
+                // cout 
+                //     << "--- noised ---" << endl
+                //     << "min_point:" << endl << min_point << endl;
+                // getchar();
                 point_cloud.push_back(min_point);                      // Push back into a vector of Segment* pointers
             }
         } else {

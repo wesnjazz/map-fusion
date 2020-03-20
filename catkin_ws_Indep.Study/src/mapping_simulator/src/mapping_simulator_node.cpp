@@ -43,8 +43,8 @@ int main(int argc, char **argv)
 
     /** Sensors and Noises **/
     Laser laser_sensor = Laser();
-    Noise laser_length_noise = Noise(0.0, 0.8);
-    Noise laser_angle_noise = Noise(0.0, 0.8);
+    Noise laser_length_noise = Noise(0.0, 0.05);
+    Noise laser_angle_noise = Noise(0.0, 0.005);
     Noise wheel_encoder_actual_dx_noise = Noise(0.0, 0.002);
     Noise wheel_encoder_actual_dy_noise = Noise(0.0, 0.01);
     WheelEncoder wheel_encoder_actual = WheelEncoder();
@@ -141,7 +141,7 @@ int main(int argc, char **argv)
                     cout 
                         << "\t\tDeparture was: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
                         << "\t\t   Arrived at: (" << arrival_W.x() << ", " << arrival_W.y() << ")" << endl
-                        << "\t\t  Robot speeddddd: " << robot_actual.speed << "\t delta_t: " << delta_t << endl
+                        << "\t\t  Robot speedhhh: " << robot_actual.speed << "\t delta_t: " << delta_t << endl
                         << endl;
                     break;
                 }
