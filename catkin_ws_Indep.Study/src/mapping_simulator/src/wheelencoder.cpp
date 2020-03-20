@@ -14,7 +14,7 @@ WheelEncoder::WheelEncoder()
 void WheelEncoder::simulate_odometry(float speed, float time, float dx_noise, float dy_noise)
 {
     dx_noise = cut_redundant_epsilon( fabs(dx_noise) );
-    this->dx = cut_redundant_epsilon( speed * time + dx_noise );
+    this->dx = cut_redundant_epsilon( speed * time - dx_noise );
     this->dy = dy_noise;
     // cout << "dx, dy: " << this->dx << ", " << this->dy << endl;
     // this->dy = cut_redundant_epsilon( speed * time + dy_noise );
