@@ -34,38 +34,13 @@ int main(int argc, char **argv)
     deque<float> robot_headings;     // deque of robot headings
 
 
-    /** File loading **/
-    if (argc <= 1 || 4 <= argc) {
-        usage(argv[0]);
-    }
-    if (argc >= 2) { wall_segments_file = ifstream(argv[1]); }
-    if (argc >= 3) { waypoints_file = ifstream(argv[2]); }
-    if (!wall_segments_file) { // && !waypoints_file) {
-        cout << "The file [";
-        if (!wall_segments_file) { cout << argv[1]; }
-        if (!waypoints_file) { cout << ", " << argv[2]; }
-        cout << "] doesn't exists.\n\n";
-        exit(0);
-    }
-    vector_slam_msgs::LidarDisplayMsg lidar_msg;
-    read_segments(wall_segments_file, wall_segments);
-    read_waypoints(waypoints_file, waypoints, robot_headings, lidar_msg);
-    deque<Vec3f> *waypoints_backup = new deque<Vec3f>(waypoints);   // Deep copy
-
-
     /** Create objects **/
     
     /** Sets robot's init position **/
     Vec3f robot_init_frame = waypoints.empty() ? Vec3f(0, 0, 0) : waypoints.front();
     Vec2f robot_init_position = robot_init_frame.block<2, 1>(0, 0);
     float robot_init_heading = robot_init_frame.z();
-    cout << "robot_init_frame:\n" << robot_init_frame << endl;
-    cout << "robot_init_position:\n" << robot_init_position << endl;
     float speed = 0.4;
-
-    Robot robot_actual = Robot(robot_init_position, robot_init_heading, speed);
-    Robot robot_ideal = Robot(robot_init_position, robot_init_heading, speed);
-    cout << "robot_frame:\n" << robot_ideal.robot_frame_in_Wframe << endl;
 
     /** Sensors and Noises **/
     Laser laser_sensor = Laser();
@@ -80,6 +55,32 @@ int main(int argc, char **argv)
     float delta_t = get_delta_t(laser_sensor);
     float time_stamp = 0.0;
 
+
+    /** File loading **/
+    if (argc <= 1 || 6 <= argc) {
+        usage(argv[0]);
+    }
+    if (argc >= 2) { wall_segments_file = ifstream(argv[1]); }
+    if (argc >= 3) { waypoints_file = ifstream(argv[2]); }
+    if (argc >= 4) { speed = atof(argv[3]); }
+    if (argc >= 5) { delta_t = atof(argv[4]); }
+    if (!wall_segments_file) { // && !waypoints_file) {
+        cout << "The file [";
+        if (!wall_segments_file) { cout << argv[1]; }
+        if (!waypoints_file) { cout << ", " << argv[2]; }
+        cout << "] doesn't exists.\n\n";
+        exit(0);
+    }
+    vector_slam_msgs::LidarDisplayMsg lidar_msg;
+    read_segments(wall_segments_file, wall_segments);
+    read_waypoints(waypoints_file, waypoints, robot_headings, lidar_msg);
+    deque<Vec3f> *waypoints_backup = new deque<Vec3f>(waypoints);   // Deep copy
+
+
+    Robot robot_actual = Robot(robot_init_position, robot_init_heading, speed);
+    Robot robot_ideal = Robot(robot_init_position, robot_init_heading, speed);
+    cout << "robot_frame:\n" << robot_ideal.robot_frame_in_Wframe << endl;
+
     /** LaserScan msg **/
     sensor_msgs::LaserScan laserscan;
     laserscan.range_max = laser_sensor.range_max;
@@ -88,6 +89,7 @@ int main(int argc, char **argv)
     laserscan.angle_min = 0.0;
 
     vector<Vec2f> point_cloud;
+
 
     /** ROS node loop **/
     while (ros::ok())
