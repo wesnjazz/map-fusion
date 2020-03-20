@@ -1,0 +1,2 @@
+clang++ main.cpp robot.cpp segment.cpp position.cpp laser.cpp noise.cpp map.cpp trajectory.cpp -I/usr/include/eigen3
+

@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "/usr/include/linux",
+                "/usr/include/eigen3/",
+                "/opt/ros/melodic/include/",
+                "/home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/",
+                "/home/dpark/map-fusion/gui/gui/src/gui/"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
