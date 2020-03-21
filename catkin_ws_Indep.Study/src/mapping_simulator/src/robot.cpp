@@ -13,9 +13,9 @@ Robot::Robot()
     this->set_robot_frame();
 }
 
-Robot::Robot(Vec2f &position, float heading_degree_in_Wframe, float speed)
+Robot::Robot(Vec2f &position_in_Wframe, float heading_degree_in_Wframe, float speed)
 {
-    this->position_in_Wframe = position;
+    this->position_in_Wframe = position_in_Wframe;
     // cout << "position_in_Wframe:\n" << this->position_in_Wframe << endl
         // << "position:\n" << position << endl;
     this->heading_degree_in_Wframe = heading_degree_in_Wframe;
@@ -26,11 +26,11 @@ Robot::Robot(Vec2f &position, float heading_degree_in_Wframe, float speed)
 }
 
 
-void Robot::move_to(Vec2f &position)
+void Robot::move_to(Vec2f &position_in_Wframe)
 {
-    this->heading_degree_in_Wframe = get_angle_degree_between_two_vectors(this->position_in_Wframe, position);
+    this->heading_degree_in_Wframe = get_angle_degree_between_two_vectors(this->position_in_Wframe, position_in_Wframe);
     this->heading_radian_in_Wframe = degree_to_radian(heading_degree_in_Wframe);
-    this->position_in_Wframe = position;
+    this->position_in_Wframe = position_in_Wframe;
     this->set_velocity();
     this->set_robot_frame();
     // cout << "robot angle:" << heading_degree_in_Wframe << "\t"<< heading_radian_in_Wframe << endl;

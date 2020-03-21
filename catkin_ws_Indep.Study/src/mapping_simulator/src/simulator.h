@@ -14,6 +14,8 @@
 
 void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wall_segments,
                             Laser &laser_sensor, Noise &length_noise, Noise &angle_noise);
+void collision_avoidance(vector<Vec2f> &point_cloud, Robot &robot, vector<Mat3f> &aHTb);
+
 float get_vector_length(Vec2f &v);
 deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta_t,
                                       Robot &robot, Vec2f &depart, Vec2f &arrive, bool noisy = false, Noise *noise = NULL);

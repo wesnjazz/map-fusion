@@ -61,6 +61,15 @@ void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wa
 }
 
 
+// void collision_avoidance(vector<Vec2f> &point_cloud, Robot &robot, vector<Mat3f> &aHTb)
+// {
+//     for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it)    
+//     {
+
+//     }
+// }
+
+
 // void adjust_heading(Robot &robot, Vec2f &goal, float threshold)
 // {
 //     float angle_diff_degree = get_angle_degree_between_two_vectors(robot.position_in_Wframe, goal);
@@ -129,7 +138,8 @@ deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta
     /** Calculate the interpoint based on robot's velocity **/
     // L0: depart ~ interpoint
     // L1: interpoint ~ arrive
-    Vec2f L0 = robot.velocity_in_Wframe;
+    Vec2f L0 = robot.position_in_Wframe;
+    // Vec2f L0 = robot.velocity_in_Wframe;
     Vec2f L1 = arrive - L0;
     // cout << "L0: " << L0 << endl;
     // cout << "L1: " << L1 << endl;

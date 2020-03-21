@@ -7,8 +7,8 @@
 struct Robot
 {
     Robot();
-    Robot(Vec2f &position_W, float heading_degree = 0.0, float speed = 0.2);
-    void move_to(Vec2f &position_W);
+    Robot(Vec2f &position_in_Wframe, float heading_degree = 0.0, float speed = 0.2);
+    void move_to(Vec2f &position_in_Wframe);
     void set_speed(float speed);
     void set_heading(float heading);
     void set_velocity();
