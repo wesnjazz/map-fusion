@@ -137,7 +137,7 @@ int main(int argc, char **argv)
             while (true)
             {
                 /** If arrived at the waypoint, get the next waypoint **/
-                if (if_arrived_at_xy_frameW(robot_actual, arrival_W.x(), arrival_W.y(), 0.1)) {
+                if (if_arrived_at_xy_frameW(robot_actual, arrival_W.x(), arrival_W.y(), 0.2)) {
                     cout 
                         << "\t\tDeparture was: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
                         << "\t\t   Arrived at: (" << arrival_W.x() << ", " << arrival_W.y() << ")" << endl
@@ -294,12 +294,13 @@ int main(int argc, char **argv)
                 /** Publish lidar msg **/
                 lidar_msg_pub.publish(lidar_msg);
 
-                /** Deletes drawing **/
-                // Deletes robot points
+
+                /** Clear robot points **/
                 // lidar_msg.points_x.pop_back();
                 // lidar_msg.points_y.pop_back();
                 // lidar_msg.points_col.pop_back();
-                // Deletes robot velocity
+
+                /** Clear robot velocity **/
                 lidar_msg.lines_p1x.pop_back();
                 lidar_msg.lines_p1y.pop_back();
                 lidar_msg.lines_p2x.pop_back();
@@ -341,6 +342,16 @@ int main(int argc, char **argv)
 
             /** Update the next departure waypoint to the current position **/
             departure_W = arrival_W;
+
+
+            /** Clear trajectories **/
+            // lidar_msg.points_x.clear();
+            // lidar_msg.points_y.clear();
+            // lidar_msg.points_col.clear();
+            /** Clear circles **/
+            lidar_msg.circles_x.clear();
+            lidar_msg.circles_y.clear();
+            lidar_msg.circles_col.clear();
 
         }
 
