@@ -22,8 +22,8 @@ int main(int argc, char **argv)
     /** ROS initialization **/
     ros::init(argc, argv, "Mapping_Simulator");
     ros::NodeHandle n;
-    ros::Rate loop_rate(20);
-    ros::Publisher lidar_msg_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 1000);
+    ros::Rate loop_rate(40);
+    ros::Publisher lidar_msg_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 1);
 
 
     /** Map and Points **/
@@ -86,8 +86,8 @@ int main(int argc, char **argv)
     laserscan.angle_max = laser_sensor.FOV_radian;
     laserscan.angle_min = 0.0;
 
-    vector<Vec2f> point_cloud;
-
+    // vector<Vec2f> point_cloud;
+    // point_cloud.reserve(9990000);
 
     /** ROS node loop **/
     while (ros::ok())
@@ -147,7 +147,10 @@ int main(int argc, char **argv)
                 }
 
                 round++;
-                
+
+                vector<Vec2f> point_cloud;
+                point_cloud.reserve(90000);
+
 
                 /** Laser Scan **/
                 simulate_scan(point_cloud, robot_actual, wall_segments, robot_actual.sensor_laser, laser_length_noise, laser_angle_noise);
@@ -301,37 +304,37 @@ int main(int argc, char **argv)
                 // lidar_msg.points_col.pop_back();
 
                 /** Clear robot velocity **/
-                lidar_msg.lines_p1x.pop_back();
-                lidar_msg.lines_p1y.pop_back();
-                lidar_msg.lines_p2x.pop_back();
-                lidar_msg.lines_p2y.pop_back();
-                lidar_msg.lines_col.pop_back();
-                lidar_msg.lines_p1x.pop_back();
-                lidar_msg.lines_p1y.pop_back();
-                lidar_msg.lines_p2x.pop_back();
-                lidar_msg.lines_p2y.pop_back();
-                lidar_msg.lines_col.pop_back();
-                lidar_msg.lines_p1x.pop_back();
-                lidar_msg.lines_p1y.pop_back();
-                lidar_msg.lines_p2x.pop_back();
-                lidar_msg.lines_p2y.pop_back();
-                lidar_msg.lines_col.pop_back();
+                // lidar_msg.lines_p1x.pop_back();
+                // lidar_msg.lines_p1y.pop_back();
+                // lidar_msg.lines_p2x.pop_back();
+                // lidar_msg.lines_p2y.pop_back();
+                // lidar_msg.lines_col.pop_back();
+                // lidar_msg.lines_p1x.pop_back();
+                // lidar_msg.lines_p1y.pop_back();
+                // lidar_msg.lines_p2x.pop_back();
+                // lidar_msg.lines_p2y.pop_back();
+                // lidar_msg.lines_col.pop_back();
+                // lidar_msg.lines_p1x.pop_back();
+                // lidar_msg.lines_p1y.pop_back();
+                // lidar_msg.lines_p2x.pop_back();
+                // lidar_msg.lines_p2y.pop_back();
+                // lidar_msg.lines_col.pop_back();
 
-                lidar_msg.lines_p1x.pop_back();
-                lidar_msg.lines_p1y.pop_back();
-                lidar_msg.lines_p2x.pop_back();
-                lidar_msg.lines_p2y.pop_back();
-                lidar_msg.lines_col.pop_back();
-                lidar_msg.lines_p1x.pop_back();
-                lidar_msg.lines_p1y.pop_back();
-                lidar_msg.lines_p2x.pop_back();
-                lidar_msg.lines_p2y.pop_back();
-                lidar_msg.lines_col.pop_back();
-                lidar_msg.lines_p1x.pop_back();
-                lidar_msg.lines_p1y.pop_back();
-                lidar_msg.lines_p2x.pop_back();
-                lidar_msg.lines_p2y.pop_back();
-                lidar_msg.lines_col.pop_back();
+                // lidar_msg.lines_p1x.pop_back();
+                // lidar_msg.lines_p1y.pop_back();
+                // lidar_msg.lines_p2x.pop_back();
+                // lidar_msg.lines_p2y.pop_back();
+                // lidar_msg.lines_col.pop_back();
+                // lidar_msg.lines_p1x.pop_back();
+                // lidar_msg.lines_p1y.pop_back();
+                // lidar_msg.lines_p2x.pop_back();
+                // lidar_msg.lines_p2y.pop_back();
+                // lidar_msg.lines_col.pop_back();
+                // lidar_msg.lines_p1x.pop_back();
+                // lidar_msg.lines_p1y.pop_back();
+                // lidar_msg.lines_p2x.pop_back();
+                // lidar_msg.lines_p2y.pop_back();
+                // lidar_msg.lines_col.pop_back();
 
 
                 /** timestep increasing **/
@@ -339,6 +342,8 @@ int main(int argc, char **argv)
                 ros::spinOnce();
                 loop_rate.sleep();
             }
+            // cout 
+                // << "point_cloud size: " << point_cloud.size() << endl;
 
             /** Update the next departure waypoint to the current position **/
             departure_W = arrival_W;
