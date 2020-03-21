@@ -25,10 +25,8 @@ void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wa
                 - (laser_sensor.FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
 
     for(int i = 1; i <= laser_sensor.num_total_rays; i++) {            // For all each laser ray
-        // cout << "------ rays ----------\n";
         Segment ray = 
             laser_sensor.create_a_ray(robot.position_in_Wframe, angle, length_noise, angle_noise); // Create a ray
-        // cout << ray << "\n-------------------------\n";
         angle += laser_sensor.angular_resolution_degree;               // Get the next ray's angle
 
         float min_t = 99999;                                            // Temp value for min
@@ -38,14 +36,11 @@ void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wa
         for(vector<Segment>::iterator wall_it = wall_segments.begin(); wall_it != wall_segments.end(); wall_it++) {  // For all each wall segment
             if (!ray.isParallel(*wall_it)) {                                 // If two segments(Laser ray & Wall segment) is not Parallel
                 Vec2f new_point = ray.intersection_point(*wall_it);                // Get the intersection point as a Vec2f
-                // cout << "(" << new_point.x() << "," << new_point.y() << ")" << endl;
-                    // cout << ray.t << " ** " << min_t << endl;                       // In two intersects on its length (not on a extended line)
                 if (ray.ifIntersect(*wall_it)) {      
                     if (fabs(ray.t) < fabs(min_t)) {                    // Takes as closest wall segment at the moment
                         point_exists = true;
                         min_t = ray.t;                                  // Remember the min t (length)
                         min_point = new_point;
-                        // cout << "(" << min_point.x() << "," << min_point.y() << ") with a wall " << *wall_it << "\n";
                     }
                 }
             }
@@ -58,26 +53,10 @@ void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wa
                 ;
                 // cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor.range_min << endl;
             } else {
-                // geometry_msgs::Vector3 vec;
-                // vec.x = min_point.x();
-                // vec.y = min_point.y();
-                // vec.z = 0;
-                // cout 
-                //     << "---original---" << endl
-                //     << "min_point:" << endl << min_point << endl;
-
                 min_point = Vec2f(min_point.x() + length_noise.gaussian(), min_point.y() + angle_noise.gaussian());
-                // cout 
-                //     << "--- noised ---" << endl
-                //     << "min_point:" << endl << min_point << endl;
-                // getchar();
                 point_cloud.push_back(min_point);                      // Push back into a vector of Segment* pointers
             }
-        } else {
-            ;
-            // cout << "nothing to add!" << endl;
-        }
-        // cout << "\n\n";
+        } 
     }
 }
 
@@ -331,7 +310,7 @@ void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, vector_slam_msg
     while(getline(pos_file, line)) {
         stringstream ss(line);
         while(getline(ss, line, ',')) {
-            cout << line << endl;
+            // cout << line << endl;
             count++;
             switch (count)
             {

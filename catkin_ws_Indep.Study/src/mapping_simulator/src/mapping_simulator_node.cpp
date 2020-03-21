@@ -22,8 +22,8 @@ int main(int argc, char **argv)
     /** ROS initialization **/
     ros::init(argc, argv, "Mapping_Simulator");
     ros::NodeHandle n;
-    ros::Rate loop_rate(4);
-    ros::Publisher lidar_msg_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 1);
+    ros::Rate loop_rate(20);
+    ros::Publisher lidar_msg_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 1000);
 
 
     /** Map and Points **/
@@ -77,7 +77,7 @@ int main(int argc, char **argv)
 
     Robot robot_actual = Robot(robot_init_position, robot_init_heading, speed);
     Robot robot_ideal = Robot(robot_init_position, robot_init_heading, speed);
-    cout << "robot_frame:\n" << robot_ideal.robot_frame_in_Wframe << endl;
+    // cout << "robot_frame:\n" << robot_ideal.robot_frame_in_Wframe << endl;
 
     /** LaserScan msg **/
     sensor_msgs::LaserScan laserscan;
