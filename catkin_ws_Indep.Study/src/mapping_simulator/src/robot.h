@@ -21,6 +21,7 @@ struct Robot
     float heading_radian_in_Wframe;
     float speed;
     Laser sensor_laser;
+    const float outer_radius = 1;
     // WheelEncoder sensor_wheel_encoder;
 };
 

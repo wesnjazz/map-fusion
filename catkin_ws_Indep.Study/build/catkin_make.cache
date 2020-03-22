@@ -1,2 +1,2 @@
 indep_study_task02_rviztest:mapping_simulator
--DCATKIN_DEVEL_PREFIX=/home/dpark/map-fusion/catkin_ws_Indep.Study/devel -DCMAKE_INSTALL_PREFIX=/home/dpark/map-fusion/catkin_ws_Indep.Study/install -G Unix Makefiles
+-DCMAKE_BUILD_TYPE=Debug -DCATKIN_DEVEL_PREFIX=/home/dpark/map-fusion/catkin_ws_Indep.Study/devel -DCMAKE_INSTALL_PREFIX=/home/dpark/map-fusion/catkin_ws_Indep.Study/install -G Unix Makefiles

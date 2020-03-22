@@ -59,8 +59,10 @@ void Robot::set_velocity()
      * - Make a helper function of creating a vector(speed, angle). 
      * - Robot's velocity_W = robot.position + robot's velocity_R
      **/
-    float x = this->position_in_Wframe.x() + (this->speed * cos(heading_radian_in_Wframe));
-    float y = this->position_in_Wframe.y() + (this->speed * sin(heading_radian_in_Wframe));
+    float x = this->speed * cos(heading_radian_in_Wframe);
+    float y = this->speed * sin(heading_radian_in_Wframe);
+    // float x = this->position_in_Wframe.x() + (this->speed * cos(heading_radian_in_Wframe));
+    // float y = this->position_in_Wframe.y() + (this->speed * sin(heading_radian_in_Wframe));
     this->velocity_in_Wframe = Vec2f(x, y);
 }
 
