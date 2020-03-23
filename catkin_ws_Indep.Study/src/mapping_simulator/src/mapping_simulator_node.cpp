@@ -14,7 +14,7 @@
 #include <gui_publisher_helper.h>
 #include <sensor_msgs/LaserScan.h>
 
-// using namespace std;
+using namespace std;
 
 
 int main(int argc, char **argv) 
@@ -24,9 +24,10 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
     ros::Rate loop_rate(40);
     ros::Publisher lidar_msg_pub = n.advertise<vector_slam_msgs::LidarDisplayMsg>("/VectorSLAM/VectorLocalization/Gui", 1);
+    vector_slam_msgs::LidarDisplayMsg lidar_msg;
 
 
-    /** Map and Points **/
+    /** Map and Way Points **/
     vector<Segment> wall_segments;  // vector of wall segments
     ifstream wall_segments_file;    // file stream of wall segments
     deque<Vec3f> waypoints;         // vector of waypoints
@@ -40,6 +41,8 @@ int main(int argc, char **argv)
     Vec2f robot_init_position = robot_init_frame.block<2, 1>(0, 0);
     float robot_init_heading = robot_init_frame.z();
     float speed = 0.4;
+    Robot robot_actual = Robot(robot_init_position, robot_init_heading, speed);
+    Robot robot_ideal = Robot(robot_init_position, robot_init_heading, speed);
 
     /** Sensors and Noises **/
     Laser laser_sensor = Laser();
@@ -71,13 +74,9 @@ int main(int argc, char **argv)
         cout << "] doesn't exists.\n\n";
         exit(0);
     }
-    vector_slam_msgs::LidarDisplayMsg lidar_msg;
     read_segments(wall_segments_file, wall_segments);
-    read_waypoints(waypoints_file, waypoints, lidar_msg);
+    read_waypoints(waypoints_file, waypoints);
 
-    Robot robot_actual = Robot(robot_init_position, robot_init_heading, speed);
-    Robot robot_ideal = Robot(robot_init_position, robot_init_heading, speed);
-    // cout << "robot_frame:\n" << robot_ideal.robot_frame_in_Wframe << endl;
 
     /** LaserScan msg **/
     sensor_msgs::LaserScan laserscan;
@@ -86,60 +85,41 @@ int main(int argc, char **argv)
     laserscan.angle_max = laser_sensor.FOV_radian;
     laserscan.angle_min = 0.0;
 
-    // vector<Vec2f> point_cloud;
-    // point_cloud.reserve(9990000);
+
+
+    /** Initial position **/
+    Vec3f departure_W = waypoints.front();
+    waypoints.pop_front();
+    Mat3f initial_frame = get_HT_Aframe_to_Bframe(World_frame, departure_W);
+    Vec2f init_pos = Vec2f(departure_W.x(), departure_W.y());
+    robot_actual.move_to(init_pos);
+    robot_actual.set_heading(departure_W.z());
+
+    /** History of homogeneous transformations HT **/
+    const int HTs_size = 99000;
+    vector<Mat3f> HTs_actual;
+    vector<Mat3f> HTs_ideal;
+    HTs_actual.reserve(HTs_size);
+    HTs_ideal.reserve(HTs_size);
+    HTs_actual.push_back(initial_frame);
+    HTs_ideal.push_back(initial_frame);
+
+
+    /** Draw Wall segments **/
+    for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
+        lidar_msg.lines_p1x.push_back(it->start.x());
+        lidar_msg.lines_p1y.push_back(it->start.y());
+        lidar_msg.lines_p2x.push_back(it->end.x());
+        lidar_msg.lines_p2y.push_back(it->end.y());
+        lidar_msg.lines_col.push_back(0x22555555);
+    }
+
+    /** Drawing Grid **/
+    draw_grids(lidar_msg);
 
     /** ROS node loop **/
     while (ros::ok())
     {   
-        /** Initial position **/
-        Vec3f departure_W = waypoints.front();
-        waypoints.pop_front();
-
-
-        // float init_angle_degree = departure_W.z();
-        // float cos_init_angle_degree = cut_redundant_epsilon(degree_to_radian( cos(init_angle_degree) ));
-        // float sin_init_angle_degree = cut_redundant_epsilon(degree_to_radian( sin(init_angle_degree) ));
-        // Mat2f init_ROT;  // pure ROT in Rframe
-        // init_ROT << cos_init_angle_degree, -sin_init_angle_degree, sin_init_angle_degree, cos_init_angle_degree;
-        // Vec2f init_position = Vec2f(departure_W.x(), departure_W.y()); 
-        // Mat3f init_HT = init_HT.setIdentity();
-        // init_HT.block<2, 2>(0, 0) = init_ROT;
-        // init_HT.block<3, 1>(0, 2) = init_position.homogeneous();
-        // cout << "departure_W:\n" << departure_W << endl;
-        // robot_actual.move_to(init_position);
-        // robot_ideal.move_to(init_position);
-
-        /** Initial Transformation **/
-        Mat3f initial_frame;
-        Mat2f initial_rot;
-        Vec2f initial_trans = Vec2f(0, 0);
-        initial_rot << 1, 0, 0, 1;
-        initial_frame.setIdentity();
-        initial_frame.block<2, 2>(0, 0) = initial_rot;
-        initial_frame.block<2, 1>(0, 2) = initial_trans;
-
-        /** History of homogeneous transformations HT **/
-        vector<Mat3f> HTs_actual;
-        vector<Mat3f> HTs_ideal;
-        HTs_actual.push_back(initial_frame);
-        HTs_ideal.push_back(initial_frame);
-
-        /** Draw Wall segments **/
-        for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
-            lidar_msg.lines_p1x.push_back(it->start.x());
-            lidar_msg.lines_p1y.push_back(it->start.y());
-            lidar_msg.lines_p2x.push_back(it->end.x());
-            lidar_msg.lines_p2y.push_back(it->end.y());
-            lidar_msg.lines_col.push_back(0x22555555);
-        }
-
-        /** Drawing Grid **/
-        draw_grids(lidar_msg);
-        // draw_robot_vector(robot_ideal, lidar_msg);
-        // draw_robot_vector(robot_actual, lidar_msg, 0xFFFF5555);
-
-        int round = 0;
         /** Loop untround visit all waypoints **/
         while (!waypoints.empty())  // While there's a waypoint to visit
         {
@@ -155,10 +135,12 @@ int main(int argc, char **argv)
                 lidar_msg.points_x.push_back(robot_actual.position_in_Wframe.x());
                 lidar_msg.points_y.push_back(robot_actual.position_in_Wframe.y());
                 lidar_msg.points_col.push_back(0xFFFF5555);
-                // draw_robot_vector(robot_ideal, lidar_msg, 0xFFFF5555);
+                draw_robot_vector(robot_ideal, lidar_msg, 0xFFFF5555);
                 lidar_msg.points_x.push_back(robot_ideal.position_in_Wframe.x());
                 lidar_msg.points_y.push_back(robot_ideal.position_in_Wframe.y());
                 lidar_msg.points_col.push_back(0xFF5555FF);
+
+                /** Draw a circle for each way point **/
                 if (!arrival_circle_drew) {
                     lidar_msg.circles_x.push_back(arrival_W.x());
                     lidar_msg.circles_y.push_back(arrival_W.y());
@@ -178,12 +160,15 @@ int main(int argc, char **argv)
                     break;
                 }
 
-                round++;
-
+                /** TODO:
+                 * - not storing all history of points now. 
+                 * - Very slow if store all points
+                 * */
                 vector<Vec2f> point_cloud;
                 point_cloud.reserve(90000);
 
                 vector<Vec2f> collison_candidates;
+                collison_candidates.reserve(laser_sensor.num_total_rays * 2);
                 /** Laser Scan **/
                 simulate_scan(point_cloud, collison_candidates, robot_actual, wall_segments, robot_actual.sensor_laser, laser_length_noise, laser_angle_noise);
                 for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
@@ -205,17 +190,6 @@ int main(int argc, char **argv)
                 float dtheta_radian_ideal = cut_redundant_epsilon( ( atan2(wheel_encoder_ideal.dy, wheel_encoder_ideal.dx) ) );
                 float cos_dtheta_ideal = cut_redundant_epsilon( cos(dtheta_radian_ideal) );
                 float sin_dtheta_ideal = cut_redundant_epsilon( sin(dtheta_radian_ideal) );
-
-
-
-/**
- * 
-departure_W.x() + 
-departure_W.y() + 
-departure_W.z() + 
-**/
-
-
 
 
 
@@ -357,7 +331,7 @@ departure_W.z() +
 
                 /** For debugging **/                
                 // draw_grid_line_of_robot_frame(robot_actual, HT_accumulated, arrival_R, lidar_msg);
-                draw_robot_vector(robot_actual, lidar_msg, 0xFF5555FF);
+                // draw_robot_vector(robot_actual, lidar_msg, 0xFF5555FF);
 
 
                 /** Publish lidar msg **/

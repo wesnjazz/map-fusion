@@ -363,7 +363,7 @@ float cut_redundant_epsilon(float x, float threshold)
 }
 
 
-void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, vector_slam_msgs::LidarDisplayMsg &msg)
+void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions)
 {
     float x, y, theta_degree;
     int count = 0;
