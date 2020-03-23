@@ -145,6 +145,8 @@ laser.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 noise.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
+ros/ros.h
+-
 geometry_msgs/Vector3.h
 -
 vector_slam_msgs/LidarDisplayMsg.h

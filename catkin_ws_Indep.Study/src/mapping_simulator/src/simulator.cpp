@@ -18,12 +18,31 @@ float get_delta_t(Laser &laser)
 }
 
 
-void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wall_segments,
+void simulate_scan(vector<Vec2f> &point_cloud, vector<Vec2f> &collison_candidates, Robot &robot, vector<Segment> &wall_segments,
                             Laser &laser_sensor, Noise &length_noise, Noise &angle_noise)
 {
     float angle = robot.heading_degree_in_Wframe 
                 - (laser_sensor.FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
 
+    float collision_angle_range_degree = 30;
+    float proportion_FOV_collision = collision_angle_range_degree / (laser_sensor.FOV_degree);
+    float number_rays = laser_sensor.num_total_rays * proportion_FOV_collision;
+    int ray_middle = (int)(laser_sensor.num_total_rays / 2);
+    int ray_min = ray_middle - (int)(number_rays / 2);
+    int ray_max = ray_middle + (int)(number_rays / 2);
+    float collision_angle_min_degree = robot.heading_degree_in_Wframe - collision_angle_range_degree / 2.0f;
+    float collision_angle_max_degree = robot.heading_degree_in_Wframe + collision_angle_range_degree / 2.0f;
+    
+//     cout 
+//         << angle << endl
+//         << collision_angle_range_degree << endl
+//         << proportion_FOV_collision << endl
+//         << number_rays << endl
+//         << ray_middle << endl
+//         << ray_min << endl
+//         << ray_max << endl
+//         ;
+// getchar();
     for(int i = 1; i <= laser_sensor.num_total_rays; i++) {            // For all each laser ray
         Segment ray = 
             laser_sensor.create_a_ray(robot.position_in_Wframe, angle, length_noise, angle_noise); // Create a ray
@@ -55,9 +74,41 @@ void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wa
             } else {
                 min_point = Vec2f(min_point.x() + length_noise.gaussian(), min_point.y() + angle_noise.gaussian());
                 point_cloud.push_back(min_point);                      // Push back into a vector of Segment* pointers
+                if (ray_min < i && i < ray_max) {
+                    collison_candidates.push_back(min_point);
+                }
             }
         } 
     }
+}
+
+
+bool if_collides(vector<Vec2f> &point_cloud, Robot &robot, vector_slam_msgs::LidarDisplayMsg &lidar_msg, ros::Publisher &lidar_msg_pub)
+{
+    for (vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it)
+    {
+        float x_diff = it->x() - robot.position_in_Wframe.x();
+        float y_diff = it->y() - robot.position_in_Wframe.y();
+        float angle_degree_between_laser_scan_and_velocity 
+            = cut_redundant_epsilon( 
+                radian_to_degree( atan2( y_diff, x_diff ) ));
+        cout << angle_degree_between_laser_scan_and_velocity << endl;
+        cout << robot.heading_degree_in_Wframe << endl;
+        lidar_msg.points_x.push_back(it->x());
+        lidar_msg.points_y.push_back(it->y());
+        lidar_msg.points_col.push_back(0xFF00ff00);
+        // lidar_msg_pub.publish(lidar_msg);
+        float squared_length_robot_to_laserscanpoint
+            = cut_redundant_epsilon( sqrt( y_diff * y_diff + x_diff * x_diff ));
+        float squared_velocity_length 
+            = get_vector_length(robot.velocity_in_Wframe) * get_vector_length(robot.velocity_in_Wframe);
+        if (squared_length_robot_to_laserscanpoint < (squared_velocity_length + robot.outer_radius ))
+        {
+            cout << "\t\t\tCOLLIDES !!!\n";
+            return true;
+        } 
+    }
+    return false;
 }
 
 
