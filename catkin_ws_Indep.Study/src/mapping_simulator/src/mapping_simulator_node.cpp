@@ -191,14 +191,7 @@ int main(int argc, char **argv)
                     lidar_msg.points_y.push_back(it->y());
                     lidar_msg.points_col.push_back(0xFFFF5500);
                 }
-                // for(vector<Vec2f>::iterator it = collison_candidates.begin(); it != collison_candidates.end(); ++it) {
-                //     lidar_msg.points_x.push_back(it->x());
-                //     lidar_msg.points_y.push_back(it->y());
-                //     lidar_msg.points_col.push_back(0xFF66FF33);
-                // }
                 bool if_collide = if_collides(collison_candidates, robot_actual, lidar_msg, lidar_msg_pub);
-                // lidar_msg_pub.publish(lidar_msg);
-                // getchar();
                 
 
                 /** Odometry simulation in robot frame **/
@@ -216,141 +209,14 @@ int main(int argc, char **argv)
 
                 /** Check collison **/
                 // point_cloud, robot, HTs
-                int num_collides = 0;
                 int does_collide = false;
                 float angle = robot_actual.heading_degree_in_Wframe;
-            // do {
-                for (vector<Vec2f>::iterator it = collison_candidates.begin(); it != collison_candidates.end(); ++it)
-                {
-                    float x_diff = it->x() - robot_actual.position_in_Wframe.x();
-                    float y_diff = it->y() - robot_actual.position_in_Wframe.y();
-                    float angle_degree_between_laser_scan_and_velocity 
-                        = cut_redundant_epsilon( 
-                          radian_to_degree( atan2( y_diff, x_diff ) ));
-                    cout << angle_degree_between_laser_scan_and_velocity << endl;
-                    cout << robot_actual.heading_degree_in_Wframe << endl;
-                    // if (45.0f < angle_degree_between_laser_scan_and_velocity ||
-                    //             angle_degree_between_laser_scan_and_velocity < -45.0f)
-                    // {
-                    //     continue;
-                    // }
-                    cout << "previous \n";
-                    lidar_msg.points_x.push_back(it->x());
-                    lidar_msg.points_y.push_back(it->y());
-                    lidar_msg.points_col.push_back(0xFF00ff00);
-                    lidar_msg_pub.publish(lidar_msg);
-                    // getchar();
-                    float squared_length_robot_to_laserscanpoint
-                        = cut_redundant_epsilon( sqrt( y_diff * y_diff + x_diff * x_diff ));
-                    // float squared_length_robot_to_laserscanpoint
-                    //     = cut_redundant_epsilon( y_diff * y_diff + x_diff * x_diff );
-                    float squared_velocity_length 
-                        = get_vector_length(robot_actual.velocity_in_Wframe) * get_vector_length(robot_actual.velocity_in_Wframe);
-                    if (squared_length_robot_to_laserscanpoint < (squared_velocity_length + robot_actual.outer_radius ))
-                    {
-                        // lidar_msg.points_x.push_back(it->x());
-                        // lidar_msg.points_y.push_back(it->y());
-                        // lidar_msg.points_col.push_back(0xFF22FF44);
-                        // lidar_msg_pub.publish(lidar_msg);
-                        does_collide = true;
-                        // if (90.0f >= angle_degree_between_laser_scan_and_velocity >= 0.0f)
-                        // {
-                        //     angle = 30;
-                        // } else if (-90.0f <= angle_degree_between_laser_scan_and_velocity <= 0.0f)
-                        // {
-                        //     angle = -30;
-                        // }
-                        Noise random_angle = Noise(0, 90);
-                            angle = robot_actual.heading_degree_in_Wframe + random_angle.gaussian();
-                            // angle = robot_actual.heading_degree_in_Wframe + 180;
-                        // robot_actual.set_heading(angle);
-                        lidar_msg.points_x.push_back(it->x());
-                        lidar_msg.points_y.push_back(it->y());
-                        lidar_msg.points_col.push_back(0xFF9900FF);
-                        lidar_msg.circles_x.push_back(it->x());
-                        lidar_msg.circles_y.push_back(it->y());
-                        lidar_msg.circles_col.push_back(0xFFFF66FF);
-                        lidar_msg_pub.publish(lidar_msg);
-                        // getchar();
-                        // num_collides += 1;
-                        // if (num_collides > 50) {
-                            // robot_actual.set_heading(robot_actual.heading_degree_in_Wframe + 15);
-                            // draw_robot_vector(robot_actual, lidar_msg, 0xFF987654);
-                            // robot_ideal.set_heading(robot_ideal.heading_degree_in_Wframe + 15);
-                            // draw_robot_vector(robot_ideal, lidar_msg, 0xFF456789);
-                            // lidar_msg_pub.publish(lidar_msg);
-                            // it = point_cloud.begin();
-                            // break;
-                            // continue;
-                        // }
-                        // does_collide = false;
-                        // break;
-                    break;
-                    } 
-                }
-                // break;
-            // } while (does_collide);
+                Noise random_angle = Noise(0, 90);
+                angle = robot_actual.heading_degree_in_Wframe + random_angle.gaussian();
 
-                // angle = robot_actual.heading_degree_in_Wframe;
-
-                //         // angle += 45; 
-                //         // float adjust_heading_radian = 0.0f;
-                //         // float abs_angle = fabs( angle_degree_between_laser_scan_and_velocity );
-                //         // if (0.0f <= angle && angle <= 90.0f ||
-                //         //     -90.0f <= angle && angle <= 0.0f)
-                //         // {
-                //         //     angle = robot_actual.heading_radian_in_Wframe + 90.0f;
-                //         // }
-                //         // else
-                //         // {
-                //         //     angle = robot_actual.heading_radian_in_Wframe - 90.0f;
-                //         // }
-                //         // else if (0.0f > angle_degree_between_laser_scan_and_velocity 
-                //         //               && angle_degree_between_laser_scan_and_velocity >= -90.0f)
-                //         // {
-                //         //     adjust_heading_radian = degree_to_radian( -45.0f );
-                //         // }
-                //         // else if (-90.0f > angle_degree_between_laser_scan_and_velocity 
-                //         //               && angle_degree_between_laser_scan_and_velocity >= -180.0f)
-                //         // {
-                //         //     adjust_heading_radian = degree_to_radian( -45.0f );
-                //         // }
-                //         // float cos_adjust_heading = cut_redundant_epsilon( cos( degree_to_radian( angle)) );
-                //         // float sin_adjust_heading = cut_redundant_epsilon( sin( degree_to_radian( angle)) );
-                //         // Mat2f pure_rotation;
-                //         // pure_rotation << cos_adjust_heading, -sin_adjust_heading, sin_adjust_heading, cos_adjust_heading;
-                //         // Mat3f rotation_HT = rotation_HT.setIdentity();
-                //         // rotation_HT.block<2, 2>(0, 0) = pure_rotation;
-                //         // rotation_HT.block<2, 1>(0, 2) = Vec2f(0, 0);
-                //         // // // cout << HTs_actual.back() << endl;
-                //         // // // cout << rotation_HT << endl;
-                //         // cut_redundant_epsilon_Mat3f(rotation_HT);
-                //         // Mat3f accumulated_frame_HT_rotated_frame = HTs_actual.back() * rotation_HT;
-                //         // HTs_actual.pop_back();
-                //         // HTs_actual.push_back(accumulated_frame_HT_rotated_frame);
-                //         // HTs_ideal.pop_back();
-                //         // HTs_ideal.push_back(accumulated_frame_HT_rotated_frame);
-                //         // // robot_actual.set_heading(angle);
-                //         // // robot_actual.set_velocity();
-                //         // draw_robot_vector(robot_actual, lidar_msg, 0xFF99CCAA);
-                //         // draw_robot_vector(robot_ideal, lidar_msg, 0xFFAA99CC);
-                //         // lidar_msg_pub.publish(lidar_msg);
-                //         // break;
-                //     // }
-                //     // getchar();
-                // }
 
                 if (does_collide) {
                     cout << "\t\t\tCOLLIDES!!!" << endl;
-                    // if (0.0f <= angle && angle <= 90.0f ||
-                    //     -90.0f <= angle && angle <= 0.0f)
-                    // {
-                    //     angle = robot_actual.heading_radian_in_Wframe + 180.0f;
-                    // }
-                    // else
-                    // {
-                    //     angle = robot_actual.heading_radian_in_Wframe - 180.0f;
-                    // }
 
                     float cos_adjust_heading = cut_redundant_epsilon( cos( degree_to_radian( angle)) );
                     float sin_adjust_heading = cut_redundant_epsilon( sin( degree_to_radian( angle)) );
@@ -379,28 +245,62 @@ int main(int argc, char **argv)
                     continue;
                 }
 
-                /** HT(homogeneous transformation matrix) from Current frame to Next frame written in Robot frame **/
-                /** HT: pure ROT in Rframe + pure TRANS in Rframe **/
-                /** Robot_actual **/
-                /** Pure rotation in Rframe: from current -> next **/
-                Mat2f current_frame_ROT_next_frame_inRframe_actual;
-                current_frame_ROT_next_frame_inRframe_actual << cos_dtheta_actual, -sin_dtheta_actual, sin_dtheta_actual, cos_dtheta_actual;
-                /** Pure translation in Rframe: from current -> next **/
-                Vec2f current_frame_TRANS_next_frame_in_Rframe_actual = Vec2f(wheel_encoder_actual.dx, wheel_encoder_actual.dy);
-                /** HT: current -> next **/
-                Mat3f current_frame_HT_next_frame_in_Rframe_actual = current_frame_HT_next_frame_in_Rframe_actual.setIdentity();
-                current_frame_HT_next_frame_in_Rframe_actual.block<2, 2>(0, 0) = current_frame_ROT_next_frame_inRframe_actual;
-                current_frame_HT_next_frame_in_Rframe_actual.block<2, 1>(0, 2) = current_frame_TRANS_next_frame_in_Rframe_actual;
 
-                /** Robot_ideal **/
-                /** Pure rotation in Rframe: from current -> next **/
-                Mat2f current_frame_ROT_next_frame_inRframe_ideal;
-                current_frame_ROT_next_frame_inRframe_ideal << cos_dtheta_ideal, -sin_dtheta_ideal, sin_dtheta_ideal, cos_dtheta_ideal;
-                /** Pure translation in Rframe: from current -> next **/
-                Vec2f current_frame_TRANS_next_frame_in_Rframe_ideal = Vec2f(wheel_encoder_ideal.dx, wheel_encoder_ideal.dy);
-                Mat3f current_frame_HT_next_frame_in_Rframe_ideal = current_frame_HT_next_frame_in_Rframe_ideal.setIdentity();
-                current_frame_HT_next_frame_in_Rframe_ideal.block<2, 2>(0, 0) = current_frame_ROT_next_frame_inRframe_ideal;
-                current_frame_HT_next_frame_in_Rframe_ideal.block<2, 1>(0, 2) = current_frame_TRANS_next_frame_in_Rframe_ideal;
+                /** Robot moves to the new frame (only TRANS yet) **/
+                Mat3f departure_W_HT_arrival_W = get_HT_from_Aframe_Bframe(departure_W, arrival_W);
+                Mat3f accumulated_HT = HTs_actual.back() * departure_W_HT_arrival_W;
+                HTs_actual.pop_back();
+                HTs_actual.push_back(accumulated_HT);
+                Vec3f new_position_added_dummy1 = accumulated_HT * Vec3f(0, 0, 1);
+                Vec2f new_position_in_Wframe = Vec2f(new_position_added_dummy1.x(), new_position_added_dummy1.y());
+                robot_actual.move_to(new_position_in_Wframe);
+
+                /** Rotate the frame **/
+                
+
+                /** New HT in World frame
+                 *  sHTt = sHT1 * 1HT2 * ... * (k-1)HTk * kHTt
+                 *  **/
+                /** Robot_actual **/
+                /** Accumulated HT: last HT * current HT in World frame **/
+                // Mat3f accumulated_frames_HT_next_frame_in_Wframe_actual = HTs_actual.back() * current_frame_HT_next_frame_in_Rframe_actual;
+                // /** Replace old HT to new HT **/
+                // HTs_actual.pop_back();
+                // HTs_actual.push_back(accumulated_frames_HT_next_frame_in_Wframe_actual);
+                // Vec3f next_position_with_extra_1_in_Wframe_actual = accumulated_frames_HT_next_frame_in_Wframe_actual * Vec3f(0, 0, 1);  // Pure Translation // current position in Rframe is always (0, 0)
+                // Vec2f next_position_in_Wframe_actual = Vec2f(next_position_with_extra_1_in_Wframe_actual.x(), next_position_with_extra_1_in_Wframe_actual.y());    // cut unnecessary third element
+
+                // /** Robot_ideal **/
+                // Mat3f accumulated_frames_HT_next_frame_in_Wframe_ideal = HTs_ideal.back() * current_frame_HT_next_frame_in_Rframe_ideal;
+                // HTs_ideal.pop_back();
+                // HTs_ideal.push_back(accumulated_frames_HT_next_frame_in_Wframe_ideal);
+                // Vec3f next_position_with_extra_1_in_Wframe_ideal = accumulated_frames_HT_next_frame_in_Wframe_ideal * Vec3f(0, 0, 1);  // Pure Translation // current position in Rframe is always (0, 0)
+                // Vec2f next_position_in_Wframe_ideal = Vec2f(next_position_with_extra_1_in_Wframe_ideal.x(), next_position_with_extra_1_in_Wframe_ideal.y());    // cut unnecessary third element
+
+
+
+                // /** HT(homogeneous transformation matrix) from Current frame to Next frame written in Robot frame **/
+                // /** HT: pure ROT in Rframe + pure TRANS in Rframe **/
+                // /** Robot_actual **/
+                // /** Pure rotation in Rframe: from current -> next **/
+                // Mat2f current_frame_ROT_next_frame_in_Rframe_actual;
+                // current_frame_ROT_next_frame_in_Rframe_actual << cos_dtheta_actual, -sin_dtheta_actual, sin_dtheta_actual, cos_dtheta_actual;
+                // /** Pure translation in Rframe: from current -> next **/
+                // Vec2f current_frame_TRANS_next_frame_in_Rframe_actual = Vec2f(wheel_encoder_actual.dx, wheel_encoder_actual.dy);
+                // /** HT: current -> next **/
+                // Mat3f current_frame_HT_next_frame_in_Rframe_actual = current_frame_HT_next_frame_in_Rframe_actual.setIdentity();
+                // current_frame_HT_next_frame_in_Rframe_actual.block<2, 2>(0, 0) = current_frame_ROT_next_frame_in_Rframe_actual;
+                // current_frame_HT_next_frame_in_Rframe_actual.block<2, 1>(0, 2) = current_frame_TRANS_next_frame_in_Rframe_actual;
+
+                // /** Robot_ideal **/
+                // /** Pure rotation in Rframe: from current -> next **/
+                // Mat2f current_frame_ROT_next_frame_in_Rframe_ideal;
+                // current_frame_ROT_next_frame_in_Rframe_ideal << cos_dtheta_ideal, -sin_dtheta_ideal, sin_dtheta_ideal, cos_dtheta_ideal;
+                // /** Pure translation in Rframe: from current -> next **/
+                // Vec2f current_frame_TRANS_next_frame_in_Rframe_ideal = Vec2f(wheel_encoder_ideal.dx, wheel_encoder_ideal.dy);
+                // Mat3f current_frame_HT_next_frame_in_Rframe_ideal = current_frame_HT_next_frame_in_Rframe_ideal.setIdentity();
+                // current_frame_HT_next_frame_in_Rframe_ideal.block<2, 2>(0, 0) = current_frame_ROT_next_frame_in_Rframe_ideal;
+                // current_frame_HT_next_frame_in_Rframe_ideal.block<2, 1>(0, 2) = current_frame_TRANS_next_frame_in_Rframe_ideal;
 
 
                 /** New HT in World frame
@@ -408,24 +308,24 @@ int main(int argc, char **argv)
                  *  **/
                 /** Robot_actual **/
                 /** Accumulated HT: last HT * current HT in World frame **/
-                Mat3f accumulated_frames_HT_next_frame_in_Wframe_actual = HTs_actual.back() * current_frame_HT_next_frame_in_Rframe_actual;
-                /** Replace old HT to new HT **/
-                HTs_actual.pop_back();
-                HTs_actual.push_back(accumulated_frames_HT_next_frame_in_Wframe_actual);
-                Vec3f next_position_with_extra_1_in_Wframe_actual = accumulated_frames_HT_next_frame_in_Wframe_actual * Vec3f(0, 0, 1);  // Pure Translation // current position in Rframe is always (0, 0)
-                Vec2f next_position_in_Wframe_actual = Vec2f(next_position_with_extra_1_in_Wframe_actual.x(), next_position_with_extra_1_in_Wframe_actual.y());    // cut unnecessary third element
+                // Mat3f accumulated_frames_HT_next_frame_in_Wframe_actual = HTs_actual.back() * current_frame_HT_next_frame_in_Rframe_actual;
+                // /** Replace old HT to new HT **/
+                // HTs_actual.pop_back();
+                // HTs_actual.push_back(accumulated_frames_HT_next_frame_in_Wframe_actual);
+                // Vec3f next_position_with_extra_1_in_Wframe_actual = accumulated_frames_HT_next_frame_in_Wframe_actual * Vec3f(0, 0, 1);  // Pure Translation // current position in Rframe is always (0, 0)
+                // Vec2f next_position_in_Wframe_actual = Vec2f(next_position_with_extra_1_in_Wframe_actual.x(), next_position_with_extra_1_in_Wframe_actual.y());    // cut unnecessary third element
 
-                /** Robot_ideal **/
-                Mat3f accumulated_frames_HT_next_frame_in_Wframe_ideal = HTs_ideal.back() * current_frame_HT_next_frame_in_Rframe_ideal;
-                HTs_ideal.pop_back();
-                HTs_ideal.push_back(accumulated_frames_HT_next_frame_in_Wframe_ideal);
-                Vec3f next_position_with_extra_1_in_Wframe_ideal = accumulated_frames_HT_next_frame_in_Wframe_ideal * Vec3f(0, 0, 1);
-                Vec2f next_position_in_Wframe_ideal = Vec2f(next_position_with_extra_1_in_Wframe_ideal.x(), next_position_with_extra_1_in_Wframe_ideal.y());
+                // /** Robot_ideal **/
+                // Mat3f accumulated_frames_HT_next_frame_in_Wframe_ideal = HTs_ideal.back() * current_frame_HT_next_frame_in_Rframe_ideal;
+                // HTs_ideal.pop_back();
+                // HTs_ideal.push_back(accumulated_frames_HT_next_frame_in_Wframe_ideal);
+                // Vec3f next_position_with_extra_1_in_Wframe_ideal = accumulated_frames_HT_next_frame_in_Wframe_ideal * Vec3f(0, 0, 1);
+                // Vec2f next_position_in_Wframe_ideal = Vec2f(next_position_with_extra_1_in_Wframe_ideal.x(), next_position_with_extra_1_in_Wframe_ideal.y());
 
 
-                /** Move the robot **/
-                robot_actual.move_to(next_position_in_Wframe_actual);
-                robot_ideal.move_to(next_position_in_Wframe_ideal);
+                // /** Move the robot **/
+                // robot_actual.move_to(next_position_in_Wframe_actual);
+                // robot_ideal.move_to(next_position_in_Wframe_ideal);
 
 
                 /** Robot moved to the new frame, but needs to adjust its heading too by another HT(contains only ROT) **/

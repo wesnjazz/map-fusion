@@ -120,6 +120,86 @@ Vec3f get_frame_from_homogeneous_transform(Mat3f &homo_transform)
 }
 
 
+Mat2f get_pure_ROT(float cos_theta, float sin_theta)
+{
+    Mat2f current_frame_ROT_next_frame_inRframe_actual;
+    current_frame_ROT_next_frame_inRframe_actual << cos_theta, -sin_theta, sin_theta, cos_theta;
+    return current_frame_ROT_next_frame_inRframe_actual;
+}
+
+
+Vec2f get_pure_TRANS(float x, float y)
+{
+    return Vec2f(x, y);
+}
+
+
+Mat3f get_HT_from_ROT_and_TRANS(Mat2f &pure_ROT, Vec2f &pure_TRANS)
+{
+    Mat3f HT = HT.setIdentity();
+    HT.block<2, 2>(0, 0) = pure_ROT;
+    HT.block<2, 1>(0, 2) = pure_TRANS;
+    return HT;
+}
+
+
+Mat3f get_HT_from_Aframe_Bframe(Robot &robot, Vec3f &departure, Vec3f &arrival)
+{
+    float x_diff = arrival.x() - departure.x();
+    float y_diff = arrival.y() - departure.y();
+    float theta_diff_radian = degree_to_radian( arrival.z() - departure.z() );
+    float cos_theta = cut_redundant_epsilon( cos(theta_diff_radian) );
+    float sin_theta = cut_redundant_epsilon( sin(theta_diff_radian) );
+
+
+    /** HT(homogeneous transformation matrix) from Current frame to Next frame written in Robot frame **/
+    /** HT: pure ROT in Rframe + pure TRANS in Rframe **/
+    /** Robot_actual **/
+    /** Pure rotation in Rframe: from current -> next **/
+    Mat2f Aframe_ROT_Bframe = get_pure_ROT(cos_theta, sin_theta);
+    /** Pure translation in Rframe: from current -> next **/
+    Vec2f Aframe_TRANS_Bframe = get_pure_TRANS(x_diff, y_diff);
+    /** HT: current -> next **/
+    Mat3f Aframe_HT_Bframe = get_HT_from_ROT_and_TRANS(Aframe_ROT_Bframe, Aframe_TRANS_Bframe);
+    return Aframe_HT_Bframe;
+}
+
+
+void robot_move_Aframe_HT_Bframe(Robot &robot, Mat3f &HT)
+{
+    Mat3f accumulated_HT = HTs_actual.back() * HT;
+
+}
+
+// Mat3f get_homogeneous_transform_pureROT(float cos_theta, float sin_theta)
+// {
+//         /** HT(homogeneous transformation matrix) from Current frame to Next frame written in Robot frame **/
+//     /** HT: pure ROT in Rframe + pure TRANS in Rframe **/
+//     /** Robot_actual **/
+//     /** Pure rotation in Rframe: from current -> next **/
+//     Mat2f current_frame_ROT_next_frame_inRframe_actual;
+//     current_frame_ROT_next_frame_inRframe_actual << cos_dtheta_actual, -sin_dtheta_actual, sin_dtheta_actual, cos_dtheta_actual;
+//     /** Pure translation in Rframe: from current -> next **/
+//     Vec2f current_frame_TRANS_next_frame_in_Rframe_actual = Vec2f(wheel_encoder_actual.dx, wheel_encoder_actual.dy);
+//     /** HT: current -> next **/
+//     Mat3f current_frame_HT_next_frame_in_Rframe_actual = current_frame_HT_next_frame_in_Rframe_actual.setIdentity();
+//     current_frame_HT_next_frame_in_Rframe_actual.block<2, 2>(0, 0) = current_frame_ROT_next_frame_inRframe_actual;
+//     current_frame_HT_next_frame_in_Rframe_actual.block<2, 1>(0, 2) = current_frame_TRANS_next_frame_in_Rframe_actual;
+
+//     /** Robot_ideal **/
+//     /** Pure rotation in Rframe: from current -> next **/
+//     Mat2f current_frame_ROT_next_frame_inRframe_ideal;
+//     current_frame_ROT_next_frame_inRframe_ideal << cos_dtheta_ideal, -sin_dtheta_ideal, sin_dtheta_ideal, cos_dtheta_ideal;
+//     /** Pure translation in Rframe: from current -> next **/
+//     Vec2f current_frame_TRANS_next_frame_in_Rframe_ideal = Vec2f(wheel_encoder_ideal.dx, wheel_encoder_ideal.dy);
+//     Mat3f current_frame_HT_next_frame_in_Rframe_ideal = current_frame_HT_next_frame_in_Rframe_ideal.setIdentity();
+//     current_frame_HT_next_frame_in_Rframe_ideal.block<2, 2>(0, 0) = current_frame_ROT_next_frame_inRframe_ideal;
+//     current_frame_HT_next_frame_in_Rframe_ideal.block<2, 1>(0, 2) = current_frame_TRANS_next_frame_in_Rframe_ideal;
+
+// }
+
+
+
 void cut_redundant_epsilon_Mat3f(Mat3f &m)
 {
     m(0 ,0) = cut_redundant_epsilon(m(0, 0));

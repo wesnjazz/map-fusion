@@ -11,6 +11,11 @@ Mat3f get_homogeneous_transform(Vec2f &P0, Vec2f &P1);
 Mat3f get_homogeneous_transform_frame_A_to_B(float A_x, float A_y, float A_theta_degree, float B_x, float B_y, float B_theta_degree);
 Mat3f get_homogeneous_transform_dx_dy(float dx, float dy, float A_x, float A_y, float A_theta_degree, float B_x, float B_y, float B_theta_degree);
 
+Mat2f get_pure_ROT(float cos_theta, float sin_theta);
+Vec2f get_pure_TRANS(float x, float y);
+Mat3f get_HT_from_ROT_and_TRANS(Mat2f &pure_ROT, Vec2f &pure_TRANS);
+Mat3f get_HT_from_Aframe_Bframe(Vec3f &departure, Vec3f &arrival);
+
 Vec3f get_frame_from_homogeneous_transform(Mat3f &frame);
 void cut_redundant_epsilon_Mat3f(Mat3f &m);
 // Eigen::Matrix3f get_homogeneous_transform(Eigen::Matrix2f &rotation, Vec2f translation);
