@@ -92,8 +92,8 @@ bool if_collides(vector<Vec2f> &point_cloud, Robot &robot, vector_slam_msgs::Lid
         float angle_degree_between_laser_scan_and_velocity 
             = cut_redundant_epsilon( 
                 radian_to_degree( atan2( y_diff, x_diff ) ));
-        cout << angle_degree_between_laser_scan_and_velocity << endl;
-        cout << robot.heading_degree_in_Wframe << endl;
+        // cout << angle_degree_between_laser_scan_and_velocity << endl;
+        // cout << robot.heading_degree_in_Wframe << endl;
         lidar_msg.points_x.push_back(it->x());
         lidar_msg.points_y.push_back(it->y());
         lidar_msg.points_col.push_back(0xFF00ff00);

@@ -14,7 +14,9 @@ Mat3f get_homogeneous_transform_dx_dy(float dx, float dy, float A_x, float A_y, 
 Mat2f get_pure_ROT(float cos_theta, float sin_theta);
 Vec2f get_pure_TRANS(float x, float y);
 Mat3f get_HT_from_ROT_and_TRANS(Mat2f &pure_ROT, Vec2f &pure_TRANS);
-Mat3f get_HT_from_Aframe_Bframe(Vec3f &departure, Vec3f &arrival);
+Mat3f get_HT_Aframe_to_Bframe(Vec3f &departure, Vec3f &arrival);
+Mat3f get_HT_inverse_Aframe_to_Wframe(Mat3f &Aframe);
+Mat3f get_HT_ROT_only(float theta_degree);
 
 Vec3f get_frame_from_homogeneous_transform(Mat3f &frame);
 void cut_redundant_epsilon_Mat3f(Mat3f &m);

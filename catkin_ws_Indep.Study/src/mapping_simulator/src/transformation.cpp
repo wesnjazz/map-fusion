@@ -143,7 +143,7 @@ Mat3f get_HT_from_ROT_and_TRANS(Mat2f &pure_ROT, Vec2f &pure_TRANS)
 }
 
 
-Mat3f get_HT_from_Aframe_Bframe(Robot &robot, Vec3f &departure, Vec3f &arrival)
+Mat3f get_HT_Aframe_to_Bframe(Vec3f &departure, Vec3f &arrival)
 {
     float x_diff = arrival.x() - departure.x();
     float y_diff = arrival.y() - departure.y();
@@ -165,11 +165,38 @@ Mat3f get_HT_from_Aframe_Bframe(Robot &robot, Vec3f &departure, Vec3f &arrival)
 }
 
 
-void robot_move_Aframe_HT_Bframe(Robot &robot, Mat3f &HT)
+Mat3f get_HT_inverse_Aframe_to_Wframe(Mat3f &Aframe)
 {
-    Mat3f accumulated_HT = HTs_actual.back() * HT;
-
+    /** HT inverse: To transform arrival_W to Robot frame **/
+    /** HT_inverse: [R_transpose | -R_transpose * p ] p: translation **/
+    /**             [      0     |                1 ] **/
+    Mat3f HT_inverse = HT_inverse.setIdentity();
+    /** Extract rotation R and translation T for the independent calculation **/
+    Mat2f HT_ROT_only = Aframe.block<2, 2>(0, 0);  // R
+    Vec2f HT_TRANS_only = Aframe.block<2, 1>(0, 2);    // p
+    Mat2f HT_ROT_neg = -HT_ROT_only;    // -R
+    /** Pure Translation in the R_inverse: -R_transpose * p **/
+    Vec2f TRANS_in_inverse = HT_ROT_neg.transpose() * HT_TRANS_only;
+    /** Assign rotation and translation of the inverse **/
+    HT_inverse.block<2, 2>(0, 0) = HT_ROT_only.transpose();
+    HT_inverse.block<2, 1>(0, 2) = TRANS_in_inverse;
+    return HT_inverse;
 }
+
+
+Mat3f get_HT_ROT_only(float theta_degree)
+{
+    float theta_radian = degree_to_radian(theta_degree);
+    float cos_theta = cut_redundant_epsilon( cos(theta_radian) );
+    float sin_theta = cut_redundant_epsilon( sin(theta_radian) );
+
+    Mat2f ROT = get_pure_ROT(cos_theta, sin_theta);
+    Vec2f TRANS = Vec2f(0, 0);
+    Mat3f HT_ROT_only = get_HT_from_ROT_and_TRANS(ROT, TRANS);
+    return HT_ROT_only;
+}
+
+
 
 // Mat3f get_homogeneous_transform_pureROT(float cos_theta, float sin_theta)
 // {
