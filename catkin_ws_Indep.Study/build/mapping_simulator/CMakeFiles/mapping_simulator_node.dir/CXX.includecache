@@ -11,8 +11,6 @@ iostream
 -
 segment.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
-position.h
-/home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/position.h
 noise.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
 laser.h
@@ -21,8 +19,6 @@ laser.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 segment.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
-position.h
-/home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/position.h
 noise.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
 

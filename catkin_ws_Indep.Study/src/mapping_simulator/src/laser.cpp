@@ -1,6 +1,5 @@
 #include <iostream>
 #include "segment.h"
-#include "position.h"
 #include "noise.h"
 #include "laser.h"
 

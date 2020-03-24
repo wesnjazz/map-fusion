@@ -67,23 +67,14 @@ Mat3f get_homogeneous_transform_dx_dy(float dx, float dy, float A_x, float A_y, 
 }
 
 
-// Mat3f get_homogeneous_transform(Mat2f &rotation, Vec2f translation)
 Mat3f get_homogeneous_transform(Vec2f &P0, Vec2f &P1)
 {
-    // cout << "P0:" << endl << P0 << endl;
-    // cout << "P1:" << endl << P1 << endl;
     float theta_radian = get_angle_radian_between_two_vectors(P0, P1);
     theta_radian = cut_redundant_epsilon( theta_radian );
-    // cout << "angle between two vectors:" << radian_to_degree(theta_radian) << endl;
     Mat2f rot = get_rotation_matrix2f(theta_radian);
-    // cout << "rotation matrix:" << endl << rot << endl;
-    // Vec2f trans = get_translation_vec2f(P0, P1);
-    // cout << "trans:" << endl << trans << endl;
-
     Mat3f homo;
     homo.setIdentity();
     homo.block<2, 2>(0, 0) = rot;
-    // homo.block<2, 1>(0, 2) = trans;
     return homo;
 }
 
@@ -93,18 +84,14 @@ Mat3f get_homogeneous_transform_frame_A_to_B(float A_x, float A_y, float A_theta
     Vec2f A = Vec2f(A_x, A_y);
     Vec2f B = Vec2f(B_x, B_y);
     Vec2f trans = get_translation_vec2f(A_x, A_y, A_theta_degree, B_x, B_y, B_theta_degree);
-    // cout << "trans:" << endl << trans << endl;
     float angle_degree = B_theta_degree - A_theta_degree;
     angle_degree = cut_redundant_epsilon( angle_degree );
     Mat2f rot = get_rotation_matrix2f(angle_degree);
-    // cout << "trans:\n" << trans << "\trot:\n" << rot << endl;
     cout << "angleA,B,diff:" << A_theta_degree << ", " << B_theta_degree << ", " << angle_degree << endl;
     Mat3f homo;
     homo.setIdentity();
     homo.block<2, 2>(0, 0) = rot;
     homo.block<2, 1>(0, 2) = trans;
-    // cout << "homo:\n" << homo << endl;
-    // getchar();
     return homo;
 }
 
@@ -118,6 +105,8 @@ Vec3f get_frame_from_homogeneous_transform(Mat3f &homo_transform)
     Vec3f frame = Vec3f(x, y, theta_degree);
     return frame;
 }
+
+
 
 
 Mat2f get_pure_ROT(float cos_theta, float sin_theta)

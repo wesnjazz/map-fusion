@@ -2,7 +2,6 @@
 #define LASER_H
 
 #include "segment.h"
-#include "position.h"
 #include "noise.h"
 
 

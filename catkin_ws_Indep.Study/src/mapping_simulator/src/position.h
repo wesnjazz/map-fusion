@@ -13,7 +13,6 @@ struct Position
     void new_position(double x, double y);
     void new_position(double x, double y, double theta);
     void update_position_vector();
-    // vector<Position> calculate_curve_points(Position &p1, int addiotional_num_cut = 0, int default_num_cut = 10);
     double x;
     double y;
     double theta_radian;
