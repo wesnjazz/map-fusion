@@ -18,31 +18,20 @@ float get_delta_t(Laser &laser)
 }
 
 
-void simulate_scan(vector<Vec2f> &point_cloud, vector<Vec2f> &collison_candidates, Robot &robot, vector<Segment> &wall_segments,
+void simulate_scan_with_vision(vector<Vec2f> &point_cloud, vector<Vec2f> &collison_candidates, Robot &robot, vector<Segment> &wall_segments,
                             Laser &laser_sensor, Noise &length_noise, Noise &angle_noise)
 {
     float angle = robot.heading_degree_in_Wframe 
                 - (laser_sensor.FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
-
     float collision_angle_range_degree = 30;
     float proportion_FOV_collision = collision_angle_range_degree / (laser_sensor.FOV_degree);
     float number_rays = laser_sensor.num_total_rays * proportion_FOV_collision;
     int ray_middle = (int)(laser_sensor.num_total_rays / 2);
     int ray_min = ray_middle - (int)(number_rays / 2);
     int ray_max = ray_middle + (int)(number_rays / 2);
-    float collision_angle_min_degree = robot.heading_degree_in_Wframe - collision_angle_range_degree / 2.0f;
-    float collision_angle_max_degree = robot.heading_degree_in_Wframe + collision_angle_range_degree / 2.0f;
+    // float collision_angle_min_degree = robot.heading_degree_in_Wframe - collision_angle_range_degree / 2.0f;
+    // float collision_angle_max_degree = robot.heading_degree_in_Wframe + collision_angle_range_degree / 2.0f;
     
-//     cout 
-//         << angle << endl
-//         << collision_angle_range_degree << endl
-//         << proportion_FOV_collision << endl
-//         << number_rays << endl
-//         << ray_middle << endl
-//         << ray_min << endl
-//         << ray_max << endl
-//         ;
-// getchar();
     for(int i = 1; i <= laser_sensor.num_total_rays; i++) {            // For all each laser ray
         Segment ray = 
             laser_sensor.create_a_ray(robot.position_in_Wframe, angle, length_noise, angle_noise); // Create a ray
@@ -77,6 +66,48 @@ void simulate_scan(vector<Vec2f> &point_cloud, vector<Vec2f> &collison_candidate
                 if (ray_min < i && i < ray_max) {
                     collison_candidates.push_back(min_point);
                 }
+            }
+        } 
+    }
+}
+
+void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wall_segments,
+                            Laser &laser_sensor, Noise &length_noise, Noise &angle_noise)
+{
+    float angle = robot.heading_degree_in_Wframe 
+                - (laser_sensor.FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
+    
+    for(int i = 1; i <= laser_sensor.num_total_rays; i++) {            // For all each laser ray
+        Segment ray = 
+            laser_sensor.create_a_ray(robot.position_in_Wframe, angle, length_noise, angle_noise); // Create a ray
+        angle += laser_sensor.angular_resolution_degree;               // Get the next ray's angle
+
+        float min_t = 99999;                                            // Temp value for min
+        bool point_exists = false;
+        Vec2f min_point;                                                // Pointer of the closest segment at the moment
+
+        for(vector<Segment>::iterator wall_it = wall_segments.begin(); wall_it != wall_segments.end(); wall_it++) {  // For all each wall segment
+            if (!ray.isParallel(*wall_it)) {                                 // If two segments(Laser ray & Wall segment) is not Parallel
+                Vec2f new_point = ray.intersection_point(*wall_it);                // Get the intersection point as a Vec2f
+                if (ray.ifIntersect(*wall_it)) {      
+                    if (fabs(ray.t) < fabs(min_t)) {                    // Takes as closest wall segment at the moment
+                        point_exists = true;
+                        min_t = ray.t;                                  // Remember the min t (length)
+                        min_point = new_point;
+                    }
+                }
+            }
+        }
+
+        if (point_exists) {                                             // If there existed any closest wall segment
+            // cout << "adding min!" << endl;
+            // cout << min_point << endl;
+            if (min_t < laser_sensor.range_min) {                      // Too close point (closer than min_range of laser)
+                ;
+                // cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor.range_min << endl;
+            } else {
+                min_point = Vec2f(min_point.x() + length_noise.gaussian(), min_point.y() + angle_noise.gaussian());
+                point_cloud.push_back(min_point);                      // Push back into a vector of Segment* pointers
             }
         } 
     }

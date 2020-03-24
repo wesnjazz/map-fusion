@@ -13,7 +13,9 @@
 #include <vector_slam_msgs/LidarDisplayMsg.h>
 
 
-void simulate_scan(vector<Vec2f> &point_cloud, vector<Vec2f> &collison_candidates, Robot &robot, vector<Segment> &wall_segments,
+void simulate_scan_with_vision(vector<Vec2f> &point_cloud, vector<Vec2f> &collison_candidates, Robot &robot, vector<Segment> &wall_segments,
+                            Laser &laser_sensor, Noise &length_noise, Noise &angle_noise);
+void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wall_segments,
                             Laser &laser_sensor, Noise &length_noise, Noise &angle_noise);
 void collision_avoidance(vector<Vec2f> &point_cloud, Robot &robot, vector<Mat3f> &aHTb);
 
