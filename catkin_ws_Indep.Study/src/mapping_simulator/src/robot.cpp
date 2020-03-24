@@ -41,6 +41,18 @@ void Robot::set_speed(float speed)
 }
 
 
+void Robot::set_speed_normal()
+{
+    this->set_speed(this->speed_normal);
+}
+
+
+void Robot::set_speed_low()
+{
+    this->set_speed(this->speed_low);
+}
+
+
 void Robot::set_heading(float heading_degree_in_Wframe)
 {
     this->heading_degree_in_Wframe = heading_degree_in_Wframe;

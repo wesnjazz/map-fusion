@@ -14,7 +14,7 @@
 #include <gui_publisher_helper.h>
 #include <sensor_msgs/LaserScan.h>
 
-using namespace std;
+// using namespace std;
 
 
 int main(int argc, char **argv) 
@@ -49,7 +49,6 @@ int main(int argc, char **argv)
     float delta_t = get_delta_t(laser_sensor);
     float time_step = 0.0;
     float speed = 0.4;
-
 
     /** File loading **/
     if (argc <= 1 || 6 <= argc) {
@@ -101,9 +100,15 @@ int main(int argc, char **argv)
 
     /** Robot objects **/
     Robot robot___actual = Robot(init_pos, departure_W.z(), speed);
-    Robot robot___ideal = Robot(init_pos, departure_W.z(), speed);
     robot___actual.move_to(init_pos);
     robot___actual.set_heading(departure_W.z());
+    robot___actual.speed_normal = speed;
+    robot___actual.speed_low = speed / 2.0f;
+    Robot robot___ideal = Robot(init_pos, departure_W.z(), speed);
+    robot___ideal.move_to(init_pos);
+    robot___ideal.set_heading(departure_W.z());
+    robot___ideal.speed_normal = speed;
+    robot___ideal.speed_low = speed / 2.0f;
 
 
     /** Draw Wall segments **/
@@ -118,12 +123,17 @@ int main(int argc, char **argv)
     /** Drawing Grid **/
     draw_grids(lidar_msg);
 
+    /** vector of point_cloud vector: Store all laserscan points **/
     vector<vector<Vec2f>> point_clouds;
 
     /** ROS node loop **/
     while (ros::ok())
     {   
         int num_total_laserscan_points = 0;
+        int num_total_HTs = 0;
+        int safety_steps_departure = 0;
+        bool safely_arrived = false;
+
         /** Loop untround visit all waypoints **/
         while (!waypoints.empty())  // While there's a waypoint to visit
         {
@@ -153,7 +163,7 @@ int main(int argc, char **argv)
                 }
 
                 /** If arrived at the waypoint, get the next waypoint **/
-                if (if_arrived_at_xy_frameW(robot___actual, arrival_W.x(), arrival_W.y(), 0.2)) {
+                if (if_arrived_at_xy_frameW(robot___actual, arrival_W.x(), arrival_W.y(), robot___actual.speed / 2.0f)) {
                     cout 
                         << "\t Departure was: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
                         << "\t    Arrived at: (" << arrival_W.x() << ", " << arrival_W.y() << ")"
@@ -161,18 +171,21 @@ int main(int argc, char **argv)
                         << "\t Robot speed: " << robot___actual.speed 
                         << " delta_t: " << delta_t << endl
                         << endl;
+                        // safely_arrived = true;
                     break;
                 }
+                // if (safely_arrived) { safety_steps_departure++; }
+                // if (safety_steps_departure > 7) { safely_arrived = false; safety_steps_departure = 0; }
 
                 /** TODO:
-                 * - not storing all history of points now. 
-                 * - Very slow if store all points
+                 * - Slow if store all points
                  * */
                 vector<Vec2f> point_cloud;
                 point_cloud.reserve(laser_sensor.num_total_rays);
-
                 vector<Vec2f> collison_candidates;
                 collison_candidates.reserve(laser_sensor.num_total_rays);
+
+
                 /** Laser Scan **/
                 // simulate_scan(point_cloud, robot___actual, wall_segments, robot___actual.sensor_laser, laser_length_noise, laser_angle_noise);
                 simulate_scan_with_vision(point_cloud, collison_candidates, robot___actual, wall_segments, robot___actual.sensor_laser, laser_length_noise, laser_angle_noise);
@@ -201,10 +214,10 @@ int main(int argc, char **argv)
 
                 /** Check collison **/
                 // point_cloud, robot, HTs
-                int does_collide = false;
-                float angle = robot___actual.heading_degree_in_Wframe;
-                Noise random_angle = Noise(0, 90);
-                angle = robot___actual.heading_degree_in_Wframe + random_angle.gaussian();
+                // int does_collide = false;
+                // float angle = robot___actual.heading_degree_in_Wframe;
+                // Noise random_angle = Noise(0, 90);
+                // angle = robot___actual.heading_degree_in_Wframe + random_angle.gaussian();
 
 
                 // if (does_collide) {
@@ -253,6 +266,7 @@ int main(int argc, char **argv)
                 Mat3f HT_accumulated___actual = HTs___actual.back() * HT_Aframe_to_Bframe___actual;      // Transfer to Wframe
                 HTs___actual.pop_back();
                 HTs___actual.push_back(HT_accumulated___actual);
+                num_total_HTs++;
                 Vec3f new_position_added_dummy1___actual = HT_accumulated___actual * Vec3f(0, 0, 1);
                 Vec2f new_position_in_Wframe___actual = Vec2f(new_position_added_dummy1___actual.x(), new_position_added_dummy1___actual.y());
                 robot___actual.move_to(new_position_in_Wframe___actual);
@@ -266,6 +280,9 @@ int main(int argc, char **argv)
                 Vec2f arrival_W_only_xy___actual = arrival_W.block<2, 1>(0, 0);  // Excluding theta in Vec3f(x, y, theta)
                 Vec3f arrival_R___actual = HT_inverse___actual * arrival_W_only_xy___actual.homogeneous();
 
+                // float distance_to_arrival_R = sqrt( arrival_R___actual.x() * arrival_R___actual.x() + arrival_R___actual.y() * arrival_R___actual.x() );
+                // check_safety(robot___actual, distance_to_arrival_R, safely_arrived);
+
                 /** Get HT for the next arrival point **/
                 /** Get angle between robot's heading(always 0 in R frame) and next location in Robot frame **/
                 float angle_degree_to_next_point_in_Robot_frame___actual = cut_redundant_epsilon( radian_to_degree( atan2(arrival_R___actual.y(), arrival_R___actual.x()) ));
@@ -275,6 +292,7 @@ int main(int argc, char **argv)
                 HT_accumulated___actual = HTs___actual.back() * HT_ROT_only___actual;
                 HTs___actual.pop_back();
                 HTs___actual.push_back(HT_accumulated___actual);
+                num_total_HTs++;
 
 
 
@@ -393,6 +411,7 @@ int main(int argc, char **argv)
             << "\t..." << endl
             << "total num of points: " << num_total_laserscan_points
             << "\tAvg.num of points per scan: " << num_total_laserscan_points / point_clouds.size() << endl
+            << "total num of HTs: " << num_total_HTs << endl
             << "Press to continue..." << endl
             ;
         getchar();

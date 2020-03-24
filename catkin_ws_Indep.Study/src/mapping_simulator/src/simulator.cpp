@@ -211,6 +211,26 @@ bool if_arrived_at_theta_degree_frameW(Robot &robot, float theta_degree, float t
 }
 
 
+void check_safety(Robot &robot___actual, float distance_to_arrival_R, bool safely_arrived)
+{
+    if (robot___actual.speed <= 0.7f) {
+        return ;
+    }
+    if (0.7f < distance_to_arrival_R && distance_to_arrival_R < robot___actual.speed * 2.0f) 
+    {
+        robot___actual.set_speed(robot___actual.speed / 4.0f);
+    } else if (safely_arrived) {
+        robot___actual.set_speed(0.3f);
+    }
+    else if (0.7f > distance_to_arrival_R) {
+        robot___actual.set_speed(0.2f);
+    }
+    else {
+        robot___actual.set_speed_normal();
+    }
+}
+
+
 deque<Vec2f> interpolate_curve_points(deque<Eigen::Matrix3f> &homos, float delta_t, Robot &robot, Vec2f &depart, Vec2f &arrive, bool noisy, Noise *noise)
 {
     float move = delta_t * robot.speed;

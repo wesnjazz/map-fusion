@@ -40,6 +40,7 @@ bool if_arrived_at_a_point_frameW(Robot &robot, Vec3f &goal, float threshold_dis
 bool if_arrived_at_xy_frameW(Robot &robot, float x, float y, float threshold_distance = 0.05);
 bool if_arrived_at_theta_degree_frameW(Robot &robot, float theta_degree, float threshold_theta = 1);
 bool if_collides(vector<Vec2f> &point_cloud, Robot &robot, vector_slam_msgs::LidarDisplayMsg &lidar_msg, ros::Publisher &lidar_msg_pub);
+void check_safety(Robot &robot___actual, float distance_to_arrival_R, bool safely_arrived);
 
 
 #endif
