@@ -39,10 +39,10 @@ int main(int argc, char **argv)
     WheelEncoder wheel_encoder___actual = WheelEncoder();
     WheelEncoder wheel_encoder___ideal = WheelEncoder();
     /** Noises **/
-    Noise laser_length_noise = Noise(0.0, 0.05);
+    Noise laser_length_noise = Noise(0.0, 0.01);
     Noise laser_angle_noise = Noise(0.0, 0.005);
-    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.002);
-    Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.01);
+    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.004);
+    Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.012);
 
     /** Variables for the simulator **/
     Vec3f World_frame = Vec3f(0, 0, 0);
@@ -142,17 +142,18 @@ int main(int argc, char **argv)
         {
             /** Get the next waypoint **/
             Vec3f arrival_W = waypoints.front();
+            arrival_W = Vec3f(arrival_W.x() + dx_ns_accumulated, arrival_W.y() + dy_ns_accumulated, arrival_W.z());
             waypoints.pop_front();
             bool arrival_circle_drew = false;
 
             while (true)
             {
                 /** Draw robot's position and its velocity vector **/
-                draw_robot_vector(robot___actual, lidar_msg, 0xFF5555FF);
-                // lidar_msg.points_x.push_back(robot___actual.position_in_Wframe.x());
-                // lidar_msg.points_y.push_back(robot___actual.position_in_Wframe.y());
-                // lidar_msg.points_col.push_back(0xFFFF5555);
-                draw_robot_vector(robot___ideal, lidar_msg, 0xFFFF5555);
+                // draw_robot_vector(robot___actual, lidar_msg, 0xFF5555FF);
+                lidar_msg.points_x.push_back(robot___actual.position_in_Wframe.x());
+                lidar_msg.points_y.push_back(robot___actual.position_in_Wframe.y());
+                lidar_msg.points_col.push_back(0xFFFF5555);
+                // draw_robot_vector(robot___ideal, lidar_msg, 0xFFFF5555);
                 // lidar_msg.points_x.push_back(robot___ideal.position_in_Wframe.x());
                 // lidar_msg.points_y.push_back(robot___ideal.position_in_Wframe.y());
                 // lidar_msg.points_col.push_back(0xFF5555FF);
@@ -190,9 +191,9 @@ int main(int argc, char **argv)
 
 
                 /** Odometry simulation in robot frame **/
-                float dx_ns = wheel_encoder___actual_dx_noise.gaussian();
+                float dx_ns = wheel_encoder___actual_dx_noise.gaussian();   // Get a noise from wheel encoder noise object
                 float dy_ns = wheel_encoder___actual_dy_noise.gaussian();
-                dx_ns_accumulated += dx_ns;
+                dx_ns_accumulated += dx_ns; // Accumulated noise
                 dy_ns_accumulated += dy_ns;
                 wheel_encoder___actual.simulate_odometry( robot___actual.speed, delta_t, dx_ns, dy_ns );
                 float dtheta_radian___actual = cut_redundant_epsilon( ( atan2(wheel_encoder___actual.dy, wheel_encoder___actual.dx) ) );
