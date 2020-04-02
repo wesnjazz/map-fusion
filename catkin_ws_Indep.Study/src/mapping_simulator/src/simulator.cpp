@@ -6,6 +6,7 @@
 #include "laser.h"
 #include "noise.h"
 #include "transformation.h"
+#include "wheelencoder.h"
 #include <geometry_msgs/Vector3.h>
 #include <visualization_msgs/Marker.h>
 using namespace std;
@@ -19,7 +20,7 @@ float get_delta_t(Laser &laser)
 
 
 void simulate_scan_with_vision(vector<Vec2f> &point_cloud, vector<Vec2f> &collison_candidates, Robot &robot, vector<Segment> &wall_segments,
-                            Laser &laser_sensor, Noise &length_noise, Noise &angle_noise)
+                            Laser &laser_sensor, Noise &length_noise, Noise &angle_noise, float dx_ns_accumulated, float dy_ns_accumulated)
 {
     float angle = robot.heading_degree_in_Wframe 
                 - (laser_sensor.FOV_degree / 2.0);                     // Calculate starting angle from current Position(x, y, theta)
@@ -61,7 +62,7 @@ void simulate_scan_with_vision(vector<Vec2f> &point_cloud, vector<Vec2f> &collis
                 ;
                 // cout << "Too close to detect... pass by this ray. t: " << min_t << "\trange_min: " << laser_sensor.range_min << endl;
             } else {
-                min_point = Vec2f(min_point.x() + length_noise.gaussian(), min_point.y() + angle_noise.gaussian());
+                min_point = Vec2f(min_point.x() + length_noise.gaussian() + dx_ns_accumulated, min_point.y() + angle_noise.gaussian() + dy_ns_accumulated);
                 point_cloud.push_back(min_point);                      // Push back into a vector of Segment* pointers
                 if (ray_min < i && i < ray_max) {
                     collison_candidates.push_back(min_point);

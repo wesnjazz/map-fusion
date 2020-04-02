@@ -8,13 +8,14 @@
 #include "robot.h"
 #include "laser.h"
 #include "noise.h"
+#include "wheelencoder.h"
 #include <ros/ros.h>
 #include <geometry_msgs/Vector3.h>
 #include <vector_slam_msgs/LidarDisplayMsg.h>
 
 
 void simulate_scan_with_vision(vector<Vec2f> &point_cloud, vector<Vec2f> &collison_candidates, Robot &robot, vector<Segment> &wall_segments,
-                            Laser &laser_sensor, Noise &length_noise, Noise &angle_noise);
+                            Laser &laser_sensor, Noise &length_noise, Noise &angle_noise, float dx_ns_accumulated, float dy_ns_accumulated);
 void simulate_scan(vector<Vec2f> &point_cloud, Robot &robot, vector<Segment> &wall_segments,
                             Laser &laser_sensor, Noise &length_noise, Noise &angle_noise);
 void collision_avoidance(vector<Vec2f> &point_cloud, Robot &robot, vector<Mat3f> &aHTb);
