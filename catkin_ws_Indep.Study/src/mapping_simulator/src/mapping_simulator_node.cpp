@@ -41,8 +41,8 @@ int main(int argc, char **argv)
     /** Noises **/
     Noise laser_length_noise = Noise(0.0, 0.01);
     Noise laser_angle_noise = Noise(0.0, 0.005);
-    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.004);
-    Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.012);
+    Noise wheel_encoder___actual_dx_noise = Noise(-0.001, 0.004);
+    Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.02);
 
     /** Variables for the simulator **/
     Vec3f World_frame = Vec3f(0, 0, 0);
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
     }
 
     /** Drawing Grid **/
-    draw_grids(lidar_msg);
+    // draw_grids(lidar_msg);
 
     /** vector of point_cloud vector: Store all laserscan points **/
     vector<vector<Vec2f>> point_clouds;
