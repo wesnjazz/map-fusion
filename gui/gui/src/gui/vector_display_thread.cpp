@@ -238,17 +238,17 @@ void VectorDisplayThread::KeyboardEventCallback(
       // blankDisplay = !blankDisplay;
     } break;
 
-    //case Qt::Key_L : {
-      //AutoLocalize();
+    case Qt::Key_L : {
+      AutoLocalize();
       //printf("AutoLocalizing robot.\n");
-    //} break;
+    } break;
 
     case Qt::Key_U : {
       autoUpdateMap = !autoUpdateMap;
       printf("AutoUpdateMap: %d\n", autoUpdateMap);
     } break;
 
-    //case Qt::Key_N : {
+    // case Qt::Key_N : {
     //  printf("Number of lines in map %s: %i\n", vectorMap.mapName.c_str(),
     //         int(vectorMap.Lines().size()));
     //} break;

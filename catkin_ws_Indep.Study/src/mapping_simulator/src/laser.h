@@ -11,7 +11,7 @@ struct Laser
     const float FOV_degree = 270;
     const float FOV_radian = FOV_degree * (M_PI / 180.0);
     const float range_min = 0.2;
-    const float range_max = 10;
+    const float range_max = 20;
     const float ray_length = range_max - range_min;
     const int num_total_rays = 300;
     const int frequency = 5;

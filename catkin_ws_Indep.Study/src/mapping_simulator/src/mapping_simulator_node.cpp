@@ -32,7 +32,7 @@ int main(int argc, char **argv)
     ifstream wall_segments_file;    // file stream of wall segments
     deque<Vec3f> waypoints;         // vector of waypoints  // dequeue for FIFO
     ifstream waypoints_file;        // file stream of waypoints
-
+    ifstream TF_origin_file;
 
     /** Sensors **/ 
     Laser laser_sensor = Laser();
@@ -45,19 +45,20 @@ int main(int argc, char **argv)
     Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.02);
 
     /** Variables for the simulator **/
-    Vec3f World_frame = Vec3f(0, 0, 0);
     float delta_t = get_delta_t(laser_sensor);
     float time_step = 0.0;
     float speed = 0.4;
 
     /** File loading **/
-    if (argc <= 1 || 6 <= argc) {
+    if (argc <= 1 || 7 <= argc) {
         usage(argv[0]);
     }
+    bool origin_transformed = false;
     if (argc >= 2) { wall_segments_file = ifstream(argv[1]); }
     if (argc >= 3) { waypoints_file = ifstream(argv[2]); }
     if (argc >= 4) { speed = atof(argv[3]); }
     if (argc >= 5) { delta_t = atof(argv[4]); }
+    if (argc >= 6) { TF_origin_file = ifstream(argv[5]); origin_transformed = true; }
     if (!wall_segments_file) { // && !waypoints_file) {
         cout << "The file [";
         if (!wall_segments_file) { cout << argv[1]; }
@@ -66,9 +67,25 @@ int main(int argc, char **argv)
         exit(0);
     }
 
+
+    /** World frame and Transformed World frame(TF_origin) **/
+    Vec3f World_frame = Vec3f(0, 0, 0);
+    Vec3f TF_origin = read_TF_origin(TF_origin_file);
+    Mat3f HT_Worldframe_to_TForigin = get_HT_Aframe_to_Bframe(World_frame, TF_origin);
+    Vec3f New_origin_point = HT_Worldframe_to_TForigin * Vec2f(World_frame.x(), World_frame.y()).homogeneous();
+    float x_transform = New_origin_point.x();
+    float y_transform = New_origin_point.y();
+    // float x_transform = cut_redundant_epsilon( TF_origin.x() * cos( degree_to_radian(TF_origin.z())) );
+    // float y_transform = cut_redundant_epsilon( TF_origin.y() * sin( degree_to_radian(TF_origin.z())) );
+
+    /** If origin_transformed **/
+    // wall_segments
+    // way_points
+    // World_frame
+
     /** Read Map (Wall Segments) and Way Points **/
-    read_segments(wall_segments_file, wall_segments);
-    read_waypoints(waypoints_file, waypoints);
+    read_segments(wall_segments_file, wall_segments, origin_transformed, &TF_origin);
+    read_waypoints(waypoints_file, waypoints, origin_transformed, &TF_origin);
     wall_segments_file.close();
     waypoints_file.close();
 
@@ -113,11 +130,21 @@ int main(int argc, char **argv)
 
     /** Draw Wall segments **/
     for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
-        lidar_msg.lines_p1x.push_back(it->start.x());
-        lidar_msg.lines_p1y.push_back(it->start.y());
-        lidar_msg.lines_p2x.push_back(it->end.x());
-        lidar_msg.lines_p2y.push_back(it->end.y());
-        lidar_msg.lines_col.push_back(0x22555555);
+        if (origin_transformed) {
+            Vec3f transformed_point_start = HT_Worldframe_to_TForigin * it->start.homogeneous();
+            Vec3f transformed_point_end = HT_Worldframe_to_TForigin * it->end.homogeneous();
+            lidar_msg.lines_p1x.push_back(transformed_point_start.x());
+            lidar_msg.lines_p1y.push_back(transformed_point_start.y());
+            lidar_msg.lines_p2x.push_back(transformed_point_end.x());
+            lidar_msg.lines_p2y.push_back(transformed_point_end.y());
+            lidar_msg.lines_col.push_back(0x22555555);
+        } else {
+            lidar_msg.lines_p1x.push_back(it->start.x());
+            lidar_msg.lines_p1y.push_back(it->start.y());
+            lidar_msg.lines_p2x.push_back(it->end.x());
+            lidar_msg.lines_p2y.push_back(it->end.y());
+            lidar_msg.lines_col.push_back(0x22555555);
+        }
     }
 
     /** Drawing Grid **/
@@ -142,27 +169,49 @@ int main(int argc, char **argv)
         {
             /** Get the next waypoint **/
             Vec3f arrival_W = waypoints.front();
+            Vec2f arrival_W_2f = Vec2f(arrival_W.x(), arrival_W.y());
             arrival_W = Vec3f(arrival_W.x() + dx_ns_accumulated, arrival_W.y() + dy_ns_accumulated, arrival_W.z());
             waypoints.pop_front();
             bool arrival_circle_drew = false;
 
             while (true)
             {
-                /** Draw robot's position and its velocity vector **/
-                // draw_robot_vector(robot___actual, lidar_msg, 0xFF5555FF);
-                lidar_msg.points_x.push_back(robot___actual.position_in_Wframe.x());
-                lidar_msg.points_y.push_back(robot___actual.position_in_Wframe.y());
-                lidar_msg.points_col.push_back(0xFFFF5555);
-                // draw_robot_vector(robot___ideal, lidar_msg, 0xFFFF5555);
-                // lidar_msg.points_x.push_back(robot___ideal.position_in_Wframe.x());
-                // lidar_msg.points_y.push_back(robot___ideal.position_in_Wframe.y());
-                // lidar_msg.points_col.push_back(0xFF5555FF);
+                if (origin_transformed) {
+                    Vec3f transformed_point = HT_Worldframe_to_TForigin * robot___actual.position_in_Wframe.homogeneous();
+
+                    /** Draw robot's position and its velocity vector **/
+                    // draw_robot_vector(robot___actual, lidar_msg, 0xFF5555FF);
+                    lidar_msg.points_x.push_back(transformed_point.x());
+                    lidar_msg.points_y.push_back(transformed_point.y());
+                    lidar_msg.points_col.push_back(0xFFFF5555);
+                    // draw_robot_vector(robot___ideal, lidar_msg, 0xFFFF5555);
+                    // lidar_msg.points_x.push_back(robot___ideal.position_in_Wframe.x());
+                    // lidar_msg.points_y.push_back(robot___ideal.position_in_Wframe.y());
+                    // lidar_msg.points_col.push_back(0xFF5555FF);
+                } else {
+                    /** Draw robot's position and its velocity vector **/
+                    // draw_robot_vector(robot___actual, lidar_msg, 0xFF5555FF);
+                    lidar_msg.points_x.push_back(robot___actual.position_in_Wframe.x());
+                    lidar_msg.points_y.push_back(robot___actual.position_in_Wframe.y());
+                    lidar_msg.points_col.push_back(0xFFFF5555);
+                    // draw_robot_vector(robot___ideal, lidar_msg, 0xFFFF5555);
+                    // lidar_msg.points_x.push_back(robot___ideal.position_in_Wframe.x());
+                    // lidar_msg.points_y.push_back(robot___ideal.position_in_Wframe.y());
+                    // lidar_msg.points_col.push_back(0xFF5555FF);
+                }
 
                 /** Draw a circle for each way point **/
                 if (!arrival_circle_drew) {
-                    lidar_msg.circles_x.push_back(arrival_W.x());
-                    lidar_msg.circles_y.push_back(arrival_W.y());
-                    lidar_msg.circles_col.push_back(0xFFFF00FF);
+                    if (origin_transformed) {
+                        Vec3f transformed_point = HT_Worldframe_to_TForigin * arrival_W_2f.homogeneous();
+                        lidar_msg.circles_x.push_back(transformed_point.x());
+                        lidar_msg.circles_y.push_back(transformed_point.y());
+                        lidar_msg.circles_col.push_back(0xFFFF00FF);
+                    } else {
+                        lidar_msg.circles_x.push_back(arrival_W.x());
+                        lidar_msg.circles_y.push_back(arrival_W.y());
+                        lidar_msg.circles_col.push_back(0xFFFF00FF);
+                    }
                     arrival_circle_drew = true;
                 }
 
@@ -209,11 +258,18 @@ int main(int argc, char **argv)
                 // simulate_scan(point_cloud, robot___actual, wall_segments, robot___actual.sensor_laser, laser_length_noise, laser_angle_noise);
                 simulate_scan_with_vision(point_cloud, collison_candidates, robot___ideal, wall_segments, robot___ideal.sensor_laser, laser_length_noise, laser_angle_noise, dx_ns_accumulated, dy_ns_accumulated);
                 for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
-                    lidar_msg.points_x.push_back(it->x());
-                    lidar_msg.points_y.push_back(it->y());
-                    lidar_msg.points_col.push_back(0xFFFF5500);
+                    if (origin_transformed) {
+                        Vec3f transformed_point = HT_Worldframe_to_TForigin * it->homogeneous();
+                        lidar_msg.points_x.push_back(transformed_point.x());
+                        lidar_msg.points_y.push_back(transformed_point.y());
+                        lidar_msg.points_col.push_back(0xFFFF5500);
+                    } else {
+                        lidar_msg.points_x.push_back(it->x());
+                        lidar_msg.points_y.push_back(it->y());
+                        lidar_msg.points_col.push_back(0xFFFF5500);
+                    }
                 }
-                bool if_collide = if_collides(collison_candidates, robot___actual, lidar_msg, lidar_msg_pub);
+                // bool if_collide = if_collides(collison_candidates, robot___actual, lidar_msg, lidar_msg_pub);
                 point_clouds.push_back(point_cloud);
                 num_total_laserscan_points += point_cloud.size();
 

@@ -377,7 +377,7 @@ int usage(char *app_name) {
 }
 
 
-void read_segments(ifstream &seg_file, vector<Segment> &segments)
+void read_segments(ifstream &seg_file, vector<Segment> &segments, bool origin_transformed, Vec3f *TF_origin)
 {
     Vec2f p1 = Vec2f(0,0);
     Vec2f p2 = Vec2f(0,0);
@@ -399,8 +399,38 @@ void read_segments(ifstream &seg_file, vector<Segment> &segments)
                 p2 = Vec2f(x, y);
                 count = 0;
                 // Segment seg = Segment(p1, p2);
+                // if (origin_transformed) {
+                //     Vec2f TF_origin2f = Vec2f(TF_origin->x(), TF_origin->y());
+                //     p1 = p1 + TF_origin2f;
+                //     p2 = p2 + TF_origin2f;
+                // }
                 seg = Segment(p1, p2);
                 segments.push_back(seg);
+                break;
+            default: break;
+            }
+        }
+    }
+}
+
+
+Vec3f read_TF_origin(ifstream &TF_origin_file)
+{
+    float x, y, theta;
+    int count = 0;
+    string line;
+    while(getline(TF_origin_file, line)) {
+        stringstream ss(line);
+        while(getline(ss, line, ',')) {
+            count++;
+            switch (count)
+            {
+            case 1: x = stof(line); break;
+            case 2: y = stof(line); break;
+            case 3: 
+                theta = stof(line);
+                count = 0;
+                return Vec3f(x, y, theta);
                 break;
             default: break;
             }
@@ -415,7 +445,7 @@ float cut_redundant_epsilon(float x, float threshold)
 }
 
 
-void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions)
+void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, bool origin_transformed, Vec3f *TF_origin)
 {
     float x, y, theta_degree;
     int count = 0;
@@ -425,6 +455,7 @@ void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions)
         while(getline(ss, line, ',')) {
             // cout << line << endl;
             count++;
+            Vec3f waypoint;
             switch (count)
             {
             case 1: x = stof(line); break;
@@ -434,8 +465,16 @@ void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions)
                 // msg.points_x.push_back(x);
                 // msg.points_y.push_back(y);
                 // msg.points_col.push_back(0xFF00FF00);
+                // if (origin_transformed) 
+                // {
+                //     x +=  TF_origin->x();
+                //     y +=  TF_origin->y();
+                //     theta_degree +=  TF_origin->z();
+                // }
 
-                positions.push_back(Vec3f(x, y, theta_degree));
+                waypoint = Vec3f(x, y, theta_degree);
+                positions.push_back(waypoint);
+                // positions.push_back(Vec3f(x, y, theta_degree));
                 // robot_headings.push_back(theta_degree);
                 count = 0;
                 break;

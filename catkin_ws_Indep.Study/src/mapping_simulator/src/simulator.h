@@ -28,8 +28,11 @@ void draw_grids(vector_slam_msgs::LidarDisplayMsg &lidar_msg, uint32_t color = 0
 void draw_grid_line_of_robot_frame(Robot &robot_ideal, Mat3f &new_HT, Vec3f &arrival_R, vector_slam_msgs::LidarDisplayMsg &lidar_msg, bool erase=false);
 
 int usage(char *app_name);
-void read_segments(ifstream &seg_file, vector<Segment> &segments);
-void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions);
+void read_segments(ifstream &seg_file, vector<Segment> &segments, 
+                    bool origin_transformed = false, Vec3f *TF_origin = NULL);
+void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, 
+                    bool origin_transformed = false, Vec3f *TF_origin = NULL);
+Vec3f read_TF_origin(ifstream &TF_origin_file);
 
 float cut_redundant_epsilon(float x, float threshold = 0.000001);
 float degree_to_radian(float theta);
