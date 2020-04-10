@@ -2,6 +2,7 @@
 #include "segment.h"
 #include "transformation.h"
 #include "wheelencoder.h"
+#include "image.h"
 #include <vector>
 #include <deque>
 #include <algorithm>
@@ -13,8 +14,10 @@
 #include <vector_slam_msgs/LidarDisplayMsg.h>
 #include <gui_publisher_helper.h>
 #include <sensor_msgs/LaserScan.h>
+#include "CImg.h"
 
 // using namespace std;
+using namespace cimg_library;
 
 
 int main(int argc, char **argv) 
@@ -183,8 +186,8 @@ int main(int argc, char **argv)
                     // draw_robot_vector(robot___actual, lidar_msg, 0xFF5555FF);
                     lidar_msg.points_x.push_back(transformed_point.x());
                     lidar_msg.points_y.push_back(transformed_point.y());
-                    lidar_msg.points_col.push_back(0xFFFF5555);
-                    // draw_robot_vector(robot___ideal, lidar_msg, 0xFFFF5555);
+                    lidar_msg.points_col.push_back(0xFF2200fc);
+                    // draw_robot_vector(robot___ideal, lidar_msg, 0xFF2200fc);
                     // lidar_msg.points_x.push_back(robot___ideal.position_in_Wframe.x());
                     // lidar_msg.points_y.push_back(robot___ideal.position_in_Wframe.y());
                     // lidar_msg.points_col.push_back(0xFF5555FF);
@@ -193,8 +196,8 @@ int main(int argc, char **argv)
                     // draw_robot_vector(robot___actual, lidar_msg, 0xFF5555FF);
                     lidar_msg.points_x.push_back(robot___actual.position_in_Wframe.x());
                     lidar_msg.points_y.push_back(robot___actual.position_in_Wframe.y());
-                    lidar_msg.points_col.push_back(0xFFFF5555);
-                    // draw_robot_vector(robot___ideal, lidar_msg, 0xFFFF5555);
+                    lidar_msg.points_col.push_back(0xFF2200fc);
+                    // draw_robot_vector(robot___ideal, lidar_msg, 0xFF2200fc);
                     // lidar_msg.points_x.push_back(robot___ideal.position_in_Wframe.x());
                     // lidar_msg.points_y.push_back(robot___ideal.position_in_Wframe.y());
                     // lidar_msg.points_col.push_back(0xFF5555FF);
@@ -479,34 +482,37 @@ int main(int argc, char **argv)
         getchar();
 
 
+        string img_filename = "test.jpg";
+        save_map(point_clouds, img_filename);
+
         /** Plot point cloud on the map in two different colors **/
-        vector<uint32_t> colors;
-        uint32_t color_1 = 0xFFff00ff;
-        uint32_t color_2 = 0xFF3366ff;
-        colors.push_back(color_1);
-        colors.push_back(color_2);
-        int round = 0;
+        // vector<uint32_t> colors;
+        // uint32_t color_1 = 0xFFff00ff;
+        // uint32_t color_2 = 0xFF3366ff;
+        // colors.push_back(color_1);
+        // colors.push_back(color_2);
+        // int round = 0;
         
-        while (true)
-        {
-            uint32_t color = colors[round++];
-            if (round >= 2) { round = 0; }
-            vector_slam_msgs::LidarDisplayMsg lidar_msg_after_all_scans;
-            for(vector<vector<Vec2f>>::iterator it = point_clouds.begin(); it != point_clouds.end(); ++it)
-            {
-                for(vector<Vec2f>::iterator jt = it->begin(); jt != it->end(); ++jt)
-                {
-                    lidar_msg_after_all_scans.points_x.push_back(jt->x());
-                    lidar_msg_after_all_scans.points_y.push_back(jt->y());
-                    lidar_msg_after_all_scans.points_col.push_back(color);
-                }
-            }
-            cout
-                << "Press anykey to plot point coulds..." << endl
-                ;
-                lidar_msg_pub.publish(lidar_msg_after_all_scans);
-            getchar();
-        }
+        // while (true)
+        // {
+        //     uint32_t color = colors[round++];
+        //     if (round >= 2) { round = 0; }
+        //     vector_slam_msgs::LidarDisplayMsg lidar_msg_after_all_scans;
+        //     for(vector<vector<Vec2f>>::iterator it = point_clouds.begin(); it != point_clouds.end(); ++it)
+        //     {
+        //         for(vector<Vec2f>::iterator jt = it->begin(); jt != it->end(); ++jt)
+        //         {
+        //             lidar_msg_after_all_scans.points_x.push_back(jt->x());
+        //             lidar_msg_after_all_scans.points_y.push_back(jt->y());
+        //             lidar_msg_after_all_scans.points_col.push_back(color);
+        //         }
+        //     }
+        //     cout
+        //         << "Press anykey to plot point coulds..." << endl
+        //         ;
+        //         lidar_msg_pub.publish(lidar_msg_after_all_scans);
+        //     getchar();
+        // }
     }
 
     return 0;

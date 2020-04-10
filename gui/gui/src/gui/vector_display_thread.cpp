@@ -238,10 +238,10 @@ void VectorDisplayThread::KeyboardEventCallback(
       // blankDisplay = !blankDisplay;
     } break;
 
-    case Qt::Key_L : {
-      AutoLocalize();
+    // case Qt::Key_L : {
+      // AutoLocalize();
       //printf("AutoLocalizing robot.\n");
-    } break;
+    // } break;
 
     case Qt::Key_U : {
       autoUpdateMap = !autoUpdateMap;

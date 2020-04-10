@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(mapping_simulator)
 
+message(STATUS "X11_FOUND = ${X11_FOUND}")
+message(STATUS "X11_INCLUDE_DIR = ${X11_INCLUDE_DIR}")
+message(STATUS "X11_LIBRARIES = ${X11_LIBRARIES}")
+
+#add_definitions("-L/usr/X11R6/lib -lm -lpthread -lX11 -lxcb")
+
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
@@ -13,6 +19,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   visualization_msgs
 )
+
+#find_package(x11 REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -146,6 +154,7 @@ add_executable(${PROJECT_NAME}_node src/mapping_simulator_node.cpp
   src/laser.cpp
   src/transformation.cpp
   src/wheelencoder.cpp
+  src/image.cpp
 )
 
 ## Rename C++ executable without prefix
@@ -161,6 +170,8 @@ add_executable(${PROJECT_NAME}_node src/mapping_simulator_node.cpp
 ## Specify libraries to link a library or executable target against
  target_link_libraries(${PROJECT_NAME}_node
    ${catkin_LIBRARIES}
+   ${X11_LIBRARIES}
+   -lX11
  )
 
 #############

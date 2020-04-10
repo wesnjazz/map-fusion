@@ -17,7 +17,6 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/dpark/map-fusion/gui/vector_slam_msgs/include"
-  "/opt/ros/melodic/include"
   "/usr/src/googletest/googletest/include"
   "/usr/src/googletest/googletest"
   )
