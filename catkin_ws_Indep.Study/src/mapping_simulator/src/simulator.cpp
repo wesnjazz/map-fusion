@@ -398,12 +398,11 @@ void read_segments(ifstream &seg_file, vector<Segment> &segments, bool origin_tr
                 y = stof(line);
                 p2 = Vec2f(x, y);
                 count = 0;
-                // Segment seg = Segment(p1, p2);
-                // if (origin_transformed) {
-                //     Vec2f TF_origin2f = Vec2f(TF_origin->x(), TF_origin->y());
-                //     p1 = p1 + TF_origin2f;
-                //     p2 = p2 + TF_origin2f;
-                // }
+                if (origin_transformed) {
+                    Vec2f TF_origin2f = Vec2f(TF_origin->x(), TF_origin->y());
+                    p1 = p1 + TF_origin2f;
+                    p2 = p2 + TF_origin2f;
+                }
                 seg = Segment(p1, p2);
                 segments.push_back(seg);
                 break;
@@ -465,12 +464,12 @@ void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, bool origin_tra
                 // msg.points_x.push_back(x);
                 // msg.points_y.push_back(y);
                 // msg.points_col.push_back(0xFF00FF00);
-                // if (origin_transformed) 
-                // {
-                //     x +=  TF_origin->x();
-                //     y +=  TF_origin->y();
-                //     theta_degree +=  TF_origin->z();
-                // }
+                if (origin_transformed) 
+                {
+                    x +=  TF_origin->x();
+                    y +=  TF_origin->y();
+                    theta_degree +=  TF_origin->z();
+                }
 
                 waypoint = Vec3f(x, y, theta_degree);
                 positions.push_back(waypoint);
