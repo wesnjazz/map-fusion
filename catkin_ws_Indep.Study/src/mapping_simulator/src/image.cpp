@@ -47,8 +47,12 @@ void save_map(vector<vector<Vec2f>> &point_clouds,  Mat3f &HT_World_frame_to_Rob
         for(vector<Vec2f>::iterator it = its->begin(); it != its->end(); ++it)
         {
             Vec3f transformed_point = HT_World_frame_to_Robot_frame * it->homogeneous();
+            /** Scaled **/
             int x_grid = ((int)((transformed_point.x())*scale)) - (int)(x_min*scale) + (margin/2);
             int y_grid = ((int)((transformed_point.y())*scale)) - (int)(y_min*scale) + (margin/2);
+            /** Not scaled - 1:1 **/
+            // int x_grid = ((int)((transformed_point.x()))) - (int)(x_min);
+            // int y_grid = ((int)((transformed_point.y()))) - (int)(y_min);
 
             // img(x_grid, y_grid, 0) = 255;
             // img(x_grid, y_grid, 1) = 255;
@@ -64,5 +68,5 @@ void save_map(vector<vector<Vec2f>> &point_clouds,  Mat3f &HT_World_frame_to_Rob
             }
         }
     }
-    img.save_jpeg(img_filename.c_str());
+    img.mirror('y').save_jpeg(img_filename.c_str());
 }

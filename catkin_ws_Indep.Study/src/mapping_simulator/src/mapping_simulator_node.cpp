@@ -46,6 +46,11 @@ int main(int argc, char **argv)
     Noise laser_angle_noise = Noise(0.0, 0.005);
     Noise wheel_encoder___actual_dx_noise = Noise(-0.001, 0.004);
     Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.02);
+    /** No Noises **/
+    // Noise laser_length_noise = Noise(0.0, 0.0);
+    // Noise laser_angle_noise = Noise(0.0, 0.0);
+    // Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.0);
+    // Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.0);
 
     /** Variables for the simulator **/
     float delta_t = get_delta_t(laser_sensor);
@@ -202,20 +207,6 @@ int main(int argc, char **argv)
                     arrival_circle_drew = true;
                 }
 
-                /** If arrived at the waypoint, get the next waypoint **/
-                if (if_arrived_at_xy_frameW(robot___actual, arrival_W.x(), arrival_W.y(), robot___actual.speed / 2.0f)) {
-                    cout 
-                        << "\t Departure was: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
-                        << "\t    Arrived at: (" << arrival_W.x() << ", " << arrival_W.y() << ")"
-                        << "\t\tActual position:(" << robot___actual.position_in_Wframe.x() << ", " << robot___actual.position_in_Wframe.y() << ")" << endl
-                        << "\t Robot speed: " << robot___actual.speed 
-                        << " delta_t: " << delta_t << endl
-                        << endl;
-                        // safely_arrived = true;
-                    break;
-                }
-                // if (safely_arrived) { safety_steps_departure++; }
-                // if (safety_steps_departure > 7) { safely_arrived = false; safety_steps_departure = 0; }
 
                 /** TODO:
                  * - Slow if store all points
@@ -436,6 +427,24 @@ int main(int argc, char **argv)
                 time_step += delta_t;
                 ros::spinOnce();
                 loop_rate.sleep();
+
+
+                /** If arrived at the waypoint, get the next waypoint **/
+                if (if_arrived_at_xy_frameW(robot___actual, arrival_W.x(), arrival_W.y(), robot___actual.speed / 2.0f)) {
+                    cout 
+                        << "\t Departure was: (" << departure_W.x() << ", " << departure_W.y() << ")" << endl
+                        << "\t    Arrived at: (" << arrival_W.x() << ", " << arrival_W.y() << ")"
+                        << "\t\tActual position:(" << robot___actual.position_in_Wframe.x() << ", " << robot___actual.position_in_Wframe.y() << ")" << endl
+                        << "\t Robot speed: " << robot___actual.speed 
+                        << " delta_t: " << delta_t << endl
+                        << endl;
+                        // safely_arrived = true;
+                    break;
+                }
+                // if (safely_arrived) { safety_steps_departure++; }
+                // if (safety_steps_departure > 7) { safely_arrived = false; safety_steps_departure = 0; }
+
+
             }
 
             /** Update the next departure waypoint to the current position **/

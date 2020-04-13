@@ -10,7 +10,7 @@ int main(int argc, char **argv)
     CImg<unsigned char> img(1024,768,1,3,0);
     for (int i=0; i<100; ++i)
     {
-        for (int j=0; j<100; ++j)
+        for (int j=0; j<30; ++j)
         {
             img(i,j,0) = 255;
             img(i,j,1) = 255;
