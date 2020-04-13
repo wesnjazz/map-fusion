@@ -35,7 +35,7 @@ int main(int argc, char **argv)
     ifstream wall_segments_file;    // file stream of wall segments
     deque<Vec3f> waypoints;         // vector of waypoints  // dequeue for FIFO
     ifstream waypoints_file;        // file stream of waypoints
-    ifstream TF_origin_file;
+    ifstream Robot_frame_file;
 
     /** Sensors **/ 
     Laser laser_sensor = Laser();
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     if (argc >= 3) { waypoints_file = ifstream(argv[2]); }
     if (argc >= 4) { speed = atof(argv[3]); }
     if (argc >= 5) { delta_t = atof(argv[4]); }
-    if (argc >= 6) { TF_origin_file = ifstream(argv[5]); origin_transformed = true; }
+    if (argc >= 6) { Robot_frame_file = ifstream(argv[5]); origin_transformed = true; }
     if (!wall_segments_file) { // && !waypoints_file) {
         cout << "The file [";
         if (!wall_segments_file) { cout << argv[1]; }
@@ -71,34 +71,18 @@ int main(int argc, char **argv)
     }
 
 
-    /** World frame and Transformed World frame(TF_origin) **/
+    /** World frame and Transformed World frame(Robot_frame) **/
     Vec3f World_frame = Vec3f(0, 0, 0);
-    Vec3f TF_origin = read_TF_origin(TF_origin_file);
-    Mat3f HT_Worldframe_to_TForigin = get_HT_Aframe_to_Bframe(World_frame, TF_origin);
-    Vec3f New_origin_point = HT_Worldframe_to_TForigin * Vec2f(World_frame.x(), World_frame.y()).homogeneous();
-    float x_transform = New_origin_point.x();
-    float y_transform = New_origin_point.y();
-    // float x_transform = cut_redundant_epsilon( TF_origin.x() * cos( degree_to_radian(TF_origin.z())) );
-    // float y_transform = cut_redundant_epsilon( TF_origin.y() * sin( degree_to_radian(TF_origin.z())) );
+    Vec3f Robot_frame = read_Robot_frame(Robot_frame_file);
+    Mat3f HT_World_frame_to_Robot_frame = get_HT_Aframe_to_Bframe(World_frame, Robot_frame);
 
-    /** If origin_transformed **/
-    // wall_segments
-    // way_points
-    // World_frame
 
     /** Read Map (Wall Segments) and Way Points **/
-    read_segments(wall_segments_file, wall_segments, origin_transformed, &TF_origin);
-    read_waypoints(waypoints_file, waypoints, origin_transformed, &TF_origin);
+    read_segments(wall_segments_file, wall_segments, origin_transformed, &Robot_frame);
+    read_waypoints(waypoints_file, waypoints, origin_transformed, &Robot_frame);
     wall_segments_file.close();
     waypoints_file.close();
-
-
-    /** LaserScan msg **/
-    sensor_msgs::LaserScan laserscan;
-    laserscan.range_max = laser_sensor.range_max;
-    laserscan.range_min = laser_sensor.range_min;
-    laserscan.angle_max = laser_sensor.FOV_radian;
-    laserscan.angle_min = 0.0;
+    Robot_frame_file.close();
 
 
     /** History of homogeneous transformations HT **/
@@ -134,8 +118,8 @@ int main(int argc, char **argv)
     /** Draw Wall segments **/
     for (vector<Segment>::iterator it = wall_segments.begin(); it != wall_segments.end(); ++it) {
         if (origin_transformed) {
-            Vec3f transformed_point_start = HT_Worldframe_to_TForigin * it->start.homogeneous();
-            Vec3f transformed_point_end = HT_Worldframe_to_TForigin * it->end.homogeneous();
+            Vec3f transformed_point_start = HT_World_frame_to_Robot_frame * it->start.homogeneous();
+            Vec3f transformed_point_end = HT_World_frame_to_Robot_frame * it->end.homogeneous();
             lidar_msg.lines_p1x.push_back(transformed_point_start.x());
             lidar_msg.lines_p1y.push_back(transformed_point_start.y());
             lidar_msg.lines_p2x.push_back(transformed_point_end.x());
@@ -180,7 +164,7 @@ int main(int argc, char **argv)
             while (true)
             {
                 if (origin_transformed) {
-                    Vec3f transformed_point = HT_Worldframe_to_TForigin * robot___actual.position_in_Wframe.homogeneous();
+                    Vec3f transformed_point = HT_World_frame_to_Robot_frame * robot___actual.position_in_Wframe.homogeneous();
 
                     /** Draw robot's position and its velocity vector **/
                     // draw_robot_vector(robot___actual, lidar_msg, 0xFF5555FF);
@@ -206,7 +190,7 @@ int main(int argc, char **argv)
                 /** Draw a circle for each way point **/
                 if (!arrival_circle_drew) {
                     if (origin_transformed) {
-                        Vec3f transformed_point = HT_Worldframe_to_TForigin * arrival_W_2f.homogeneous();
+                        Vec3f transformed_point = HT_World_frame_to_Robot_frame * arrival_W_2f.homogeneous();
                         lidar_msg.circles_x.push_back(transformed_point.x());
                         lidar_msg.circles_y.push_back(transformed_point.y());
                         lidar_msg.circles_col.push_back(0xFFFF00FF);
@@ -262,7 +246,7 @@ int main(int argc, char **argv)
                 simulate_scan_with_vision(point_cloud, collison_candidates, robot___ideal, wall_segments, robot___ideal.sensor_laser, laser_length_noise, laser_angle_noise, dx_ns_accumulated, dy_ns_accumulated);
                 for(vector<Vec2f>::iterator it = point_cloud.begin(); it != point_cloud.end(); ++it) {
                     if (origin_transformed) {
-                        Vec3f transformed_point = HT_Worldframe_to_TForigin * it->homogeneous();
+                        Vec3f transformed_point = HT_World_frame_to_Robot_frame * it->homogeneous();
                         lidar_msg.points_x.push_back(transformed_point.x());
                         lidar_msg.points_y.push_back(transformed_point.y());
                         lidar_msg.points_col.push_back(0xFFFF5500);
@@ -483,7 +467,7 @@ int main(int argc, char **argv)
 
 
         string img_filename = "test.jpg";
-        save_map(point_clouds, img_filename);
+        save_map(point_clouds, HT_World_frame_to_Robot_frame, img_filename);
 
         /** Plot point cloud on the map in two different colors **/
         // vector<uint32_t> colors;

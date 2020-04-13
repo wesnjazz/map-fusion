@@ -13,8 +13,12 @@ image.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/image.h
 CImg.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/CImg.h
+segment.h
+/home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/image.h
+segment.h
+/home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 segment.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 

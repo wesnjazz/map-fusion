@@ -377,7 +377,7 @@ int usage(char *app_name) {
 }
 
 
-void read_segments(ifstream &seg_file, vector<Segment> &segments, bool origin_transformed, Vec3f *TF_origin)
+void read_segments(ifstream &seg_file, vector<Segment> &segments, bool origin_transformed, Vec3f *Robot_frame)
 {
     Vec2f p1 = Vec2f(0,0);
     Vec2f p2 = Vec2f(0,0);
@@ -399,9 +399,9 @@ void read_segments(ifstream &seg_file, vector<Segment> &segments, bool origin_tr
                 p2 = Vec2f(x, y);
                 count = 0;
                 if (origin_transformed) {
-                    Vec2f TF_origin2f = Vec2f(TF_origin->x(), TF_origin->y());
-                    p1 = p1 + TF_origin2f;
-                    p2 = p2 + TF_origin2f;
+                    Vec2f Robot_frame2f = Vec2f(Robot_frame->x(), Robot_frame->y());
+                    p1 = p1 + Robot_frame2f;
+                    p2 = p2 + Robot_frame2f;
                 }
                 seg = Segment(p1, p2);
                 segments.push_back(seg);
@@ -413,12 +413,12 @@ void read_segments(ifstream &seg_file, vector<Segment> &segments, bool origin_tr
 }
 
 
-Vec3f read_TF_origin(ifstream &TF_origin_file)
+Vec3f read_Robot_frame(ifstream &Robot_frame_file)
 {
     float x, y, theta;
     int count = 0;
     string line;
-    while(getline(TF_origin_file, line)) {
+    while(getline(Robot_frame_file, line)) {
         stringstream ss(line);
         while(getline(ss, line, ',')) {
             count++;
@@ -444,7 +444,7 @@ float cut_redundant_epsilon(float x, float threshold)
 }
 
 
-void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, bool origin_transformed, Vec3f *TF_origin)
+void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, bool origin_transformed, Vec3f *Robot_frame)
 {
     float x, y, theta_degree;
     int count = 0;
@@ -466,9 +466,9 @@ void read_waypoints(ifstream &pos_file, deque<Vec3f> &positions, bool origin_tra
                 // msg.points_col.push_back(0xFF00FF00);
                 if (origin_transformed) 
                 {
-                    x +=  TF_origin->x();
-                    y +=  TF_origin->y();
-                    theta_degree +=  TF_origin->z();
+                    x +=  Robot_frame->x();
+                    y +=  Robot_frame->y();
+                    theta_degree +=  Robot_frame->z();
                 }
 
                 waypoint = Vec3f(x, y, theta_degree);

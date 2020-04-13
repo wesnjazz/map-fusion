@@ -1,11 +1,12 @@
 #include <string>
 #include "image.h"
 #include "CImg.h"
+#include "segment.h"
 
 // save_map
 using namespace cimg_library;
 
-void save_map(vector<vector<Vec2f>> &point_clouds, string img_filename)
+void save_map(vector<vector<Vec2f>> &point_clouds,  Mat3f &HT_World_frame_to_Robot_frame, string img_filename)
 {
     float x_max = -987654321;
     float x_min =  987654321;
@@ -15,8 +16,9 @@ void save_map(vector<vector<Vec2f>> &point_clouds, string img_filename)
     {
         for(vector<Vec2f>::iterator it = its->begin(); it != its->end(); ++it)
         {
-            float x = it->x();
-            float y = it->y();
+            Vec3f transformed_point = HT_World_frame_to_Robot_frame * it->homogeneous();
+            float x = transformed_point.x();
+            float y = transformed_point.y();
             if (x > x_max) { x_max = x; }
             if (x < x_min) { x_min = x; }
             if (y > y_max) { y_max = y; }
@@ -44,8 +46,10 @@ void save_map(vector<vector<Vec2f>> &point_clouds, string img_filename)
     {
         for(vector<Vec2f>::iterator it = its->begin(); it != its->end(); ++it)
         {
-            int x_grid = ((int)((it->x())*scale)) - (int)(x_min*scale) + (margin/2);
-            int y_grid = ((int)((it->y())*scale)) - (int)(y_min*scale) + (margin/2);
+            Vec3f transformed_point = HT_World_frame_to_Robot_frame * it->homogeneous();
+            int x_grid = ((int)((transformed_point.x())*scale)) - (int)(x_min*scale) + (margin/2);
+            int y_grid = ((int)((transformed_point.y())*scale)) - (int)(y_min*scale) + (margin/2);
+
             // img(x_grid, y_grid, 0) = 255;
             // img(x_grid, y_grid, 1) = 255;
             // img(x_grid, y_grid, 2) = 255;
