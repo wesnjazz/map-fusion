@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/aligning_maps_node.cpp" "/home/dpark/map-fusion/catkin_ws_Indep.Study/build/aligning_maps/CMakeFiles/aligning_maps_node.dir/src/aligning_maps_node.cpp.o"
+  "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/map_align.cpp" "/home/dpark/map-fusion/catkin_ws_Indep.Study/build/aligning_maps/CMakeFiles/aligning_maps_node.dir/src/map_align.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -19,6 +20,8 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+  "/usr/include/opencv"
+  "/usr/local/include/opencv4"
   )
 
 # Targets to which this target links.

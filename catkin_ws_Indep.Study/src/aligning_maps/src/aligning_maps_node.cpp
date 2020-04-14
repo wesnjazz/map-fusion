@@ -1,10 +1,11 @@
-#include <ros/ros.h>
 #include <iostream>
 #include <fstream>
-#include "CImg.h"
+#include <ros/ros.h>
+#include "map_align.h"
+// #include "CImg.h"
 
 using namespace std;
-using namespace cimg_library;
+// using namespace cimg_library;
 
 int main(int argc, char **argv) 
 {
@@ -32,16 +33,26 @@ int main(int argc, char **argv)
         // getline(cin, s_img2);
 
 
-        CImg<unsigned char> im1(s_img1.c_str()), im2(s_img2.c_str());
-        CImgDisplay im1_disp(im1, "image 1"), im2_disp(im2, "image 2");
-        int scale = 3;
-        im1_disp.resize(im1.width() / scale, im1.height() / scale);
-        im2_disp.resize(im2.width() / scale, im2.height() / scale);
-        while(!im1_disp.is_closed() && !im2_disp.is_closed())
-        {
-            im1_disp.wait();
-            im2_disp.wait();
-        }
+
+        SIFT(s_img1, s_img2);
+
+
+        // CImg<unsigned char> im1(s_img1.c_str()), im2(s_img2.c_str());
+        // CImgDisplay im1_disp(im1, "image 1"), im2_disp(im2, "image 2");
+        // int scale = 3;
+        // im1_disp.resize(im1.width() / scale, im1.height() / scale);
+        // im2_disp.resize(im2.width() / scale, im2.height() / scale);
+
+        // while(!im1_disp.is_closed() && !im2_disp.is_closed())
+        // {
+        //     im1_disp.wait();
+        //     im2_disp.wait();
+        // }
+
+
+
+
+
         cout << "Press any key to continue...";
         getchar();
         cin.clear();

@@ -1,10 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(mapping_simulator)
 
-message(STATUS "X11_FOUND = ${X11_FOUND}")
-message(STATUS "X11_INCLUDE_DIR = ${X11_INCLUDE_DIR}")
-message(STATUS "X11_LIBRARIES = ${X11_LIBRARIES}")
-
 #add_definitions("-L/usr/X11R6/lib -lm -lpthread -lX11 -lxcb")
 
 ## Compile as C++11, supported in ROS Kinetic and newer

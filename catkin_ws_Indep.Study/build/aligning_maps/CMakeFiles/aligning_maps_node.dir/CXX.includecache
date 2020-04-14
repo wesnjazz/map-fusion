@@ -7,14 +7,20 @@
 #IncludeRegexTransform: 
 
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/aligning_maps_node.cpp
-ros/ros.h
--
 iostream
 -
 fstream
 -
-CImg.h
-/home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/CImg.h
+ros/ros.h
+-
+map_align.h
+/home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/map_align.h
+
+/home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/map_align.cpp
+
+/home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/map_align.h
+opencv4/opencv2/opencv.hpp
+-
 
 /opt/ros/melodic/include/ros/advertise_options.h
 ros/forwards.h
