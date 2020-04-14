@@ -21,12 +21,12 @@ int main(int argc, char **argv)
 
     while(ros::ok())
     {
-        Mat im1 = imread("/home/dpark/map-fusion/map_data/butterfly01.jpg");
+        // Mat im1 = imread("/home/dpark/map-fusion/map_data/butterfly01.jpg");
         // Mat im1 = imread("/home/dpark/map-fusion/map_data/guitar04.jpg");
         // Mat im1 = imread("/home/dpark/map-fusion/map_data/mountain01.jpeg");
         // Mat im1 = imread("/home/dpark/map-fusion/map_data/robot01.jpg");
         // Mat im1 = imread("/home/dpark/map-fusion/map_data/shaq01.jpg");
-        // Mat im1 = imread("/home/dpark/map-fusion/map_data/img01_nonoise.jpg");
+        Mat im1 = imread("/home/dpark/map-fusion/map_data/img01_nonoise.jpg");
         Mat im2 = imread("/home/dpark/map-fusion/map_data/img02_nonoise.jpg");
 
         Mat im1_gray;
