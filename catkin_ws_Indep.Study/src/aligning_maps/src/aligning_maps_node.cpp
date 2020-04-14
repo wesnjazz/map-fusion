@@ -31,9 +31,14 @@ int main(int argc, char **argv)
         Mat im1 = imread("/home/dpark/map-fusion/map_data/shaq01.jpg");
         // Mat im1 = imread("/home/dpark/map-fusion/map_data/img01_nonoise.jpg");
         Mat im2 = imread("/home/dpark/map-fusion/map_data/img02_nonoise.jpg");
+        Mat im1_gray;
+        cvtColor(im1, im1_gray, cv::COLOR_BGR2GRAY);
+        Mat im2_gray;
+        cvtColor(im2, im2_gray, cv::COLOR_BGR2GRAY);
 
-        CannyEdge(im1, im2);
-        // SIFT(im1, im2);
+
+        CannyEdge(im1);
+        SIFT(im1);
 
 
         // CImg<unsigned char> im1(s_img1.c_str()), im2(s_img2.c_str());

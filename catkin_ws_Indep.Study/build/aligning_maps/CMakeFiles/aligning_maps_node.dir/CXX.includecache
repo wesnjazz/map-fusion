@@ -23,6 +23,8 @@ opencv4/opencv2/opencv.hpp
 -
 opencv4/opencv2/core.hpp
 -
+opencv4/opencv2/xfeatures2d.hpp
+-
 
 /opt/ros/melodic/include/ros/advertise_options.h
 ros/forwards.h
