@@ -21,7 +21,8 @@ int main(int argc, char **argv)
 
     while(ros::ok())
     {
-        Mat im1 = imread("/home/dpark/map-fusion/map_data/guitar04.jpg");
+        Mat im1 = imread("/home/dpark/map-fusion/map_data/butterfly01.jpg");
+        // Mat im1 = imread("/home/dpark/map-fusion/map_data/guitar04.jpg");
         // Mat im1 = imread("/home/dpark/map-fusion/map_data/mountain01.jpeg");
         // Mat im1 = imread("/home/dpark/map-fusion/map_data/robot01.jpg");
         // Mat im1 = imread("/home/dpark/map-fusion/map_data/shaq01.jpg");
@@ -34,8 +35,9 @@ int main(int argc, char **argv)
         cvtColor(im2, im2_gray, cv::COLOR_BGR2GRAY);
 
 
-        CannyEdge(im1);
+        // CannyEdge(im1);
         // SIFT(im1);
+        SimpleBlob(im1);
 
 
         cout << "Press any key to continue...";

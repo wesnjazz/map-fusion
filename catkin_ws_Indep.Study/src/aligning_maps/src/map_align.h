@@ -39,6 +39,7 @@ void display_imorigin_imconvoluted_adj_horizontal(Mat &im_original, Mat &im_conv
     display_im("im_result_window", concat_im);
 }
 
+
 void SIFT(cv::Mat &im)
 {
     Mat im_gray;
@@ -78,6 +79,26 @@ void CannyEdge(Mat &im)
     Canny(im_gray, im_result, min_val, max_val, aperture_size, false);
 
     display_imorigin_imconvoluted_adj_horizontal(im_gray, im_result);
+}
+
+
+void SimpleBlob(cv::Mat &im)
+{
+    Mat im_gray;
+    cvtColor(im, im_gray, cv::COLOR_BGR2GRAY);
+
+    SimpleBlobDetector::Params param;
+    // param.maxArea = 100000.0;
+    param.minArea = 0.0;
+    // param.minCircularity = 100.0;
+    Ptr<SimpleBlobDetector> blob = SimpleBlobDetector::create(param);
+    vector<KeyPoint> kp;
+    blob->detect(im_gray, kp);
+
+    Mat im_result;
+    drawKeypoints(im_gray, kp, im_result);
+
+    display_imorigin_imconvoluted_adj_horizontal(im, im_result);
 }
 
 
