@@ -21,6 +21,8 @@ map_align.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/map_align.h
 opencv4/opencv2/opencv.hpp
 -
+opencv4/opencv2/core.hpp
+-
 
 /opt/ros/melodic/include/ros/advertise_options.h
 ros/forwards.h
