@@ -1,3 +1,0 @@
-time stamp
-
-FeatureMsg[] features

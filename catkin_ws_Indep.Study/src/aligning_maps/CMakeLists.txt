@@ -11,10 +11,10 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  #  cv_bridge
+  # cv_bridge
 )
 
-find_package(OpenCV 3 REQUIRED)
+find_package(OpenCV 3.4 REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -122,7 +122,7 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
-  /usr/local/include/opencv4/
+  /usr/local/include/opencv2/
 )
 
 ## Declare a C++ library
@@ -214,3 +214,6 @@ target_link_libraries(${PROJECT_NAME}_node
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+# LINK_DIRECTORIES(/usr/local/lib)
+

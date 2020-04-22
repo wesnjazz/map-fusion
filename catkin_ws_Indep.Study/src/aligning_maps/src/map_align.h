@@ -1,11 +1,11 @@
 #ifndef MAP_ALIGN_H
 #define MAP_ALIGN_H
 
-#include <opencv4/opencv2/opencv.hpp>
-#include <opencv4/opencv2/core.hpp>
-#include <opencv4/opencv2/features2d.hpp>
-#include <opencv4/opencv2/xfeatures2d.hpp>
-// #include <opencv4/opencv2/highgui/highgui.hpp>
+#include <opencv2/opencv.hpp>
+#include <opencv2/core.hpp>
+#include <opencv2/features2d.hpp>
+#include <opencv2/xfeatures2d.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
 using namespace std;
 using namespace cv;
