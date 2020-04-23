@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 
 
         // CannyEdge(im1);
-        // SIFT(im1);
+        // mySIFT(im1);
         SimpleBlob(im1);
 
 

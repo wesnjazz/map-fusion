@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(visual_feature_server_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT "/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/include;/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/include;/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/utils " STREQUAL " ")
+if(NOT "/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/include;/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/include " STREQUAL " ")
   set(visual_feature_server_INCLUDE_DIRS "")
-  set(_include_dirs "/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/include;/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/include;/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/utils")
+  set(_include_dirs "/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/include;/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")

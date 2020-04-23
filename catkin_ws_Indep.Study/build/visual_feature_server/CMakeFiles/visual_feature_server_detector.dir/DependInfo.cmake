@@ -27,7 +27,6 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/include"
   "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/include"
-  "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/utils"
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/opencv"
@@ -47,6 +46,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/libxml2"
   "/usr/include/jsoncpp"
   "/usr/include/tcl"
+  "/usr/local/include"
+  "/usr/local/include/opencv"
   )
 
 # Targets to which this target links.

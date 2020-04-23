@@ -8,3 +8,6 @@
 
 # modified environment variables
 export PWD="/home/dpark/map-fusion/catkin_ws_Indep.Study/build"
+export ROS_PACKAGE_PATH="/home/dpark/map-fusion/catkin_ws_Indep.Study/src:
+
+:/opt/ros/melodic/share"

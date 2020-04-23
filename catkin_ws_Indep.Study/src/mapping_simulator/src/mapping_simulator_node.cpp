@@ -42,15 +42,15 @@ int main(int argc, char **argv)
     WheelEncoder wheel_encoder___actual = WheelEncoder();
     WheelEncoder wheel_encoder___ideal = WheelEncoder();
     /** Noises **/
-    // Noise laser_length_noise = Noise(0.0, 0.01);
-    // Noise laser_angle_noise = Noise(0.0, 0.005);
-    // Noise wheel_encoder___actual_dx_noise = Noise(-0.001, 0.004);
-    // Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.02);
+    Noise laser_length_noise = Noise(0.0, 0.01);
+    Noise laser_angle_noise = Noise(0.0, 0.005);
+    Noise wheel_encoder___actual_dx_noise = Noise(-0.001, 0.004);
+    Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.2);
     /** No Noises **/
-    Noise laser_length_noise = Noise(0.0, 0.0);
-    Noise laser_angle_noise = Noise(0.0, 0.0);
-    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.0);
-    Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.0);
+    // Noise laser_length_noise = Noise(0.0, 0.0);
+    // Noise laser_angle_noise = Noise(0.0, 0.0);
+    // Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.0);
+    // Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.0);
 
     /** Variables for the simulator **/
     float delta_t = get_delta_t(laser_sensor);

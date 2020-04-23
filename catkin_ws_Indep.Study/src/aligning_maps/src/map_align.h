@@ -41,7 +41,7 @@ void display_imorigin_imconvoluted_adj_horizontal(Mat &im_original, Mat &im_conv
 }
 
 
-void SIFT(cv::Mat &im)
+void mySIFT(cv::Mat &im)
 {
     Mat im_gray;
     cvtColor(im, im_gray, cv::COLOR_BGR2GRAY);
@@ -90,33 +90,30 @@ void SimpleBlob(cv::Mat &im)
 
     SimpleBlobDetector::Params params;
     params.filterByArea = true;
-    params.minArea = 1;
+    params.minArea = 0.001;
     params.maxArea = 10000;
     params.filterByCircularity = true;
-    // params.filterByConvexity = true;
-    // params.filterByInertia = true;
-    // params.filterByColor = true;
-    // params.blobColor = 255;
 
-    // // Change thresholds
-    // params.minThreshold = 10;
-    // params.maxThreshold = 200;
+	params.minThreshold = 10;
+	params.maxThreshold = 200;
 
-    // // Filter by Area.
-    // params.filterByArea = true;
-    // params.minArea = 1500;
+	// Filter by Area.
+	params.filterByArea = true;
+	params.minArea = 1500;
 
-    // // Filter by Circularity
-    // params.filterByCircularity = true;
-    // params.minCircularity = 0.1;
+	// Filter by Circularity
+	params.filterByCircularity = true;
+	params.minCircularity = 0.1;
 
-    // // Filter by Convexity
-    // params.filterByConvexity = true;
-    // params.minConvexity = 0.87;
+	// Filter by Convexity
+	params.filterByConvexity = true;
+	params.minConvexity = 0.87;
 
-    // // Filter by Inertia
-    // params.filterByInertia = true;
-    // params.minInertiaRatio = 0.01;
+	// Filter by Inertia
+	params.filterByInertia = true;
+	params.minInertiaRatio = 0.01;
+
+    Ptr<SimpleBlobDetector> detector = SimpleBlobDetector::create(params);
 
     // Ptr<SimpleBlobDetector> blob = SimpleBlobDetector::create(params);
     // vector<KeyPoint> kp;
@@ -126,15 +123,17 @@ void SimpleBlob(cv::Mat &im)
     // drawKeypoints(im_gray, kp, img_keypoints, Scalar(0, 0, 255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
 
     //-- Step 1: Detect the keypoints using SURF Detector
-    int minHessian = 400;
-    Ptr<SURF> detector = SURF::create( minHessian );
+    // int minHessian = 400;
+    // Ptr<SURF> detector = SURF::create( minHessian );
     std::vector<KeyPoint> keypoints;
     detector->detect( im_gray, keypoints );
     //-- Draw keypoints
     Mat img_keypoints;
-    drawKeypoints( im_gray, keypoints, img_keypoints );
+    drawKeypoints( im_gray, keypoints, img_keypoints, Scalar(0,0,255), DrawMatchesFlags::DRAW_RICH_KEYPOINTS );
 
 
+
+    
     // imshow("keypoints", img_keypoints);
     // waitKey(0);
     display_imorigin_imconvoluted_adj_horizontal(im, img_keypoints);

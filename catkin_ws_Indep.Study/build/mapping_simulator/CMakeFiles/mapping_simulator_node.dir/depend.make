@@ -466,6 +466,8 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/laser.cpp.o: /usr/in
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/laser.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/laser.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
 
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/gui/src/gui/gui_publisher_helper.h
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/image.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/mapping_simulator_node.cpp
@@ -475,8 +477,6 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_no
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/transformation.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/wheelencoder.h
-mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/gui/gui/src/gui/gui_publisher_helper.h
-mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/geometry_msgs/Vector3.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/ros/advertise_options.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/mapping_simulator_node.cpp.o: /opt/ros/melodic/include/ros/advertise_service_options.h
@@ -987,6 +987,7 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/position.cpp.o: /usr
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/position.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/position.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
 
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.cpp
@@ -995,7 +996,6 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/d
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/transformation.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/wheelencoder.h
-mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /opt/ros/melodic/include/geometry_msgs/Vector3.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /opt/ros/melodic/include/ros/advertise_options.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /opt/ros/melodic/include/ros/advertise_service_options.h
@@ -1268,6 +1268,7 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /usr/in
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/robot.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
 
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
@@ -1275,7 +1276,6 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/wheelencoder.h
-mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /opt/ros/melodic/include/geometry_msgs/Vector3.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /opt/ros/melodic/include/ros/advertise_options.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /opt/ros/melodic/include/ros/advertise_service_options.h
@@ -1548,6 +1548,7 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /usr/
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/segment.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
 
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
@@ -1556,7 +1557,6 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /ho
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/transformation.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/wheelencoder.h
-mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /opt/ros/melodic/include/geometry_msgs/Point.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /opt/ros/melodic/include/geometry_msgs/Pose.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /opt/ros/melodic/include/geometry_msgs/Quaternion.h
@@ -1835,6 +1835,7 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /us
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/simulator.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
 
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
@@ -1843,7 +1844,6 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/transformation.cpp
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/transformation.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/wheelencoder.h
-mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /opt/ros/melodic/include/geometry_msgs/Vector3.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /opt/ros/melodic/include/ros/advertise_options.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /opt/ros/melodic/include/ros/advertise_service_options.h
@@ -2116,6 +2116,7 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseBinaryOps.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/transformation.cpp.o: /usr/include/eigen3/Eigen/src/plugins/MatrixCwiseUnaryOps.h
 
+mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.h
@@ -2123,7 +2124,6 @@ mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: 
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/wheelencoder.cpp
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/wheelencoder.h
-mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/vector_slam_msgs/LidarDisplayMsg.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /opt/ros/melodic/include/geometry_msgs/Vector3.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /opt/ros/melodic/include/ros/advertise_options.h
 mapping_simulator/CMakeFiles/mapping_simulator_node.dir/src/wheelencoder.cpp.o: /opt/ros/melodic/include/ros/advertise_service_options.h

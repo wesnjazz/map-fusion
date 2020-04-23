@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/build/devel/setup.sh

@@ -9,7 +9,10 @@
                 "/usr/local/include/opencv/",
                 "/opt/ros/melodic/include/",
                 "/home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/",
-                "/home/dpark/map-fusion/gui/gui/src/gui/"    
+                "/home/dpark/map-fusion/gui/gui/src/gui/",
+                "/opt/ros/melodic/include/",
+                "/usr/include/pcl-1.8/",
+                "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/include"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",
