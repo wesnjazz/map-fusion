@@ -2,6 +2,7 @@
 #include <fstream>
 #include <ros/ros.h>
 #include "map_align.h"
+#include "ransac.h"
 // #include "CImg.h"
 
 using namespace std;
@@ -21,23 +22,29 @@ int main(int argc, char **argv)
 
     while(ros::ok())
     {
-        // Mat im1 = imread("/home/dpark/map-fusion/map_data/butterfly01.jpg");
-        // Mat im1 = imread("/home/dpark/map-fusion/map_data/guitar04.jpg");
-        // Mat im1 = imread("/home/dpark/map-fusion/map_data/mountain01.jpeg");
-        // Mat im1 = imread("/home/dpark/map-fusion/map_data/robot01.jpg");
-        // Mat im1 = imread("/home/dpark/map-fusion/map_data/shaq01.jpg");
-        Mat im1 = imread("/home/dpark/map-fusion/map_data/img01_nonoise.jpg");
-        Mat im2 = imread("/home/dpark/map-fusion/map_data/img02_nonoise.jpg");
+        // cv::Mat im1 = imread("/home/dpark/map-fusion/imgs/examples/butterfly01.jpg");
+        // cv::Mat im1 = imread("/home/dpark/map-fusion/imgs/examples/guitar04.jpg");
+        // cv::Mat im1 = imread("/home/dpark/map-fusion/imgs/examples/mountain01.jpeg");
+        // cv::Mat im1 = imread("/home/dpark/map-fusion/imgs/examples/robot01.jpg");
+        // cv::Mat im1 = imread("/home/dpark/map-fusion/imgs/examples/shaq01.jpg");
+        // cv::Mat im1 = imread("/home/dpark/map-fusion/imgs/mapping_output/img01_nonoise.jpg");
+        // cv::Mat im2 = imread("/home/dpark/map-fusion/imgs/mapping_output/img02_nonoise.jpg");
+        cv::Mat im1 = cv::imread("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_0_a45.png");
+        cv::Mat im2 = cv::imread("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_15_a45.png");
+        ifstream lsd_txt_01 = ifstream("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_0_a45.txt");
+        ifstream lsd_txt_02 = ifstream("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_15_a45.txt");
 
-        Mat im1_gray;
+        cv::Mat im1_gray;
         cvtColor(im1, im1_gray, cv::COLOR_BGR2GRAY);
-        Mat im2_gray;
+        cv::Mat im2_gray;
         cvtColor(im2, im2_gray, cv::COLOR_BGR2GRAY);
 
 
         // CannyEdge(im1);
         // mySIFT(im1);
-        SimpleBlob(im1);
+        // SimpleBlob(im1);
+        // myGRANSAC();
+        myGRANSAC(lsd_txt_01, lsd_txt_02);
 
 
         cout << "Press any key to continue...";

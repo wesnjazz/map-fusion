@@ -4,15 +4,17 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "/usr/include/linux",
+                "/opt/ros/melodic/include/",
+                "/usr/include/linux/",
                 "/usr/include/eigen3/",
                 "/usr/local/include/opencv/",
-                "/opt/ros/melodic/include/",
-                "/home/dpark/map-fusion/gui/vector_slam_msgs/msg_gen/cpp/include/",
-                "/home/dpark/map-fusion/gui/gui/src/gui/",
-                "/opt/ros/melodic/include/",
+                "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/include/",
+                "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/include/",
+                "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/",
+                "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/gui/src/gui/",
                 "/usr/include/pcl-1.8/",
-                "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/visual_feature_server/include"
+                "/home/dpark/map-fusion/GRANSAC/include/",
+                "/home/dpark/map-fusion/GRANSAC/examples/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang",

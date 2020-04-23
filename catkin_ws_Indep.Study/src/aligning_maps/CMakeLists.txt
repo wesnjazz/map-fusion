@@ -123,6 +123,11 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
   /usr/local/include/opencv2/
+  /usr/include/eigen3/
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/include/
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/
+  /home/dpark/map-fusion/GRANSAC/include/
+  /home/dpark/map-fusion/GRANSAC/examples/
 )
 
 ## Declare a C++ library
@@ -140,6 +145,13 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/aligning_maps_node.cpp
   src/map_align.cpp
+  src/ransac.cpp
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/simulator.cpp
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/segment.cpp
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/robot.cpp
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/noise.cpp
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/laser.cpp
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/src/transformation.cpp
 )
 
 ## Rename C++ executable without prefix

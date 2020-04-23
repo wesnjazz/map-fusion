@@ -18,6 +18,8 @@ find_package(catkin REQUIRED COMPONENTS
 
 #find_package(x11 REQUIRED)
 
+find_package (Eigen3 3.3 REQUIRED NO_MODULE)
+
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -124,6 +126,7 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
   /usr/include/eigen3/
+  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/include/
   /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/
   /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/gui/src/gui/
 )
@@ -168,7 +171,8 @@ add_executable(${PROJECT_NAME}_node src/mapping_simulator_node.cpp
    ${catkin_LIBRARIES}
    ${X11_LIBRARIES}
    -lX11
- )
+   Eigen3::Eigen
+)
 
 #############
 ## Install ##

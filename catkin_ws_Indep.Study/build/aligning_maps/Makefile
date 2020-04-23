@@ -407,6 +407,168 @@ std_msgs_generate_messages_py/fast:
 	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/std_msgs_generate_messages_py.dir/build.make aligning_maps/CMakeFiles/std_msgs_generate_messages_py.dir/build
 .PHONY : std_msgs_generate_messages_py/fast
 
+__/mapping_simulator/src/laser.o: __/mapping_simulator/src/laser.cpp.o
+
+.PHONY : __/mapping_simulator/src/laser.o
+
+# target to build an object file
+__/mapping_simulator/src/laser.cpp.o:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/laser.cpp.o
+.PHONY : __/mapping_simulator/src/laser.cpp.o
+
+__/mapping_simulator/src/laser.i: __/mapping_simulator/src/laser.cpp.i
+
+.PHONY : __/mapping_simulator/src/laser.i
+
+# target to preprocess a source file
+__/mapping_simulator/src/laser.cpp.i:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/laser.cpp.i
+.PHONY : __/mapping_simulator/src/laser.cpp.i
+
+__/mapping_simulator/src/laser.s: __/mapping_simulator/src/laser.cpp.s
+
+.PHONY : __/mapping_simulator/src/laser.s
+
+# target to generate assembly for a file
+__/mapping_simulator/src/laser.cpp.s:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/laser.cpp.s
+.PHONY : __/mapping_simulator/src/laser.cpp.s
+
+__/mapping_simulator/src/noise.o: __/mapping_simulator/src/noise.cpp.o
+
+.PHONY : __/mapping_simulator/src/noise.o
+
+# target to build an object file
+__/mapping_simulator/src/noise.cpp.o:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/noise.cpp.o
+.PHONY : __/mapping_simulator/src/noise.cpp.o
+
+__/mapping_simulator/src/noise.i: __/mapping_simulator/src/noise.cpp.i
+
+.PHONY : __/mapping_simulator/src/noise.i
+
+# target to preprocess a source file
+__/mapping_simulator/src/noise.cpp.i:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/noise.cpp.i
+.PHONY : __/mapping_simulator/src/noise.cpp.i
+
+__/mapping_simulator/src/noise.s: __/mapping_simulator/src/noise.cpp.s
+
+.PHONY : __/mapping_simulator/src/noise.s
+
+# target to generate assembly for a file
+__/mapping_simulator/src/noise.cpp.s:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/noise.cpp.s
+.PHONY : __/mapping_simulator/src/noise.cpp.s
+
+__/mapping_simulator/src/robot.o: __/mapping_simulator/src/robot.cpp.o
+
+.PHONY : __/mapping_simulator/src/robot.o
+
+# target to build an object file
+__/mapping_simulator/src/robot.cpp.o:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/robot.cpp.o
+.PHONY : __/mapping_simulator/src/robot.cpp.o
+
+__/mapping_simulator/src/robot.i: __/mapping_simulator/src/robot.cpp.i
+
+.PHONY : __/mapping_simulator/src/robot.i
+
+# target to preprocess a source file
+__/mapping_simulator/src/robot.cpp.i:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/robot.cpp.i
+.PHONY : __/mapping_simulator/src/robot.cpp.i
+
+__/mapping_simulator/src/robot.s: __/mapping_simulator/src/robot.cpp.s
+
+.PHONY : __/mapping_simulator/src/robot.s
+
+# target to generate assembly for a file
+__/mapping_simulator/src/robot.cpp.s:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/robot.cpp.s
+.PHONY : __/mapping_simulator/src/robot.cpp.s
+
+__/mapping_simulator/src/segment.o: __/mapping_simulator/src/segment.cpp.o
+
+.PHONY : __/mapping_simulator/src/segment.o
+
+# target to build an object file
+__/mapping_simulator/src/segment.cpp.o:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/segment.cpp.o
+.PHONY : __/mapping_simulator/src/segment.cpp.o
+
+__/mapping_simulator/src/segment.i: __/mapping_simulator/src/segment.cpp.i
+
+.PHONY : __/mapping_simulator/src/segment.i
+
+# target to preprocess a source file
+__/mapping_simulator/src/segment.cpp.i:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/segment.cpp.i
+.PHONY : __/mapping_simulator/src/segment.cpp.i
+
+__/mapping_simulator/src/segment.s: __/mapping_simulator/src/segment.cpp.s
+
+.PHONY : __/mapping_simulator/src/segment.s
+
+# target to generate assembly for a file
+__/mapping_simulator/src/segment.cpp.s:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/segment.cpp.s
+.PHONY : __/mapping_simulator/src/segment.cpp.s
+
+__/mapping_simulator/src/simulator.o: __/mapping_simulator/src/simulator.cpp.o
+
+.PHONY : __/mapping_simulator/src/simulator.o
+
+# target to build an object file
+__/mapping_simulator/src/simulator.cpp.o:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/simulator.cpp.o
+.PHONY : __/mapping_simulator/src/simulator.cpp.o
+
+__/mapping_simulator/src/simulator.i: __/mapping_simulator/src/simulator.cpp.i
+
+.PHONY : __/mapping_simulator/src/simulator.i
+
+# target to preprocess a source file
+__/mapping_simulator/src/simulator.cpp.i:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/simulator.cpp.i
+.PHONY : __/mapping_simulator/src/simulator.cpp.i
+
+__/mapping_simulator/src/simulator.s: __/mapping_simulator/src/simulator.cpp.s
+
+.PHONY : __/mapping_simulator/src/simulator.s
+
+# target to generate assembly for a file
+__/mapping_simulator/src/simulator.cpp.s:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/simulator.cpp.s
+.PHONY : __/mapping_simulator/src/simulator.cpp.s
+
+__/mapping_simulator/src/transformation.o: __/mapping_simulator/src/transformation.cpp.o
+
+.PHONY : __/mapping_simulator/src/transformation.o
+
+# target to build an object file
+__/mapping_simulator/src/transformation.cpp.o:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/transformation.cpp.o
+.PHONY : __/mapping_simulator/src/transformation.cpp.o
+
+__/mapping_simulator/src/transformation.i: __/mapping_simulator/src/transformation.cpp.i
+
+.PHONY : __/mapping_simulator/src/transformation.i
+
+# target to preprocess a source file
+__/mapping_simulator/src/transformation.cpp.i:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/transformation.cpp.i
+.PHONY : __/mapping_simulator/src/transformation.cpp.i
+
+__/mapping_simulator/src/transformation.s: __/mapping_simulator/src/transformation.cpp.s
+
+.PHONY : __/mapping_simulator/src/transformation.s
+
+# target to generate assembly for a file
+__/mapping_simulator/src/transformation.cpp.s:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/__/mapping_simulator/src/transformation.cpp.s
+.PHONY : __/mapping_simulator/src/transformation.cpp.s
+
 src/aligning_maps_node.o: src/aligning_maps_node.cpp.o
 
 .PHONY : src/aligning_maps_node.o
@@ -461,6 +623,33 @@ src/map_align.cpp.s:
 	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/src/map_align.cpp.s
 .PHONY : src/map_align.cpp.s
 
+src/ransac.o: src/ransac.cpp.o
+
+.PHONY : src/ransac.o
+
+# target to build an object file
+src/ransac.cpp.o:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/src/ransac.cpp.o
+.PHONY : src/ransac.cpp.o
+
+src/ransac.i: src/ransac.cpp.i
+
+.PHONY : src/ransac.i
+
+# target to preprocess a source file
+src/ransac.cpp.i:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/src/ransac.cpp.i
+.PHONY : src/ransac.cpp.i
+
+src/ransac.s: src/ransac.cpp.s
+
+.PHONY : src/ransac.s
+
+# target to generate assembly for a file
+src/ransac.cpp.s:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f aligning_maps/CMakeFiles/aligning_maps_node.dir/build.make aligning_maps/CMakeFiles/aligning_maps_node.dir/src/ransac.cpp.s
+.PHONY : src/ransac.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -490,12 +679,33 @@ help:
 	@echo "... std_msgs_generate_messages_nodejs"
 	@echo "... roscpp_generate_messages_nodejs"
 	@echo "... std_msgs_generate_messages_py"
+	@echo "... __/mapping_simulator/src/laser.o"
+	@echo "... __/mapping_simulator/src/laser.i"
+	@echo "... __/mapping_simulator/src/laser.s"
+	@echo "... __/mapping_simulator/src/noise.o"
+	@echo "... __/mapping_simulator/src/noise.i"
+	@echo "... __/mapping_simulator/src/noise.s"
+	@echo "... __/mapping_simulator/src/robot.o"
+	@echo "... __/mapping_simulator/src/robot.i"
+	@echo "... __/mapping_simulator/src/robot.s"
+	@echo "... __/mapping_simulator/src/segment.o"
+	@echo "... __/mapping_simulator/src/segment.i"
+	@echo "... __/mapping_simulator/src/segment.s"
+	@echo "... __/mapping_simulator/src/simulator.o"
+	@echo "... __/mapping_simulator/src/simulator.i"
+	@echo "... __/mapping_simulator/src/simulator.s"
+	@echo "... __/mapping_simulator/src/transformation.o"
+	@echo "... __/mapping_simulator/src/transformation.i"
+	@echo "... __/mapping_simulator/src/transformation.s"
 	@echo "... src/aligning_maps_node.o"
 	@echo "... src/aligning_maps_node.i"
 	@echo "... src/aligning_maps_node.s"
 	@echo "... src/map_align.o"
 	@echo "... src/map_align.i"
 	@echo "... src/map_align.s"
+	@echo "... src/ransac.o"
+	@echo "... src/ransac.i"
+	@echo "... src/ransac.s"
 .PHONY : help
 
 

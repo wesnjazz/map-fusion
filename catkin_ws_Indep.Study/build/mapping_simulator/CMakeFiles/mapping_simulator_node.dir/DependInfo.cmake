@@ -29,6 +29,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/opt/ros/melodic/include"
   "/opt/ros/melodic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
   "/usr/include/eigen3"
+  "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/include"
   "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include"
   "/home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/gui/src/gui"
   )
