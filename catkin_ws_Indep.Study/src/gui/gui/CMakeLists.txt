@@ -356,3 +356,5 @@ TARGET_LINK_LIBRARIES(gui_libraries
     ${QT_LIBRARIES})
 TARGET_LINK_LIBRARIES(gui_libraries ${QT_LIBRARIES})
 
+find_package(glog 0.4.0 REQUIRED)
+
