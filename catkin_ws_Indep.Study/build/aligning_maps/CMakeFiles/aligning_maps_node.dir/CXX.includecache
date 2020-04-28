@@ -79,6 +79,10 @@ fstream
 -
 opencv2/opencv.hpp
 -
+opencv2/imgproc.hpp
+-
+transformation.h
+/home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/transformation.h
 segment.h
 /home/dpark/map-fusion/catkin_ws_Indep.Study/src/aligning_maps/src/segment.h
 GRANSAC.hpp

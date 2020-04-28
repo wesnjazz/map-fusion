@@ -31,20 +31,22 @@ int main(int argc, char **argv)
         // cv::Mat im2 = imread("/home/dpark/map-fusion/imgs/mapping_output/img02_nonoise.jpg");
         cv::Mat im1 = cv::imread("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_0_a45.png");
         cv::Mat im2 = cv::imread("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_15_a45.png");
-        ifstream lsd_txt_01 = ifstream("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_0_a45.txt");
-        ifstream lsd_txt_02 = ifstream("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_15_a45.txt");
+        ifstream lsd_txt_01 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/test_clean_0_0_0_a45.txt");
+        ifstream lsd_txt_02 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/test_clean_0_0_15_a45.txt");
 
         cv::Mat im1_gray;
         cvtColor(im1, im1_gray, cv::COLOR_BGR2GRAY);
         cv::Mat im2_gray;
         cvtColor(im2, im2_gray, cv::COLOR_BGR2GRAY);
 
-
+        int cols = 8000;
+        int rows = 5000;
+        cv::Mat img = cv::Mat::zeros(cols, rows, CV_8UC3);
         // CannyEdge(im1);
         // mySIFT(im1);
         // SimpleBlob(im1);
         // myGRANSAC();
-        myGRANSAC(lsd_txt_01, lsd_txt_02);
+        myAlign(img, lsd_txt_01, lsd_txt_02);
 
 
         cout << "Press any key to continue...";
