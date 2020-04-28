@@ -5,6 +5,7 @@
 #include <fstream>
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc.hpp>
+#include "simulator.h"
 #include "transformation.h"
 #include "segment.h"
 #include "GRANSAC.hpp"
@@ -142,6 +143,9 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
     for(vector<int>::iterator it = matches.begin(); it != matches.end(); ++it)
     {
         int idx_i = it - matches.begin();
+        Segment seg_01 = segments_01.at(idx_i);
+        Segment seg_02 = segments_02.at(*it);
+
         float seg_01_x = segments_01.at(idx_i).start.x();
         float seg_01_y = segments_01.at(idx_i).start.y();
         float seg_01_theta = segments_01.at(idx_i).angle_degree;
@@ -151,6 +155,7 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
         Vec3f seg_01_pos = Vec3f(seg_01_x, seg_01_y, seg_01_theta);
         Vec3f seg_02_pos = Vec3f(seg_02_x, seg_02_y, seg_02_theta);
         Mat3f HT = get_HT_Aframe_to_Bframe(seg_01_pos, seg_02_pos);
+
         cout << seg_01_pos << endl;
         cout << seg_02_pos << endl;
         cout << HT << endl;
@@ -168,23 +173,45 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
             Vec2f new_end_2f = Vec2f(new_end_with_dummy_1.x(), new_end_with_dummy_1.y());
             Segment seg_transformed = Segment(new_start_2f, new_end_2f);
 
+            float theta_diff = fabs(it_seg->angle_degree - seg_01.angle_degree);
+            float dot = fabs(it_seg->segment.dot(seg_01.segment));
+            float theta_diff_dot = dot * degree_to_radian(theta_diff);
+            float similarity = theta_diff_dot / dot;
+            if (theta_diff_dot > dot) {
+                similarity = dot / theta_diff_dot;
+            }
+            cout << "theta_diff: " << theta_diff << endl
+                << "dot: " << dot << endl
+                << "theta_diff_dot: " << theta_diff_dot << endl
+                << "similarity: " << similarity << endl
+                ;
+
+            // cout << segments_01.at(*it) << endl;
+            // cout << seg_transformed << endl << endl;
+            // cout << segments_01.at(*it).segment.dot(seg_transformed.segment) << endl;
+            // Vec2f a = Vec2f(10, 0);
+            // Vec2f b = Vec2f(0, 10);
+            // cout << a.unitOrthogonal() << endl;
+            // cout << b.unitOrthogonal() << endl;
+            // cout << a.unitOrthogonal().dot(b.unitOrthogonal()) << endl;
+
         cv::Mat im = cv::Mat::zeros(6000, 8500, CV_8UC3);
         cv::Point2f seg_01_p1 = cv::Point2f(segments_01.at(idx_i).start.x() + x_move, segments_01.at(idx_i).start.y() + y_move);
         cv::Point2f seg_01_p2 = cv::Point2f(segments_01.at(idx_i).end.x()   + x_move, segments_01.at(idx_i).end.y()   + y_move);
         cv::line(im, seg_01_p1, seg_01_p2, cv::Scalar(0, 100, 255), 50, 8);
         display_im("Result", im);
-        cv::Point2f seg_01_pair_p1 = cv::Point2f(segments_02.at(*it).start.x() + x_move, segments_02.at(*it).start.y() + y_move);
-        cv::Point2f seg_01_pair_p2 = cv::Point2f(segments_02.at(*it).end.x()   + x_move, segments_02.at(*it).end.y()   + y_move);
-        cv::line(im, seg_01_pair_p1, seg_01_pair_p2, cv::Scalar(0, 50, 255), 50, 8);
-        display_im("Result", im);
+        // cv::Point2f seg_01_pair_p1 = cv::Point2f(segments_02.at(*it).start.x() + x_move, segments_02.at(*it).start.y() + y_move);
+        // cv::Point2f seg_01_pair_p2 = cv::Point2f(segments_02.at(*it).end.x()   + x_move, segments_02.at(*it).end.y()   + y_move);
+        // cv::line(im, seg_01_pair_p1, seg_01_pair_p2, cv::Scalar(0, 50, 255), 50, 8);
+        // display_im("Result", im);
         cv::Point2f seg_02_p1 = cv::Point2f(it_seg->start.x() + x_move, it_seg->start.y() + y_move);
         cv::Point2f seg_02_p2 = cv::Point2f(it_seg->end.x()   + x_move, it_seg->end.y()   + y_move);
         cv::line(im, seg_02_p1, seg_02_p2, cv::Scalar(255, 0, 100), 50, 7);
         display_im("Result", im);
-        cv::Point2f seg_transformed_p1 = cv::Point2f(seg_transformed.start.x() + x_move, seg_transformed.start.y() + y_move);
-        cv::Point2f seg_transformed_p2 = cv::Point2f(seg_transformed.end.x()   + x_move, seg_transformed.end.y()   + y_move);
-        cv::line(im, seg_transformed_p1, seg_transformed_p2, cv::Scalar(0, 255, 10), 50, 7);
-        display_im("Result", im);
+        // cv::Point2f seg_transformed_p1 = cv::Point2f(seg_transformed.start.x() + x_move, seg_transformed.start.y() + y_move);
+        // cv::Point2f seg_transformed_p2 = cv::Point2f(seg_transformed.end.x()   + x_move, seg_transformed.end.y()   + y_move);
+        // cv::line(im, seg_transformed_p1, seg_transformed_p2, cv::Scalar(0, 255, 10), 50, 7);
+        // display_im("Result", im);
         //     cv::Point2f seg_02_p1 = cv::Point2f(it_seg->start.x(), it_seg->start.y());
         //     cv::Point2f seg_02_p2 = cv::Point2f(it_seg->end.x(), it_seg->end.y());
         //     cv::line(im, seg_02_p1, seg_02_p2, cv::Scalar(0, 255, 100), 50, 8);
