@@ -103,7 +103,7 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &seg_01, vector<Segmen
         // p1 = cv::Point2f(seg_02.at(ee).start.x(), seg_02.at(ee).start.y());
         // p2 = cv::Point2f(seg_02.at(ee).end.x(), seg_02.at(ee).end.y());
         // cv::line(im, p1, p2, cv::Scalar(100, 255, 0), 50, 8);
-        // display_im("Result", im);
+        // display("Result", im);
         // cout 
         //     << *it_01 << endl
         //     << seg_02.at(ee) << endl
@@ -127,7 +127,7 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &seg_01, vector<Segmen
             // p1 = cv::Point2f(it_02->start.x(), it_02->start.y());
             // p2 = cv::Point2f(it_02->end.x(), it_02->end.y());
             // cv::line(im, p1, p2, cv::Scalar(100, 255, 0), 10, 8);
-            // display_im("Result", im);
+            // display("Result", im);
 
 
 
@@ -157,7 +157,7 @@ void ransac_affine(cv::Mat &im, Segment &depart, Segment &arrival, cv::Mat &affi
         cv::circle(im, cv::Point2f(x1p + x_move, y1p + y_move), 100, cv::Scalar(50, 200, 255), 10);
         cv::circle(im, cv::Point2f(x2p + x_move, y2p + y_move), 100, cv::Scalar(50, 200, 255), 10);
         cv::circle(im, cv::Point2f(x3p + x_move, y3p + y_move), 100, cv::Scalar(50, 200, 255), 10);
-        display_im("Result", im);
+        display("Result", im);
 
     float data[36] = { 
                         x1, y1,  0,  0,  1,  0,
@@ -196,7 +196,7 @@ void ransac_affine(cv::Mat &im, Segment &depart, Segment &arrival, cv::Mat &affi
     // cv::warpAffine(im, warp_dst, warp_mat, warp_dst.size());
     cout << "warp_mat:" << endl << warp_mat << endl << endl;
     getchar();
-    // display_im("Result", warp_dst);
+    // display("Result", warp_dst);
 
 
 
@@ -211,7 +211,7 @@ void ransac_affine(cv::Mat &im, Segment &depart, Segment &arrival, cv::Mat &affi
         // cv::circle(im, cv::Point2f(transformed_M.at<float>(0,0) + x_move, transformed_M.at<float>(1,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
         // cv::circle(im, cv::Point2f(transformed_M.at<float>(2,0) + x_move, transformed_M.at<float>(3,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
         // cv::circle(im, cv::Point2f(transformed_M.at<float>(4,0) + x_move, transformed_M.at<float>(5,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
-        // display_im("Result", im);
+        // display("Result", im);
 
 
     float affine[4] = {
@@ -239,7 +239,7 @@ void draw_lsd_map(cv::Mat &im, vector<Segment> &segments, cv::Scalar &color, int
         cv::Point2f p2 = cv::Point2f(it->end.x()   + x_move, it->end.y()   + y_move);
         cv::line(im, p1, p2, color, thickness, type);
     }
-        display_im("Result", im);
+        display("Result", im);
 }
 
 void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
@@ -256,16 +256,27 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
 
     cv::Mat im_base = cv::Mat::zeros(3000, 5000, CV_8UC3);
     cv::Scalar color_r = cv::Scalar(0, 0, 255);
+    cv::Scalar color_r1 = cv::Scalar(100, 100, 255);
+    cv::Scalar color_r2 = cv::Scalar(200, 200, 255);
     cv::Scalar color_g = cv::Scalar(0, 255, 0);
     cv::Scalar color_b = cv::Scalar(255, 0, 0);
-    draw_lsd_map(im_base, segments_01, color_r, 6, 1);
-    draw_lsd_map(im_base, segments_02, color_b, 6, 2);
+    cv::Scalar color_b1 = cv::Scalar(255, 100, 100);
+    cv::Scalar color_b2 = cv::Scalar(255, 200, 200);
+    cv::Scalar color_purple = cv::Scalar(255, 0, 255);
+    cv::Scalar color_yellow = cv::Scalar(0, 255, 255);
+    cv::Scalar color_orange = cv::Scalar(0, 150, 255);
+    cv::Scalar color_white = cv::Scalar(255, 255, 255);
+    draw_lsd_map(im_base, segments_01, color_r, 2, 1);
+    draw_lsd_map(im_base, segments_02, color_b, 2, 2);
 
     /** Compute matches **/
     vector<int> matches = compute_matches(img, segments_01, segments_02);
     
     for(vector<int>::iterator it = matches.begin(); it != matches.end(); ++it)
     {
+        // cv::Mat im_board = cv::Mat::zeros(im_base.rows, im_base.cols, im_base.type);
+        cv::Mat im_board = cv::Mat::zeros(3000, 5000, CV_8UC3);
+        im_board += im_base;
         int x_move = 0;
         int y_move = 0;
         int idx_i = it - matches.begin();
@@ -274,41 +285,43 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
         Segment seg_A = segments_01.at(idx_i);
         Segment seg_B = segments_02.at(*it);
 
-        cv::Mat im = cv::Mat::zeros(6000, 8500, CV_8UC3);
-        // cv::Point2f seg_A_p1 = cv::Point2f(seg_A.start.x() + x_move, seg_A.start.y() + y_move);
-        // cv::Point2f seg_A_p2 = cv::Point2f(seg_A.end.x()   + x_move, seg_A.end.y()   + y_move);
-        // cv::line(im, seg_A_p1, seg_A_p2, cv::Scalar(0, 100, 255), 50, 8);
-        // cv::circle(im, seg_A_p1, 100, cv::Scalar(255, 255, 255), 10);
-        // display_im("Result", im);
+        // cv::Mat im = cv::Mat::zeros(6000, 8500, CV_8UC3);
+        cv::Point2f seg_A_p1 = cv::Point2f(seg_A.start.x() + x_move, seg_A.start.y() + y_move);
+        cv::Point2f seg_A_p2 = cv::Point2f(seg_A.end.x()   + x_move, seg_A.end.y()   + y_move);
+        cv::line(im_board, seg_A_p1, seg_A_p2, color_g, 10, 3);
+        cv::circle(im_board, seg_A_p1, 50, color_white, 10);
+        display("Board", im_board);
 
-        // cv::Point2f seg_B_p1 = cv::Point2f(seg_B.start.x() + x_move, seg_B.start.y() + y_move);
-        // cv::Point2f seg_B_p2 = cv::Point2f(seg_B.end.x()   + x_move, seg_B.end.y()   + y_move);
-        // cv::line(im, seg_B_p1, seg_B_p2, cv::Scalar(0, 100, 255), 50, 8);
-        // cv::circle(im, seg_B_p1, 100, cv::Scalar(255, 255, 255), 10);
-        // display_im("Result", im);
+        cv::Point2f seg_B_p1 = cv::Point2f(seg_B.start.x() + x_move, seg_B.start.y() + y_move);
+        cv::Point2f seg_B_p2 = cv::Point2f(seg_B.end.x()   + x_move, seg_B.end.y()   + y_move);
+        cv::line(im_board, seg_B_p1, seg_B_p2, color_purple, 10, 4);
+        cv::circle(im_board, seg_B_p1, 50, color_white, 10);
+        display("Board", im_board);
 
 
-        cv::Mat affine_M = cv::Mat::zeros(2, 2, CV_32FC1);
-        cv::Mat translate_M = cv::Mat::zeros(2, 1, CV_32FC1);
+        // cv::Mat affine_M = cv::Mat::zeros(2, 2, CV_32FC1);
+        // cv::Mat translate_M = cv::Mat::zeros(2, 1, CV_32FC1);
 
         // ransac_affine(im, seg_A, seg_B, affine_M, translate_M);
-        cout << "affine_M: " << endl << affine_M << endl << endl;
-        cout << "translate_M: " << endl << translate_M << endl << endl;
+        // cout << "affine_M: " << endl << affine_M << endl << endl;
+        // cout << "translate_M: " << endl << translate_M << endl << endl;
 
-        float seg_A_x = seg_A.start.x();
-        float seg_A_y = seg_A.start.y();
-        float seg_A_theta = seg_A.angle_degree;
-        float seg_B_x = seg_B.start.x();
-        float seg_B_y = seg_B.start.y();
-        float seg_B_theta = seg_B.angle_degree;
-        Vec3f seg_A_pos = Vec3f(seg_A_x, seg_A_y, seg_A_theta);
-        Vec3f seg_B_pos = Vec3f(seg_B_x, seg_B_y, seg_B_theta);
-        Mat3f HT = get_HT_Aframe_to_Bframe(seg_A_pos, seg_B_pos);
+        // float seg_A_x = seg_A.start.x();
+        // float seg_A_y = seg_A.start.y();
+        // float seg_A_theta = seg_A.angle_degree;
+        // float seg_B_x = seg_B.start.x();
+        // float seg_B_y = seg_B.start.y();
+        // float seg_B_theta = seg_B.angle_degree;
+        // Vec3f seg_A_pos = Vec3f(seg_A_x, seg_A_y, seg_A_theta);
+        // Vec3f seg_B_pos = Vec3f(seg_B_x, seg_B_y, seg_B_theta);
+        // Mat3f HT = get_HT_Aframe_to_Bframe(seg_A_pos, seg_B_pos);
+
+
         // cv::Point2f tf_p1 = cv::Point2f(seg_A_x + x_move, seg_A_y + y_move);
         // cv::Point2f tf_p2 = cv::Point2f(seg_B_x + x_move, seg_B_y + y_move);
         // cv::line(im, tf_p1, tf_p2, cv::Scalar(0, 200, 0), 50, 8);
         // cv::circle(im, tf_p1, 100, cv::Scalar(255, 255, 255), 10);
-        // display_im("Result", im);
+        // display("Result", im);
 
 
         // cout << seg_A_pos << endl;
@@ -327,7 +340,7 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
         // cv::Point2f seg_tf_end = cv::Point2f(seg_transformed.end.x()   + x_move, seg_transformed.end.y()   + y_move);
         // cv::line(im, seg_tf_start, seg_tf_end, cv::Scalar(255, 0, 0), 30, 8);
         // cv::circle(im, seg_tf_start, 100, cv::Scalar(255, 255, 255), 10);
-        // display_im("Result", im);
+        // display("Result", im);
 
 
         // float x1 = 
@@ -370,25 +383,25 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
         // cv::Point2f seg_01_p2 = cv::Point2f(segments_01.at(idx_i).end.x()   + x_move, segments_01.at(idx_i).end.y()   + y_move);
         // cv::line(im, seg_01_p1, seg_01_p2, cv::Scalar(0, 100, 255), 50, 8);
         // cv::circle(im, seg_01_p1, 100, cv::Scalar(255, 255, 255), 10);
-        // display_im("Result", im);
+        // display("Result", im);
         // cv::Point2f seg_02_p1 = cv::Point2f(seg_transformed.start.x() + x_move, seg_transformed.start.y() + y_move);
         // cv::Point2f seg_02_p2 = cv::Point2f(seg_transformed.end.x()   + x_move, seg_transformed.end.y()   + y_move);
         // cv::line(im, seg_02_p1, seg_02_p2, cv::Scalar(255, 0, 100), 50, 7);
         // cv::circle(im, seg_02_p1, 100, cv::Scalar(255, 255, 255), 10);
-        // display_im("Result", im);
+        // display("Result", im);
 
         // cv::Point2f seg_01_pair_p1 = cv::Point2f(segments_02.at(*it).start.x() + x_move, segments_02.at(*it).start.y() + y_move);
         // cv::Point2f seg_01_pair_p2 = cv::Point2f(segments_02.at(*it).end.x()   + x_move, segments_02.at(*it).end.y()   + y_move);
         // cv::line(im, seg_01_pair_p1, seg_01_pair_p2, cv::Scalar(0, 50, 255), 50, 8);
-        // display_im("Result", im);
+        // display("Result", im);
         // cv::Point2f seg_transformed_p1 = cv::Point2f(seg_transformed.start.x() + x_move, seg_transformed.start.y() + y_move);
         // cv::Point2f seg_transformed_p2 = cv::Point2f(seg_transformed.end.x()   + x_move, seg_transformed.end.y()   + y_move);
         // cv::line(im, seg_transformed_p1, seg_transformed_p2, cv::Scalar(0, 255, 10), 50, 7);
-        // display_im("Result", im);
+        // display("Result", im);
         //     cv::Point2f seg_02_p1 = cv::Point2f(it_seg->start.x(), it_seg->start.y());
         //     cv::Point2f seg_02_p2 = cv::Point2f(it_seg->end.x(), it_seg->end.y());
         //     cv::line(im, seg_02_p1, seg_02_p2, cv::Scalar(0, 255, 100), 50, 8);
-        //     display_im("Result", im);
+        //     display("Result", im);
 
         // }
 

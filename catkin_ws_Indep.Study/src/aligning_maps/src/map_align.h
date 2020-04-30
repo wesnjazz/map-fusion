@@ -23,7 +23,7 @@ cv::Mat concatenate_two_images_adjacent_horizontal(cv::Mat &im1, cv::Mat&im2)
 }
 
 
-void display_im(string window_name, cv::Mat &im)
+void display(string window_name, cv::Mat &im)
 {
     cv::namedWindow(window_name, cv::WINDOW_NORMAL);
     cv::resizeWindow(window_name, 2560, 1440);
@@ -37,7 +37,7 @@ void display_imorigin_imconvoluted_adj_horizontal(cv::Mat &im_original, cv::Mat 
 {
     cv::Mat concat_im;
     concat_im = concatenate_two_images_adjacent_horizontal(im_original, im_convoluted);
-    display_im("im_result_window", concat_im);
+    display("im_result_window", concat_im);
 }
 
 
