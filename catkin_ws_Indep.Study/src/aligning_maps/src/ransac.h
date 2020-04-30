@@ -68,7 +68,7 @@ void read_lsd(ifstream &seg_file, vector<Segment> &segments)
             // default: break;
             // }
         }
-        cout << "size: " << segments.size() << endl;
+        // cout << "size: " << segments.size() << endl;
     }
 }
 
@@ -95,7 +95,7 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &seg_01, vector<Segmen
         // cout << "\t\t\tmin_diff: " << min_diff << endl;
         matches.push_back(index_min);
 
-        // cv::Mat im = cv::Mat::zeros(6000, 8500, CV_8UC3);
+        // cv::Mat im = cv::Mat::zeros(6000, 8500, CV_32FC3);
         // cv::Point2f p1 = cv::Point2f(it_01->start.x(), it_01->start.y());
         // cv::Point2f p2 = cv::Point2f(it_01->end.x(), it_01->end.y());
         // cv::line(im, p1, p2, cv::Scalar(0, 100, 255), 50, 8);
@@ -120,7 +120,7 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &seg_01, vector<Segmen
             //         << it_02->start.x() << "/t" << it_02->start.y() << endl
             //         << it_02->end.x() << "/t" << it_02->end.y() << endl
             //         ;
-            // cv::Mat im = cv::Mat::zeros(10000, 8000, CV_8UC3);
+            // cv::Mat im = cv::Mat::zeros(10000, 8000, CV_32FC3);
             // cv::Point2f p1 = cv::Point2f(it_01->start.x(), it_01->start.y());
             // cv::Point2f p2 = cv::Point2f(it_01->end.x(), it_01->end.y());
             // cv::line(im, p1, p2, cv::Scalar(0, 100, 255), 10, 8);
@@ -131,7 +131,98 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &seg_01, vector<Segmen
 
 
 
-void ransac_affine(cv::Mat &im, Segment &depart, Segment &arrival, cv::Mat &affine_M, cv::Mat &translate_M)
+void find_affine_translate(cv::Mat &im,  cv::Point2f src[], cv::Point2f dst[], cv::Mat &affine_M, cv::Mat &translate_M)
+{
+        int x_move = 0;
+        int y_move = 0;
+        cv::Point2f seg_A_p1    = cv::Point2f(src[0].x + x_move, src[0].y + y_move);
+        cv::Point2f seg_A_prp1  = cv::Point2f(dst[0].x + x_move, dst[0].y + y_move);
+        cv::Point2f seg_A_p2    = cv::Point2f(src[1].x + x_move, src[1].y + y_move);
+        cv::Point2f seg_A_prp2  = cv::Point2f(dst[1].x + x_move, dst[1].y + y_move);
+        cv::Point2f seg_A_p3    = cv::Point2f(src[2].x + x_move, src[2].y + y_move);
+        cv::Point2f seg_A_prp3  = cv::Point2f(dst[2].x + x_move, dst[2].y + y_move);
+        cv::line(im, seg_A_p1, seg_A_prp1, cv::Scalar(100, 255, 255), 2, 8);
+        cv::line(im, seg_A_p2, seg_A_prp2, cv::Scalar(50, 205, 205), 2, 8);
+        cv::line(im, seg_A_p3, seg_A_prp3, cv::Scalar(0, 155, 155), 2, 8);
+        cv::circle(im, cv::Point2f(src[0].x + x_move, src[0].y + y_move), 50, cv::Scalar(255, 0, 255), 10);
+        cv::circle(im, cv::Point2f(src[1].x + x_move, src[1].y + y_move), 50, cv::Scalar(155, 0, 155), 10);
+        cv::circle(im, cv::Point2f(src[2].x + x_move, src[2].y + y_move), 50, cv::Scalar(55, 0, 55), 10);
+        cv::circle(im, cv::Point2f(dst[0].x + x_move, dst[0].y + y_move), 50, cv::Scalar(50, 200, 255), 10);
+        cv::circle(im, cv::Point2f(dst[1].x + x_move, dst[1].y + y_move), 50, cv::Scalar(20, 100, 155), 10);
+        cv::circle(im, cv::Point2f(dst[2].x + x_move, dst[2].y + y_move), 50, cv::Scalar(0, 50, 55), 10);
+        display("Result", im);
+
+    // float data[36] = { 
+    //                     x1, y1,  0,  0,  1,  0,
+    //                      0,  0, x1, y1,  0,  1,
+    //                     x2, y2,  0,  0,  1,  0,
+    //                      0,  0, x2, y2,  0,  1,
+    //                     x3, y3,  0,  0,  1,  0,
+    //                      0,  0, x3, y3,  0,  1
+    //                  };
+    // float data2[6] = { dst[0], dst[0], dst[1].x, y2p, x3p, y3p };
+    // cv::Mat before_M = cv::Mat(6, 6, CV_32FC1, &data);
+    // cv::Mat before_M_inv = before_M.inv();
+    // cv::Mat transformed_M = cv::Mat(6, 1, CV_32FC1, &data2);
+    // trans = np.dot(np.linalg.inv(p),p_prime)
+    // p   # original data
+    // p_prime  # transformed data
+
+    // cv::Mat rot_mat( 2, 3, CV_32FC1 );
+    // cv::Mat warp_mat( 2, 3, CV_32FC1 );
+    // cv::Mat warp_dst, warp_rotate_dst;
+    // warp_dst = cv::Mat::zeros(im.rows, im.cols, im.type());
+
+    cout 
+        << "src:" << endl << src[0] << "\t" << src[1] << "\t" << src[2] << endl
+        << "dst:" << endl << dst[0] << "\t" << dst[1] << "\t" << dst[2] << endl
+        << endl;
+
+    cv::Mat warp_mat = cv::getAffineTransform(src, dst);
+    affine_M = warp_mat(cv::Range::all(), cv::Range(0,2));
+    affine_M.convertTo(affine_M, CV_32FC1);
+    translate_M = warp_mat(cv::Range::all(), cv::Range(2, 3));
+
+    // cv::warpAffine(im, warp_dst, warp_mat, warp_dst.size());
+    cout << "warp_mat:" << endl << warp_mat << endl << endl;
+    cout << "affine_M:" << endl << affine_M << endl << endl;
+    cout << "translate_M:" << endl << translate_M << endl << endl;
+    // getchar();
+    // display("Result", warp_dst);
+
+
+
+
+
+    // cv::Mat parameter_M = before_M.inv() * transformed_M;
+    // cout << "before_M:" << endl << before_M << endl << endl;
+    // cout << "before_M_inv():" << endl << before_M_inv << endl << endl;
+    // cout << "det: " << endl << cv::determinant(before_M) << endl << endl;
+    // cout << "transformed_M:" << endl << transformed_M << endl << endl;
+    // cout << "parameter_M:" << endl << parameter_M << endl << endl;
+        // cv::circle(im, cv::Point2f(transformed_M.at<float>(0,0) + x_move, transformed_M.at<float>(1,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
+        // cv::circle(im, cv::Point2f(transformed_M.at<float>(2,0) + x_move, transformed_M.at<float>(3,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
+        // cv::circle(im, cv::Point2f(transformed_M.at<float>(4,0) + x_move, transformed_M.at<float>(5,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
+        // display("Result", im);
+
+
+    // float affine[4] = {
+    //                     parameter_M.at<float>(0, 0), parameter_M.at<float>(1, 0),
+    //                     parameter_M.at<float>(2, 0), parameter_M.at<float>(3, 0)
+    //                   };
+    // cv::Mat a_M = cv::Mat(2, 2, CV_32FC1, &affine);
+    // float translate[2] = {
+    //                         parameter_M.at<float>(4, 0), parameter_M.at<float>(5, 0)
+    //                      };
+    // cv::Mat t_M = cv::Mat(2, 1, CV_32FC1, &translate);
+    // cout << "affine_M: " << endl << affine_M << endl << endl;
+    // cout << "translate_M: " << endl << translate_M << endl << endl;
+    // affine_M = a_M;
+    // translate_M = t_M;
+}
+
+
+void get_three_pairs_of_line(Segment &depart, Segment &arrival, cv::Point2f src[], cv::Point2f dst[])
 {
     float x1 = depart.start.x();
     float x1p = arrival.start.x();
@@ -145,95 +236,36 @@ void ransac_affine(cv::Mat &im, Segment &depart, Segment &arrival, cv::Mat &affi
     float x2p = (x1p + x3p) / 2.0f;
     float y2 = (y1 + y3) / 2.0f;
     float y2p = (y1p + y3p) / 2.0f;
-
-        int x_move = 0;
-        int y_move = 0;
-        cv::Point2f seg_A_p1 = cv::Point2f(x1 + x_move, y1 + y_move);
-        cv::Point2f seg_A_prp1 = cv::Point2f(x1p + x_move, y1p + y_move);
-        cv::Point2f seg_A_p2 = cv::Point2f(x2 + x_move, y2 + y_move);
-        cv::Point2f seg_A_prp2 = cv::Point2f(x2p + x_move, y2p + y_move);
-        cv::Point2f seg_A_p3 = cv::Point2f(x3 + x_move, y3 + y_move);
-        cv::Point2f seg_A_prp3 = cv::Point2f(x3p + x_move, y3p + y_move);
-        cv::line(im, seg_A_p1, seg_A_prp1, cv::Scalar(100, 255, 255), 2, 8);
-        cv::line(im, seg_A_p2, seg_A_prp2, cv::Scalar(50, 205, 205), 2, 8);
-        cv::line(im, seg_A_p3, seg_A_prp3, cv::Scalar(0, 155, 155), 2, 8);
-        cv::circle(im, cv::Point2f(x1 + x_move, y1 + y_move), 50, cv::Scalar(255, 0, 255), 10);
-        cv::circle(im, cv::Point2f(x2 + x_move, y2 + y_move), 50, cv::Scalar(155, 0, 155), 10);
-        cv::circle(im, cv::Point2f(x3 + x_move, y3 + y_move), 50, cv::Scalar(55, 0, 55), 10);
-        cv::circle(im, cv::Point2f(x1p + x_move, y1p + y_move), 50, cv::Scalar(50, 200, 255), 10);
-        cv::circle(im, cv::Point2f(x2p + x_move, y2p + y_move), 50, cv::Scalar(20, 100, 155), 10);
-        cv::circle(im, cv::Point2f(x3p + x_move, y3p + y_move), 50, cv::Scalar(0, 50, 55), 10);
-        display("Result", im);
-
-    float data[36] = { 
-                        x1, y1,  0,  0,  1,  0,
-                         0,  0, x1, y1,  0,  1,
-                        x2, y2,  0,  0,  1,  0,
-                         0,  0, x2, y2,  0,  1,
-                        x3, y3,  0,  0,  1,  0,
-                         0,  0, x3, y3,  0,  1
-                     };
-    float data2[6] = { x1p, y1p, x2p, y2p, x3p, y3p };
-    cv::Mat before_M = cv::Mat(6, 6, CV_32FC1, &data);
-    cv::Mat before_M_inv = before_M.inv();
-    cv::Mat transformed_M = cv::Mat(6, 1, CV_32FC1, &data2);
-    // trans = np.dot(np.linalg.inv(p),p_prime)
-    // p   # original data
-    // p_prime  # transformed data
-
-    cv::Point2f src[3];
-    cv::Point2f dst[3];
-    cv::Mat rot_mat( 2, 3, CV_32FC1 );
-    cv::Mat warp_mat( 2, 3, CV_32FC1 );
-    cv::Mat warp_dst, warp_rotate_dst;
-    warp_dst = cv::Mat::zeros(im.rows, im.cols, im.type());
-
     src[0] = cv::Point2f( x1, y1 );
     src[1] = cv::Point2f( x2, y2 );
     src[2] = cv::Point2f( x3, y3 );
-
     dst[0] = cv::Point2f( x1p, y1p );
     dst[1] = cv::Point2f( x2p, y2p );
     dst[2] = cv::Point2f( x3p, y3p );
-
-    warp_mat = cv::getAffineTransform(src, dst);
-
-
-    // cv::warpAffine(im, warp_dst, warp_mat, warp_dst.size());
-    cout << "warp_mat:" << endl << warp_mat << endl << endl;
-    getchar();
-    // display("Result", warp_dst);
-
-
-
-
-
-    cv::Mat parameter_M = before_M.inv() * transformed_M;
-    cout << "before_M:" << endl << before_M << endl << endl;
-    cout << "before_M_inv():" << endl << before_M_inv << endl << endl;
-    cout << "det: " << endl << cv::determinant(before_M) << endl << endl;
-    cout << "transformed_M:" << endl << transformed_M << endl << endl;
-    cout << "parameter_M:" << endl << parameter_M << endl << endl;
-        // cv::circle(im, cv::Point2f(transformed_M.at<float>(0,0) + x_move, transformed_M.at<float>(1,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
-        // cv::circle(im, cv::Point2f(transformed_M.at<float>(2,0) + x_move, transformed_M.at<float>(3,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
-        // cv::circle(im, cv::Point2f(transformed_M.at<float>(4,0) + x_move, transformed_M.at<float>(5,0) + y_move), 120, cv::Scalar(0, 200, 55), 10);
-        // display("Result", im);
-
-
-    float affine[4] = {
-                        parameter_M.at<float>(0, 0), parameter_M.at<float>(1, 0),
-                        parameter_M.at<float>(2, 0), parameter_M.at<float>(3, 0)
-                      };
-    cv::Mat a_M = cv::Mat(2, 2, CV_32FC1, &affine);
-    float translate[2] = {
-                            parameter_M.at<float>(4, 0), parameter_M.at<float>(5, 0)
-                         };
-    cv::Mat t_M = cv::Mat(2, 1, CV_32FC1, &translate);
-    cout << "affine_M: " << endl << affine_M << endl << endl;
-    cout << "translate_M: " << endl << translate_M << endl << endl;
-    affine_M = a_M;
-    translate_M = t_M;
 }
+
+void draw_affine_transforms(cv::Mat &im_board, vector<Segment> &segments, cv::Mat &affine_M, cv::Mat &translate_M)
+{
+    for(vector<Segment>::iterator it = segments.begin(); it != segments.end(); ++it)
+    {
+        cv::Mat af = cv::Mat(2, 2, CV_32FC1);
+        // affine_M.copyTo(af);
+        float head[2] = { it->start.x(), it->start.y() };
+        float tail[2] = { it->end.x(), it->end.y() };
+        cv::Mat head_M = cv::Mat(2, 1, CV_32FC1, head);
+        cv::Mat tail_M = cv::Mat(2, 1, CV_32FC1, tail);
+        cv::Mat head_prime = af * head_M;
+        // head_prime = affine_M.mul(head_M) + translate_M;
+        cv::Mat tail_prime = affine_M.mul(tail_M) + translate_M;
+        
+        cv::Point2f p1 = cv::Point2f(head_prime.at<float>(0, 0), head_prime.at<float>(0, 1));
+        cv::Point2f p2 = cv::Point2f(tail_prime.at<float>(0, 0), tail_prime.at<float>(0, 1));
+        cv::line(im_board, p1, p2, cv::Scalar(100,200,50), 4, 8);
+        display("Result", im_board);
+    }
+}
+
+
 
 void draw_lsd_map(cv::Mat &im, vector<Segment> &segments, cv::Scalar &color, int thickness, int type)
 {
@@ -248,6 +280,36 @@ void draw_lsd_map(cv::Mat &im, vector<Segment> &segments, cv::Scalar &color, int
         display("Result", im);
 }
 
+
+void test(cv::Mat src)
+{
+    using namespace cv;
+    Point2f srcTri[3];
+    srcTri[0] = Point2f( 0.f, 0.f );
+    srcTri[1] = Point2f( src.cols - 1.f, 0.f );
+    srcTri[2] = Point2f( 0.f, src.rows - 1.f );
+    Point2f dstTri[3];
+    dstTri[0] = Point2f( 0.f, src.rows*0.13f );
+    dstTri[1] = Point2f( src.cols*0.25f, src.rows*0.25f );
+    dstTri[2] = Point2f( src.cols*0.05f, src.rows*0.07f );
+    Mat warp_mat = getAffineTransform( srcTri, dstTri );
+    cout << "warp_mat:" << endl << warp_mat << endl << endl;
+    getchar();
+    Mat warp_dst = Mat::zeros( src.rows/3, src.cols/3, src.type() );
+    warpAffine( src, warp_dst, warp_mat, warp_dst.size() );
+    Point center = Point( warp_dst.cols/2, warp_dst.rows/2 );
+    double angle = -50.0;
+    double scale = 0.6;
+    Mat rot_mat = getRotationMatrix2D( center, angle, scale );
+    Mat warp_rotate_dst;
+    warpAffine( warp_dst, warp_rotate_dst, rot_mat, warp_dst.size() );
+    imshow( "Source image", src );
+    imshow( "Warp", warp_dst );
+    imshow( "Warp + Rotate", warp_rotate_dst );
+    waitKey();
+}
+
+
 void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
 {
 	std::vector<std::shared_ptr<GRANSAC::AbstractParameter>> CandPoints_01;
@@ -260,7 +322,7 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
     read_lsd(file_01, segments_01);
     read_lsd(file_02, segments_02);
 
-    cv::Mat im_base = cv::Mat::zeros(3000, 5000, CV_8UC3);
+    cv::Mat im_base = cv::Mat::zeros(3000, 5000, CV_32FC3);
     cv::Scalar color_r = cv::Scalar(0, 0, 255);
     cv::Scalar color_r1 = cv::Scalar(100, 100, 255);
     cv::Scalar color_r2 = cv::Scalar(200, 200, 255);
@@ -275,14 +337,16 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
     draw_lsd_map(im_base, segments_01, color_r, 2, 1);
     draw_lsd_map(im_base, segments_02, color_b, 2, 2);
 
+    // test(im_base);
+
     /** Compute matches **/
     vector<int> matches = compute_matches(img, segments_01, segments_02);
     
     for(vector<int>::iterator it = matches.begin(); it != matches.end(); ++it)
     {
         // cv::Mat im_board = cv::Mat::zeros(im_base.rows, im_base.cols, im_base.type);
-        cv::Mat im_board = cv::Mat::zeros(3000, 5000, CV_8UC3);
-        cv::Mat im_affine = cv::Mat::zeros(3000, 5000, CV_8UC3);
+        cv::Mat im_board = cv::Mat::zeros(3000, 5000, CV_32FC3);
+        cv::Mat im_affine = cv::Mat::zeros(3000, 5000, CV_32FC3);
         im_board += im_base;
         im_affine += im_base;
         int x_move = 0;
@@ -293,7 +357,7 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
         Segment seg_A = segments_01.at(idx_i);
         Segment seg_B = segments_02.at(*it);
 
-        // cv::Mat im = cv::Mat::zeros(6000, 8500, CV_8UC3);
+        // cv::Mat im = cv::Mat::zeros(6000, 8500, CV_32FC3);
         cv::Point2f seg_A_p1 = cv::Point2f(seg_A.start.x() + x_move, seg_A.start.y() + y_move);
         cv::Point2f seg_A_p2 = cv::Point2f(seg_A.end.x()   + x_move, seg_A.end.y()   + y_move);
         cv::line(im_board, seg_A_p1, seg_A_p2, color_g, 10, 3);
@@ -310,10 +374,17 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
         cv::Mat affine_M = cv::Mat::zeros(2, 2, CV_32FC1);
         cv::Mat translate_M = cv::Mat::zeros(2, 1, CV_32FC1);
 
-        ransac_affine(im_board, seg_A, seg_B, affine_M, translate_M);
 
-        // cout << "affine_M: " << endl << affine_M << endl << endl;
-        // cout << "translate_M: " << endl << translate_M << endl << endl;
+        cv::Point2f src[3];
+        cv::Point2f dst[3];
+        get_three_pairs_of_line(seg_A, seg_B, src, dst);
+        find_affine_translate(im_board, src, dst, affine_M, translate_M);
+
+        cout << "*****************" << endl;
+        cout << "affine_M: " << endl << affine_M << endl << endl;
+        cout << "translate_M: " << endl << translate_M << endl << endl;
+
+        draw_affine_transforms(im_board, segments_02, affine_M, translate_M);
 
         // float seg_A_x = seg_A.start.x();
         // float seg_A_y = seg_A.start.y();
@@ -387,7 +458,7 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
             // cout << b.unitOrthogonal() << endl;
             // cout << a.unitOrthogonal().dot(b.unitOrthogonal()) << endl;
 
-        // cv::Mat im = cv::Mat::zeros(6000, 8500, CV_8UC3);
+        // cv::Mat im = cv::Mat::zeros(6000, 8500, CV_32FC3);
         // cv::Point2f seg_01_p1 = cv::Point2f(segments_01.at(idx_i).start.x() + x_move, segments_01.at(idx_i).start.y() + y_move);
         // cv::Point2f seg_01_p2 = cv::Point2f(segments_01.at(idx_i).end.x()   + x_move, segments_01.at(idx_i).end.y()   + y_move);
         // cv::line(im, seg_01_p1, seg_01_p2, cv::Scalar(0, 100, 255), 50, 8);

@@ -42,7 +42,8 @@ int main(int argc, char **argv)
 
         int cols = 8000;
         int rows = 5000;
-        cv::Mat img = cv::Mat::zeros(cols, rows, CV_8UC3);
+        cv::Mat img = cv::Mat::zeros(cols, rows, CV_32FC1);
+        // convertTo(src,CV_32FC1);
         // CannyEdge(im1);
         // mySIFT(im1);
         // SimpleBlob(im1);
