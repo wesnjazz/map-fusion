@@ -146,17 +146,23 @@ void ransac_affine(cv::Mat &im, Segment &depart, Segment &arrival, cv::Mat &affi
     float y2 = (y1 + y3) / 2.0f;
     float y2p = (y1p + y3p) / 2.0f;
 
-        int x_move = 1500;
-        int y_move = 1500;
+        int x_move = 0;
+        int y_move = 0;
         cv::Point2f seg_A_p1 = cv::Point2f(x1 + x_move, y1 + y_move);
-        cv::Point2f seg_A_p2 = cv::Point2f(x1p + x_move, y1p + y_move);
-        cv::line(im, seg_A_p1, seg_A_p2, cv::Scalar(255, 10, 10), 10, 8);
-        cv::circle(im, cv::Point2f(x1 + x_move, y1 + y_move), 100, cv::Scalar(255, 0, 255), 10);
-        cv::circle(im, cv::Point2f(x2 + x_move, y2 + y_move), 100, cv::Scalar(255, 0, 255), 10);
-        cv::circle(im, cv::Point2f(x3 + x_move, y3 + y_move), 100, cv::Scalar(255, 0, 255), 10);
-        cv::circle(im, cv::Point2f(x1p + x_move, y1p + y_move), 100, cv::Scalar(50, 200, 255), 10);
-        cv::circle(im, cv::Point2f(x2p + x_move, y2p + y_move), 100, cv::Scalar(50, 200, 255), 10);
-        cv::circle(im, cv::Point2f(x3p + x_move, y3p + y_move), 100, cv::Scalar(50, 200, 255), 10);
+        cv::Point2f seg_A_prp1 = cv::Point2f(x1p + x_move, y1p + y_move);
+        cv::Point2f seg_A_p2 = cv::Point2f(x2 + x_move, y2 + y_move);
+        cv::Point2f seg_A_prp2 = cv::Point2f(x2p + x_move, y2p + y_move);
+        cv::Point2f seg_A_p3 = cv::Point2f(x3 + x_move, y3 + y_move);
+        cv::Point2f seg_A_prp3 = cv::Point2f(x3p + x_move, y3p + y_move);
+        cv::line(im, seg_A_p1, seg_A_prp1, cv::Scalar(100, 255, 255), 2, 8);
+        cv::line(im, seg_A_p2, seg_A_prp2, cv::Scalar(50, 205, 205), 2, 8);
+        cv::line(im, seg_A_p3, seg_A_prp3, cv::Scalar(0, 155, 155), 2, 8);
+        cv::circle(im, cv::Point2f(x1 + x_move, y1 + y_move), 50, cv::Scalar(255, 0, 255), 10);
+        cv::circle(im, cv::Point2f(x2 + x_move, y2 + y_move), 50, cv::Scalar(155, 0, 155), 10);
+        cv::circle(im, cv::Point2f(x3 + x_move, y3 + y_move), 50, cv::Scalar(55, 0, 55), 10);
+        cv::circle(im, cv::Point2f(x1p + x_move, y1p + y_move), 50, cv::Scalar(50, 200, 255), 10);
+        cv::circle(im, cv::Point2f(x2p + x_move, y2p + y_move), 50, cv::Scalar(20, 100, 155), 10);
+        cv::circle(im, cv::Point2f(x3p + x_move, y3p + y_move), 50, cv::Scalar(0, 50, 55), 10);
         display("Result", im);
 
     float data[36] = { 
@@ -276,7 +282,9 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
     {
         // cv::Mat im_board = cv::Mat::zeros(im_base.rows, im_base.cols, im_base.type);
         cv::Mat im_board = cv::Mat::zeros(3000, 5000, CV_8UC3);
+        cv::Mat im_affine = cv::Mat::zeros(3000, 5000, CV_8UC3);
         im_board += im_base;
+        im_affine += im_base;
         int x_move = 0;
         int y_move = 0;
         int idx_i = it - matches.begin();
@@ -299,10 +307,11 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
         display("Board", im_board);
 
 
-        // cv::Mat affine_M = cv::Mat::zeros(2, 2, CV_32FC1);
-        // cv::Mat translate_M = cv::Mat::zeros(2, 1, CV_32FC1);
+        cv::Mat affine_M = cv::Mat::zeros(2, 2, CV_32FC1);
+        cv::Mat translate_M = cv::Mat::zeros(2, 1, CV_32FC1);
 
-        // ransac_affine(im, seg_A, seg_B, affine_M, translate_M);
+        ransac_affine(im_board, seg_A, seg_B, affine_M, translate_M);
+
         // cout << "affine_M: " << endl << affine_M << endl << endl;
         // cout << "translate_M: " << endl << translate_M << endl << endl;
 
