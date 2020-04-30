@@ -33,6 +33,7 @@ int main(int argc, char **argv)
         cv::Mat im2 = cv::imread("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_15_a45.png");
         ifstream lsd_txt_01 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/test_clean_0_0_0_a45.txt");
         ifstream lsd_txt_02 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/test_clean_0_0_15_a45.txt");
+        // ifstream lsd_txt_01 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/small.txt");
 
         cv::Mat im1_gray;
         cvtColor(im1, im1_gray, cv::COLOR_BGR2GRAY);
