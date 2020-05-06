@@ -15,6 +15,13 @@ int main(int argc, char **argv)
     ros::NodeHandle n;
     ros::Rate loop_rate(20);
 
+    ifstream img1_file;
+    ifstream img2_file;
+    bool origin_transformed = false;
+    if (argc >= 2) { img1_file = ifstream(argv[1]); }
+    if (argc >= 3) { img2_file = ifstream(argv[2]); }
+
+
     cout << "OpenCV version : " << CV_VERSION << endl;
     cout << "Major version : " << CV_MAJOR_VERSION << endl;
     cout << "Minor version : " << CV_MINOR_VERSION << endl;
@@ -31,9 +38,12 @@ int main(int argc, char **argv)
         // cv::Mat im2 = imread("/home/dpark/map-fusion/imgs/mapping_output/img02_nonoise.jpg");
         cv::Mat im1 = cv::imread("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_0_a45.png");
         cv::Mat im2 = cv::imread("/home/dpark/map-fusion/imgs/lsd_output/test_clean_0_0_15_a45.png");
-        ifstream lsd_txt_01 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/test_clean_0_0_0_a45.txt");
-        ifstream lsd_txt_02 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/test_clean_0_0_15_a45.txt");
+        // ifstream lsd_txt_01 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/test_clean_0_0_0_a45.txt");
+        // ifstream lsd_txt_02 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/test_clean_0_0_15_a45.txt");
         // ifstream lsd_txt_01 = ifstream("/home/dpark/map-fusion/imgs/lsd_output2/small.txt");
+        ifstream lsd_txt_01 = ifstream(argv[1]);
+        ifstream lsd_txt_02 = ifstream(argv[2]);
+
 
         cv::Mat im1_gray;
         cvtColor(im1, im1_gray, cv::COLOR_BGR2GRAY);

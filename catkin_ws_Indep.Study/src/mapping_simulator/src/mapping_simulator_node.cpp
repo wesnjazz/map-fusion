@@ -37,8 +37,34 @@ int main(int argc, char **argv)
     ifstream waypoints_file;        // file stream of waypoints
     ifstream Robot_frame_file;
 
-    /** Sensors **/ 
+    /** Variables for the simulator **/
     Laser laser_sensor = Laser();
+    float delta_t = get_delta_t(laser_sensor);
+    float time_step = 0.0;
+    float speed = 0.4;
+    float dy_mean = 0.0;
+
+    /** File loading **/
+    if (argc <= 1 || 8 <= argc) {
+        usage(argv[0]);
+    }
+    bool origin_transformed = false;
+    if (argc >= 2) { wall_segments_file = ifstream(argv[1]); }
+    if (argc >= 3) { waypoints_file = ifstream(argv[2]); }
+    if (argc >= 4) { speed = atof(argv[3]); }
+    if (argc >= 5) { delta_t = atof(argv[4]); }
+    if (argc >= 6) { dy_mean = atof(argv[5]); }
+    if (argc >= 7) { Robot_frame_file = ifstream(argv[6]); origin_transformed = true; }
+    if (!wall_segments_file) { // && !waypoints_file) {
+        cout << "The file [";
+        if (!wall_segments_file) { cout << argv[1]; }
+        if (!waypoints_file) { cout << ", " << argv[2]; }
+        cout << "] doesn't exists.\n\n";
+        exit(0);
+    }
+    
+
+    /** Sensors **/ 
     WheelEncoder wheel_encoder___actual = WheelEncoder();
     WheelEncoder wheel_encoder___ideal = WheelEncoder();
     /** Noises **/
@@ -50,30 +76,7 @@ int main(int argc, char **argv)
     Noise laser_length_noise = Noise(-0.002, 0.015);
     Noise laser_angle_noise = Noise(0.008, 0.01);
     Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.01);
-    Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.01);
-
-    /** Variables for the simulator **/
-    float delta_t = get_delta_t(laser_sensor);
-    float time_step = 0.0;
-    float speed = 0.4;
-
-    /** File loading **/
-    if (argc <= 1 || 7 <= argc) {
-        usage(argv[0]);
-    }
-    bool origin_transformed = false;
-    if (argc >= 2) { wall_segments_file = ifstream(argv[1]); }
-    if (argc >= 3) { waypoints_file = ifstream(argv[2]); }
-    if (argc >= 4) { speed = atof(argv[3]); }
-    if (argc >= 5) { delta_t = atof(argv[4]); }
-    if (argc >= 6) { Robot_frame_file = ifstream(argv[5]); origin_transformed = true; }
-    if (!wall_segments_file) { // && !waypoints_file) {
-        cout << "The file [";
-        if (!wall_segments_file) { cout << argv[1]; }
-        if (!waypoints_file) { cout << ", " << argv[2]; }
-        cout << "] doesn't exists.\n\n";
-        exit(0);
-    }
+    Noise wheel_encoder___actual_dy_noise = Noise(dy_mean, 0.01);
 
 
     /** World frame and Transformed World frame(Robot_frame) **/
@@ -469,12 +472,19 @@ int main(int argc, char **argv)
             << "total num of HTs: " << num_total_HTs << endl
             << "Press to continue..." << endl
             ;
-        getchar();
+        // getchar();
 
 
-        string img_filename = "test.jpg";
+        string img_filename_prefix = argv[6];
+        string img_filename_suffix = ".jpg";
+        string img_filename = img_filename_prefix + img_filename_suffix;
+        cout << "filename: " << img_filename << endl;
+        // string img_filename = "test.jpg";
         save_map(point_clouds, HT_World_frame_to_Robot_frame, img_filename);
 
+        cout
+            << "Press to continue..." << endl;
+        getchar();
 
         /** Plot point cloud on the map in two different colors **/
         // vector<uint32_t> colors;
