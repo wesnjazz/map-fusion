@@ -46,10 +46,10 @@ int main(int argc, char **argv)
         // convertTo(src,CV_32FC1);
         // CannyEdge(im1);
         // myGRANSAC();
-        // myAlign(img, lsd_txt_01, lsd_txt_02);
-        lsd_txt_to_cv_mat(lsd_txt_01, img);
-        SimpleBlob(img);
-        mySIFT(img);
+        myAlign(img, lsd_txt_01, lsd_txt_02);
+        // lsd_txt_to_cv_mat(lsd_txt_01, img);
+        // SimpleBlob(img);
+        // mySIFT(img);
 
         cout << "Press any key to continue...";
         getchar();

@@ -47,10 +47,10 @@ int main(int argc, char **argv)
     // Noise wheel_encoder___actual_dx_noise = Noise(-0.001, 0.004);
     // Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.02);
     /** No Noises **/
-    Noise laser_length_noise = Noise(0.0, 0.0);
-    Noise laser_angle_noise = Noise(0.0, 0.0);
-    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.0);
-    Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.0);
+    Noise laser_length_noise = Noise(-0.002, 0.015);
+    Noise laser_angle_noise = Noise(0.008, 0.01);
+    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.01);
+    Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.01);
 
     /** Variables for the simulator **/
     float delta_t = get_delta_t(laser_sensor);

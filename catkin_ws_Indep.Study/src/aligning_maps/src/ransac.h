@@ -204,22 +204,17 @@ void draw_affine_transforms(cv::Mat &im_board, vector<Segment> &segments, cv::Ma
 {
     for(vector<Segment>::iterator it = segments.begin(); it != segments.end(); ++it)
     {
-        cv::Mat af = cv::Mat(2, 2, CV_32FC1);
-        // affine_M.copyTo(af);
         float head[2] = { it->start.x(), it->start.y() };
         float tail[2] = { it->end.x(), it->end.y() };
         cv::Mat head_M = cv::Mat(2, 1, CV_32FC1, head);
         cv::Mat tail_M = cv::Mat(2, 1, CV_32FC1, tail);
-        cv::Mat head_prime = affine_M * head_M;
-        // head_prime *= -1;
-        // cv::Mat head_prime = af * head_M;
-        // head_prime = affine_M.mul(head_M) + translate_M;
-        // cv::Mat tail_prime = affine_M.mul(tail_M) + translate_M;
+        cv::Mat head_prime = affine_M * head_M + translate_M;
         cv::Mat tail_prime = affine_M * tail_M + translate_M;
-        // tail_prime *= -1;
-        
-        cv::Point2f p1 = cv::Point2f(head_prime.at<float>(0, 0), head_prime.at<float>(0, 1));
-        cv::Point2f p2 = cv::Point2f(tail_prime.at<float>(0, 0), tail_prime.at<float>(0, 1));
+
+        int x_move = 0;
+        int y_move = 0;
+        cv::Point2f p1 = cv::Point2f(head_prime.at<float>(0, 0) + x_move, head_prime.at<float>(0, 1) + y_move);
+        cv::Point2f p2 = cv::Point2f(tail_prime.at<float>(0, 0) + x_move, tail_prime.at<float>(0, 1) + y_move);
         cv::line(im_board, p1, p2, cv::Scalar(200,200,255), 10, 8);
         cout 
             << "head_M:" << endl << head_M << endl
