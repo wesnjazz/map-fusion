@@ -40,16 +40,16 @@ int main(int argc, char **argv)
         cv::Mat im2_gray;
         cvtColor(im2, im2_gray, cv::COLOR_BGR2GRAY);
 
-        int cols = 8000;
         int rows = 5000;
-        cv::Mat img = cv::Mat::zeros(cols, rows, CV_32FC1);
+        int cols = 8000;
+        cv::Mat img = cv::Mat::zeros(rows, cols, CV_8UC3);
         // convertTo(src,CV_32FC1);
         // CannyEdge(im1);
-        // mySIFT(im1);
-        // SimpleBlob(im1);
         // myGRANSAC();
-        myAlign(img, lsd_txt_01, lsd_txt_02);
-
+        // myAlign(img, lsd_txt_01, lsd_txt_02);
+        lsd_txt_to_cv_mat(lsd_txt_01, img);
+        SimpleBlob(img);
+        mySIFT(img);
 
         cout << "Press any key to continue...";
         getchar();
