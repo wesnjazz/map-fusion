@@ -75,24 +75,26 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
     vector<int> idxs_pivot;
     vector<int> idxs_target;
     
-    int num_trials = 300;
-    int num_matches = 30;
-    int num_sets = 50;
-    float threshold_sum = 1.0f;
-    float threshold_dist = 100.0;
-    float sum_diff = 999999999.0f;
-    float minimum_sum_diff = 999999999.0f;
-
-    cv::Mat im_compute_matches_base = cv::Mat::zeros(3000, 5000, CV_32FC3);
-    cv::Mat im_compute_matches_pivot = cv::Mat::zeros(3000, 5000, CV_32FC3);
-    cv::Mat im_compute_matches_target = cv::Mat::zeros(3000, 5000, CV_32FC3);
-    cv::Mat im_compute_matches_final = cv::Mat::zeros(3000, 5000, CV_32FC3);
     while(true)
     {
+        int num_trials = 3;
+        int num_trials_pivot = 10;
+        int num_trials_target = segs_target.size()/4;
+        int num_matches = 50;
+        // int num_matches = 50;
+        int num_sets = 50;
+        // float threshold_sum = 3.0f;
+        float threshold_sum = 0.05f;
+        float threshold_dist = 100.0;
+        float minimum_sum_diff = 999999999.0f;
+
+        cv::Mat im_compute_matches_base = cv::Mat::zeros(3000, 5000, CV_32FC3);
+        cv::Mat im_compute_matches_pivot = cv::Mat::zeros(3000, 5000, CV_32FC3);
+        cv::Mat im_compute_matches_target = cv::Mat::zeros(3000, 5000, CV_32FC3);
+        cv::Mat im_compute_matches_final = cv::Mat::zeros(3000, 5000, CV_32FC3);
         // random indices
 
-        num_trials--;
-        cout << "\n\n\t\t\t\t\t\ttrial: " << num_trials << endl;
+        // num_trials--;
 
         int segs_pivot_idx = 0;
         int segs_pivot_min_idx = 0;
@@ -100,18 +102,31 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
         vector<int> closest_idx_min_pivot;
         vector<int> closest_idx_min_target;
 
-        for(vector<Segment>::iterator it_seg_pivot = segs_pivot.begin(); it_seg_pivot != segs_pivot.end(); it_seg_pivot++)
+        // for(vector<Segment>::iterator it_seg_pivot = segs_pivot.begin(); it_seg_pivot != segs_pivot.end(); it_seg_pivot++)
+        // {
+        while(num_trials_pivot > 0)
         {
+            cout << "\n\n\t\t\t\t\t\ttrial: " << num_trials_pivot << endl;
+            // for(int k=0; k<segs_pivot_idx; k++)
+            // {
+            //     it_seg_pivot++;
+            // }
             im_compute_matches_pivot = img.clone();
 
-            Segment segment_pivot = *it_seg_pivot;
-            // Segment segment_pivot = segs_pivot.at(rand_segs_pivot_idx);
+            // Segment segment_pivot = *it_seg_pivot;
             // copy vectors of segs_pivot, segs_target
             vector<Segment> segs_pivot_copy;
             for (int i=0; i<segs_pivot.size(); i++) 
                 segs_pivot_copy.push_back(segs_pivot[i]); 
             // get a random segment
-            // int rand_segs_pivot_idx = dis_pivot(gen_pivot);
+            int rand_segs_pivot_idx = dis_pivot(gen_pivot);
+            Segment segment_pivot = segs_pivot.at(rand_segs_pivot_idx);
+            cout 
+                << "rand_segs_pivot_idx:" << rand_segs_pivot_idx 
+                << "\t"
+                << "seg_pivot[" << rand_segs_pivot_idx << "]: (" << segs_pivot[rand_segs_pivot_idx].mid.x() << "," << segs_pivot[rand_segs_pivot_idx].mid.y() << ")"
+                << endl;
+            segs_pivot_idx = rand_segs_pivot_idx;
             // indices of closest segments from pivot
             vector<int> closest_idx_pivot;
             vector<Segment *> closes_seg_address_pivot;
@@ -131,7 +146,7 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
                 // get the minimum distance segment
                 float min_distance_pivot = 999999999.0f;
                 int min_pivot_idx = 0;
-                for(int i=0; i<segs_pivot_copy.size(); ++i)
+                for(int i=segs_pivot_idx; i<segs_pivot_copy.size(); ++i)
                 {
                     float distance_tmp = segment_pivot.distance_between_segments(segs_pivot_copy.at(i));
                     if(distance_tmp < min_distance_pivot)
@@ -177,18 +192,26 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
 
 
             int segs_target_idx = 0;
-            for(vector<Segment>::iterator it_seg_target = segs_target.begin(); it_seg_target != segs_target.end(); it_seg_target++)
+            // for(vector<Segment>::iterator it_seg_target = segs_target.begin(); it_seg_target != segs_target.end(); it_seg_target++)
+            // {
+            while (num_trials_target > 0)
             {
                 im_compute_matches_target = im_compute_matches_pivot.clone();
 
-                Segment segment_target = *it_seg_target;
-                // Segment segment_target = segs_target.at(rand_segs_target_idx);
+                // Segment segment_target = *it_seg_target;
                 // copy vectors of segs_pivot, segs_target
                 vector<Segment> segs_target_copy;
                 for (int i=0; i<segs_target.size(); i++) 
                     segs_target_copy.push_back(segs_target[i]); 
                 // get a random segment
-                // int rand_segs_target_idx = dis_target(gen_target);
+                int rand_segs_target_idx = dis_target(gen_target);
+                Segment segment_target = segs_target.at(rand_segs_target_idx);
+                cout 
+                    << "rand_segs_target_idx:" << rand_segs_target_idx 
+                    << "\t"
+                    << "seg_target[" << rand_segs_target_idx << "]: (" << segs_target[rand_segs_target_idx].mid.x() << "," << segs_target[rand_segs_target_idx].mid.y() << ")"
+                    << endl;
+
                 // indices of closest segments from target
                 vector<int> closest_idx_target;
                 vector<Segment *> closes_seg_address_target;
@@ -203,10 +226,11 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
                 }
                 // get closest segments
                 int num_closest_segs_target = num_matches;
+                float min_distance_target = 999999999.0f;
                 while(num_closest_segs_target > 0)
                 {
                     // get the minimum distance segment
-                    float min_distance_target = 999999999.0f;
+                    // min_distance_target = 999999999.0f;
                     int min_target_idx = 0;
                     for(int i=0; i<segs_target_copy.size(); ++i)
                     {
@@ -253,15 +277,15 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
                     // cv::Point2f tail = cv::Point2f(segs_target.at(*it).end.x()   + x_move, segs_target.at(*it).end.y()   + y_move);
                     // cv::line(im_compute_matches_target, head, tail, cv::Scalar(0, 200, 200), 15, 1);
                 }
-                // cout 
-                //     << "seg_pivot[" << segs_pivot_idx << "]: (" << segment_pivot.mid.x() << "," << segment_pivot.mid.y() << ")"
-                //     << "\t"
-                //     << "seg_target[" << segs_target_idx << "]: (" << segment_target.mid.x() << "," << segment_target.mid.y() << ")"
-                //     << endl
-                //     << "sum_closest_distance_target: " << sum_closest_distance_target 
-                //     << "\tsegs_target_size: " << segs_target.size()
-                //     << "\tsegs_target_idx: " << segs_target_idx
-                //     << endl;
+                cout 
+                    << "seg_pivot[" << segs_pivot_idx << "]: (" << segment_pivot.mid.x() << "," << segment_pivot.mid.y() << ")"
+                    << "\t"
+                    << "seg_target[" << segs_target_idx << "]: (" << segment_target.mid.x() << "," << segment_target.mid.y() << ")"
+                    << endl
+                    << "sum_closest_distance_target: " << sum_closest_distance_target 
+                    << "\tsegs_target_size: " << segs_target.size()
+                    << "\tsegs_target_idx: " << segs_target_idx
+                    << endl;
 
                 float sum_total_diff = fabs(sum_closest_distance_pivot - sum_closest_distance_target);
                 // cout << "sum_diff: " << sum_total_diff << endl;
@@ -289,6 +313,7 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
                 // getchar();
                 // display("Results", im_compute_matches_target);
                 segs_target_idx++;
+                num_trials_target--;
             }
 
             cout 
@@ -305,6 +330,10 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
                     << "seg_target[" << segs_target_min_idx << "]: (" << segs_target[segs_target_min_idx].mid.x() << "," << segs_target[segs_target_min_idx].mid.y() << ")"
                     << endl << endl
                     << endl;
+
+            if (minimum_sum_diff < threshold_sum) {
+                break;
+            }
             // getchar();
 
             // display("Results", im_compute_matches_board);
@@ -388,6 +417,7 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
         // }
         // // getchar();
             segs_pivot_idx++;
+            num_trials_pivot--;
         }
         cout << "\nfinished!!\nready to draw?" << endl;
         getchar();
@@ -404,17 +434,17 @@ vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Se
         {
             cv::Point2f head = cv::Point2f(segs_target.at(*it).start.x(), segs_target.at(*it).start.y() );
             cv::Point2f tail = cv::Point2f(segs_target.at(*it).end.x()  , segs_target.at(*it).end.y()   );
-            cv::line(im_compute_matches_final, head, tail, cv::Scalar(0, 200, 200), 15, 1);
+            cv::line(im_compute_matches_final, head, tail, cv::Scalar(200, 200, 0), 15, 1);
         }
         display("Final", im_compute_matches_final);
-        display("Final", im_compute_matches_final);
-        display("Final", im_compute_matches_final);
+        // display("Final", im_compute_matches_final);
+        // display("Final", im_compute_matches_final);
 
 
-        if (num_trials < 0)
-        {
-            break;
-        }
+        // if (num_trials < 0)
+        // {
+        //     break;
+        // }
     }
 
 
