@@ -52,7 +52,8 @@ int main(int argc, char **argv)
 
         int rows = 5000;
         int cols = 8000;
-        cv::Mat img = cv::Mat::zeros(rows, cols, CV_8UC3);
+        cv::Mat img = cv::Mat::zeros(rows, cols, CV_32FC3);
+        // cv::Mat img = cv::Mat::zeros(rows, cols, CV_8UC3);
         // convertTo(src,CV_32FC1);
         // CannyEdge(im1);
         // myGRANSAC();
