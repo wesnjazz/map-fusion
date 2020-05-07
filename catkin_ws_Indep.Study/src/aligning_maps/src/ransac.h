@@ -140,8 +140,8 @@ void find_affine_translate(cv::Mat &im,  cv::Point2f src[], cv::Point2f dst[], c
     cv::Point2f p1_tail = cv::Point2f(A_tail.x(), A_tail.y());
     cv::Point2f p2_head = cv::Point2f(B_head.x(), B_head.y());
     cv::Point2f p2_tail = cv::Point2f(B_tail.x(), B_tail.y());
-    cv::line(im, p1_head, p1_tail, cv::Scalar(0,155,255), 15, 8);
-    cv::line(im, p2_head, p2_tail, cv::Scalar(0,155,255), 15, 8);
+    cv::line(im, p1_head, p1_tail, cv::Scalar(0,0,255), 40, 8);
+    cv::line(im, p2_head, p2_tail, cv::Scalar(255,0,0), 40, 8);
     display("Result", im);
 
     Mat3f HT = get_HT_Aframe_to_Bframe(B_frame, A_frame);
