@@ -51,27 +51,408 @@ void read_lsd(ifstream &seg_file, vector<Segment> &segments)
 }
 
 
-vector<int> compute_matches(cv::Mat &img, vector<Segment> &seg_01, vector<Segment> &seg_02)
+vector<int> compute_matches(cv::Mat &img, vector<Segment> &segs_pivot, vector<Segment> &segs_target)
 {
-    vector<int> matches;
-    for(vector<Segment>::iterator it_01 = seg_01.begin(); it_01 != seg_01.end(); ++it_01)
-    {
-        int index_min = 0;
-        float diff = 0.0f;
-        float min_diff = 9999999999.0f;
 
-        for(vector<Segment>::iterator it_02 = seg_02.begin(); it_02 != seg_02.end(); ++it_02)
+    int segs_pivot_size = segs_pivot.size();
+    int segs_target_size = segs_target.size();
+    std::random_device rd_pivot;
+    std::mt19937 gen_pivot( rd_pivot());
+    std::uniform_int_distribution<> dis_pivot( 0, segs_pivot_size-1);
+    std::random_device rd_target;
+    std::mt19937 gen_target( rd_target());
+    std::uniform_int_distribution<> dis_target( 0, segs_target_size-1);
+
+    // // random indices
+    // int num_sets = 50;
+    // float sum_diff = 999999999.0f;
+    // float threshold_sum = 1.0f;
+    // float threshold_dist = 100.0;
+    // int num_trials = 300;
+    // float minimum_sum_diff = 999999999.0f;
+
+    // indices of segments
+    vector<int> idxs_pivot;
+    vector<int> idxs_target;
+    
+    int num_trials = 300;
+    int num_matches = 30;
+    int num_sets = 50;
+    float threshold_sum = 1.0f;
+    float threshold_dist = 100.0;
+    float sum_diff = 999999999.0f;
+    float minimum_sum_diff = 999999999.0f;
+
+    cv::Mat im_compute_matches_base = cv::Mat::zeros(3000, 5000, CV_32FC3);
+    cv::Mat im_compute_matches_pivot = cv::Mat::zeros(3000, 5000, CV_32FC3);
+    cv::Mat im_compute_matches_target = cv::Mat::zeros(3000, 5000, CV_32FC3);
+    cv::Mat im_compute_matches_final = cv::Mat::zeros(3000, 5000, CV_32FC3);
+    while(true)
+    {
+        // random indices
+
+        num_trials--;
+        cout << "\n\n\t\t\t\t\t\ttrial: " << num_trials << endl;
+
+        int segs_pivot_idx = 0;
+        int segs_pivot_min_idx = 0;
+        int segs_target_min_idx = 0;
+        vector<int> closest_idx_min_pivot;
+        vector<int> closest_idx_min_target;
+
+        for(vector<Segment>::iterator it_seg_pivot = segs_pivot.begin(); it_seg_pivot != segs_pivot.end(); it_seg_pivot++)
         {
-            diff = fabs(it_01->length - it_02->length);
-            // cout << "min_diff: " << min_diff << "\t" << "diff: " << diff << endl;
-            if (diff < min_diff)
+            im_compute_matches_pivot = img.clone();
+
+            Segment segment_pivot = *it_seg_pivot;
+            // Segment segment_pivot = segs_pivot.at(rand_segs_pivot_idx);
+            // copy vectors of segs_pivot, segs_target
+            vector<Segment> segs_pivot_copy;
+            for (int i=0; i<segs_pivot.size(); i++) 
+                segs_pivot_copy.push_back(segs_pivot[i]); 
+            // get a random segment
+            // int rand_segs_pivot_idx = dis_pivot(gen_pivot);
+            // indices of closest segments from pivot
+            vector<int> closest_idx_pivot;
+            vector<Segment *> closes_seg_address_pivot;
+            // distances from pivot
+            vector<float> distances_from_pivot;
+            // cout << "segment_pivot:mid:" << segment_pivot.mid << endl;
+            for(vector<Segment>::iterator it = segs_pivot.begin(); it != segs_pivot.end(); ++it)
             {
-                min_diff = diff; 
-                index_min = it_02 - seg_02.begin();
+                float distance_tmp = segment_pivot.distance_between_segments(*it);
+                distances_from_pivot.push_back(distance_tmp);
+                // cout << distance_tmp << "\t";
             }
+            // get closest segments
+            int num_closest_segs_pivot = num_matches;
+            while(num_closest_segs_pivot > 0)
+            {
+                // get the minimum distance segment
+                float min_distance_pivot = 999999999.0f;
+                int min_pivot_idx = 0;
+                for(int i=0; i<segs_pivot_copy.size(); ++i)
+                {
+                    float distance_tmp = segment_pivot.distance_between_segments(segs_pivot_copy.at(i));
+                    if(distance_tmp < min_distance_pivot)
+                    {   
+                        // cout << "i:" << i << endl;
+                        // cout << "closest_idx_pivot:\t";
+                        // for(int j=0; j<closest_idx_pivot.size(); j++)
+                        // {
+                        //     cout << closest_idx_pivot[j] << "\t";
+                        // }
+                        // cout << endl;
+                        if(find(closest_idx_pivot.begin(), closest_idx_pivot.end(), i) == closest_idx_pivot.end())
+                        {
+                            min_distance_pivot = distance_tmp;
+                            min_pivot_idx = i;
+                        }
+                        else {
+                            continue;
+                        }
+                    }
+                    // getchar();
+                }
+                // cout << "closes:idx:size:" << closest_idx_pivot.size() << endl;
+                // cout << "mid_idx: " << min_pivot_idx << endl;
+                // cout << "distance: " << min_distance_pivot << endl;
+                // segs_pivot_copy.erase(segs_pivot_copy.begin() + min_pivot_idx);
+                // distances_from_pivot.erase(distances_from_pivot.begin() + min_pivot_idx);
+                closest_idx_pivot.push_back(min_pivot_idx);
+                // cout << "size of closest segs: " << num_closest_segs_pivot << endl;
+                num_closest_segs_pivot--;
+            }
+            // get sum of distances
+            float sum_closest_distance_pivot = 0.0f;
+            for(vector<int>::iterator it = closest_idx_pivot.begin(); it != closest_idx_pivot.end(); ++it)
+            {
+                sum_closest_distance_pivot += segment_pivot.distance_between_segments(segs_pivot.at(*it));
+                // cout << segment_pivot.distance_between_segments(segs_pivot.at(*it)) << endl;
+                // cv::Point2f head = cv::Point2f(segs_pivot.at(*it).start.x(), segs_pivot.at(*it).start.y());
+                // cv::Point2f tail = cv::Point2f(segs_pivot.at(*it).end.x(), segs_pivot.at(*it).end.y());
+                // cv::line(im_compute_matches_pivot, head, tail, cv::Scalar(200, 200, 0), 15, 1);
+            }
+            // cout << "sum_closest_distance_pivot: " << sum_closest_distance_pivot << endl;
+
+
+            int segs_target_idx = 0;
+            for(vector<Segment>::iterator it_seg_target = segs_target.begin(); it_seg_target != segs_target.end(); it_seg_target++)
+            {
+                im_compute_matches_target = im_compute_matches_pivot.clone();
+
+                Segment segment_target = *it_seg_target;
+                // Segment segment_target = segs_target.at(rand_segs_target_idx);
+                // copy vectors of segs_pivot, segs_target
+                vector<Segment> segs_target_copy;
+                for (int i=0; i<segs_target.size(); i++) 
+                    segs_target_copy.push_back(segs_target[i]); 
+                // get a random segment
+                // int rand_segs_target_idx = dis_target(gen_target);
+                // indices of closest segments from target
+                vector<int> closest_idx_target;
+                vector<Segment *> closes_seg_address_target;
+                // distances from target
+                vector<float> distances_from_target;
+                // cout << "segment_target:mid:" << segment_target.mid << endl;
+                for(vector<Segment>::iterator it = segs_target.begin(); it != segs_target.end(); ++it)
+                {
+                    float distance_tmp = segment_target.distance_between_segments(*it);
+                    distances_from_target.push_back(distance_tmp);
+                    // cout << distance_tmp << "\t";
+                }
+                // get closest segments
+                int num_closest_segs_target = num_matches;
+                while(num_closest_segs_target > 0)
+                {
+                    // get the minimum distance segment
+                    float min_distance_target = 999999999.0f;
+                    int min_target_idx = 0;
+                    for(int i=0; i<segs_target_copy.size(); ++i)
+                    {
+                        float distance_tmp = segment_target.distance_between_segments(segs_target_copy.at(i));
+                        if(distance_tmp < min_distance_target)
+                        {   
+                            // cout << "i:" << i << endl;
+                            // cout << "closest_idx_target:\t";
+                            // for(int j=0; j<closest_idx_target.size(); j++)
+                            // {
+                            //     cout << closest_idx_target[j] << "\t";
+                            // }
+                            // cout << endl;
+                            if(find(closest_idx_target.begin(), closest_idx_target.end(), i) == closest_idx_target.end())
+                            {
+                                min_distance_target = distance_tmp;
+                                min_target_idx = i;
+                            }
+                            else {
+                                continue;
+                            }
+                        }
+                        // getchar();
+                    }
+                    // cout << "closes:idx:size:" << closest_idx_target.size() << endl;
+                    // cout << "mid_idx: " << min_target_idx << endl;
+                    // cout << "distance: " << min_distance_target << endl;
+                    // segs_target_copy.erase(segs_target_copy.begin() + min_target_idx);
+                    // distances_from_target.erase(distances_from_target.begin() + min_target_idx);
+                    closest_idx_target.push_back(min_target_idx);
+                    // cout << "size of closest segs: " << num_closest_segs_target << endl;
+                    num_closest_segs_target--;
+                }
+
+                // get sum of distances
+                int x_move = 0;
+                int y_move = 0;
+                float sum_closest_distance_target = 0.0f;
+                for(vector<int>::iterator it = closest_idx_target.begin(); it != closest_idx_target.end(); ++it)
+                {
+                    sum_closest_distance_target += segment_target.distance_between_segments(segs_target.at(*it));
+                    // cout << segment_target.distance_between_segments(segs_target.at(*it)) << endl;
+                    // cv::Point2f head = cv::Point2f(segs_target.at(*it).start.x() + x_move, segs_target.at(*it).start.y() + y_move);
+                    // cv::Point2f tail = cv::Point2f(segs_target.at(*it).end.x()   + x_move, segs_target.at(*it).end.y()   + y_move);
+                    // cv::line(im_compute_matches_target, head, tail, cv::Scalar(0, 200, 200), 15, 1);
+                }
+                // cout 
+                //     << "seg_pivot[" << segs_pivot_idx << "]: (" << segment_pivot.mid.x() << "," << segment_pivot.mid.y() << ")"
+                //     << "\t"
+                //     << "seg_target[" << segs_target_idx << "]: (" << segment_target.mid.x() << "," << segment_target.mid.y() << ")"
+                //     << endl
+                //     << "sum_closest_distance_target: " << sum_closest_distance_target 
+                //     << "\tsegs_target_size: " << segs_target.size()
+                //     << "\tsegs_target_idx: " << segs_target_idx
+                //     << endl;
+
+                float sum_total_diff = fabs(sum_closest_distance_pivot - sum_closest_distance_target);
+                // cout << "sum_diff: " << sum_total_diff << endl;
+                if (sum_total_diff < minimum_sum_diff)
+                {
+                    minimum_sum_diff = sum_total_diff;
+                    segs_pivot_min_idx = segs_pivot_idx;
+                    segs_target_min_idx = segs_target_idx;
+                    closest_idx_min_pivot.clear();
+                    for (int i=0; i<closest_idx_pivot.size(); i++) 
+                        closest_idx_min_pivot.push_back(closest_idx_pivot[i]); 
+                    closest_idx_min_target.clear();
+                    for (int i=0; i<closest_idx_target.size(); i++) 
+                        closest_idx_min_target.push_back(closest_idx_target[i]); 
+                }
+                // getchar();
+                // cout 
+                //     << "the minimum sum_diff:" << minimum_sum_diff 
+                //     << endl
+                //     << "min_seg_pivot[" << segs_pivot_min_idx << "]: (" << segs_target[segs_pivot_min_idx].mid.x() << "," << segs_target[segs_pivot_min_idx].mid.y() << ")"
+                //     << "\t"
+                //     << "min_seg_target[" << segs_target_min_idx << "]: (" << segs_target[segs_target_min_idx].mid.x() << "," << segs_target[segs_target_min_idx].mid.y() << ")"
+                //     << endl << endl
+                //     << endl;
+                // getchar();
+                // display("Results", im_compute_matches_target);
+                segs_target_idx++;
+            }
+
+            cout 
+                << "seg_pivot_idx: " << segs_pivot_idx
+                << "\t"
+                << "seg_pivot[" << segs_pivot_idx << "]: (" << segs_pivot[segs_pivot_idx].mid.x() << "," << segs_pivot[segs_pivot_idx].mid.y() << ")"
+                << endl;
+
+                cout 
+                    << "the minimum sum_diff:" << minimum_sum_diff 
+                    << endl
+                    << "seg_pivot[" << segs_pivot_min_idx << "]: (" << segs_pivot[segs_pivot_min_idx].mid.x() << "," << segs_pivot[segs_pivot_min_idx].mid.y() << ")"
+                    << "\t"
+                    << "seg_target[" << segs_target_min_idx << "]: (" << segs_target[segs_target_min_idx].mid.x() << "," << segs_target[segs_target_min_idx].mid.y() << ")"
+                    << endl << endl
+                    << endl;
+            // getchar();
+
+            // display("Results", im_compute_matches_board);
+            // if (sum_total_diff < threshold_sum)
+            // {
+            //     display("Results", im_compute_matches_board);
+            //     break;
+            // }
+
+
+
+
+        // int rand_segs_target_idx = dis_target(gen_target);
+        // Segment segs_target = segs_pivot.at(rand_segs_target_idx);
+
+        // vector<int> closest_idx_target;
+        // vector<Segment *> closes_seg_address_target;
+
+        // // copy vectors of segs_pivot, segs_target
+        // vector<Segment> segs_pivot_copy;
+        // for (int i=0; i<segs_pivot.size(); i++) 
+        // segs_pivot_copy.push_back(segs_pivot[i]); 
+        // vector<Segment> segs_target_copy;
+        // for (int i=0; i<segs_target.size(); i++) 
+        // segs_target_copy.push_back(segs_target[i]); 
+
+        // // distances from pivot
+        // vector<float> distances_from_target;
+
+
+
+
+        // for(int i=0; i<num_sets; ++i)
+        // {
+        //     Segment seg_tmp_pivot = segs_pivot.at()
+        //     float dst = segs_pivot.distance_between_segments(seg_)
+        //     idxs_pivot.push_back(dis_pivot(gen_pivot));
+        //     cout << idxs_pivot.at(idxs_pivot.size()-1) << "\t";
+        // }
+
+        
+
+
+        // idxs_pivot.clear();
+        // idxs_target.clear();
+        // for(int i=0; i<num_sets; ++i)
+        // {
+        //     idxs_pivot.push_back(dis_pivot(gen_pivot));
+        //     cout << idxs_pivot.at(idxs_pivot.size()-1) << "\t";
+        // }
+        // for(int i=0; i<num_sets; ++i)
+        // {
+        //     idxs_target.push_back(dis_target(gen_target));
+        //     cout << idxs_target.at(idxs_target.size()-1) << "\t";
+        // }
+
+        // // sum of pivot
+        // float sum_pivot = 0.0;
+        // for(vector<int>::iterator it = idxs_pivot.begin(); it != idxs_pivot.end(); ++it)
+        // {
+        //     sum_pivot += segs_pivot.at(*it).length;
+        //     cout << "pivot at:" << *it << "\tvalue:" << segs_pivot.at(*it).length << endl;
+        // }
+        // cout << "sum_pivot: " << sum_pivot << endl;
+
+        // // sum of target
+        // float sum_target = 0.0;
+        // for(vector<int>::iterator it = idxs_target.begin(); it != idxs_target.end(); ++it)
+        // {
+        //     sum_target += segs_target.at(*it).length;
+        //     cout << "target at:" << *it << "\tvalue:" << segs_target.at(*it).length << endl;
+        // }
+        // cout << "sum_target: " << sum_target << endl;
+
+        // sum_diff = fabs(sum_pivot - sum_target);
+        // cout << endl << "sum_diff: " << sum_diff << endl;
+        // // getchar();
+        // if(sum_diff <= threshold_sum) {
+        //     cout << "found good matches!" << endl;
+        //     break;
+        // }
+        // // getchar();
+            segs_pivot_idx++;
         }
-        matches.push_back(index_min);
+        cout << "\nfinished!!\nready to draw?" << endl;
+        getchar();
+
+        im_compute_matches_final = img.clone();
+
+        for(vector<int>::iterator it = closest_idx_min_pivot.begin(); it != closest_idx_min_pivot.end(); ++it)
+        {
+            cv::Point2f head = cv::Point2f(segs_pivot.at(*it).start.x(), segs_pivot.at(*it).start.y() );
+            cv::Point2f tail = cv::Point2f(segs_pivot.at(*it).end.x()  , segs_pivot.at(*it).end.y()   );
+            cv::line(im_compute_matches_final, head, tail, cv::Scalar(0, 200, 200), 15, 1);
+        }
+        for(vector<int>::iterator it = closest_idx_min_target.begin(); it != closest_idx_min_target.end(); ++it)
+        {
+            cv::Point2f head = cv::Point2f(segs_target.at(*it).start.x(), segs_target.at(*it).start.y() );
+            cv::Point2f tail = cv::Point2f(segs_target.at(*it).end.x()  , segs_target.at(*it).end.y()   );
+            cv::line(im_compute_matches_final, head, tail, cv::Scalar(0, 200, 200), 15, 1);
+        }
+        display("Final", im_compute_matches_final);
+        display("Final", im_compute_matches_final);
+        display("Final", im_compute_matches_final);
+
+
+        if (num_trials < 0)
+        {
+            break;
+        }
     }
+
+
+    // for(vector<int>::iterator it = idxs_pivot.begin(); it != idxs_pivot.end(); ++it)
+    // {
+    //     cv::Point2f head = cv::Point2f(segs_pivot.at(*it).start.x(), segs_pivot.at(*it).start.y());
+    //     cv::Point2f tail = cv::Point2f(segs_pivot.at(*it).end.x(), segs_pivot.at(*it).end.y());
+    //     cv::line(img, head, tail, cv::Scalar(0, 0, 200), 2, 1);
+    // }
+    // display("Result", img);
+    // for(vector<int>::iterator it = idxs_target.begin(); it != idxs_target.end(); ++it)
+    // {
+    //     cv::Point2f head = cv::Point2f(segs_target.at(*it).start.x(), segs_target.at(*it).start.y());
+    //     cv::Point2f tail = cv::Point2f(segs_target.at(*it).end.x(), segs_target.at(*it).end.y());
+    //     cv::line(img, head, tail, cv::Scalar(200, 0, 0), 2, 1);
+    // }
+    // display("Result", img);
+
+
+    vector<int> matches;
+    // for(vector<Segment>::iterator it_01 = segs_pivot.begin(); it_01 != segs_pivot.end(); ++it_01)
+    // {
+    //     int index_min = 0;
+    //     float diff = 0.0f;
+    //     float min_diff = 9999999999.0f;
+
+    //     for(vector<Segment>::iterator it_02 = segs_target.begin(); it_02 != segs_target.end(); ++it_02)
+    //     {
+    //         diff = fabs(it_01->length - it_02->length);
+    //         // cout << "min_diff: " << min_diff << "\t" << "diff: " << diff << endl;
+    //         if (diff < min_diff)
+    //         {
+    //             min_diff = diff; 
+    //             index_min = it_02 - segs_target.begin();
+    //         }
+    //     }
+    //     matches.push_back(index_min);
+    // }
     return matches;
 }
 
@@ -323,7 +704,7 @@ void myAlign(cv::Mat &img, ifstream &file_01, ifstream &file_02)
     // test(im_base);
 
     /** Compute matches **/
-    vector<int> matches = compute_matches(img, segments_01, segments_02);
+    vector<int> matches = compute_matches(im_base, segments_01, segments_02);
     
     for(vector<int>::iterator it = matches.begin(); it != matches.end(); ++it)
     {

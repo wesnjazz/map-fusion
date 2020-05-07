@@ -20,6 +20,7 @@ struct Segment
     Segment(Vec2f start, float length, float angle_degree);
     Vec2f start;                // start point vector
     Vec2f end;                  // end point vector
+    Vec2f mid;
     Vec2f segment;              // segment(line) vector = end - start
     Vec2f segment_unit;         // unit vector of segment
     Vec2f segment_norm_unit;    // unit vector of normal vector of segment
@@ -36,6 +37,7 @@ struct Segment
     Vec2f intersection_point(Segment &seg2);
     bool ifIntersect(const Segment &seg2);
     void remove_small_error_values(Vec2f &vec);
+    float distance_between_segments(Segment &seg2);
 
     friend std::ostream& operator<<(std::ostream& os, const Segment &sg)
     {

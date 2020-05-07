@@ -38,6 +38,14 @@ void Segment::calculate_members()
     angle_radian = atan2(y_diff, x_diff);  // Angle (Direction) of the line vector
     angle_degree = angle_radian * (180.0/M_PI);
     length = abs(sqrt((pow(x_diff,2.0) + pow(y_diff,2.0))));    // Length of the line
+
+    float x1 = this->start.x();
+    float y1 = this->start.y();
+    float x3 = this->end.x();
+    float y3 = this->end.y();
+    float x2 = (x1 + x3) / 2.0f;
+    float y2 = (y1 + y3) / 2.0f;
+    this->mid = Vec2f(x2, y2);
 }
 
 
@@ -83,4 +91,31 @@ void Segment::remove_small_error_values(Vec2f &vec)     // Replace very small nu
     vec = Vec2f(vec.x(), cut_redundant_epsilon(vec.y()));
     // if (fabs(vec.x()) < 0.00001) { vec = Vec2f(0, vec.y()); }    
     // if (fabs(vec.y()) < 0.00001) { vec = Vec2f(vec.x(), 0); }
+}
+
+
+
+float Segment::distance_between_segments(Segment &seg2)
+{
+    float mid_point_seg_01_x = this->mid.x();
+    float mid_point_seg_01_y = this->mid.y();
+    float mid_point_seg_02_x = seg2.mid.x();
+    float mid_point_seg_02_y = seg2.mid.y();
+    float x_diff_pow2 = pow(fabs(mid_point_seg_01_x - mid_point_seg_02_x), 2.0);
+    float y_diff_pow2 = pow(fabs(mid_point_seg_01_y - mid_point_seg_02_y) ,2.0);
+    float distance =sqrt(x_diff_pow2 + y_diff_pow2);
+    return distance;
+    // float x1_pivot = this->start.x();
+    // float y1_pivot = this->start.y();
+    // float x3_pivot = this->end.x();
+    // float y3_pivot = this->end.y();
+    // float x2_pivot = (x1_pivot + x3_pivot) / 2.0f;
+    // float y2_pivot = (y1_pivot + y3_pivot) / 2.0f;
+    // float x1_target = seg2.start.x();
+    // float y1_target = seg2.start.y();
+    // float x3_target = seg2.end.x();
+    // float y3_target = seg2.end.y();
+    // float x2_target = (x1_target + x3_target) / 2.0f;
+    // float y2_target = (y1_target + y3_target) / 2.0f;
+
 }
