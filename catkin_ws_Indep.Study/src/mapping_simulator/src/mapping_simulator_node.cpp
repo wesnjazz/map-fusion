@@ -67,16 +67,16 @@ int main(int argc, char **argv)
     /** Sensors **/ 
     WheelEncoder wheel_encoder___actual = WheelEncoder();
     WheelEncoder wheel_encoder___ideal = WheelEncoder();
-    /** Noises **/
-    // Noise laser_length_noise = Noise(0.0, 0.01);
-    // Noise laser_angle_noise = Noise(0.0, 0.005);
-    // Noise wheel_encoder___actual_dx_noise = Noise(-0.001, 0.004);
-    // Noise wheel_encoder___actual_dy_noise = Noise(-0.002, 0.02);
     /** No Noises **/
-    Noise laser_length_noise = Noise(-0.002, 0.015);
-    Noise laser_angle_noise = Noise(0.008, 0.01);
-    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.01);
-    Noise wheel_encoder___actual_dy_noise = Noise(dy_mean, 0.01);
+    Noise laser_length_noise = Noise(0.0, 0.0);
+    Noise laser_angle_noise = Noise(0.0, 0.0);
+    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.0);
+    Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.0);
+    /** Noises **/
+    // Noise laser_length_noise = Noise(-0.002, 0.015);
+    // Noise laser_angle_noise = Noise(0.008, 0.01);
+    // Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.01);
+    // Noise wheel_encoder___actual_dy_noise = Noise(dy_mean, 0.01);
 
 
     /** World frame and Transformed World frame(Robot_frame) **/
