@@ -11,7 +11,7 @@ import std_msgs.msg
 class CornerFeatureMsg(genpy.Message):
   _md5sum = "f86d11aa7264d820fbf8de0199829dfe"
   _type = "visual_feature_server/CornerFeatureMsg"
-  _has_header = False #flag to mark the presence of a Header object
+  _has_header = False  # flag to mark the presence of a Header object
   _full_text = """uint8 threshold
 #uint8 scale
 
@@ -93,7 +93,7 @@ float64 w
     """
     if args or kwds:
       super(CornerFeatureMsg, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.threshold is None:
         self.threshold = 0
       if self.centroid is None:
@@ -159,7 +159,7 @@ float64 w
       self.centroid.pose.covariance = _get_struct_36d().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -215,7 +215,7 @@ float64 w
       self.centroid.pose.covariance = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=36)
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():

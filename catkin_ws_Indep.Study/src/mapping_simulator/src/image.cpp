@@ -6,7 +6,7 @@
 // save_map
 using namespace cimg_library;
 
-void save_map(vector<vector<Vec2f>> &point_clouds,  Mat3f &HT_World_frame_to_Robot_frame, string img_filename)
+void save_map(vector<vector<Vec2f>> &point_clouds,  Mat3f &HT_World_frame_to_Robot_frame, string img_filename, int img_scale)
 {
     float x_max = -987654321;
     float x_min =  987654321;
@@ -26,10 +26,12 @@ void save_map(vector<vector<Vec2f>> &point_clouds,  Mat3f &HT_World_frame_to_Rob
         }
     }
     int margin = 10;
-    int scale = 50;
+//    int img_scale = 50;
+//    int margin = 0;
+//    int img_scale = 1;
     int pixel_size = 1;
-    int img_width =  (int)(fabs(x_max - x_min)*scale);
-    int img_height = (int)(fabs(y_max - y_min)*scale);
+    int img_width =  (int)(fabs(x_max - x_min)*img_scale);
+    int img_height = (int)(fabs(y_max - y_min)*img_scale);
     int color_channel = 3;
     int default_color = 0;
     cout
@@ -48,15 +50,15 @@ void save_map(vector<vector<Vec2f>> &point_clouds,  Mat3f &HT_World_frame_to_Rob
         {
             Vec3f transformed_point = HT_World_frame_to_Robot_frame * it->homogeneous();
             /** Scaled **/
-            int x_grid = ((int)((transformed_point.x())*scale)) - (int)(x_min*scale) + (margin/2);
-            int y_grid = ((int)((transformed_point.y())*scale)) - (int)(y_min*scale) + (margin/2);
+            int y_grid = ((int)((transformed_point.y())*img_scale)) - (int)(y_min*img_scale) + (margin/2);
+            int x_grid = ((int)((transformed_point.x())*img_scale)) - (int)(x_min*img_scale) + (margin/2);
             /** Not scaled - 1:1 **/
-            // int x_grid = ((int)((transformed_point.x()))) - (int)(x_min);
-            // int y_grid = ((int)((transformed_point.y()))) - (int)(y_min);
+//             int x_grid = ((int)((transformed_point.x()))) - (int)(x_min);
+//             int y_grid = ((int)((transformed_point.y()))) - (int)(y_min);
 
-            // img(x_grid, y_grid, 0) = 255;
-            // img(x_grid, y_grid, 1) = 255;
-            // img(x_grid, y_grid, 2) = 255;
+//             img(x_grid, y_grid, 0) = 255;
+//             img(x_grid, y_grid, 1) = 255;
+//             img(x_grid, y_grid, 2) = 255;
             for(int i = 0; i < pixel_size; ++i)
             {
                 for(int j = 0; j < pixel_size; ++j)

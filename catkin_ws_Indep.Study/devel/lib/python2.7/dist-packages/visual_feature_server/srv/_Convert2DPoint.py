@@ -10,7 +10,7 @@ import genpy
 class Convert2DPointRequest(genpy.Message):
   _md5sum = "2a1f2197011561a384f51fa793dee78b"
   _type = "visual_feature_server/Convert2DPointRequest"
-  _has_header = False #flag to mark the presence of a Header object
+  _has_header = False  # flag to mark the presence of a Header object
   _full_text = """time stamp
 float64[] x
 float64[] y
@@ -37,7 +37,7 @@ string destination_frame
     """
     if args or kwds:
       super(Convert2DPointRequest, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.stamp is None:
         self.stamp = genpy.Time()
       if self.x is None:
@@ -140,7 +140,7 @@ string destination_frame
       self.stamp.canon()
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -224,7 +224,7 @@ string destination_frame
       self.stamp.canon()
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():
@@ -247,7 +247,7 @@ import struct
 class Convert2DPointResponse(genpy.Message):
   _md5sum = "ab4d89ce84f35328de2f5124bef6a8d2"
   _type = "visual_feature_server/Convert2DPointResponse"
-  _has_header = False #flag to mark the presence of a Header object
+  _has_header = False  # flag to mark the presence of a Header object
   _full_text = """
 float64[] x_source
 float64[] y_source
@@ -277,7 +277,7 @@ float64[] z_dest
     """
     if args or kwds:
       super(Convert2DPointResponse, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.x_source is None:
         self.x_source = []
       if self.y_source is None:
@@ -388,7 +388,7 @@ float64[] z_dest
       self.z_dest = struct.unpack(pattern, str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -477,7 +477,7 @@ float64[] z_dest
       self.z_dest = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=length)
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():

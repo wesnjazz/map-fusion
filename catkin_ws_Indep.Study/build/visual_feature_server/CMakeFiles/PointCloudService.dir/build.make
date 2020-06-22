@@ -110,6 +110,7 @@ PointCloudService_EXTERNAL_OBJECTS =
 /home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/visual_feature_server/PointCloudService: /opt/ros/melodic/lib/libdynamic_reconfigure_config_init_mutex.so
 /home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/visual_feature_server/PointCloudService: /opt/ros/melodic/lib/libnodeletlib.so
 /home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/visual_feature_server/PointCloudService: /opt/ros/melodic/lib/libbondcpp.so
+/home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/visual_feature_server/PointCloudService: /usr/lib/x86_64-linux-gnu/libuuid.so
 /home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/visual_feature_server/PointCloudService: /usr/lib/x86_64-linux-gnu/libpcl_common.so
 /home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/visual_feature_server/PointCloudService: /usr/lib/x86_64-linux-gnu/libpcl_octree.so
 /home/dpark/map-fusion/catkin_ws_Indep.Study/devel/lib/visual_feature_server/PointCloudService: /usr/lib/x86_64-linux-gnu/libpcl_io.so

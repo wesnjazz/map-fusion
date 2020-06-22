@@ -5,15 +5,15 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import visual_feature_server.msg
-import geometry_msgs.msg
 import genpy
+import geometry_msgs.msg
 import std_msgs.msg
+import visual_feature_server.msg
 
 class FeaturePoses(genpy.Message):
   _md5sum = "8329d4cd40eb21004182798fbd3b3cb5"
   _type = "visual_feature_server/FeaturePoses"
-  _has_header = False #flag to mark the presence of a Header object
+  _has_header = False  # flag to mark the presence of a Header object
   _full_text = """time stamp
 
 FeatureMsg[] features
@@ -152,7 +152,7 @@ geometry_msgs/PoseWithCovarianceStamped centroid
     """
     if args or kwds:
       super(FeaturePoses, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.stamp is None:
         self.stamp = genpy.Time()
       if self.features is None:
@@ -191,7 +191,8 @@ geometry_msgs/PoseWithCovarianceStamped centroid
         buff.write(_get_struct_7B().pack(_x.hHigh, _x.sHigh, _x.vHigh, _x.hLow, _x.sLow, _x.vLow, _x.threshold))
         _v2 = _v1.centroid
         _v3 = _v2.header
-        buff.write(_get_struct_I().pack(_v3.seq))
+        _x = _v3.seq
+        buff.write(_get_struct_I().pack(_x))
         _v4 = _v3.stamp
         _x = _v4
         buff.write(_get_struct_2I().pack(_x.secs, _x.nsecs))
@@ -211,10 +212,12 @@ geometry_msgs/PoseWithCovarianceStamped centroid
         buff.write(_get_struct_4d().pack(_x.x, _x.y, _x.z, _x.w))
         buff.write(_get_struct_36d().pack(*_v5.covariance))
         _v9 = val1.cornerFeature
-        buff.write(_get_struct_B().pack(_v9.threshold))
+        _x = _v9.threshold
+        buff.write(_get_struct_B().pack(_x))
         _v10 = _v9.centroid
         _v11 = _v10.header
-        buff.write(_get_struct_I().pack(_v11.seq))
+        _x = _v11.seq
+        buff.write(_get_struct_I().pack(_x))
         _v12 = _v11.stamp
         _x = _v12
         buff.write(_get_struct_2I().pack(_x.secs, _x.nsecs))
@@ -234,10 +237,12 @@ geometry_msgs/PoseWithCovarianceStamped centroid
         buff.write(_get_struct_4d().pack(_x.x, _x.y, _x.z, _x.w))
         buff.write(_get_struct_36d().pack(*_v13.covariance))
         _v17 = val1.edgeFeature
-        buff.write(_get_struct_B().pack(_v17.threshold))
+        _x = _v17.threshold
+        buff.write(_get_struct_B().pack(_x))
         _v18 = _v17.centroid
         _v19 = _v18.header
-        buff.write(_get_struct_I().pack(_v19.seq))
+        _x = _v19.seq
+        buff.write(_get_struct_I().pack(_x))
         _v20 = _v19.stamp
         _x = _v20
         buff.write(_get_struct_2I().pack(_x.secs, _x.nsecs))
@@ -418,7 +423,7 @@ geometry_msgs/PoseWithCovarianceStamped centroid
       self.stamp.canon()
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -446,7 +451,8 @@ geometry_msgs/PoseWithCovarianceStamped centroid
         buff.write(_get_struct_7B().pack(_x.hHigh, _x.sHigh, _x.vHigh, _x.hLow, _x.sLow, _x.vLow, _x.threshold))
         _v50 = _v49.centroid
         _v51 = _v50.header
-        buff.write(_get_struct_I().pack(_v51.seq))
+        _x = _v51.seq
+        buff.write(_get_struct_I().pack(_x))
         _v52 = _v51.stamp
         _x = _v52
         buff.write(_get_struct_2I().pack(_x.secs, _x.nsecs))
@@ -466,10 +472,12 @@ geometry_msgs/PoseWithCovarianceStamped centroid
         buff.write(_get_struct_4d().pack(_x.x, _x.y, _x.z, _x.w))
         buff.write(_v53.covariance.tostring())
         _v57 = val1.cornerFeature
-        buff.write(_get_struct_B().pack(_v57.threshold))
+        _x = _v57.threshold
+        buff.write(_get_struct_B().pack(_x))
         _v58 = _v57.centroid
         _v59 = _v58.header
-        buff.write(_get_struct_I().pack(_v59.seq))
+        _x = _v59.seq
+        buff.write(_get_struct_I().pack(_x))
         _v60 = _v59.stamp
         _x = _v60
         buff.write(_get_struct_2I().pack(_x.secs, _x.nsecs))
@@ -489,10 +497,12 @@ geometry_msgs/PoseWithCovarianceStamped centroid
         buff.write(_get_struct_4d().pack(_x.x, _x.y, _x.z, _x.w))
         buff.write(_v61.covariance.tostring())
         _v65 = val1.edgeFeature
-        buff.write(_get_struct_B().pack(_v65.threshold))
+        _x = _v65.threshold
+        buff.write(_get_struct_B().pack(_x))
         _v66 = _v65.centroid
         _v67 = _v66.header
-        buff.write(_get_struct_I().pack(_v67.seq))
+        _x = _v67.seq
+        buff.write(_get_struct_I().pack(_x))
         _v68 = _v67.stamp
         _x = _v68
         buff.write(_get_struct_2I().pack(_x.secs, _x.nsecs))
@@ -674,57 +684,57 @@ geometry_msgs/PoseWithCovarianceStamped centroid
       self.stamp.canon()
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_B = None
-def _get_struct_B():
-    global _struct_B
-    if _struct_B is None:
-        _struct_B = struct.Struct("<B")
-    return _struct_B
-_struct_7B = None
-def _get_struct_7B():
-    global _struct_7B
-    if _struct_7B is None:
-        _struct_7B = struct.Struct("<7B")
-    return _struct_7B
-_struct_36d = None
-def _get_struct_36d():
-    global _struct_36d
-    if _struct_36d is None:
-        _struct_36d = struct.Struct("<36d")
-    return _struct_36d
-_struct_f2i = None
-def _get_struct_f2i():
-    global _struct_f2i
-    if _struct_f2i is None:
-        _struct_f2i = struct.Struct("<f2i")
-    return _struct_f2i
-_struct_4d = None
-def _get_struct_4d():
-    global _struct_4d
-    if _struct_4d is None:
-        _struct_4d = struct.Struct("<4d")
-    return _struct_4d
 _struct_2I = None
 def _get_struct_2I():
     global _struct_2I
     if _struct_2I is None:
         _struct_2I = struct.Struct("<2I")
     return _struct_2I
-_struct_i2f = None
-def _get_struct_i2f():
-    global _struct_i2f
-    if _struct_i2f is None:
-        _struct_i2f = struct.Struct("<i2f")
-    return _struct_i2f
+_struct_36d = None
+def _get_struct_36d():
+    global _struct_36d
+    if _struct_36d is None:
+        _struct_36d = struct.Struct("<36d")
+    return _struct_36d
 _struct_3d = None
 def _get_struct_3d():
     global _struct_3d
     if _struct_3d is None:
         _struct_3d = struct.Struct("<3d")
     return _struct_3d
+_struct_4d = None
+def _get_struct_4d():
+    global _struct_4d
+    if _struct_4d is None:
+        _struct_4d = struct.Struct("<4d")
+    return _struct_4d
+_struct_7B = None
+def _get_struct_7B():
+    global _struct_7B
+    if _struct_7B is None:
+        _struct_7B = struct.Struct("<7B")
+    return _struct_7B
+_struct_B = None
+def _get_struct_B():
+    global _struct_B
+    if _struct_B is None:
+        _struct_B = struct.Struct("<B")
+    return _struct_B
+_struct_f2i = None
+def _get_struct_f2i():
+    global _struct_f2i
+    if _struct_f2i is None:
+        _struct_f2i = struct.Struct("<f2i")
+    return _struct_f2i
+_struct_i2f = None
+def _get_struct_i2f():
+    global _struct_i2f
+    if _struct_i2f is None:
+        _struct_i2f = struct.Struct("<i2f")
+    return _struct_i2f

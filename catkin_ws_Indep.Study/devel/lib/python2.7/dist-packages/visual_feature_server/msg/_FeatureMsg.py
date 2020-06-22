@@ -5,14 +5,14 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import visual_feature_server.msg
 import geometry_msgs.msg
 import std_msgs.msg
+import visual_feature_server.msg
 
 class FeatureMsg(genpy.Message):
   _md5sum = "93ea47ac84f852fc7e6fbfcdf7865fee"
   _type = "visual_feature_server/FeatureMsg"
-  _has_header = False #flag to mark the presence of a Header object
+  _has_header = False  # flag to mark the presence of a Header object
   _full_text = """uint8 CORNER=1
 uint8 BLOB=2
 uint8 EDGE=3
@@ -153,7 +153,7 @@ geometry_msgs/PoseWithCovarianceStamped centroid
     """
     if args or kwds:
       super(FeatureMsg, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.name is None:
         self.name = ''
       if self.type is None:
@@ -330,7 +330,7 @@ geometry_msgs/PoseWithCovarianceStamped centroid
       (_x.confidence, _x.x_pixel, _x.y_pixel,) = _get_struct_f2i().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -473,18 +473,12 @@ geometry_msgs/PoseWithCovarianceStamped centroid
       (_x.confidence, _x.x_pixel, _x.y_pixel,) = _get_struct_f2i().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_i2f7B3I = None
-def _get_struct_i2f7B3I():
-    global _struct_i2f7B3I
-    if _struct_i2f7B3I is None:
-        _struct_i2f7B3I = struct.Struct("<i2f7B3I")
-    return _struct_i2f7B3I
 _struct_36d = None
 def _get_struct_36d():
     global _struct_36d
@@ -509,3 +503,9 @@ def _get_struct_f2i():
     if _struct_f2i is None:
         _struct_f2i = struct.Struct("<f2i")
     return _struct_f2i
+_struct_i2f7B3I = None
+def _get_struct_i2f7B3I():
+    global _struct_i2f7B3I
+    if _struct_i2f7B3I is None:
+        _struct_i2f7B3I = struct.Struct("<i2f7B3I")
+    return _struct_i2f7B3I

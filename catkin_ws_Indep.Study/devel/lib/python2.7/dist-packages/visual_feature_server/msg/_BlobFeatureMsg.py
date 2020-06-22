@@ -11,7 +11,7 @@ import std_msgs.msg
 class BlobFeatureMsg(genpy.Message):
   _md5sum = "c25be8f3f0fd93ffc579284ad0e9abf8"
   _type = "visual_feature_server/BlobFeatureMsg"
-  _has_header = False #flag to mark the presence of a Header object
+  _has_header = False  # flag to mark the presence of a Header object
   _full_text = """uint8 hHigh
 uint8 sHigh
 uint8 vHigh
@@ -104,7 +104,7 @@ float64 w
     """
     if args or kwds:
       super(BlobFeatureMsg, self).__init__(*args, **kwds)
-      #message fields cannot be None, assign default values for those that are
+      # message fields cannot be None, assign default values for those that are
       if self.hHigh is None:
         self.hHigh = 0
       if self.sHigh is None:
@@ -188,7 +188,7 @@ float64 w
       self.centroid.pose.covariance = _get_struct_36d().unpack(str[start:end])
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 
   def serialize_numpy(self, buff, numpy):
@@ -244,7 +244,7 @@ float64 w
       self.centroid.pose.covariance = numpy.frombuffer(str[start:end], dtype=numpy.float64, count=36)
       return self
     except struct.error as e:
-      raise genpy.DeserializationError(e) #most likely buffer underfill
+      raise genpy.DeserializationError(e)  # most likely buffer underfill
 
 _struct_I = genpy.struct_I
 def _get_struct_I():
@@ -256,15 +256,15 @@ def _get_struct_36d():
     if _struct_36d is None:
         _struct_36d = struct.Struct("<36d")
     return _struct_36d
-_struct_7d = None
-def _get_struct_7d():
-    global _struct_7d
-    if _struct_7d is None:
-        _struct_7d = struct.Struct("<7d")
-    return _struct_7d
 _struct_7B3I = None
 def _get_struct_7B3I():
     global _struct_7B3I
     if _struct_7B3I is None:
         _struct_7B3I = struct.Struct("<7B3I")
     return _struct_7B3I
+_struct_7d = None
+def _get_struct_7d():
+    global _struct_7d
+    if _struct_7d is None:
+        _struct_7d = struct.Struct("<7d")
+    return _struct_7d
