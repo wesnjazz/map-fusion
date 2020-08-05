@@ -131,9 +131,12 @@ endif()
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/home/dpark/map-fusion/catkin_ws_Indep.Study/build/gtest/cmake_install.cmake")
+  include("/home/dpark/map-fusion/catkin_ws_Indep.Study/build/turtlebot3_simulations/turtlebot3_simulations/cmake_install.cmake")
   include("/home/dpark/map-fusion/catkin_ws_Indep.Study/build/aligning_maps/cmake_install.cmake")
   include("/home/dpark/map-fusion/catkin_ws_Indep.Study/build/indep_study_task02_rviztest/cmake_install.cmake")
   include("/home/dpark/map-fusion/catkin_ws_Indep.Study/build/mapping_simulator/cmake_install.cmake")
+  include("/home/dpark/map-fusion/catkin_ws_Indep.Study/build/turtlebot3_simulations/turtlebot3_fake/cmake_install.cmake")
+  include("/home/dpark/map-fusion/catkin_ws_Indep.Study/build/turtlebot3_simulations/turtlebot3_gazebo/cmake_install.cmake")
   include("/home/dpark/map-fusion/catkin_ws_Indep.Study/build/visual_feature_server/cmake_install.cmake")
 
 endif()

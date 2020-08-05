@@ -80,28 +80,6 @@ install/local/fast: preinstall/fast
 	/usr/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
 .PHONY : install/local/fast
 
-# Special rule for the target install
-install: preinstall
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install
-
-# Special rule for the target install
-install/fast: preinstall/fast
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
-	/usr/bin/cmake -P cmake_install.cmake
-.PHONY : install/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -124,6 +102,18 @@ test/fast: test
 
 .PHONY : test/fast
 
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	/usr/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -134,6 +124,16 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -168,51 +168,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/std_srvs_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/std_srvs_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/std_srvs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_srvs_generate_messages_py: visual_feature_server/CMakeFiles/std_srvs_generate_messages_py.dir/rule
-
-.PHONY : std_srvs_generate_messages_py
-
-# fast build rule for target.
-std_srvs_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/std_srvs_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/std_srvs_generate_messages_py.dir/build
-.PHONY : std_srvs_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-std_srvs_generate_messages_nodejs: visual_feature_server/CMakeFiles/std_srvs_generate_messages_nodejs.dir/rule
-
-.PHONY : std_srvs_generate_messages_nodejs
-
-# fast build rule for target.
-std_srvs_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/std_srvs_generate_messages_nodejs.dir/build
-.PHONY : std_srvs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_cpp: visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
-
-.PHONY : nodelet_generate_messages_cpp
-
-# fast build rule for target.
-nodelet_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/build
-.PHONY : nodelet_generate_messages_cpp/fast
-
-# Convenience name for target.
 visual_feature_server/CMakeFiles/PointCloudService.dir/rule:
 	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/PointCloudService.dir/rule
 .PHONY : visual_feature_server/CMakeFiles/PointCloudService.dir/rule
@@ -226,66 +181,6 @@ PointCloudService: visual_feature_server/CMakeFiles/PointCloudService.dir/rule
 PointCloudService/fast:
 	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/PointCloudService.dir/build.make visual_feature_server/CMakeFiles/PointCloudService.dir/build
 .PHONY : PointCloudService/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_py: visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/rule
-
-.PHONY : bond_generate_messages_py
-
-# fast build rule for target.
-bond_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/build
-.PHONY : bond_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_lisp: visual_feature_server/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
-
-.PHONY : actionlib_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/actionlib_generate_messages_lisp.dir/build
-.PHONY : actionlib_generate_messages_lisp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_srvs_generate_messages_cpp: visual_feature_server/CMakeFiles/std_srvs_generate_messages_cpp.dir/rule
-
-.PHONY : std_srvs_generate_messages_cpp
-
-# fast build rule for target.
-std_srvs_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/std_srvs_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/std_srvs_generate_messages_cpp.dir/build
-.PHONY : std_srvs_generate_messages_cpp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-std_srvs_generate_messages_lisp: visual_feature_server/CMakeFiles/std_srvs_generate_messages_lisp.dir/rule
-
-.PHONY : std_srvs_generate_messages_lisp
-
-# fast build rule for target.
-std_srvs_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/std_srvs_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/std_srvs_generate_messages_lisp.dir/build
-.PHONY : std_srvs_generate_messages_lisp/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/visual_feature_server_test_edge.dir/rule:
@@ -303,34 +198,64 @@ visual_feature_server_test_edge/fast:
 .PHONY : visual_feature_server_test_edge/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
+visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/rule
 
 # Convenience name for target.
-topic_tools_generate_messages_lisp: visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
+visual_feature_server_test_blob: visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/rule
 
-.PHONY : topic_tools_generate_messages_lisp
+.PHONY : visual_feature_server_test_blob
 
 # fast build rule for target.
-topic_tools_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
-.PHONY : topic_tools_generate_messages_lisp/fast
+visual_feature_server_test_blob/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/build
+.PHONY : visual_feature_server_test_blob/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/rule
+visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/rule
 
 # Convenience name for target.
-visual_feature_server_geneus: visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/rule
+visual_feature_server_genpy: visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/rule
 
-.PHONY : visual_feature_server_geneus
+.PHONY : visual_feature_server_genpy
 
 # fast build rule for target.
-visual_feature_server_geneus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/build
-.PHONY : visual_feature_server_geneus/fast
+visual_feature_server_genpy/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/build
+.PHONY : visual_feature_server_genpy/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+bond_generate_messages_nodejs: visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/rule
+
+.PHONY : bond_generate_messages_nodejs
+
+# fast build rule for target.
+bond_generate_messages_nodejs/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/build
+.PHONY : bond_generate_messages_nodejs/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/rule
+
+# Convenience name for target.
+nodelet_generate_messages_py: visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/rule
+
+.PHONY : nodelet_generate_messages_py
+
+# fast build rule for target.
+nodelet_generate_messages_py/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/build
+.PHONY : nodelet_generate_messages_py/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/bond_generate_messages_lisp.dir/rule:
@@ -363,34 +288,19 @@ bond_generate_messages_cpp/fast:
 .PHONY : bond_generate_messages_cpp/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-actionlib_msgs_generate_messages_cpp: visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+nodelet_generate_messages_lisp: visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
 
-.PHONY : actionlib_msgs_generate_messages_cpp
+.PHONY : nodelet_generate_messages_lisp
 
 # fast build rule for target.
-actionlib_msgs_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
-.PHONY : actionlib_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_eus: visual_feature_server/CMakeFiles/tf_generate_messages_eus.dir/rule
-
-.PHONY : tf_generate_messages_eus
-
-# fast build rule for target.
-tf_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/tf_generate_messages_eus.dir/build
-.PHONY : tf_generate_messages_eus/fast
+nodelet_generate_messages_lisp/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/build
+.PHONY : nodelet_generate_messages_lisp/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/topic_tools_generate_messages_cpp.dir/rule:
@@ -408,21 +318,6 @@ topic_tools_generate_messages_cpp/fast:
 .PHONY : topic_tools_generate_messages_cpp/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_nodejs: visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
-
-.PHONY : nodelet_generate_messages_nodejs
-
-# fast build rule for target.
-nodelet_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/build
-.PHONY : nodelet_generate_messages_nodejs/fast
-
-# Convenience name for target.
 visual_feature_server/CMakeFiles/nodelet_generate_messages_eus.dir/rule:
 	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_eus.dir/rule
 .PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_eus.dir/rule
@@ -438,139 +333,34 @@ nodelet_generate_messages_eus/fast:
 .PHONY : nodelet_generate_messages_eus/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
+visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-topic_tools_generate_messages_eus: visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
+pcl_msgs_generate_messages_eus: visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
 
-.PHONY : topic_tools_generate_messages_eus
+.PHONY : pcl_msgs_generate_messages_eus
 
 # fast build rule for target.
-topic_tools_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/build
-.PHONY : topic_tools_generate_messages_eus/fast
+pcl_msgs_generate_messages_eus/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/build
+.PHONY : pcl_msgs_generate_messages_eus/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/rule
+visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
 
 # Convenience name for target.
-_visual_feature_server_generate_messages_check_deps_PickleSrv: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/rule
+pcl_msgs_generate_messages_py: visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
 
-.PHONY : _visual_feature_server_generate_messages_check_deps_PickleSrv
+.PHONY : pcl_msgs_generate_messages_py
 
 # fast build rule for target.
-_visual_feature_server_generate_messages_check_deps_PickleSrv/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/build
-.PHONY : _visual_feature_server_generate_messages_check_deps_PickleSrv/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/rule
-
-# Convenience name for target.
-_visual_feature_server_generate_messages_check_deps_FeatureMsg: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/rule
-
-.PHONY : _visual_feature_server_generate_messages_check_deps_FeatureMsg
-
-# fast build rule for target.
-_visual_feature_server_generate_messages_check_deps_FeatureMsg/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/build
-.PHONY : _visual_feature_server_generate_messages_check_deps_FeatureMsg/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_nodejs: visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-sensor_msgs_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build
-.PHONY : sensor_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_cpp: visual_feature_server/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
-
-.PHONY : actionlib_generate_messages_cpp
-
-# fast build rule for target.
-actionlib_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/actionlib_generate_messages_cpp.dir/build
-.PHONY : actionlib_generate_messages_cpp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-bond_generate_messages_nodejs: visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/rule
-
-.PHONY : bond_generate_messages_nodejs
-
-# fast build rule for target.
-bond_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/bond_generate_messages_nodejs.dir/build
-.PHONY : bond_generate_messages_nodejs/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_py: visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_py
-
-# fast build rule for target.
-sensor_msgs_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_py.dir/build
-.PHONY : sensor_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/rule
-
-# Convenience name for target.
-nodelet_generate_messages_py: visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/rule
-
-.PHONY : nodelet_generate_messages_py
-
-# fast build rule for target.
-nodelet_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/nodelet_generate_messages_py.dir/build
-.PHONY : nodelet_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_lisp: visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_lisp
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_lisp.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_lisp/fast
+pcl_msgs_generate_messages_py/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/build
+.PHONY : pcl_msgs_generate_messages_py/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_cpp.dir/rule:
@@ -588,79 +378,49 @@ pcl_msgs_generate_messages_cpp/fast:
 .PHONY : pcl_msgs_generate_messages_cpp/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/rule
 
 # Convenience name for target.
-sensor_msgs_generate_messages_lisp: visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/rule
+visual_feature_server_generate_messages_py: visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/rule
 
-.PHONY : sensor_msgs_generate_messages_lisp
+.PHONY : visual_feature_server_generate_messages_py
 
 # fast build rule for target.
-sensor_msgs_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build
-.PHONY : sensor_msgs_generate_messages_lisp/fast
+visual_feature_server_generate_messages_py/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/build
+.PHONY : visual_feature_server_generate_messages_py/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/std_srvs_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
+visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-std_srvs_generate_messages_eus: visual_feature_server/CMakeFiles/std_srvs_generate_messages_eus.dir/rule
+nodelet_generate_messages_cpp: visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/rule
 
-.PHONY : std_srvs_generate_messages_eus
+.PHONY : nodelet_generate_messages_cpp
 
 # fast build rule for target.
-std_srvs_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/std_srvs_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/std_srvs_generate_messages_eus.dir/build
-.PHONY : std_srvs_generate_messages_eus/fast
+nodelet_generate_messages_cpp/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/nodelet_generate_messages_cpp.dir/build
+.PHONY : nodelet_generate_messages_cpp/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
+visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/rule
 
 # Convenience name for target.
-nodelet_generate_messages_lisp: visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/rule
+bond_generate_messages_py: visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/rule
 
-.PHONY : nodelet_generate_messages_lisp
+.PHONY : bond_generate_messages_py
 
 # fast build rule for target.
-nodelet_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/nodelet_generate_messages_lisp.dir/build
-.PHONY : nodelet_generate_messages_lisp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_eus: visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_eus
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build
-.PHONY : actionlib_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-sensor_msgs_generate_messages_eus: visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/rule
-
-.PHONY : sensor_msgs_generate_messages_eus
-
-# fast build rule for target.
-sensor_msgs_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build
-.PHONY : sensor_msgs_generate_messages_eus/fast
+bond_generate_messages_py/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/bond_generate_messages_py.dir/build
+.PHONY : bond_generate_messages_py/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/bond_generate_messages_eus.dir/rule:
@@ -678,34 +438,79 @@ bond_generate_messages_eus/fast:
 .PHONY : bond_generate_messages_eus/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
+visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/rule
 
 # Convenience name for target.
-dynamic_reconfigure_generate_messages_nodejs: visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/rule
+visual_feature_server_gennodejs: visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/rule
 
-.PHONY : dynamic_reconfigure_generate_messages_nodejs
+.PHONY : visual_feature_server_gennodejs
 
 # fast build rule for target.
-dynamic_reconfigure_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_nodejs.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_nodejs/fast
+visual_feature_server_gennodejs/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/build
+.PHONY : visual_feature_server_gennodejs/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
+visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/rule
 
 # Convenience name for target.
-pcl_msgs_generate_messages_eus: visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/rule
+_visual_feature_server_generate_messages_check_deps_FeaturePoses: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/rule
 
-.PHONY : pcl_msgs_generate_messages_eus
+.PHONY : _visual_feature_server_generate_messages_check_deps_FeaturePoses
 
 # fast build rule for target.
-pcl_msgs_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_eus.dir/build
-.PHONY : pcl_msgs_generate_messages_eus/fast
+_visual_feature_server_generate_messages_check_deps_FeaturePoses/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/build
+.PHONY : _visual_feature_server_generate_messages_check_deps_FeaturePoses/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+nodelet_generate_messages_nodejs: visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/rule
+
+.PHONY : nodelet_generate_messages_nodejs
+
+# fast build rule for target.
+nodelet_generate_messages_nodejs/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/nodelet_generate_messages_nodejs.dir/build
+.PHONY : nodelet_generate_messages_nodejs/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
+
+# Convenience name for target.
+pcl_msgs_generate_messages_nodejs: visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
+
+.PHONY : pcl_msgs_generate_messages_nodejs
+
+# fast build rule for target.
+pcl_msgs_generate_messages_nodejs/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/build
+.PHONY : pcl_msgs_generate_messages_nodejs/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+visual_feature_server_generate_messages_cpp: visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/rule
+
+.PHONY : visual_feature_server_generate_messages_cpp
+
+# fast build rule for target.
+visual_feature_server_generate_messages_cpp/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/build
+.PHONY : visual_feature_server_generate_messages_cpp/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/pcl_ros_gencfg.dir/rule:
@@ -738,364 +543,19 @@ topic_tools_generate_messages_nodejs/fast:
 .PHONY : topic_tools_generate_messages_nodejs/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/rule
+visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/rule
 
 # Convenience name for target.
-dynamic_reconfigure_generate_messages_eus: visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/rule
+_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/rule
 
-.PHONY : dynamic_reconfigure_generate_messages_eus
+.PHONY : _visual_feature_server_generate_messages_check_deps_BlobFeatureMsg
 
 # fast build rule for target.
-dynamic_reconfigure_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_eus.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_eus/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_generate_messages_py: visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/rule
-
-.PHONY : dynamic_reconfigure_generate_messages_py
-
-# fast build rule for target.
-dynamic_reconfigure_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_py.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/rule
-
-# Convenience name for target.
-visual_feature_server_test_blob: visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/rule
-
-.PHONY : visual_feature_server_test_blob
-
-# fast build rule for target.
-visual_feature_server_test_blob/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_test_blob.dir/build
-.PHONY : visual_feature_server_test_blob/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_lisp: visual_feature_server/CMakeFiles/tf_generate_messages_lisp.dir/rule
-
-.PHONY : tf_generate_messages_lisp
-
-# fast build rule for target.
-tf_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/tf_generate_messages_lisp.dir/build
-.PHONY : tf_generate_messages_lisp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_nodejs: visual_feature_server/CMakeFiles/tf_generate_messages_nodejs.dir/rule
-
-.PHONY : tf_generate_messages_nodejs
-
-# fast build rule for target.
-tf_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/tf_generate_messages_nodejs.dir/build
-.PHONY : tf_generate_messages_nodejs/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-pcl_msgs_generate_messages_py: visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/rule
-
-.PHONY : pcl_msgs_generate_messages_py
-
-# fast build rule for target.
-pcl_msgs_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_py.dir/build
-.PHONY : pcl_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_eus: visual_feature_server/CMakeFiles/actionlib_generate_messages_eus.dir/rule
-
-.PHONY : actionlib_generate_messages_eus
-
-# fast build rule for target.
-actionlib_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/actionlib_generate_messages_eus.dir/build
-.PHONY : actionlib_generate_messages_eus/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-pcl_msgs_generate_messages_lisp: visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : pcl_msgs_generate_messages_lisp
-
-# fast build rule for target.
-pcl_msgs_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/build
-.PHONY : pcl_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-tf_generate_messages_cpp: visual_feature_server/CMakeFiles/tf_generate_messages_cpp.dir/rule
-
-.PHONY : tf_generate_messages_cpp
-
-# fast build rule for target.
-tf_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/tf_generate_messages_cpp.dir/build
-.PHONY : tf_generate_messages_cpp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_nodejs: visual_feature_server/CMakeFiles/actionlib_generate_messages_nodejs.dir/rule
-
-.PHONY : actionlib_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/actionlib_generate_messages_nodejs.dir/build
-.PHONY : actionlib_generate_messages_nodejs/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_lisp: visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_lisp
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
-.PHONY : actionlib_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-
-# Convenience name for target.
-nodelet_topic_tools_gencfg: visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
-
-.PHONY : nodelet_topic_tools_gencfg
-
-# fast build rule for target.
-nodelet_topic_tools_gencfg/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/build.make visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/build
-.PHONY : nodelet_topic_tools_gencfg/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-
-# Convenience name for target.
-topic_tools_generate_messages_py: visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
-
-.PHONY : topic_tools_generate_messages_py
-
-# fast build rule for target.
-topic_tools_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/build
-.PHONY : topic_tools_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_nodejs: visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build
-.PHONY : actionlib_msgs_generate_messages_nodejs/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/rule
-
-# Convenience name for target.
-_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/rule
-
-.PHONY : _visual_feature_server_generate_messages_check_deps_CornerFeatureMsg
-
-# fast build rule for target.
-_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/build
-.PHONY : _visual_feature_server_generate_messages_check_deps_CornerFeatureMsg/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-actionlib_msgs_generate_messages_py: visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
-
-.PHONY : actionlib_msgs_generate_messages_py
-
-# fast build rule for target.
-actionlib_msgs_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
-.PHONY : actionlib_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_cpp: visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_cpp
-
-# fast build rule for target.
-tf2_msgs_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build
-.PHONY : tf2_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-visual_feature_server_generate_messages_eus: visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/rule
-
-.PHONY : visual_feature_server_generate_messages_eus
-
-# fast build rule for target.
-visual_feature_server_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/build
-.PHONY : visual_feature_server_generate_messages_eus/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_eus: visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_eus
-
-# fast build rule for target.
-tf2_msgs_generate_messages_eus/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build
-.PHONY : tf2_msgs_generate_messages_eus/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
-
-# Convenience name for target.
-dynamic_reconfigure_gencfg: visual_feature_server/CMakeFiles/dynamic_reconfigure_gencfg.dir/rule
-
-.PHONY : dynamic_reconfigure_gencfg
-
-# fast build rule for target.
-dynamic_reconfigure_gencfg/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/dynamic_reconfigure_gencfg.dir/build.make visual_feature_server/CMakeFiles/dynamic_reconfigure_gencfg.dir/build
-.PHONY : dynamic_reconfigure_gencfg/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_lisp: visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_lisp
-
-# fast build rule for target.
-tf2_msgs_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build
-.PHONY : tf2_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/actionlib_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/actionlib_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/actionlib_generate_messages_py.dir/rule
-
-# Convenience name for target.
-actionlib_generate_messages_py: visual_feature_server/CMakeFiles/actionlib_generate_messages_py.dir/rule
-
-.PHONY : actionlib_generate_messages_py
-
-# fast build rule for target.
-actionlib_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/actionlib_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/actionlib_generate_messages_py.dir/build
-.PHONY : actionlib_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_py: visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_py
-
-# fast build rule for target.
-tf2_msgs_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_py.dir/build
-.PHONY : tf2_msgs_generate_messages_py/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-
-# Convenience name for target.
-tf2_msgs_generate_messages_nodejs: visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/rule
-
-.PHONY : tf2_msgs_generate_messages_nodejs
-
-# fast build rule for target.
-tf2_msgs_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build
-.PHONY : tf2_msgs_generate_messages_nodejs/fast
+_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/build
+.PHONY : _visual_feature_server_generate_messages_check_deps_BlobFeatureMsg/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages.dir/rule:
@@ -1128,169 +588,109 @@ _visual_feature_server_generate_messages_check_deps_EdgeFeatureMsg/fast:
 .PHONY : _visual_feature_server_generate_messages_check_deps_EdgeFeatureMsg/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/rule
+visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/rule
+visual_feature_server_generate_messages_eus: visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/rule
 
-.PHONY : _visual_feature_server_generate_messages_check_deps_BlobFeatureMsg
+.PHONY : visual_feature_server_generate_messages_eus
 
 # fast build rule for target.
-_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_BlobFeatureMsg.dir/build
-.PHONY : _visual_feature_server_generate_messages_check_deps_BlobFeatureMsg/fast
+visual_feature_server_generate_messages_eus/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_eus.dir/build
+.PHONY : visual_feature_server_generate_messages_eus/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
+visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/rule
 
 # Convenience name for target.
-sensor_msgs_generate_messages_cpp: visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/rule
+_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/rule
 
-.PHONY : sensor_msgs_generate_messages_cpp
+.PHONY : _visual_feature_server_generate_messages_check_deps_CornerFeatureMsg
 
 # fast build rule for target.
-sensor_msgs_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build
-.PHONY : sensor_msgs_generate_messages_cpp/fast
+_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_CornerFeatureMsg.dir/build
+.PHONY : _visual_feature_server_generate_messages_check_deps_CornerFeatureMsg/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/rule
+visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
 
 # Convenience name for target.
-_visual_feature_server_generate_messages_check_deps_FeaturePoses: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/rule
+topic_tools_generate_messages_py: visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/rule
 
-.PHONY : _visual_feature_server_generate_messages_check_deps_FeaturePoses
+.PHONY : topic_tools_generate_messages_py
 
 # fast build rule for target.
-_visual_feature_server_generate_messages_check_deps_FeaturePoses/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeaturePoses.dir/build
-.PHONY : _visual_feature_server_generate_messages_check_deps_FeaturePoses/fast
+topic_tools_generate_messages_py/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/topic_tools_generate_messages_py.dir/build
+.PHONY : topic_tools_generate_messages_py/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
+visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/rule
 
 # Convenience name for target.
-dynamic_reconfigure_generate_messages_cpp: visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/rule
+_visual_feature_server_generate_messages_check_deps_FeatureMsg: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/rule
 
-.PHONY : dynamic_reconfigure_generate_messages_cpp
+.PHONY : _visual_feature_server_generate_messages_check_deps_FeatureMsg
 
 # fast build rule for target.
-dynamic_reconfigure_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/dynamic_reconfigure_generate_messages_cpp.dir/build
-.PHONY : dynamic_reconfigure_generate_messages_cpp/fast
+_visual_feature_server_generate_messages_check_deps_FeatureMsg/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_FeatureMsg.dir/build
+.PHONY : _visual_feature_server_generate_messages_check_deps_FeatureMsg/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/tf_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/tf_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/tf_generate_messages_py.dir/rule
+visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-tf_generate_messages_py: visual_feature_server/CMakeFiles/tf_generate_messages_py.dir/rule
+pcl_msgs_generate_messages_lisp: visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/rule
 
-.PHONY : tf_generate_messages_py
+.PHONY : pcl_msgs_generate_messages_lisp
 
 # fast build rule for target.
-tf_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/tf_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/tf_generate_messages_py.dir/build
-.PHONY : tf_generate_messages_py/fast
+pcl_msgs_generate_messages_lisp/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_lisp.dir/build
+.PHONY : pcl_msgs_generate_messages_lisp/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/rule
+visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
 
 # Convenience name for target.
-_visual_feature_server_generate_messages_check_deps_Convert2DPoint: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/rule
+topic_tools_generate_messages_eus: visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/rule
 
-.PHONY : _visual_feature_server_generate_messages_check_deps_Convert2DPoint
+.PHONY : topic_tools_generate_messages_eus
 
 # fast build rule for target.
-_visual_feature_server_generate_messages_check_deps_Convert2DPoint/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/build
-.PHONY : _visual_feature_server_generate_messages_check_deps_Convert2DPoint/fast
+topic_tools_generate_messages_eus/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/build.make visual_feature_server/CMakeFiles/topic_tools_generate_messages_eus.dir/build
+.PHONY : topic_tools_generate_messages_eus/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/rule
+visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/rule
 
 # Convenience name for target.
-visual_feature_server_generate_messages_cpp: visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/rule
+_visual_feature_server_generate_messages_check_deps_PickleSrv: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/rule
 
-.PHONY : visual_feature_server_generate_messages_cpp
+.PHONY : _visual_feature_server_generate_messages_check_deps_PickleSrv
 
 # fast build rule for target.
-visual_feature_server_generate_messages_cpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_cpp.dir/build
-.PHONY : visual_feature_server_generate_messages_cpp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/rule
-
-# Convenience name for target.
-visual_feature_server_gennodejs: visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/rule
-
-.PHONY : visual_feature_server_gennodejs
-
-# fast build rule for target.
-visual_feature_server_gennodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_gennodejs.dir/build
-.PHONY : visual_feature_server_gennodejs/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/rule
-
-# Convenience name for target.
-visual_feature_server_gencpp: visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/rule
-
-.PHONY : visual_feature_server_gencpp
-
-# fast build rule for target.
-visual_feature_server_gencpp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/build
-.PHONY : visual_feature_server_gencpp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-visual_feature_server_generate_messages_lisp: visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/rule
-
-.PHONY : visual_feature_server_generate_messages_lisp
-
-# fast build rule for target.
-visual_feature_server_generate_messages_lisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/build
-.PHONY : visual_feature_server_generate_messages_lisp/fast
-
-# Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/rule
-
-# Convenience name for target.
-visual_feature_server_generate_messages_py: visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/rule
-
-.PHONY : visual_feature_server_generate_messages_py
-
-# fast build rule for target.
-visual_feature_server_generate_messages_py/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_py.dir/build
-.PHONY : visual_feature_server_generate_messages_py/fast
+_visual_feature_server_generate_messages_check_deps_PickleSrv/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_PickleSrv.dir/build
+.PHONY : _visual_feature_server_generate_messages_check_deps_PickleSrv/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/rule:
@@ -1308,34 +708,94 @@ visual_feature_server_detector/fast:
 .PHONY : visual_feature_server_detector/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
+visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-pcl_msgs_generate_messages_nodejs: visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/rule
+visual_feature_server_generate_messages_lisp: visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/rule
 
-.PHONY : pcl_msgs_generate_messages_nodejs
+.PHONY : visual_feature_server_generate_messages_lisp
 
 # fast build rule for target.
-pcl_msgs_generate_messages_nodejs/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/build.make visual_feature_server/CMakeFiles/pcl_msgs_generate_messages_nodejs.dir/build
-.PHONY : pcl_msgs_generate_messages_nodejs/fast
+visual_feature_server_generate_messages_lisp/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_lisp.dir/build
+.PHONY : visual_feature_server_generate_messages_lisp/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/rule
+visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/rule
 
 # Convenience name for target.
-visual_feature_server_genlisp: visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/rule
+_visual_feature_server_generate_messages_check_deps_Convert2DPoint: visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/rule
 
-.PHONY : visual_feature_server_genlisp
+.PHONY : _visual_feature_server_generate_messages_check_deps_Convert2DPoint
 
 # fast build rule for target.
-visual_feature_server_genlisp/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/build
-.PHONY : visual_feature_server_genlisp/fast
+_visual_feature_server_generate_messages_check_deps_Convert2DPoint/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/build.make visual_feature_server/CMakeFiles/_visual_feature_server_generate_messages_check_deps_Convert2DPoint.dir/build
+.PHONY : _visual_feature_server_generate_messages_check_deps_Convert2DPoint/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/rule
+
+# Convenience name for target.
+visual_feature_server_gencpp: visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/rule
+
+.PHONY : visual_feature_server_gencpp
+
+# fast build rule for target.
+visual_feature_server_gencpp/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_gencpp.dir/build
+.PHONY : visual_feature_server_gencpp/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
+
+# Convenience name for target.
+nodelet_topic_tools_gencfg: visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/rule
+
+.PHONY : nodelet_topic_tools_gencfg
+
+# fast build rule for target.
+nodelet_topic_tools_gencfg/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/build.make visual_feature_server/CMakeFiles/nodelet_topic_tools_gencfg.dir/build
+.PHONY : nodelet_topic_tools_gencfg/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+topic_tools_generate_messages_lisp: visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/rule
+
+.PHONY : topic_tools_generate_messages_lisp
+
+# fast build rule for target.
+topic_tools_generate_messages_lisp/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/build.make visual_feature_server/CMakeFiles/topic_tools_generate_messages_lisp.dir/build
+.PHONY : topic_tools_generate_messages_lisp/fast
+
+# Convenience name for target.
+visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/rule
+
+# Convenience name for target.
+visual_feature_server_geneus: visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/rule
+
+.PHONY : visual_feature_server_geneus
+
+# fast build rule for target.
+visual_feature_server_geneus/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_geneus.dir/build
+.PHONY : visual_feature_server_geneus/fast
 
 # Convenience name for target.
 visual_feature_server/CMakeFiles/visual_feature_server_generate_messages_nodejs.dir/rule:
@@ -1353,19 +813,19 @@ visual_feature_server_generate_messages_nodejs/fast:
 .PHONY : visual_feature_server_generate_messages_nodejs/fast
 
 # Convenience name for target.
-visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/rule:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/rule
-.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/rule
+visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/rule:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f CMakeFiles/Makefile2 visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/rule
+.PHONY : visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/rule
 
 # Convenience name for target.
-visual_feature_server_genpy: visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/rule
+visual_feature_server_genlisp: visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/rule
 
-.PHONY : visual_feature_server_genpy
+.PHONY : visual_feature_server_genlisp
 
 # fast build rule for target.
-visual_feature_server_genpy/fast:
-	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_genpy.dir/build
-.PHONY : visual_feature_server_genpy/fast
+visual_feature_server_genlisp/fast:
+	cd /home/dpark/map-fusion/catkin_ws_Indep.Study/build && $(MAKE) -f visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/build.make visual_feature_server/CMakeFiles/visual_feature_server_genlisp.dir/build
+.PHONY : visual_feature_server_genlisp/fast
 
 src/action_parameters.o: src/action_parameters.cpp.o
 
@@ -1747,91 +1207,55 @@ help:
 	@echo "... depend"
 	@echo "... install/strip"
 	@echo "... install/local"
-	@echo "... install"
-	@echo "... list_install_components"
 	@echo "... edit_cache"
 	@echo "... test"
-	@echo "... std_srvs_generate_messages_py"
-	@echo "... std_srvs_generate_messages_nodejs"
-	@echo "... nodelet_generate_messages_cpp"
 	@echo "... PointCloudService"
-	@echo "... bond_generate_messages_py"
-	@echo "... actionlib_generate_messages_lisp"
-	@echo "... std_srvs_generate_messages_cpp"
-	@echo "... std_srvs_generate_messages_lisp"
+	@echo "... install"
 	@echo "... visual_feature_server_test_edge"
-	@echo "... topic_tools_generate_messages_lisp"
-	@echo "... visual_feature_server_geneus"
+	@echo "... rebuild_cache"
+	@echo "... visual_feature_server_test_blob"
+	@echo "... visual_feature_server_genpy"
+	@echo "... bond_generate_messages_nodejs"
+	@echo "... nodelet_generate_messages_py"
 	@echo "... bond_generate_messages_lisp"
 	@echo "... bond_generate_messages_cpp"
-	@echo "... actionlib_msgs_generate_messages_cpp"
-	@echo "... tf_generate_messages_eus"
-	@echo "... topic_tools_generate_messages_cpp"
-	@echo "... nodelet_generate_messages_nodejs"
-	@echo "... nodelet_generate_messages_eus"
-	@echo "... topic_tools_generate_messages_eus"
-	@echo "... _visual_feature_server_generate_messages_check_deps_PickleSrv"
-	@echo "... _visual_feature_server_generate_messages_check_deps_FeatureMsg"
-	@echo "... sensor_msgs_generate_messages_nodejs"
-	@echo "... rebuild_cache"
-	@echo "... actionlib_generate_messages_cpp"
-	@echo "... bond_generate_messages_nodejs"
-	@echo "... sensor_msgs_generate_messages_py"
-	@echo "... nodelet_generate_messages_py"
-	@echo "... dynamic_reconfigure_generate_messages_lisp"
-	@echo "... pcl_msgs_generate_messages_cpp"
-	@echo "... sensor_msgs_generate_messages_lisp"
-	@echo "... std_srvs_generate_messages_eus"
 	@echo "... nodelet_generate_messages_lisp"
-	@echo "... actionlib_msgs_generate_messages_eus"
-	@echo "... sensor_msgs_generate_messages_eus"
-	@echo "... bond_generate_messages_eus"
-	@echo "... dynamic_reconfigure_generate_messages_nodejs"
+	@echo "... topic_tools_generate_messages_cpp"
+	@echo "... nodelet_generate_messages_eus"
 	@echo "... pcl_msgs_generate_messages_eus"
+	@echo "... pcl_msgs_generate_messages_py"
+	@echo "... pcl_msgs_generate_messages_cpp"
+	@echo "... visual_feature_server_generate_messages_py"
+	@echo "... nodelet_generate_messages_cpp"
+	@echo "... bond_generate_messages_py"
+	@echo "... bond_generate_messages_eus"
+	@echo "... visual_feature_server_gennodejs"
+	@echo "... _visual_feature_server_generate_messages_check_deps_FeaturePoses"
+	@echo "... nodelet_generate_messages_nodejs"
+	@echo "... pcl_msgs_generate_messages_nodejs"
+	@echo "... visual_feature_server_generate_messages_cpp"
 	@echo "... pcl_ros_gencfg"
 	@echo "... topic_tools_generate_messages_nodejs"
-	@echo "... dynamic_reconfigure_generate_messages_eus"
-	@echo "... dynamic_reconfigure_generate_messages_py"
-	@echo "... visual_feature_server_test_blob"
-	@echo "... tf_generate_messages_lisp"
-	@echo "... tf_generate_messages_nodejs"
-	@echo "... pcl_msgs_generate_messages_py"
-	@echo "... actionlib_generate_messages_eus"
-	@echo "... pcl_msgs_generate_messages_lisp"
-	@echo "... tf_generate_messages_cpp"
-	@echo "... actionlib_generate_messages_nodejs"
-	@echo "... actionlib_msgs_generate_messages_lisp"
-	@echo "... nodelet_topic_tools_gencfg"
-	@echo "... topic_tools_generate_messages_py"
-	@echo "... actionlib_msgs_generate_messages_nodejs"
-	@echo "... _visual_feature_server_generate_messages_check_deps_CornerFeatureMsg"
-	@echo "... actionlib_msgs_generate_messages_py"
-	@echo "... tf2_msgs_generate_messages_cpp"
-	@echo "... visual_feature_server_generate_messages_eus"
-	@echo "... tf2_msgs_generate_messages_eus"
-	@echo "... dynamic_reconfigure_gencfg"
-	@echo "... tf2_msgs_generate_messages_lisp"
-	@echo "... actionlib_generate_messages_py"
-	@echo "... tf2_msgs_generate_messages_py"
-	@echo "... tf2_msgs_generate_messages_nodejs"
+	@echo "... _visual_feature_server_generate_messages_check_deps_BlobFeatureMsg"
 	@echo "... visual_feature_server_generate_messages"
 	@echo "... _visual_feature_server_generate_messages_check_deps_EdgeFeatureMsg"
-	@echo "... _visual_feature_server_generate_messages_check_deps_BlobFeatureMsg"
-	@echo "... sensor_msgs_generate_messages_cpp"
-	@echo "... _visual_feature_server_generate_messages_check_deps_FeaturePoses"
-	@echo "... dynamic_reconfigure_generate_messages_cpp"
-	@echo "... tf_generate_messages_py"
-	@echo "... _visual_feature_server_generate_messages_check_deps_Convert2DPoint"
-	@echo "... visual_feature_server_generate_messages_cpp"
-	@echo "... visual_feature_server_gennodejs"
-	@echo "... visual_feature_server_gencpp"
-	@echo "... visual_feature_server_generate_messages_lisp"
-	@echo "... visual_feature_server_generate_messages_py"
+	@echo "... visual_feature_server_generate_messages_eus"
+	@echo "... _visual_feature_server_generate_messages_check_deps_CornerFeatureMsg"
+	@echo "... topic_tools_generate_messages_py"
+	@echo "... _visual_feature_server_generate_messages_check_deps_FeatureMsg"
+	@echo "... pcl_msgs_generate_messages_lisp"
+	@echo "... topic_tools_generate_messages_eus"
+	@echo "... _visual_feature_server_generate_messages_check_deps_PickleSrv"
 	@echo "... visual_feature_server_detector"
-	@echo "... pcl_msgs_generate_messages_nodejs"
-	@echo "... visual_feature_server_genlisp"
+	@echo "... visual_feature_server_generate_messages_lisp"
+	@echo "... _visual_feature_server_generate_messages_check_deps_Convert2DPoint"
+	@echo "... list_install_components"
+	@echo "... visual_feature_server_gencpp"
+	@echo "... nodelet_topic_tools_gencfg"
+	@echo "... topic_tools_generate_messages_lisp"
+	@echo "... visual_feature_server_geneus"
 	@echo "... visual_feature_server_generate_messages_nodejs"
-	@echo "... visual_feature_server_genpy"
+	@echo "... visual_feature_server_genlisp"
 	@echo "... src/action_parameters.o"
 	@echo "... src/action_parameters.i"
 	@echo "... src/action_parameters.s"

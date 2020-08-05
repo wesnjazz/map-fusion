@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export PATH="/opt/ros/melodic/bin:/home/dpark/anaconda3/bin:/home/dpark/anaconda3/condabin:/home/dpark/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+export PATH="/opt/ros/melodic/bin:/home/dpark/anaconda3/envs/udemy_slam/bin:/home/dpark/anaconda3/condabin:/home/dpark/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 export PWD="/home/dpark/map-fusion/catkin_ws_Indep.Study/build"
 export ROS_PACKAGE_PATH="/home/dpark/map-fusion/catkin_ws_Indep.Study/src:
 
