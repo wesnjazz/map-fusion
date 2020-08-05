@@ -915,6 +915,12 @@ pcl_ros_DIR:PATH=/opt/ros/melodic/share/pcl_ros/cmake
 //The directory containing a CMake configuration file for pluginlib.
 pluginlib_DIR:PATH=/opt/ros/melodic/share/pluginlib/cmake
 
+//Value Computed by CMake
+ros_course_part2_BINARY_DIR:STATIC=/home/dpark/map-fusion/catkin_ws_Indep.Study/build/ros_course_part2
+
+//Value Computed by CMake
+ros_course_part2_SOURCE_DIR:STATIC=/home/dpark/map-fusion/catkin_ws_Indep.Study/src/ros_course_part2
+
 //The directory containing a CMake configuration file for rosbag.
 rosbag_DIR:PATH=/opt/ros/melodic/share/rosbag/cmake
 
@@ -1352,7 +1358,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=11
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=12
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
