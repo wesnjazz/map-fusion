@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++11
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -isystem /usr/local/include/opencv4 
+CXX_INCLUDES = -isystem /home/dpark/anaconda3/envs/map-fusion-py38/include/opencv4 
 

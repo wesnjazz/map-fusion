@@ -111,44 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named opencv01
+# Target rules for targets named opencv02
 
 # Build rule for target.
-opencv01: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 opencv01
-.PHONY : opencv01
+opencv02: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 opencv02
+.PHONY : opencv02
 
 # fast build rule for target.
-opencv01/fast:
-	$(MAKE) -f CMakeFiles/opencv01.dir/build.make CMakeFiles/opencv01.dir/build
-.PHONY : opencv01/fast
+opencv02/fast:
+	$(MAKE) -f CMakeFiles/opencv02.dir/build.make CMakeFiles/opencv02.dir/build
+.PHONY : opencv02/fast
 
-opencv01.o: opencv01.cpp.o
+opencv02.o: opencv02.cpp.o
 
-.PHONY : opencv01.o
+.PHONY : opencv02.o
 
 # target to build an object file
-opencv01.cpp.o:
-	$(MAKE) -f CMakeFiles/opencv01.dir/build.make CMakeFiles/opencv01.dir/opencv01.cpp.o
-.PHONY : opencv01.cpp.o
+opencv02.cpp.o:
+	$(MAKE) -f CMakeFiles/opencv02.dir/build.make CMakeFiles/opencv02.dir/opencv02.cpp.o
+.PHONY : opencv02.cpp.o
 
-opencv01.i: opencv01.cpp.i
+opencv02.i: opencv02.cpp.i
 
-.PHONY : opencv01.i
+.PHONY : opencv02.i
 
 # target to preprocess a source file
-opencv01.cpp.i:
-	$(MAKE) -f CMakeFiles/opencv01.dir/build.make CMakeFiles/opencv01.dir/opencv01.cpp.i
-.PHONY : opencv01.cpp.i
+opencv02.cpp.i:
+	$(MAKE) -f CMakeFiles/opencv02.dir/build.make CMakeFiles/opencv02.dir/opencv02.cpp.i
+.PHONY : opencv02.cpp.i
 
-opencv01.s: opencv01.cpp.s
+opencv02.s: opencv02.cpp.s
 
-.PHONY : opencv01.s
+.PHONY : opencv02.s
 
 # target to generate assembly for a file
-opencv01.cpp.s:
-	$(MAKE) -f CMakeFiles/opencv01.dir/build.make CMakeFiles/opencv01.dir/opencv01.cpp.s
-.PHONY : opencv01.cpp.s
+opencv02.cpp.s:
+	$(MAKE) -f CMakeFiles/opencv02.dir/build.make CMakeFiles/opencv02.dir/opencv02.cpp.s
+.PHONY : opencv02.cpp.s
 
 # Help Target
 help:
@@ -157,11 +157,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... opencv01"
+	@echo "... opencv02"
 	@echo "... edit_cache"
-	@echo "... opencv01.o"
-	@echo "... opencv01.i"
-	@echo "... opencv01.s"
+	@echo "... opencv02.o"
+	@echo "... opencv02.i"
+	@echo "... opencv02.s"
 .PHONY : help
 
 
