@@ -41,6 +41,7 @@ visual_feature_server/CMakeFiles/PointCloudService.dir/src/pointcloud_service.cp
 visual_feature_server/CMakeFiles/PointCloudService.dir/src/pointcloud_service.cpp.o: /opt/ros/melodic/include/ros/exceptions.h
 visual_feature_server/CMakeFiles/PointCloudService.dir/src/pointcloud_service.cpp.o: /opt/ros/melodic/include/ros/forwards.h
 visual_feature_server/CMakeFiles/PointCloudService.dir/src/pointcloud_service.cpp.o: /opt/ros/melodic/include/ros/init.h
+visual_feature_server/CMakeFiles/PointCloudService.dir/src/pointcloud_service.cpp.o: /opt/ros/melodic/include/ros/internal/condition_variable.h
 visual_feature_server/CMakeFiles/PointCloudService.dir/src/pointcloud_service.cpp.o: /opt/ros/melodic/include/ros/macros.h
 visual_feature_server/CMakeFiles/PointCloudService.dir/src/pointcloud_service.cpp.o: /opt/ros/melodic/include/ros/master.h
 visual_feature_server/CMakeFiles/PointCloudService.dir/src/pointcloud_service.cpp.o: /opt/ros/melodic/include/ros/message.h

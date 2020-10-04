@@ -1324,6 +1324,7 @@ visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_sp
  /opt/ros/melodic/include/ros/exceptions.h
  /opt/ros/melodic/include/ros/forwards.h
  /opt/ros/melodic/include/ros/init.h
+ /opt/ros/melodic/include/ros/internal/condition_variable.h
  /opt/ros/melodic/include/ros/macros.h
  /opt/ros/melodic/include/ros/master.h
  /opt/ros/melodic/include/ros/message.h
@@ -1940,6 +1941,7 @@ visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers
  /opt/ros/melodic/include/ros/exceptions.h
  /opt/ros/melodic/include/ros/forwards.h
  /opt/ros/melodic/include/ros/init.h
+ /opt/ros/melodic/include/ros/internal/condition_variable.h
  /opt/ros/melodic/include/ros/macros.h
  /opt/ros/melodic/include/ros/master.h
  /opt/ros/melodic/include/ros/message.h

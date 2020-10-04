@@ -1323,6 +1323,7 @@ visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_sp
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_space.cpp.o: /opt/ros/melodic/include/ros/exceptions.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_space.cpp.o: /opt/ros/melodic/include/ros/forwards.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_space.cpp.o: /opt/ros/melodic/include/ros/init.h
+visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_space.cpp.o: /opt/ros/melodic/include/ros/internal/condition_variable.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_space.cpp.o: /opt/ros/melodic/include/ros/macros.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_space.cpp.o: /opt/ros/melodic/include/ros/master.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/scale_space.cpp.o: /opt/ros/melodic/include/ros/message.h
@@ -1939,6 +1940,7 @@ visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers/blob_tracker.cpp.o: /opt/ros/melodic/include/ros/exceptions.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers/blob_tracker.cpp.o: /opt/ros/melodic/include/ros/forwards.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers/blob_tracker.cpp.o: /opt/ros/melodic/include/ros/init.h
+visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers/blob_tracker.cpp.o: /opt/ros/melodic/include/ros/internal/condition_variable.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers/blob_tracker.cpp.o: /opt/ros/melodic/include/ros/macros.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers/blob_tracker.cpp.o: /opt/ros/melodic/include/ros/master.h
 visual_feature_server/CMakeFiles/visual_feature_server_detector.dir/src/trackers/blob_tracker.cpp.o: /opt/ros/melodic/include/ros/message.h
