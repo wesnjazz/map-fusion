@@ -1,3 +1,0 @@
-/home/dpark/map-fusion/codepractice/opencv_practice/CMakeFiles/rebuild_cache.dir
-/home/dpark/map-fusion/codepractice/opencv_practice/CMakeFiles/opencv02.dir
-/home/dpark/map-fusion/codepractice/opencv_practice/CMakeFiles/edit_cache.dir
