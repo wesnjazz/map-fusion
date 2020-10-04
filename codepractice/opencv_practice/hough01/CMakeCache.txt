@@ -130,7 +130,7 @@ CMAKE_OBJCOPY:FILEPATH=/usr/bin/objcopy
 CMAKE_OBJDUMP:FILEPATH=/usr/bin/objdump
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=hough01
+CMAKE_PROJECT_NAME:STATIC=hough03
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/usr/bin/ranlib
@@ -189,6 +189,18 @@ hough01_BINARY_DIR:STATIC=/home/dpark/map-fusion/codepractice/opencv_practice/ho
 
 //Value Computed by CMake
 hough01_SOURCE_DIR:STATIC=/home/dpark/map-fusion/codepractice/opencv_practice/hough01
+
+//Value Computed by CMake
+hough02_BINARY_DIR:STATIC=/home/dpark/map-fusion/codepractice/opencv_practice/hough01
+
+//Value Computed by CMake
+hough02_SOURCE_DIR:STATIC=/home/dpark/map-fusion/codepractice/opencv_practice/hough01
+
+//Value Computed by CMake
+hough03_BINARY_DIR:STATIC=/home/dpark/map-fusion/codepractice/opencv_practice/hough01
+
+//Value Computed by CMake
+hough03_SOURCE_DIR:STATIC=/home/dpark/map-fusion/codepractice/opencv_practice/hough01
 
 
 ########################
