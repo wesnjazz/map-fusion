@@ -36,8 +36,7 @@ int main(int argc, char **argv)
     deque<Vec3f> waypoints;         // vector of waypoints  // dequeue for FIFO
     ifstream waypoints_file;        // file stream of waypoints
     ifstream Robot_frame_file;
-    string img_filename(argv[6]);
-    img_filename = img_filename + ".jpg";
+    string img_filename;
     int img_scale = 50;
 
     /** Variables for the simulator **/
@@ -58,7 +57,7 @@ int main(int argc, char **argv)
     if (argc >= 5) { delta_t = atof(argv[4]); }
     if (argc >= 6) { dy_mean = atof(argv[5]); }
     if (argc >= 7) { Robot_frame_file = ifstream(argv[6]); origin_transformed = true; }
-    if (argc >= 8) { img_filename = string(argv[7]); }
+    if (argc >= 8) { img_filename = string(argv[7]); img_filename = img_filename + ".jpg"; }
     if (argc >= 9) { img_scale = atoi(argv[8]); }
     if (!wall_segments_file) { // && !waypoints_file) {
         cout << "The file [";
@@ -73,15 +72,15 @@ int main(int argc, char **argv)
     WheelEncoder wheel_encoder___actual = WheelEncoder();
     WheelEncoder wheel_encoder___ideal = WheelEncoder();
     /** No Noises **/
-//    Noise laser_length_noise = Noise(0.0, 0.0);
-//    Noise laser_angle_noise = Noise(0.0, 0.0);
-//    Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.0);
-//    Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.0);
+   Noise laser_length_noise = Noise(0.0, 0.0);
+   Noise laser_angle_noise = Noise(0.0, 0.0);
+   Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.0);
+   Noise wheel_encoder___actual_dy_noise = Noise(0.0, 0.0);
     /** Noises **/
-     Noise laser_length_noise = Noise(-0.002, 0.015);
-     Noise laser_angle_noise = Noise(0.008, 0.01);
-     Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.01);
-     Noise wheel_encoder___actual_dy_noise = Noise(dy_mean, 0.01);
+    //  Noise laser_length_noise = Noise(-0.002, 0.015);
+    //  Noise laser_angle_noise = Noise(0.008, 0.01);
+    //  Noise wheel_encoder___actual_dx_noise = Noise(0.0, 0.01);
+    //  Noise wheel_encoder___actual_dy_noise = Noise(dy_mean, 0.01);
 
 
     /** World frame and Transformed World frame(Robot_frame) **/
@@ -483,7 +482,6 @@ int main(int argc, char **argv)
 //        string img_filename_prefix = img_filename;
 //        string img_filename_suffix = ".jpg";
 //        string img_filename = img_filename_prefix + img_filename_suffix;
-        cout << "filename: " << img_filename << endl;
         // string img_filename = "test.jpg";
         save_map(point_clouds, HT_World_frame_to_Robot_frame, img_filename, img_scale);
 

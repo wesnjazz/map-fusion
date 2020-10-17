@@ -19,14 +19,14 @@ int main(int argc, char **argv)
 
 
     // cv::String dir = "/home/dpark/map-fusion/imgs/examples/";
-    // cv::String dir = "/home/dpark/map-fusion/imgs/mapping_result_data/";
-    cv::String dir = "/home/dpark/map-fusion/imgs/mapping_output/";
+    cv::String dir = "/home/dpark/map-fusion/imgs/mapping_result_data/";
+    // cv::String dir = "/home/dpark/map-fusion/imgs/mapping_output/";
     // cv::String im1_name(dir + "robot01.jpg");
     // cv::String im1_name(dir + "robot_frame_0_0_0.txt.jpg");
     // cv::String im1_name(dir + "robot_frame_0_0_0.txt_left.jpg");
     // cv::String im2_name(dir + "robot_frame_0_0_0.txt_right.jpg");
-    cv::String im1_name(dir + "img01_nonoise_left.jpg");
-    cv::String im2_name(dir + "img01_nonoise_right.jpg");
+    cv::String im1_name(dir + "map12way12frame000left.jpg");
+    cv::String im2_name(dir + "map12way12frame000right.jpg");
     Mat src1 = imread( samples::findFile(im1_name), IMREAD_GRAYSCALE );
     Mat src2 = imread( samples::findFile(im2_name), IMREAD_GRAYSCALE );
     Mat dst1, dst2;

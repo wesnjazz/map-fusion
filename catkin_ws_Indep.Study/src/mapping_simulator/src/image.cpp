@@ -35,12 +35,15 @@ void save_map(vector<vector<Vec2f>> &point_clouds,  Mat3f &HT_World_frame_to_Rob
     int color_channel = 3;
     int default_color = 0;
     cout
-        << "x_max: " << x_max << endl
-        << "x_min: " << x_min << endl
-        << "y_max: " << y_max << endl
-        << "y_min: " << y_min << endl
-        << "img_width: " << img_width << endl
-        << "img_height: " << img_height << endl;
+        << "\nMap output saving into an image." << endl
+        << "Filename: [" << img_filename << "]" << endl
+        << "img_scale: " << img_scale << "\t"
+        << "img_width: " << img_width << "\t"
+        << "img_height: " << img_height << endl
+        << "x_max: " << x_max << "\t"
+        << "x_min: " << x_min << "\t"
+        << "y_max: " << y_max << "\t"
+        << "y_min: " << y_min << endl;
 
     CImg<unsigned char> img(img_width + margin, img_height + margin, 1, color_channel, default_color);
 
