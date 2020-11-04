@@ -126,9 +126,9 @@ include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
   /usr/include/eigen3/
-  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/mapping_simulator/include/
-  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/vector_slam_msgs/msg_gen/cpp/include/
-  /home/dpark/map-fusion/catkin_ws_Indep.Study/src/gui/gui/src/gui/
+  /home/dpark/catkin_ws/src/mapping_simulator/include/
+  /home/dpark/catkin_ws/src/gui/vector_slam_msgs/msg_gen/cpp/include/
+  /home/dpark/catkin_ws/src/gui/gui/src/gui/
 )
 
 ## Declare a C++ library
