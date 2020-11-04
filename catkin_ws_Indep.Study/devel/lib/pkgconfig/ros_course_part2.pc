@@ -1,8 +1,0 @@
-prefix=/home/dpark/map-fusion/catkin_ws_Indep.Study/devel
-
-Name: ros_course_part2
-Description: Description of ros_course_part2
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

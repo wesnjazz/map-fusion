@@ -1,2 +1,0 @@
-aligning_maps:indep_study_task02_rviztest:mapping_simulator:ros_course_part2:turtlebot3_simulations/turtlebot3_fake:turtlebot3_simulations/turtlebot3_gazebo:turtlebot3_simulations/turtlebot3_simulations:visual_feature_server
--DCMAKE_BUILD_TYPE=Debug -DCATKIN_DEVEL_PREFIX=/home/dpark/map-fusion/catkin_ws_Indep.Study/devel -DCMAKE_INSTALL_PREFIX=/home/dpark/map-fusion/catkin_ws_Indep.Study/install -G Unix Makefiles

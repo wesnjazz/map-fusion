@@ -1,8 +1,0 @@
-prefix=/home/dpark/map-fusion/catkin_ws_Indep.Study/devel
-
-Name: indep_study_task02_rviztest
-Description: Description of indep_study_task02_rviztest
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

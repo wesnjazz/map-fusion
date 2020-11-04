@@ -1,8 +1,0 @@
-prefix=/home/dpark/map-fusion/catkin_ws_Indep.Study/install
-
-Name: visual_feature_server
-Description: Description of visual_feature_server
-Version: 0.0.0
-Cflags: -I${prefix}/include
-Libs: -L${prefix}/lib -lvisual_feature_server
-Requires: roscpp rospy sensor_msgs std_msgs cv_bridge image_transport pcl_conversions pcl_msgs pcl_ros tf geometry_msgs

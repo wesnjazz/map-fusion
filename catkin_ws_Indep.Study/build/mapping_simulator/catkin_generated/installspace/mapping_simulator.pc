@@ -1,8 +1,0 @@
-prefix=/home/dpark/map-fusion/catkin_ws_Indep.Study/install
-
-Name: mapping_simulator
-Description: Description of mapping_simulator
-Version: 0.0.0
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 
