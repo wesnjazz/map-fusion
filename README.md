@@ -1,8 +1,25 @@
 # map-fusion
 
 # Clone the repository into catkin workspace
+For developer (Me)
 ```
+1. Put git repository into catkin/src
+  - go to ~/catkin_ws/src
+  - backup current projects in src in catkin workspace
+  - remove current projects in src in catkin workspace
+  - go to ~/catkin_ws
+  - git clone https://github.com/wesnjazz/map-fusion.git
+  - mv map-fusion src (change map-fusion repository as src)
+  - restore backupped projects into catkin workspace src folder
+  - remove CMakeLists.txt in ~/catkin_ws/src
+```
+
+For others
+```
+go to your catkin workspace (catkin_ws)
+cd ~/catkin_ws
 git clone https://github.com/wesnjazz/map-fusion.git
+cd map-fusion
 move mapping_simulator ~/catkin_ws/src/
 move gui /~catkin_ws/src/
 ```
@@ -15,12 +32,29 @@ sudo apt-get install -y cimg-dev
 
 
 # HiTL-SLAM Gui tool install
-```
+
 https://github.com/ut-amrl/hitl-slam
 dependencies:
+```
 $ sudo apt-get install g++ cmake libpopt-dev cimg-dev libncurses5-dev libglew-dev lua5.1 lua5.1-policy-dev
+```
+
 For compiling the ROS wrapper, rosbuild is used. rosbuild requires the path of the ROS wrapper to be added to the ROS_PACKAGE_PATH environment variable. To do this, add the following line in your .bashrc file.
-$ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/catkin_ws/src/gui/gui:~/catkin_ws/src/gui/vector_slam_msgs
+```
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/catkin_ws/src/gui/gui:~/catkin_ws/src/gui/vector_slam_msgs
+```
+
+```
+$ cd ~/catkin_ws/src/gui/vector_slam_msgs/
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+$ cd ~/catkin_ws/src/gui/gui/
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
 ```
 
 # install dependencies (if needed)
