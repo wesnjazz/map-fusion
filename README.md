@@ -74,13 +74,23 @@ sudo apt-get install libcanberra-gtk-module
 sudo apt-get install qt4-default
 ```
 
-# CMake
+# catkin_make
 ```
 cd ~/catkin_ws
 catkin_make
 ```
 
-# How to run
+# How to run HiTL-SLAM Gui tool
+In a terminal, run roscore
+```
+roscore
+```
+In another terminal, run the gui tool using rosrun
+```
+rosrun gui localization_gui
+```
+
+# How to run the simulator
 ```
 rosrun mapping_simulator mapping_simulator_node [map file] [waypoints file] [speed] [delta_t] [origin]
 ex) rosrun mapping_simulator mapping_simulator_node map01.txt waypoints01.txt 0.6 0.2 robot_frame01.txt
