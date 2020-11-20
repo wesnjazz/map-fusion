@@ -1,8 +1,10 @@
 # map-fusion
 
 # Install CImg
+```
 sudo apt-get update -y
 sudo apt-get install -y cimg-dev
+```
 
 # How to run
 ```
