@@ -65,6 +65,7 @@ conda install -c conda-forge catkin_pkg
 conda install -c conda-forge rosdep
 conda install -c conda-forge glog
 sudo apt-get install -y libgoogle-glog-dev
+sudo apt-get install libcanberra-gtk-module
 ```
 
 
