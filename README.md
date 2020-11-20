@@ -1,9 +1,22 @@
 # map-fusion
 
+# Clone the repository into catkin workspace
+```
+git clone https://github.com/wesnjazz/map-fusion.git
+move mapping_simulator ~/catkin_ws/src/
+move gui /~catkin_ws/src/
+```
+
 # Install CImg
 ```
 sudo apt-get update -y
 sudo apt-get install -y cimg-dev
+```
+
+# CMake
+```
+cd ~/catkin_ws
+catkin_make
 ```
 
 # How to run
