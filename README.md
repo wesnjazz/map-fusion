@@ -1,5 +1,9 @@
 # map-fusion
 
+# Install CImg
+sudo apt-get update -y
+sudo apt-get install -y cimg-dev
+
 # How to run
 ```
 rosrun mapping_simulator mapping_simulator_node [map file] [waypoints file] [speed] [delta_t] [origin]
