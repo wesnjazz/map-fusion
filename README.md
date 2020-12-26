@@ -7,6 +7,7 @@ The research is consist of three phases.
 1. **Creating a simple 2D simulator to generate environment maps.**
 2. **Aligining collection of impoerfect maps.**
 3. Fusing maps to produce a single highly accurate map.
+
 This project will be done up to phase 1 and 2.
 
 # Clone the repository into catkin workspace
