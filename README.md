@@ -1,9 +1,10 @@
-# map-fusion
-This research is to produce a single accurate map by fusing multiple inaccurate maps generated from SLAM algotihm. 
+# A Priori Map Alignment for Map Fusion (UMass Robotics Independent Study Research)
+This project is a part of a research which is to produce a single accurate map by fusing multiple inaccurate maps generated from SLAM algotihm. 
 The research is consist of three phases.
   1. Creating a simple 2D simulator to generate environment maps.
   2. Aligining collection of impoerfect maps.
   3. Fusing maps to produce a single highly accurate map.
+This project will be done up to phase 1 and 2.
 
 # Clone the repository into catkin workspace
 For developer (Me)
