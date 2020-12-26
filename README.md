@@ -1,4 +1,9 @@
 # map-fusion
+This research is to produce a single accurate map by fusing multiple inaccurate maps generated from SLAM algotihm. 
+The research is consist of three phases.
+  1. Creating a simple 2D simulator to generate environment maps.
+  2. Aligining collection of impoerfect maps.
+  3. Fusing maps to produce a single highly accurate map.
 
 # Clone the repository into catkin workspace
 For developer (Me)
