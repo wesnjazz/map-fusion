@@ -3,6 +3,11 @@
 
 This project is a part of a research which is to produce a single accurate map by fusing multiple inaccurate maps generated from SLAM algotihm. 
 
+
+![](demos/SLAM001.gif)
+![](demos/SLAM002.gif)
+
+
 The research is consist of three phases.
 1. **Creating a simple 2D simulator to generate environment maps.**
 2. **Aligining collection of impoerfect maps.**
