@@ -14,8 +14,11 @@ The research is consist of three phases.
 3. Fusing maps to produce a single highly accurate map.
 
 This project will be done up to phase 1 and 2.
-
-# Clone the repository into catkin workspace
+  
+  
+  
+  
+## Clone the repository into catkin workspace
 For developer (Me)
 ```
 1. Put git repository into catkin/src
@@ -39,14 +42,14 @@ move mapping_simulator ~/catkin_ws/src/
 move gui /~catkin_ws/src/
 ```
 
-# Install CImg
+## Install CImg
 ```
 sudo apt-get update -y
 sudo apt-get install -y cimg-dev
 ```
 
 
-# HiTL-SLAM Gui tool install
+## HiTL-SLAM Gui tool install
 
 https://github.com/ut-amrl/hitl-slam
 dependencies:
@@ -72,7 +75,7 @@ $ cmake ..
 $ make
 ```
 
-# install dependencies (if needed)
+## install dependencies (if needed)
 ```
 https://anaconda.org/conda-forge/rospkg
 conda install -c conda-forge rospkg
@@ -84,18 +87,18 @@ sudo apt-get install libcanberra-gtk-module
 ```
 
 
-# QT version (if qt4 is not the default version)
+## QT version (if qt4 is not the default version)
 ```
 sudo apt-get install qt4-default
 ```
 
-# catkin_make
+## catkin_make
 ```
 cd ~/catkin_ws
 catkin_make
 ```
 
-# How to run HiTL-SLAM Gui tool
+## How to run HiTL-SLAM Gui tool
 In a terminal, run roscore
 ```
 roscore
@@ -105,13 +108,13 @@ In another terminal, run the gui tool using rosrun
 rosrun gui localization_gui
 ```
 
-# How to run the simulator
+## How to run the simulator
 ```
 rosrun mapping_simulator mapping_simulator_node [map file] [waypoints file] [speed] [delta_t] [origin]
 ex) rosrun mapping_simulator mapping_simulator_node map01.txt waypoints01.txt 0.6 0.2 robot_frame01.txt
 ```
 
-# Debug using GDB
+## Debug using GDB
 ```
 catkin_make -DCMAKE_BUILD_TYPE=Debug
 rosrun --prefix 'gdb --args' mapping_simulator mapping_simulator_node [map file] [waypoints file] [speed] [delta_t] [origin]
