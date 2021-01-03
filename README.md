@@ -6,7 +6,10 @@ This project is a part of a research which is to produce a single accurate map b
 
 ![](demos/SLAM001.gif)
 ![](demos/SLAM002.gif)
-
+  
+  
+  *The localization gui program was developed by Joydeep Biswas, Samer Nashed and Jarret Holtz.*  
+  *[Human-in-the-Loop SLAM](https://github.com/ut-amrl/hitl-slam)*
 
 The research is consist of three phases.
 1. **Creating a simple 2D simulator to generate environment maps.**
