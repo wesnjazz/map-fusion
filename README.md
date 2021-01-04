@@ -4,8 +4,8 @@
 This project is a part of a research which is to produce a single accurate map by fusing multiple inaccurate maps generated from SLAM algotihm. 
 
 
-![](demos/SLAM001.gif)
-![](demos/SLAM002.gif)
+![](demos/mapfusion-01.gif)
+![](demos/mapfusion-02.gif)
   
   
   *The localization gui program was developed by Joydeep Biswas, Samer Nashed and Jarret Holtz.*  
