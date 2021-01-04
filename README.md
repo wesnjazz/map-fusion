@@ -5,7 +5,7 @@ This project is a part of a research which is to produce a single accurate map b
 
 
 ![](demos/mapfusion-01.gif)
-![](demos/mapfusion-01.gif)
+![](demos/mapfusion-02.gif)
   
   
   *The localization gui program was developed by Joydeep Biswas, Samer Nashed and Jarret Holtz.*  
